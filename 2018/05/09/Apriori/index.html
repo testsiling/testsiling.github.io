@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Apriori Algorithm"/>
+
+
+
+
+  <meta name="keywords" content="Data Science, Data Mining, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2018/05/09/Apriori/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> Apriori Algorithm - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Apriori Algorithm
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-05-09
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#apriori-algorithm-example"><span class="toc-text">Apriori Algorithm Example</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#challenges"><span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#improvement"><span class="toc-text">Improvement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference"><span class="toc-text">Reference</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"><p>Apriori Algorithm (Agrawal &amp; Srikant, 1994) is one of scalable methods for mining frequent patterns.</p>
+<p>It is a Candidate Generation and Test Approach</p>
+<p>According to the downward closure property of frequent patterns: <strong>If there is any itemset which is infrequent, its superset should not be generated/tested</strong> (Apriori pruning principle)</p>
+<a id="more"></a>
+<p><br></p>
+<h1 id="apriori-algorithm-example">Apriori Algorithm Example</h1>
+<p><img src="/images/Apriori.png"></p>
+<p>{B, C, E} is generated from {B, C} and {C, E}</p>
+<p>{A, B, C}, {A, B, E}, {A, C, E} will bot be generated because {A, B} and {A, E} is not popular and have been removed from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">L_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathrm mtight">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">C_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.07153em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span>: Candidate itemset of size k</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">L_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span> : frequent itemset of size k</p>
+<p><br></p>
+<h1 id="challenges">Challenges</h1>
+<ul>
+<li>Multiple scans of transaction database (Slow, high cost)</li>
+<li>Huge number of candidates (a 2000 itemset might generate 200 popular rules.)</li>
+<li>Tedious workload of support counting for candidates.</li>
+</ul>
+<p><br></p>
+<h1 id="improvement">Improvement</h1>
+<ul>
+<li>Partition: Scan Database Only Twice (A. Savasere, E. Omiecinski, and S. Navathe. An efficient algorithm for mining association in large databases. In VLDB&#x2019;95 )</li>
+<li>Hash: Reduce the Number of Candidates (J. Park, M. Chen, and P. Yu. An effective hash-based algorithm for mining association rules. In SIGMOD&#x2019;95 )</li>
+<li>Sampling for Frequent Patterns (H. Toivonen. Sampling large databases for association rules. In VLDB&#x2019;96 )</li>
+<li>DIC: Reduce Number of Scans (S. Brin R. Motwani, J. Ullman, and S. Tsur. Dynamic itemset counting and implication rules for market basket data. In SIGMOD&#x2019;97 )</li>
+<li>FP-Growth</li>
+</ul>
+<p><br></p>
+<h1 id="reference">Reference</h1>
+<p>Han, J., Kamber, M., &amp; Pei, J. (2011).&#xA0;<em>Data Mining: Concepts and Techniques</em>&#xA0;(3rd ed.). Burlington: Elsevier Science.</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2018/05/09/Apriori/">https://testsiling.github.io/2018/05/09/Apriori/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Data-Science/">Data Science</a>
+            
+              <a href="/tags/Data-Mining/">Data Mining</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/05/18/evaluation/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Accuracy, Precision, Recall, F1</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/05/09/FreqPat/">
+        <span class="next-text nav-default">Frequent Patterns and Association Rules</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2018/05/09/Apriori/';
+        this.page.identifier = '2018/05/09/Apriori/';
+        this.page.title = 'Apriori Algorithm';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

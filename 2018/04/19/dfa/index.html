@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="DFA & NFA"/>
+
+
+
+
+  <meta name="keywords" content="DFA, CS, NFA, RegExp, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2018/04/19/dfa/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> DFA & NFA - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          DFA & NFA
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-04-19
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#deterministic-finite-automaton-dfa"><span class="toc-text">Deterministic Finite Automaton (DFA)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#limits-of-dfa"><span class="toc-text">Limits of DFA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#regular-languages"><span class="toc-text">Regular Languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nondeterministic-finite-automaton-nfa"><span class="toc-text">Nondeterministic Finite Automaton (NFA)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#regular-expressions"><span class="toc-text">Regular Expressions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#regexp-examples"><span class="toc-text">RegExp Examples</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exercises"><span class="toc-text">Exercises</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#accepts-any-binary-string-containing-exactly-three-1"><span class="toc-text">Accepts any binary string containing exactly three 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#accepts-any-binary-string-whose-length-is-a-multiple-of-3.-0369"><span class="toc-text">Accepts any binary string whose length is a multiple of 3. (0,3,6,9,…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#accepts-any-binary-string-that-does-not-contain-the-substring-110"><span class="toc-text">Accepts any binary string that does not contain the substring 110</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#accepts-any-binary-string-that-begins-with-a-1-and-ends-with-a-0"><span class="toc-text">Accepts any binary string that begins with a 1 and ends with a 0</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h1 id="deterministic-finite-automaton-dfa">Deterministic Finite Automaton (DFA)</h1>
+<p>Deterministic Finite Automaton (DFA) is a theoretical model of Computation</p>
+<p>a DFA is a 5-tuple M = (Q,&#x3A3;,&#x3B4;,q,F)</p>
+<ul>
+<li>Q is a finite set of states.</li>
+<li>&#x3A3; is a finite set of symbols called the alphabet .</li>
+<li>&#x3B4; is set of transitions between states.</li>
+<li>q is the start state.</li>
+<li>F a set of accept states. F is a subset of Q.</li>
+</ul>
+<p>A DFA is said to accept and input if it exits in an accept state.</p>
+<a id="more"></a>
+<p><br></p>
+<h2 id="limits-of-dfa">Limits of DFA</h2>
+<p>A DFA is a model for computation. The DFA&#x2019;s memory is limited to its states. It cannot solve problems that require more memory.</p>
+<p><br></p>
+<h2 id="regular-languages">Regular Languages</h2>
+<ul>
+<li>Languages that DFA can accept are called regular languages</li>
+<li>Infinite Regular Languages must have a repeating component.</li>
+<li>This repetition can be done forever because the DFA has a loop.</li>
+</ul>
+<p><br></p>
+<h2 id="nondeterministic-finite-automaton-nfa">Nondeterministic Finite Automaton (NFA)</h2>
+<p>Nondeterminism: The ability of a machine to have multiple behaviors given the same input. A NFA can have multiple outgoing edges with the same values. It may have missing edges which are assumed to reject. It may have &#x3B5; edges that are taken without reading any symbols.</p>
+<p><strong>All NFA can be converted to DFA</strong></p>
+<ol style="list-style-type: decimal">
+<li>Create new states for every combination of original states</li>
+<li>Create a new reject state</li>
+<li>Follow every edge</li>
+</ol>
+<ul>
+<li>If the edges goes into two states, use the new combination states</li>
+<li>If the edges doesn&#x2019;t exist, point it to the new reject state</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Remove any states that were never used.</li>
+<li>Make accept states</li>
+</ol>
+<p><img src="/images/NFA.png"></p>
+<p><img src="/images/DFA.png"></p>
+<p><br></p>
+<h2 id="regular-expressions">Regular Expressions</h2>
+<p>Regular Expressions are a simple language to explain text patterns.</p>
+<p>Basic Regular Expressions have four components</p>
+<ul>
+<li>Symbols: a single letter to be matched</li>
+<li>Concatenation: Two regexp next to each other need to be found in order</li>
+<li>Union: The | symbol means select either of the two values</li>
+<li>Kleene Star: The &#x2217; symbol means 0 or more repetitions</li>
+</ul>
+<p>A Regular Expression makes a DFA.</p>
+<p>Order of Operations: &#x2217;, |, concat</p>
+<p>Parenthesis may be used.</p>
+<p><strong>All Regular Expressions are DFA</strong></p>
+<p><br></p>
+<h3 id="regexp-examples">RegExp Examples</h3>
+<ul>
+<li>a|b either a or b</li>
+<li>abb only accepts abb</li>
+<li>(a|b)aa accepts aaa or baa</li>
+<li>a*cc accepts cc,acc,aacc,aaacc,aaaaaacc, etc</li>
+<li>(0|1)* 101 (1|0)* accepts any binary string containing 101</li>
+</ul>
+<p><br></p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="accepts-any-binary-string-containing-exactly-three-1">Accepts any binary string containing exactly three 1</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#This DFA Accepts the Language</div><div class="line">#L={ Accepts any binary string containing exactly three 1s }</div><div class="line"></div><div class="line">#Define DFA Properties</div><div class="line">symbols=(0,1)</div><div class="line">states=(q1,q2,q3,q4,q5)</div><div class="line">start=q1</div><div class="line">accept=(q4)</div><div class="line"></div><div class="line">#Define Transition Table</div><div class="line">if q1 and 0 then q1</div><div class="line">if q1 and 1 then q2</div><div class="line"></div><div class="line">if q2 and 0 then q2</div><div class="line">if q2 and 1 then q3</div><div class="line"></div><div class="line">if q3 and 0 then q3</div><div class="line">if q3 and 1 then q4</div><div class="line"></div><div class="line">if q4 and 0 then q4</div><div class="line">if q4 and 1 then q5</div><div class="line"></div><div class="line">if q5 and 0 then q5</div><div class="line">if q5 and 1 then q5</div></pre></td></tr></table></figure>
+<p><img src="/images/Q1.png"></p>
+<h3 id="accepts-any-binary-string-whose-length-is-a-multiple-of-3.-0369">Accepts any binary string whose length is a multiple of 3. (0,3,6,9,&#x2026;)</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#L={ Accepts any binary string containing exactly three 1s }</div><div class="line"></div><div class="line">#Define DFA Properties</div><div class="line">symbols=(0,1)</div><div class="line">states=(q1,q2,q3,q4,q5)</div><div class="line">start=q1</div><div class="line">accept=(q4)</div><div class="line"></div><div class="line">#Define Transition Table</div><div class="line">if q1 and 0 then q1</div><div class="line">if q1 and 1 then q2</div><div class="line">if q2 and 0 then q2</div><div class="line">if q2 and 1 then q3</div><div class="line">if q3 and 0 then q3</div><div class="line">if q3 and 1 then q4</div><div class="line">if q4 and 0 then q4</div><div class="line">if q4 and 1 then q5</div><div class="line">if q5 and 0 then q5</div><div class="line">if q5 and 1 then q5</div></pre></td></tr></table></figure>
+<p><img src="/images/Q2.png"></p>
+<h3 id="accepts-any-binary-string-that-does-not-contain-the-substring-110">Accepts any binary string that does not contain the substring 110</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#L={Accepts any binary string that does not contain the substring 110.}</div><div class="line"></div><div class="line">symbols=(0,1)</div><div class="line">states=(q0,q1,q2,q3)</div><div class="line">start=q0</div><div class="line">accept=(q0,q1,q2)</div><div class="line"></div><div class="line">#Define Transition Table</div><div class="line">if q0 and 0 then q0</div><div class="line">if q0 and 1 then q1</div><div class="line"></div><div class="line">if q1 and 0 then q0</div><div class="line">if q1 and 1 then q2</div><div class="line"></div><div class="line">if q2 and 0 then q3</div><div class="line">if q2 and 1 then q2</div><div class="line"></div><div class="line">if q3 and 0 then q3</div><div class="line">if q3 and 1 then q3</div></pre></td></tr></table></figure>
+<p><img src="/images/Q3.png"></p>
+<h2 id="accepts-any-binary-string-that-begins-with-a-1-and-ends-with-a-0">Accepts any binary string that begins with a 1 and ends with a 0</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#This DFA Accepts the Language</div><div class="line">#L={Accepts any binary string that begins with a 1 and ends with a 0.}</div><div class="line"></div><div class="line">symbols=(0,1)</div><div class="line">states=(q0,q1,q2,q3,q4)</div><div class="line">start=q0</div><div class="line">accept=(q3)</div><div class="line"></div><div class="line">#Define Transition Table</div><div class="line"></div><div class="line">if q0 and 0 then q1</div><div class="line">if q0 and 1 then q2</div><div class="line"></div><div class="line">if q1 and 0 then q1</div><div class="line">if q1 and 1 then q1</div><div class="line"></div><div class="line">if q2 and 0 then q3</div><div class="line">if q2 and 1 then q2</div><div class="line"></div><div class="line">if q3 and 0 then q3</div><div class="line">if q3 and 1 then q4</div><div class="line"></div><div class="line">if q4 and 0 then q3</div><div class="line">if q4 and 1 then q4</div></pre></td></tr></table></figure>
+<p><img src="/images/Q4.png"></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2018/04/19/dfa/">https://testsiling.github.io/2018/04/19/dfa/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/DFA/">DFA</a>
+            
+              <a href="/tags/CS/">CS</a>
+            
+              <a href="/tags/NFA/">NFA</a>
+            
+              <a href="/tags/RegExp/">RegExp</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/05/09/FreqPat/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Frequent Patterns and Association Rules</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/04/15/hackathon2018/">
+        <span class="next-text nav-default">Philly Codefest 2018</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2018/04/19/dfa/';
+        this.page.identifier = '2018/04/19/dfa/';
+        this.page.title = 'DFA & NFA';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

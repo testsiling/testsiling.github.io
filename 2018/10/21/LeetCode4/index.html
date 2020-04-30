@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(4)"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2018/10/21/LeetCode4/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(4) - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(4)
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-10-21
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sum-ii"><span class="toc-text">454. 4Sum II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#binary-tree-inorder-traversal"><span class="toc-text">94. Binary Tree Inorder Traversal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#top-k-frequent-elements"><span class="toc-text">347. Top K Frequent Elements</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#valid-sudoku"><span class="toc-text">36. Valid Sudoku</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#container-with-most-water"><span class="toc-text">11. Container With Most Water</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>LeetCode Solutions AC Log 4 (Hash Table)</p>
+<ul>
+<li>454.4Sum II</li>
+<li>94.Binary Tree Inorder Traversal</li>
+<li>347.Top K Frequent Elements</li>
+<li>36.Valid Sudoku</li>
+<li>11.Container With Most Water</li>
+</ul>
+<a id="more"></a>
+<p><br></p>
+<h1 id="sum-ii">454. 4Sum II</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">def fourSumCount(A, B, C, D):</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    :type A: List[int]</div><div class="line">    :type B: List[int]</div><div class="line">    :type C: List[int]</div><div class="line">    :type D: List[int]</div><div class="line">    :rtype: int</div><div class="line">    &quot;&quot;&quot;</div><div class="line"></div><div class="line">    res = 0</div><div class="line">    dic = {}</div><div class="line"></div><div class="line">    # log A+B</div><div class="line">    for i in A:</div><div class="line">        for j in B:</div><div class="line">            if i+j not in dic:</div><div class="line">                dic[i+j] = 1</div><div class="line">            else:</div><div class="line">                dic[i+j] += 1</div><div class="line"></div><div class="line">    # find -C-D = A+B</div><div class="line">    for i in C:</div><div class="line">        for j in D:</div><div class="line">            if -i-j in dic:</div><div class="line">                res += dic[-i-j]</div><div class="line"></div><div class="line">    return res</div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="binary-tree-inorder-traversal">94. Binary Tree Inorder Traversal</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode(object):</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="comment"># Recursive</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTraversal</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type root: TreeNode</span></div><div class="line"><span class="string">    :rtype: List[int]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    left = inorderTraversal(root.left)</div><div class="line">    right = inorderTraversal(root.right)</div><div class="line">    <span class="keyword">return</span> left + [root.val] + right</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># Iterative</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTraversal2</span><span class="params">(root)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type root: TreeNode</span></div><div class="line"><span class="string">    :rtype: List[int]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    res = []</div><div class="line">    stack = [(root, <span class="keyword">False</span>)]</div><div class="line"></div><div class="line">    <span class="keyword">while</span> stack:</div><div class="line">        root, visited = stack.pop()</div><div class="line">        <span class="comment"># if root not null</span></div><div class="line">        <span class="keyword">if</span> root:</div><div class="line">            <span class="keyword">if</span> visited:</div><div class="line">                res.append(root.val)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                stack.append((root.right, <span class="keyword">False</span>))</div><div class="line">                stack.append((root, <span class="keyword">True</span>))</div><div class="line">                stack.append((root.left, <span class="keyword">False</span>))</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="top-k-frequent-elements">347. Top K Frequent Elements</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">topKFrequent</span><span class="params">(nums, k)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type nums: List[int]</span></div><div class="line"><span class="string">    :type k: int</span></div><div class="line"><span class="string">    :rtype: List[int]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line"></div><div class="line">    dic = {}</div><div class="line">    res = []</div><div class="line"></div><div class="line">    <span class="comment"># get the frequency</span></div><div class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</div><div class="line">        <span class="keyword">if</span> num <span class="keyword">not</span> <span class="keyword">in</span> dic:</div><div class="line">            dic[num] = <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            dic[num] += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="comment"># sort by value</span></div><div class="line">    sorted_dic = sorted(dic.items(), key=<span class="keyword">lambda</span> kv: kv[<span class="number">1</span>], reverse=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div><div class="line">        res.append(sorted_dic[i][<span class="number">0</span>])</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="valid-sudoku">36. Valid Sudoku</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValidSudoku</span><span class="params">(board)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type board: List[List[str]]</span></div><div class="line"><span class="string">    :rtype: bool</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    rows = []</div><div class="line">    cols = []</div><div class="line">    <span class="comment"># 9*9 grid</span></div><div class="line">    grids = {</div><div class="line">        (<span class="number">0</span>, <span class="number">0</span>): [],</div><div class="line">        (<span class="number">0</span>, <span class="number">3</span>): [],</div><div class="line">        (<span class="number">0</span>, <span class="number">6</span>): [],</div><div class="line">        (<span class="number">3</span>, <span class="number">0</span>): [],</div><div class="line">        (<span class="number">3</span>, <span class="number">3</span>): [],</div><div class="line">        (<span class="number">3</span>, <span class="number">6</span>): [],</div><div class="line">        (<span class="number">6</span>, <span class="number">0</span>): [],</div><div class="line">        (<span class="number">6</span>, <span class="number">3</span>): [],</div><div class="line">        (<span class="number">6</span>, <span class="number">6</span>): []</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment"># i: number of the row</span></div><div class="line">    <span class="comment"># row: each row of numbers.</span></div><div class="line">    <span class="keyword">for</span> i, row <span class="keyword">in</span> enumerate(board):</div><div class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">            cols.append([])</div><div class="line">        rows.append([])</div><div class="line">        <span class="keyword">if</span> i &lt; <span class="number">3</span>:</div><div class="line">            a = <span class="number">0</span></div><div class="line">        <span class="keyword">elif</span> <span class="number">3</span> &lt;= i &lt; <span class="number">6</span>:</div><div class="line">            a = <span class="number">3</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            a = <span class="number">6</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> j, num <span class="keyword">in</span> enumerate(row):</div><div class="line">            cols.append([])</div><div class="line">            <span class="keyword">if</span> ord(<span class="string">&apos;1&apos;</span>) &lt;= ord(num) &lt;= ord(<span class="string">&apos;9&apos;</span>):</div><div class="line">                num = int(num)</div><div class="line"></div><div class="line">                <span class="keyword">if</span> num <span class="keyword">not</span> <span class="keyword">in</span> rows[i]:</div><div class="line">                    rows[i].append(num)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">                <span class="keyword">if</span> num <span class="keyword">not</span> <span class="keyword">in</span> cols[j]:</div><div class="line">                    cols[j].append(num)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">                <span class="keyword">if</span> j &lt; <span class="number">3</span>:</div><div class="line">                    b = <span class="number">0</span></div><div class="line">                <span class="keyword">elif</span> <span class="number">3</span> &lt;= j &lt; <span class="number">6</span>:</div><div class="line">                    b = <span class="number">3</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    b = <span class="number">6</span></div><div class="line"></div><div class="line">                <span class="keyword">if</span> num <span class="keyword">not</span> <span class="keyword">in</span> grids[(a, b)]:</div><div class="line">                    grids[(a, b)].append(num)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="container-with-most-water">11. Container With Most Water</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxArea</span><span class="params">(height)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type height: List[int]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    res = <span class="number">0</span></div><div class="line">    head = <span class="number">0</span></div><div class="line">    tail = len(height) - <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> head &lt; tail:</div><div class="line">        <span class="keyword">if</span> height[head] &lt; height[tail]:</div><div class="line">            res = max(res, height[head] * (tail - head))</div><div class="line">            head += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            res = max(res, height[tail] * (tail - head))</div><div class="line">            tail -= <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2018/10/21/LeetCode4/">https://testsiling.github.io/2018/10/21/LeetCode4/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/10/27/LeetCode5/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(5)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/10/08/LeetCode3/">
+        <span class="next-text nav-default">LeetCode(3)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2018/10/21/LeetCode4/';
+        this.page.identifier = '2018/10/21/LeetCode4/';
+        this.page.title = 'LeetCode(4)';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

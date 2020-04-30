@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(16) _Design"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, Linked List, Design, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/05/09/LeetCode16/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(16) _Design - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(16) _Design
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-05-09
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lru-cache"><span class="toc-text">146. LRU Cache</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#my-original-design"><span class="toc-text">My Original Design</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#double-linked-list"><span class="toc-text">Double Linked List</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#min-stack"><span class="toc-text">155. Min Stack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#maximum-frequency-stack"><span class="toc-text">895. Maximum Frequency Stack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hashmap"><span class="toc-text">HashMap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#priorityqueue"><span class="toc-text">PriorityQueue</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lfu-cache"><span class="toc-text">460 LFU Cache</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <ul>
+<li>146.LRU Cache (<strong>This is the highest frequent problem in LeetCode</strong>)</li>
+<li>155.Min Stack</li>
+<li>895.Maximum Frequency Stack</li>
+<li>460.LFU</li>
+</ul>
+<a id="more"></a>
+<h1 id="lru-cache">146. LRU Cache</h1>
+<h3 id="my-original-design">My Original Design</h3>
+<p>set 2 dictionary to log cache and the time of last use. Great bug is the timer will consistantly increase. But AC though.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span><span class="params">(object)</span>:</span></div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, capacity)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type capacity: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        self.cache = {}</div><div class="line">        self.log = {}</div><div class="line">        self.timmer = <span class="number">0</span></div><div class="line">        self.capacity = capacity</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type key: int</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.cache:</div><div class="line">            self.log[key] = self.timmer</div><div class="line">            self.timmer += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> self.cache[key]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type key: int</span></div><div class="line"><span class="string">        :type value: int</span></div><div class="line"><span class="string">        :rtype: None</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        self.cache[key] = value</div><div class="line">        self.log[key] = self.timmer</div><div class="line">        self.timmer += <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> len(self.cache) &gt; self.capacity:</div><div class="line">            self.release()</div><div class="line">            </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">release</span><span class="params">(self)</span>:</span></div><div class="line">        leastKey = <span class="string">&apos;&apos;</span></div><div class="line">        leastFreq = self.timmer</div><div class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> self.log.items():</div><div class="line">            <span class="keyword">if</span> v &lt; leastFreq:</div><div class="line">                leastKey = k</div><div class="line">                leastFreq = v</div><div class="line">        <span class="keyword">del</span> self.cache[leastKey]</div><div class="line">        <span class="keyword">del</span> self.log[leastKey]</div><div class="line"></div><div class="line"><span class="comment"># Your LRUCache object will be instantiated and called as such:</span></div><div class="line"><span class="comment"># obj = LRUCache(capacity)</span></div><div class="line"><span class="comment"># param_1 = obj.get(key)</span></div><div class="line"><span class="comment"># obj.put(key,value)</span></div></pre></td></tr></table></figure>
+<h2 id="double-linked-list">Double Linked List</h2>
+<p>Implement a double linked list, just like using a ordered dictionary (ordered dictionary is implemented by double linked list, <a href="https://hg.python.org/cpython/file/tip/Lib/collections/__init__.py" target="_blank" rel="external">reference</a>)</p>
+<p>Use a dictionary to log key and the representative node. Everytime put into a pair of (k,v), remove the original node, add it to tail. Then check capacity, if exceed, remove the first node.</p>
+<p>Everytime get a value, remove the original node, add it to tail. get valu from node.val</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,  key = <span class="number">0</span>, val = <span class="number">0</span>)</span>:</span></div><div class="line">        self.key = key</div><div class="line">        self.val = val</div><div class="line">        self.next = <span class="keyword">None</span></div><div class="line">        self.prev = <span class="keyword">None</span>      </div><div class="line">        </div><div class="line">    </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, capacity)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type capacity: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        self.capacity = capacity</div><div class="line">        self.cache = {}</div><div class="line">        self.head = Node()</div><div class="line">        self.tail = Node()</div><div class="line">        self.head.next = self.tail</div><div class="line">        self.tail.prev = self.head</div><div class="line">        </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self, node)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type node: Node</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        pre = node.prev</div><div class="line">        nex = node.next</div><div class="line">        pre.next = nex</div><div class="line">        nex.prev = pre</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addTail</span><span class="params">(self, node)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type node: Node</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        last = self.tail.prev</div><div class="line">        last.next = node</div><div class="line">        node.prev = last</div><div class="line">        node.next = self.tail</div><div class="line">        self.tail.prev = node</div><div class="line">    </div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type key: int</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.cache:</div><div class="line">            node = self.cache[key]</div><div class="line">            self.remove(node)</div><div class="line">            self.addTail(node)</div><div class="line">            <span class="keyword">return</span> node.val</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span></div><div class="line"></div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type key: int</span></div><div class="line"><span class="string">        :type value: int</span></div><div class="line"><span class="string">        :rtype: None</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.cache:</div><div class="line">            self.remove(self.cache[key])</div><div class="line">        </div><div class="line">        node = Node(key, value)</div><div class="line">        self.cache[key] = node</div><div class="line">        self.addTail(node)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> len(self.cache) &gt; self.capacity:</div><div class="line">            <span class="comment"># remove the first node</span></div><div class="line">            first = self.head.next</div><div class="line">            <span class="keyword">del</span> self.cache[first.key]</div><div class="line">            self.remove(first)</div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="min-stack">155. Min Stack</h1>
+<p>Kinda like DP. Every node in the stack contain 2 element: (current value, current minimum value in the stack).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinStack</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        initialize your data structure here.</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="comment"># the node is (current element, current min value)</span></div><div class="line">        self.stack = []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, x)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type x: int</span></div><div class="line"><span class="string">        :rtype: None</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.stack: <span class="comment"># if stack is empty</span></div><div class="line">            self.stack.append((x, x))</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># self.stack[-1][1] is the top element&apos;s minimum</span></div><div class="line">            self.stack.append((x, min(x, self.stack[<span class="number">-1</span>][<span class="number">1</span>])))</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :rtype: None</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.stack:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self.stack.pop()[<span class="number">0</span>]</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.stack:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self.stack[<span class="number">-1</span>][<span class="number">0</span>]</div><div class="line">        </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getMin</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.stack:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> self.stack[<span class="number">-1</span>][<span class="number">1</span>]</div></pre></td></tr></table></figure>
+<h1 id="maximum-frequency-stack">895. Maximum Frequency Stack</h1>
+<h3 id="hashmap">HashMap</h3>
+<p>Use dictionary to log the stack. key is the frequency, and value is a list of elements that have that frequency</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FreqStack</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.freq = collections.Counter()</div><div class="line">        <span class="comment"># key is the frequency, value are a list element of that frequency</span></div><div class="line">        self.stack = collections.defaultdict(list)</div><div class="line">        self.maxFreq = <span class="number">0</span></div><div class="line">        </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, x)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type x: int</span></div><div class="line"><span class="string">        :rtype: None</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        self.freq[x] += <span class="number">1</span></div><div class="line">        <span class="comment"># update max frequency</span></div><div class="line">        self.maxFreq = max(self.freq[x], self.maxFreq)</div><div class="line">        <span class="comment"># add new element to the frequency list.</span></div><div class="line">        self.stack[self.freq[x]].append(x)</div><div class="line">        </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        x = self.stack[self.maxFreq].pop()</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.stack[self.maxFreq]:</div><div class="line">            self.maxFreq -= <span class="number">1</span></div><div class="line">        self.freq[x] -= <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> x</div></pre></td></tr></table></figure>
+<h3 id="priorityqueue">PriorityQueue</h3>
+<p>Maintain a priority Queue. Worse than hash map.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FreqStack</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.stack = [] </div><div class="line">        self.cnt = collections.Counter()</div><div class="line">        self.index = <span class="number">-1</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, x)</span>:</span></div><div class="line">        self.cnt[x] += <span class="number">1</span></div><div class="line">        self.index += <span class="number">1</span></div><div class="line">        heapq.heappush(self.stack, (-self.cnt[x], -self.index, x))</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        num = heapq.heappop(self.stack)[<span class="number">2</span>]</div><div class="line">        self.cnt[num] -= <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> num</div></pre></td></tr></table></figure>
+<h1 id="lfu-cache">460 LFU Cache</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CacheNode</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,  key = <span class="number">0</span>, val = <span class="number">0</span>, freq = <span class="number">0</span>)</span>:</span></div><div class="line">        self.key = key</div><div class="line">        self.val = val</div><div class="line">        self.freq = freq</div><div class="line">        self.next = <span class="keyword">None</span></div><div class="line">        self.prev = <span class="keyword">None</span></div><div class="line">        </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoubleLinkedList</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.head = CacheNode()</div><div class="line">        self.tail = CacheNode()</div><div class="line">        self.head.next = self.tail</div><div class="line">        self.tail.prev = self.head</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.head.next == self.tail</div><div class="line">        </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LFUCache</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, capacity)</span>:</span></div><div class="line">        self.capacity = capacity</div><div class="line">        self.cache = {} <span class="comment"># (key, node)</span></div><div class="line">        self.FreqTable = {} <span class="comment"># (frequency, [node1, node2, ...])</span></div><div class="line">        self.minFreq = <span class="number">1</span></div><div class="line">        </div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addTail</span><span class="params">(self, ls, node)</span>:</span></div><div class="line">        last = ls.tail.prev</div><div class="line">        last.next = node</div><div class="line">        node.prev = last</div><div class="line">        node.next = ls.tail</div><div class="line">        ls.tail.prev = node</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self, ls, node)</span>:</span></div><div class="line">        pre = node.prev</div><div class="line">        nex = node.next</div><div class="line">        pre.next = nex</div><div class="line">        nex.prev = pre</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> ls.isEmpty():</div><div class="line">            <span class="keyword">if</span> node.freq &lt;= self.minFreq:</div><div class="line">                self.minFreq += <span class="number">1</span></div><div class="line">            <span class="keyword">del</span> self.FreqTable[node.freq]</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span>    </div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.cache:</div><div class="line">            node = self.cache[key] </div><div class="line">            self.remove(self.FreqTable[node.freq], node)</div><div class="line">            node.freq += <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> node.freq <span class="keyword">not</span> <span class="keyword">in</span> self.FreqTable:</div><div class="line">                self.FreqTable[node.freq] = DoubleLinkedList()</div><div class="line">            self.addTail(self.FreqTable[node.freq], node)</div><div class="line">            <span class="keyword">return</span> self.cache[key].val</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div><div class="line">        </div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.capacity == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="comment"># if already in cache, just update its freq and add the that freq list</span></div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.cache:</div><div class="line">            node = self.cache[key]</div><div class="line">            self.remove(self.FreqTable[node.freq] , node)</div><div class="line">            node.freq += <span class="number">1</span></div><div class="line">            node.val = value</div><div class="line">            <span class="keyword">if</span> node.freq <span class="keyword">not</span> <span class="keyword">in</span> self.FreqTable:</div><div class="line">                self.FreqTable[node.freq] = DoubleLinkedList()</div><div class="line">            self.addTail(self.FreqTable[node.freq], node) </div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># if exceeded delete first</span></div><div class="line">            <span class="keyword">if</span> len(self.cache) &gt;= self.capacity:</div><div class="line">                ls = self.FreqTable[self.minFreq]</div><div class="line">                minNode = ls.head.next</div><div class="line">                self.remove(ls, minNode)</div><div class="line">                <span class="keyword">del</span> self.cache[minNode.key]</div><div class="line">            </div><div class="line">            node = CacheNode(key, value, <span class="number">1</span>)</div><div class="line">            self.cache[key] = node</div><div class="line">            <span class="keyword">if</span> <span class="number">1</span> <span class="keyword">not</span> <span class="keyword">in</span> self.FreqTable:</div><div class="line">                self.FreqTable[<span class="number">1</span>] = DoubleLinkedList()</div><div class="line">            self.addTail(self.FreqTable[<span class="number">1</span>], node)</div><div class="line">            self.minFreq = <span class="number">1</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/05/09/LeetCode16/">https://testsiling.github.io/2019/05/09/LeetCode16/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/Linked-List/">Linked List</a>
+            
+              <a href="/tags/Design/">Design</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/05/14/LeetCode17/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(17) - Amazon</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/05/07/LeetCode15/">
+        <span class="next-text nav-default">LeetCode(15) - DP</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/05/09/LeetCode16/';
+        this.page.identifier = '2019/05/09/LeetCode16/';
+        this.page.title = 'LeetCode(16) _Design';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

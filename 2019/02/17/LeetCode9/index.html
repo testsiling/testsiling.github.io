@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(9) - Sort"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, Sort, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/02/17/LeetCode9/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(9) - Sort - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(9) - Sort
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-17
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#merge-sorted-array"><span class="toc-text">88.Merge sorted array​</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Problem Set for Sorting</p>
+<ul>
+<li>88.Merge sorted array</li>
+<li>21.Merge Two Sorted Lists</li>
+<li>23.Merge k Sorted Lists</li>
+</ul>
+<a id="more"></a>
+<h2 id="merge-sorted-array">88.Merge sorted array&#x200B;</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(self, nums1, m, nums2, n)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type nums1: List[int]</span></div><div class="line"><span class="string">    :type m: int</span></div><div class="line"><span class="string">    :type nums2: List[int]</span></div><div class="line"><span class="string">    :type n: int</span></div><div class="line"><span class="string">    :rtype: void Do not return anything, modify nums1 in-place instead.</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">while</span> m<span class="number">-1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> n<span class="number">-1</span> &gt;= <span class="number">0</span>:</div><div class="line"></div><div class="line">        <span class="keyword">if</span> nums2[n - <span class="number">1</span>] &gt;= nums1[m - <span class="number">1</span>]:</div><div class="line">            nums1[m + n - <span class="number">1</span>] = nums2[n - <span class="number">1</span>]</div><div class="line">            n -= <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            nums1[n + m - <span class="number">1</span>] = nums1[m - <span class="number">1</span>]</div><div class="line">            m -= <span class="number">1</span></div><div class="line">    <span class="keyword">if</span> n &gt; <span class="number">0</span>:</div><div class="line">        nums1[:n] = nums2[:n]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/02/17/LeetCode9/">https://testsiling.github.io/2019/02/17/LeetCode9/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/Sort/">Sort</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/07/sql/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">SQL Review (with examples)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/07/LeetCode8/">
+        <span class="next-text nav-default">LeetCode(8) - Combinations, Backtracking</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/02/17/LeetCode9/';
+        this.page.identifier = '2019/02/17/LeetCode9/';
+        this.page.title = 'LeetCode(9) - Sort';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

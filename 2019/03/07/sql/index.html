@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="SQL Review (with examples)"/>
+
+
+
+
+  <meta name="keywords" content="SQL, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/03/07/sql/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> SQL Review (with examples) - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          SQL Review (with examples)
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-07
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ddl-data-definition-language"><span class="toc-text">DDL (Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#create"><span class="toc-text">CREATE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alter-table"><span class="toc-text">ALTER TABLE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert-data"><span class="toc-text">INSERT DATA</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dml-data-manipulation-language"><span class="toc-text">DML (Data Manipulation Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#virtual-table"><span class="toc-text">Virtual Table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hierarchy"><span class="toc-text">Hierarchy</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>This is the INFO606 Advanced Database Management Assignment 2: SQL part.</p>
+<p>SQL back-up. database: Oracle sqlPlus</p>
+<a id="more"></a>
+<h1 id="ddl-data-definition-language">DDL (Data Definition Language)</h1>
+<h3 id="create">CREATE</h3>
+<p>Create an EMPLOYEE table as follows:</p>
+<ul>
+<li><p>Set the primary key constraint as SSN, and the foreign key as SUPER_SSN. <em>Do not yet specify the foreign key constraint referencing the department table.</em></p></li>
+<li>Use constraint name for PK (EMPPK) and FK (EMPSUPERFK) constraint. (Naming the constraint is helpful in disabling/enabling later.)</li>
+<li><p>DISABLE all the constraints for now. (NOT NULL does not have to be disabled).</p></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> EMPLOYEE (</div><div class="line"> FNAME 		VARCHAR2(<span class="number">15</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> MINIT 		<span class="built_in">CHAR</span>,</div><div class="line"> LNAME 		VARCHAR2(<span class="number">15</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> SSN 		<span class="built_in">CHAR</span>(<span class="number">9</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> BDATE 		<span class="built_in">DATE</span>,</div><div class="line"> ADDRESS 	VARCHAR2(<span class="number">30</span>),</div><div class="line"> SEX 		<span class="built_in">CHAR</span>(<span class="number">1</span>),</div><div class="line"> SALARY 	<span class="built_in">NUMBER</span>(<span class="number">10</span>,<span class="number">2</span>),</div><div class="line"> SUPER_SSN 	<span class="built_in">CHAR</span>(<span class="number">9</span>),</div><div class="line"> DNO 		<span class="built_in">NUMBER</span> 		<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> <span class="keyword">CONSTRAINT</span> EMPPK PRIMARY <span class="keyword">KEY</span> (SSN),</div><div class="line"> <span class="keyword">CONSTRAINT</span> EMPSUPERFK FOREIGN <span class="keyword">KEY</span> (SUPER_SSN) <span class="keyword">REFERENCES</span> EMPLOYEE(SSN)</div><div class="line">);</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> EMPLOYEE <span class="keyword">DISABLE</span> <span class="keyword">CONSTRAINT</span> EMPSUPERFK;</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> EMPLOYEE <span class="keyword">DISABLE</span> <span class="keyword">CONSTRAINT</span> EMPPK;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_1.png">
+
+</div>
+<p>Create a DEPARTMENT table as follows:</p>
+<ul>
+<li><p>Create DEPARTMENT table with PK as DNUMBER and FK as MGR_SSN</p></li>
+<li><p>Use constraint name for PK (DEPTPK) and FK (DEPTMGRFK)</p></li>
+<li><p>DISABLE constraints.</p></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> DEPARTMENT (</div><div class="line"> DNAME 		VARCHAR2(<span class="number">15</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>, </div><div class="line"> DNUMBER	<span class="built_in">NUMBER</span> 		<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> MGR_SSN 	<span class="built_in">CHAR</span>(<span class="number">9</span>) 	<span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"> MGR_START_DATE 	<span class="built_in">DATE</span>,</div><div class="line"> <span class="keyword">CONSTRAINT</span> DEPTPK PRIMARY <span class="keyword">KEY</span> (DNUMBER),</div><div class="line"> <span class="keyword">CONSTRAINT</span> DEPTMGRFK FOREIGN <span class="keyword">KEY</span> (MGR_SSN) <span class="keyword">REFERENCES</span> EMPLOYEE(SSN)</div><div class="line">);</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> DEPARTMENT <span class="keyword">DISABLE</span> <span class="keyword">CONSTRAINT</span> DEPTMGRFK;</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> DEPARTMENT <span class="keyword">DISABLE</span> <span class="keyword">CONSTRAINT</span> DEPTPK;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_2.png">
+
+</div>
+<h3 id="alter-table">ALTER TABLE</h3>
+<ul>
+<li>ALTER TABLE to enable PK constraint of DEPARTMENT table.</li>
+<li>ALTER TABLE to add foreign key specification of DNO in the EMPLOYEE to the DEPARTMENT table and name the constraint (EMPDEPTFK).</li>
+<li>Can check all constraints</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> DEPARTMENT <span class="keyword">ENABLE</span> <span class="keyword">CONSTRAINT</span> DEPTPK;</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> EMPLOYEE</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> EMPDEPTFK</div><div class="line">FOREIGN <span class="keyword">KEY</span> (DNO) <span class="keyword">REFERENCES</span> DEPARTMENT (DNUMBER);</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TABLE_NAME, CONSTRAINT_NAME, <span class="keyword">STATUS</span> <span class="keyword">FROM</span> user_constraints;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_3.png">
+
+</div>
+<h3 id="insert-data">INSERT DATA</h3>
+<p>Employee table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> EMPLOYEE <span class="keyword">DISABLE</span> <span class="keyword">CONSTRAINT</span> EMPDEPTFK;</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Jonn&apos;</span>, <span class="string">&apos;B&apos;</span>, <span class="string">&apos;Smith&apos;</span>, <span class="number">123456789</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1965-01-09&apos;</span>,<span class="string">&apos;yyyy-mm-dd&apos;</span>), <span class="string">&apos;731 Fondren, Houston, TX&apos;</span>, <span class="string">&apos;M&apos;</span>, <span class="number">30000</span>, <span class="number">333445555</span>, <span class="number">5</span>)</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Employee <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Franklin&apos;</span>, <span class="string">&apos;T&apos;</span>, <span class="string">&apos;Wong&apos;</span>, <span class="number">333445555</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1955-12-08&apos;</span>,<span class="string">&apos;yyyy-mm-dd&apos;</span>), <span class="string">&apos;638 Voss, Houston, TX&apos;</span>, <span class="string">&apos;M&apos;</span>, <span class="number">40000</span>, <span class="number">888665555</span>, <span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Alicia&apos;</span>, <span class="string">&apos;J&apos;</span>, <span class="string">&apos;Zelaya&apos;</span>, <span class="number">999887777</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1968-01-19&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>),<span class="string">&apos;3321 Castle, Spring, TX&apos;</span>, <span class="string">&apos;F&apos;</span>, <span class="number">25000</span>, <span class="number">987654321</span>, <span class="number">4</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Jennifer&apos;</span>, <span class="string">&apos;S&apos;</span>, <span class="string">&apos;Wallace&apos;</span>, <span class="number">987654321</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1941-06-20&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>),<span class="string">&apos;291 Berry, Bellaire, TX&apos;</span>, <span class="string">&apos;F&apos;</span>, <span class="number">43000</span>, <span class="number">888665555</span>, <span class="number">4</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Ramesh&apos;</span>, <span class="string">&apos;K&apos;</span>, <span class="string">&apos;Narayan&apos;</span>, <span class="number">666884444</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1962-09-15&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>),<span class="string">&apos;975 Fire Oak, Humble, TX&apos;</span>, <span class="string">&apos;M&apos;</span>, <span class="number">38000</span>, <span class="number">333445555</span>, <span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Joyce&apos;</span>, <span class="string">&apos;A&apos;</span>, <span class="string">&apos;English&apos;</span>, <span class="number">453453453</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1972-07-31&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>), <span class="string">&apos;5631 Rice, Houston, TX&apos;</span>, <span class="string">&apos;F&apos;</span>, <span class="number">25000</span>, <span class="number">333445555</span>, <span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;Ahmad&apos;</span>, <span class="string">&apos;V&apos;</span>, <span class="string">&apos;Jabbar&apos;</span>, <span class="number">987987987</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1969-03-29&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>), <span class="string">&apos;980 Dallas, Houston, TX&apos;</span>, <span class="string">&apos;M&apos;</span>, <span class="number">25000</span>, <span class="number">888665555</span>, <span class="number">4</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span> </div><div class="line">(<span class="string">&apos;James&apos;</span>, <span class="string">&apos;E&apos;</span>, <span class="string">&apos;Borg&apos;</span>, <span class="number">888665555</span>, <span class="keyword">to_date</span>(<span class="string">&apos;1937-11-10&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>), <span class="string">&apos;450 Stone, Houston, TX&apos;</span>, <span class="string">&apos;M&apos;</span>, <span class="number">55000</span>, <span class="string">&apos;NULL&apos;</span>, <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>Department table</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span> (<span class="string">&apos;Research&apos;</span>, <span class="number">5</span>, <span class="number">333445555</span>, </div><div class="line"><span class="keyword">TO_DATE</span>(<span class="string">&apos;1988-05-22&apos;</span>, <span class="string">&apos;yyyy-mm-dd&apos;</span>));</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span> (<span class="string">&apos;Administration&apos;</span>, <span class="number">4</span>, <span class="number">987654321</span>, <span class="keyword">TO_DATE</span>(<span class="string">&apos;1995-01-01&apos;</span>,<span class="string">&apos;yyyy-mm-dd&apos;</span>));</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span> (<span class="string">&apos;Headquarters&apos;</span>, <span class="number">1</span>, <span class="number">888665555</span>, </div><div class="line"><span class="keyword">TO_DATE</span>(<span class="string">&apos;1981-06-19&apos;</span>,<span class="string">&apos;yyyy-mm-dd&apos;</span>));</div></pre></td></tr></table></figure>
+<p>Show the all instances of both EMPLOYEE and DEPARTMENT tables. Display BDATE in the form of DD-MON-YYYY format to make sure your data have the correct year for each first name. <em>(Use</em> SET linesize &#x2026; , SET pagesize &#x2026; , COLUMN&#x2026;format&#x2026; <em>, etc to make your output readable)</em></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TO_CHAR(BDATE, <span class="string">&apos;DD-MON-YYYY&apos;</span>) <span class="keyword">AS</span> BDATE, e.*</div><div class="line"><span class="keyword">FROM</span> EMPLOYEE e;</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> TO_CHAR(MGR_START_DATE, <span class="string">&apos;DD-MON-YYYY&apos;</span>) <span class="keyword">AS</span> MGR_START_DATE, d.*</div><div class="line"><span class="keyword">FROM</span> DEPARTMENT d;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_4.png">
+
+</div>
+<div class="figure">
+<img src="/images/sql_5.png">
+
+</div>
+<p>Insert a new employee, Bill Clinton, whose SSN is 123123123, is the manager of a new department called &#x2018;Special Project&#x2019;, which the department number is 99.</p>
+<p>Enable all constraints.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> EMPLOYEE <span class="keyword">DISABLE</span> <span class="keyword">CONSTRAINT</span> EMPDEPTFK;</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> employee (FNAME, LNAME, SSN, DNO)</div><div class="line"><span class="keyword">VALUES</span>(<span class="string">&apos;Bill&apos;</span>, <span class="string">&apos;Clinton&apos;</span>, <span class="number">123123123</span>, <span class="number">99</span>);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> department (DNAME, DNUMBER, MGR_SSN)</div><div class="line"><span class="keyword">VALUES</span>(<span class="string">&apos;Special Project&apos;</span>, <span class="number">99</span>, <span class="number">123123123</span>);</div><div class="line"></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> EMPLOYEE <span class="keyword">ENABLE</span> <span class="keyword">CONSTRAINT</span> EMPDEPTFK;</div></pre></td></tr></table></figure>
+<h1 id="dml-data-manipulation-language">DML (Data Manipulation Language)</h1>
+<p>Find all employees&#x2019; ages, names and <strong>monthly</strong> salary. Sort the output by age. Salary value should be preceded by $ symbol (use COLUMN command). Display the age in the integer.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">COLUMN salary FORMAT $99,990</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> </div><div class="line">	<span class="keyword">CONCAT</span>(fname, lname) <span class="keyword">AS</span> <span class="keyword">Name</span>,</div><div class="line">	<span class="keyword">FLOOR</span>(MONTHS_BETWEEN(<span class="keyword">SYSDATE</span>, bdate)/<span class="number">12</span>) <span class="keyword">AS</span> Age,</div><div class="line">	salary/<span class="number">12</span> <span class="keyword">AS</span> Salary</div><div class="line"><span class="keyword">FROM</span> employee</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Age;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_6.png">
+
+</div>
+<p>For each department, find the employee who lives in Texas with the department&#x2019;s top salary, and show the results with their last and first names, sex, department names, and salary in the ascending order of salary.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> d.dname <span class="keyword">AS</span> Department, e.fname, e.lname, e.sex, e.Salary </div><div class="line"><span class="keyword">FROM</span> department d, employee e </div><div class="line"><span class="keyword">WHERE</span> e.dno = d.dnumber </div><div class="line"><span class="keyword">AND</span> e.salary=(</div><div class="line">	<span class="keyword">SELECT</span> <span class="keyword">MAX</span>(salary) <span class="keyword">FROM</span> employee e2 </div><div class="line">	<span class="keyword">WHERE</span> e2.dno=d.dnumber </div><div class="line">	<span class="keyword">AND</span> <span class="keyword">SUBSTR</span>(e2.address, <span class="number">-2</span>, <span class="number">2</span>) = <span class="string">&apos;TX&apos;</span>)</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> e.salary;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_7.png">
+
+</div>
+<h3 id="virtual-table">Virtual Table</h3>
+<p>Use a virtual table top_five_paid_employees to find all information of the five highest paid employees in the order of highest to lowest. <em>(excluded Unspecified salary)</em></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">COLUMN salary FORMAT $99,990</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> (</div><div class="line">	<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employee </div><div class="line">	<span class="keyword">WHERE</span> salary <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line">	<span class="keyword">ORDER</span> <span class="keyword">BY</span> salary <span class="keyword">DESC</span></div><div class="line">) tb</div><div class="line"><span class="keyword">WHERE</span> tb.salary <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">AND</span> <span class="keyword">rownum</span> &lt; <span class="number">6</span>;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_8.png">
+
+</div>
+<p>Joyce English just got a promotion and her salary now has an additional $10k every year. Update the database and check the current status in top_five_paid_employees.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> employee</div><div class="line"><span class="keyword">SET</span> salary = salary+<span class="number">10000</span></div><div class="line"><span class="keyword">WHERE</span> fname = <span class="string">&apos;Joyce&apos;</span> <span class="keyword">AND</span> lname = <span class="string">&apos;English&apos;</span>;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="/images/sql_9.png">
+
+</div>
+<h3 id="hierarchy">Hierarchy</h3>
+<p>Find all the subordinates of Borg in the hierarchical order. Show only managing level and names. Indent each hierarchical level by 4 spaces and in the order of supervisors to subordinates.</p>
+<p>USE LPAD, and START WITH, CONNECT BY PRIOR</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">COLUMN employee FORMAT A30</div><div class="line">COLUMN LEVEL FORMAT 9  </div><div class="line"><span class="keyword">SET</span> PAGESIZE <span class="number">5000</span></div><div class="line"><span class="keyword">SET</span> LINESIZE <span class="number">50</span></div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">LEVEL</span>, <span class="keyword">LPAD</span> (<span class="string">&apos; &apos;</span>, <span class="number">4</span> * (<span class="keyword">LEVEL</span> - <span class="number">1</span>)) || fname || <span class="string">&apos; &apos;</span> || lname employee</div><div class="line"><span class="keyword">FROM</span> employee</div><div class="line"><span class="keyword">START</span> <span class="keyword">WITH</span> lname = <span class="string">&apos;Borg&apos;</span></div><div class="line"><span class="keyword">CONNECT</span> <span class="keyword">BY</span> <span class="keyword">PRIOR</span> ssn = super_ssn;</div></pre></td></tr></table></figure>
+<div class="figure">
+<img src="images/sql_10.png">
+
+</div>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/03/07/sql/">https://testsiling.github.io/2019/03/07/sql/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/SQL/">SQL</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/04/07/LeetCode10/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(10) - Linked List(Easy)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/17/LeetCode9/">
+        <span class="next-text nav-default">LeetCode(9) - Sort</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/03/07/sql/';
+        this.page.identifier = '2019/03/07/sql/';
+        this.page.title = 'SQL Review (with examples)';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

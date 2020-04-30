@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="NoSQL Notes"/>
+
+
+
+
+  <meta name="keywords" content="Big Data, Database, NoSQL, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/05/26/NoSQL/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> NoSQL Notes - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          NoSQL Notes
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-05-26
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#nosql"><span class="toc-text">NoSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#cap-theroem"><span class="toc-text">CAP Theroem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nosql-database"><span class="toc-text">NoSQL Database</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nosql-models-keyvalue-systems"><span class="toc-text">NoSQL Models: Key/Value Systems</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#api"><span class="toc-text">API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#use-cases"><span class="toc-text">Use Cases</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nosql-models-column-store"><span class="toc-text">NoSQL Models: Column Store</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nosql-models-document-store"><span class="toc-text">NoSQL Models: Document Store</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nosql-models-graph-databases"><span class="toc-text">NoSQL Models: Graph Databases</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#summary"><span class="toc-text">Summary</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h1 id="nosql">NoSQL</h1>
+<p><strong>ACID</strong> - Atomic, Consistent, Isolated, Durable</p>
+<p><strong>BASE</strong> - Basic Availability, Soft-state, Eventual consistency</p>
+<a id="more"></a>
+<h2 id="cap-theroem">CAP Theroem</h2>
+<ul>
+<li>Consistency: Every read receives the most recent value</li>
+<li>Availability: Every request receives a (non-error) response without the guarantee that it contains the most recent write. no downtime.</li>
+<li>Partition Tolerance: The system continues to operate despite an arbitrary number of nodes being dropped.</li>
+</ul>
+<p><img src="/images/cap.png"></p>
+<h2 id="nosql-database">NoSQL Database</h2>
+<table style="width:92%;">
+<colgroup>
+<col width="11%">
+<col width="20%">
+<col width="19%">
+<col width="22%">
+<col width="18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Key-value Store</th>
+<th>Column Store</th>
+<th>Document Store</th>
+<th>Graph Store</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Usage</td>
+<td>- image stores<br>- Key-tased file systems<br>- Object cache<br>- System designed to scale</td>
+<td>- Web crawler results<br>- Big data problem with relaxed consistency riles</td>
+<td>- High variability data<br>- Document search<br>- Web content management<br>- Publishing</td>
+<td>- Social network<br>- Fraud detection<br>- Relationship heavy data</td>
+</tr>
+<tr class="even">
+<td>Example</td>
+<td>Memcache<br>Redis<br>Riak</td>
+<td>Hbase<br>Cassandra<br>Hypertable</td>
+<td>MongoDB<br>CoutchDB<br>CouchBase</td>
+<td>Neo4J<br>InfinteGraph(Objectively)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nosql-models-keyvalue-systems">NoSQL Models: Key/Value Systems</h3>
+<ul>
+<li>A store of two fields: (Key, Value) pairs.</li>
+<li>Only one way to access the data through hashing(Key) = value</li>
+<li>No query language: only get/put/delete/update</li>
+<li>Limited multi-record transactional consistency</li>
+<li>Each row has timestemp</li>
+</ul>
+<h4 id="api">API</h4>
+<ul>
+<li><p>lookup(key) -&gt; value</p></li>
+<li>lookup(key range) -&gt; value</li>
+<li>getNext -&gt; value</li>
+<li>insert(key, value)</li>
+<li><p>delete(key)</p></li>
+</ul>
+<h4 id="use-cases">Use Cases</h4>
+<ul>
+<li>Storing data for customer preferences and profiles</li>
+<li>Customized product recommendations, Ads, coupons</li>
+<li><p>User profiles</p></li>
+<li>Using cache to accelerate application responses</li>
+<li><p>As a cache for heavily accessed but rarely updated data</p></li>
+</ul>
+<h3 id="nosql-models-column-store">NoSQL Models: Column Store</h3>
+<ul>
+<li><p>Motivated by Google&#x2019;s BigTable</p></li>
+<li>Extension of the K/V system, where columns can have a complex structure, rather than a blob value</li>
+<li>Supports complex modeling structure (nested tables, repeating groups, set, list, etc.)</li>
+<li><p>Big Table, Cassandra, HBase, Vertica, Accumulo, Hypertable, etc</p></li>
+</ul>
+<h3 id="nosql-models-document-store">NoSQL Models: Document Store</h3>
+<ul>
+<li><p>Similar to Key-value store, but the value is a complete document, such as JSON, XML, etc.</p></li>
+<li><p>Any collection of documents such as maps, collections, and scalar values.</p></li>
+</ul>
+<h3 id="nosql-models-graph-databases">NoSQL Models: Graph Databases</h3>
+<ul>
+<li><p>Models data in terms of nodes and connections</p></li>
+<li><p>Useful for inter-connected data such as communication patterns, social networks, bio interactions.</p></li>
+<li><p>Allows us to ask deeper and more complex questions</p></li>
+<li><p>Difficult to distribute components of a graph among a network of</p></li>
+</ul>
+<p>servers as graphs become larger.</p>
+<h2 id="summary">Summary</h2>
+<table>
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>- Utilize the scale-out architecture that supports scalability, fault tolerance, and high availability <br>- Rapid insertion of arbitrary heterogeneous data with schema-on-read<br>- High performance of sequential scan (good for batch-oriented job such as OLAP workload)</td>
+<td>- Lack of ACID<br>- Not adequate for OLTP workload that requires random access and ACID <br>- Lack of high-level functionality such as SQL, schemas, and secondary indexes</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/05/26/NoSQL/">https://testsiling.github.io/2019/05/26/NoSQL/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Big-Data/">Big Data</a>
+            
+              <a href="/tags/Database/">Database</a>
+            
+              <a href="/tags/NoSQL/">NoSQL</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/05/28/LeetCode18/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(18) - Amazon 2</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/05/14/LeetCode17/">
+        <span class="next-text nav-default">LeetCode(17) - Amazon</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/05/26/NoSQL/';
+        this.page.identifier = '2019/05/26/NoSQL/';
+        this.page.title = 'NoSQL Notes';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(13) - BFS (Medium)"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, BFS, Topological Sort, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/04/16/LeetCode13/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(13) - BFS (Medium) - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(13) - BFS (Medium)
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-16
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#binary-tree-level-order-traversal"><span class="toc-text">102. Binary Tree Level Order Traversal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#binary-tree-zigzag-level-order-traversal"><span class="toc-text">103. Binary Tree Zigzag Level Order Traversal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#word-ladder"><span class="toc-text">127. Word Ladder</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#course-schedule"><span class="toc-text">207. Course Schedule</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#topological-sort"><span class="toc-text">Topological Sort</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#course-schedule-ii"><span class="toc-text">210. Course Schedule II</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Problem Set of BFS (Medium)</p>
+<ul>
+<li>102.Binary Tree Level Order Traversal</li>
+<li>103.Binary Tree Zigzag Level Order Traversal</li>
+<li>127.Word Ladder</li>
+<li>207.Course Schedule</li>
+<li>210.Course Schedule II</li>
+</ul>
+<a id="more"></a>
+<h1 id="binary-tree-level-order-traversal">102. Binary Tree Level Order Traversal</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span><span class="params">(self, root)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type root: TreeNode</span></div><div class="line"><span class="string">    :rtype: List[List[int]]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span> []</div><div class="line">    q = [root]</div><div class="line">    cnt = <span class="number">1</span></div><div class="line">    res, data = [], []</div><div class="line">    <span class="keyword">while</span> q:</div><div class="line">        cur = q.pop(<span class="number">0</span>)</div><div class="line">        cnt -= <span class="number">1</span></div><div class="line">        data.append(cur.val)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> cur.left:</div><div class="line">            q.append(cur.left)</div><div class="line">        <span class="keyword">if</span> cur.right:</div><div class="line">            q.append(cur.right)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> cnt == <span class="number">0</span>:</div><div class="line">            res.append(data)</div><div class="line">            data = []</div><div class="line">            cnt = len(q)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h1 id="binary-tree-zigzag-level-order-traversal">103. Binary Tree Zigzag Level Order Traversal</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">zigzagLevelOrder</span><span class="params">(self, root)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type root: TreeNode</span></div><div class="line"><span class="string">    :rtype: List[List[int]]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</div><div class="line">        <span class="keyword">return</span> []</div><div class="line">    q = [root]</div><div class="line">    res, data = [], []</div><div class="line">    cnt = <span class="number">1</span></div><div class="line">    <span class="comment"># right to left, level 1 would be left to right</span></div><div class="line">    r2l = <span class="keyword">False</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> q:</div><div class="line">        cur = q.pop(<span class="number">0</span>)</div><div class="line">        cnt -= <span class="number">1</span></div><div class="line">        data.append(cur.val)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> cur.left:</div><div class="line">            q.append(cur.left)</div><div class="line">        <span class="keyword">if</span> cur.right:</div><div class="line">            q.append(cur.right)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> cnt == <span class="number">0</span>:</div><div class="line">            <span class="keyword">if</span> r2l:</div><div class="line">                res.append(data[::<span class="number">-1</span>])</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                res.append(data)  </div><div class="line">            data = []</div><div class="line">            cnt = len(q)</div><div class="line">            r2l = <span class="keyword">not</span> r2l</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h1 id="word-ladder">127. Word Ladder</h1>
+<ol style="list-style-type: decimal">
+<li>build a dictionary for all generic states, Ex. *og, h*t &#x2026;</li>
+<li>from the begin word, push all possible words for all generic states into the queue</li>
+<li>use visited dictionary</li>
+<li>if go through all posible way for that generic states still no answer, mark as [] in dictionary, means bad end.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ladderLength</span><span class="params">(self, beginWord, endWord, wordList)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type beginWord: str</span></div><div class="line"><span class="string">    :type endWord: str</span></div><div class="line"><span class="string">    :type wordList: List[str]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> endWord <span class="keyword">not</span> <span class="keyword">in</span> wordList <span class="keyword">or</span> <span class="keyword">not</span> endWord <span class="keyword">or</span> <span class="keyword">not</span> beginWord <span class="keyword">or</span> <span class="keyword">not</span> wordList:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    </div><div class="line">    l = len(wordList[<span class="number">0</span>])</div><div class="line">    dic = {} <span class="comment"># a dict for generic state. Ex: {&apos;*og&apos;: [dog, log, cog]}</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> wordList:</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div><div class="line">            gene = w[:i] + <span class="string">&apos;*&apos;</span> + w[i+<span class="number">1</span>:]</div><div class="line">            <span class="keyword">if</span> gene <span class="keyword">not</span> <span class="keyword">in</span> dic:</div><div class="line">                dic[gene] = [w]</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                dic[gene].append(w)</div><div class="line">                </div><div class="line">    res = <span class="number">0</span></div><div class="line">    q = [(beginWord, <span class="number">1</span>)] <span class="comment"># 1 is current distant</span></div><div class="line">    visited = {}</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> q:</div><div class="line">        cur, dist = q.pop(<span class="number">0</span>)</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div><div class="line">            gene = cur[:i] + <span class="string">&apos;*&apos;</span> + cur[i+<span class="number">1</span>:]</div><div class="line">            <span class="keyword">if</span> gene <span class="keyword">in</span> dic:</div><div class="line">                <span class="keyword">for</span> word <span class="keyword">in</span> dic[gene]:</div><div class="line">                    <span class="keyword">if</span> word == endWord:</div><div class="line">                        <span class="keyword">return</span> dist + <span class="number">1</span></div><div class="line">                    </div><div class="line">                    <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> visited:</div><div class="line">                        visited[word] = <span class="keyword">True</span></div><div class="line">                        q.append((word, dist + <span class="number">1</span>))</div><div class="line">                        </div><div class="line">                <span class="comment"># all used, remove all word for that generic state        </span></div><div class="line">                dic[gene] = []</div><div class="line">                </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span></div></pre></td></tr></table></figure>
+<h1 id="course-schedule">207. Course Schedule</h1>
+<h3 id="topological-sort">Topological Sort</h3>
+<p>Explanation : <a href="https://blog.csdn.net/zjuPeco/article/details/78981634" target="_blank" rel="external">Topological Sort</a></p>
+<ol style="list-style-type: decimal">
+<li>find zero degree cell</li>
+<li>remove cell that points by zero cell</li>
+<li>repeat 1.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">canFinish</span><span class="params">(self, numCourses, prerequisites)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type numCourses: int</span></div><div class="line"><span class="string">    :type prerequisites: List[List[int]]</span></div><div class="line"><span class="string">    :rtype: bool</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="comment"># build a graph Topological Sort</span></div><div class="line">    indegree = collections.defaultdict(set)</div><div class="line">    outdegree = collections.defaultdict(set)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> c, pre <span class="keyword">in</span> prerequisites:</div><div class="line">        indegree[c].add(pre)</div><div class="line">        outdegree[pre].add(c)</div><div class="line">    </div><div class="line">    visited = <span class="number">0</span></div><div class="line">    zero = []</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(numCourses):</div><div class="line">        <span class="comment"># if c havn&apos;t got any prerequistite</span></div><div class="line">        <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> indegree:</div><div class="line">            zero.append(c)</div><div class="line">            visited += <span class="number">1</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> zero:</div><div class="line">        cur = zero.pop(<span class="number">0</span>)</div><div class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> outdegree[cur]:</div><div class="line">            indegree[c].remove(cur)</div><div class="line">            <span class="comment"># if no more prerequisite anymore, add to zero degree</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> indegree[c]:</div><div class="line">                zero.append(c)</div><div class="line">                visited += <span class="number">1</span></div><div class="line">    </div><div class="line">    <span class="keyword">return</span> visited == numCourses</div></pre></td></tr></table></figure>
+<h1 id="course-schedule-ii">210. Course Schedule II</h1>
+<p>Still topological sort</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">findOrder</span><span class="params">(self, numCourses, prerequisites)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type numCourses: int</span></div><div class="line"><span class="string">    :type prerequisites: List[List[int]]</span></div><div class="line"><span class="string">    :rtype: List[int]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="comment"># build a graph for Topological Sort</span></div><div class="line">    indegree = collections.defaultdict(set)</div><div class="line">    outdegree = collections.defaultdict(set)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> c, pre <span class="keyword">in</span> prerequisites:</div><div class="line">        indegree[c].add(pre)</div><div class="line">        outdegree[pre].add(c)</div><div class="line"></div><div class="line">    schedule, zero = [], []</div><div class="line"></div><div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(numCourses):</div><div class="line">        <span class="comment"># if c havn&apos;t got any prerequistite</span></div><div class="line">        <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> indegree:</div><div class="line">            zero.append(c)</div><div class="line">            schedule.append(c)</div><div class="line"></div><div class="line">    <span class="keyword">while</span> zero:</div><div class="line">        cur = zero.pop(<span class="number">0</span>)</div><div class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> outdegree[cur]:</div><div class="line">            indegree[c].remove(cur)</div><div class="line">            <span class="comment"># if no more prerequisite anymore, add to zero degree</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> indegree[c]:</div><div class="line">                zero.append(c)</div><div class="line">                schedule.append(c)</div><div class="line">                </div><div class="line">    <span class="keyword">return</span> schedule <span class="keyword">if</span> len(schedule) == numCourses <span class="keyword">else</span> []</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/04/16/LeetCode13/">https://testsiling.github.io/2019/04/16/LeetCode13/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/BFS/">BFS</a>
+            
+              <a href="/tags/Topological-Sort/">Topological Sort</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/05/07/LeetCode14/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(14) - Google</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/04/14/LeetCode12/">
+        <span class="next-text nav-default">LeetCode(12) - BFS (Easy)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/04/16/LeetCode13/';
+        this.page.identifier = '2019/04/16/LeetCode13/';
+        this.page.title = 'LeetCode(13) - BFS (Medium)';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

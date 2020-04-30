@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(7) - Backtracking(DFS), Permutations"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, BackTracking, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/02/07/LeetCode7/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(7) - Backtracking(DFS), Permutations - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(7) - Backtracking(DFS), Permutations
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-07
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#basic-permutations"><span class="toc-text">46.Basic Permutations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#method-1"><span class="toc-text">Method 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#method-2-dfs"><span class="toc-text">Method 2: DFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unique-permutations"><span class="toc-text">47.Unique Permutations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#method-1-384ms"><span class="toc-text">Method 1: 384ms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#method-2-60ms"><span class="toc-text">Method 2: 60ms</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#letter-combinations-of-phone-number"><span class="toc-text">17. Letter Combinations of Phone Number</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#generate-parentheses"><span class="toc-text">22.Generate Parentheses</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Problem Set for Backtracking and Permutations (To Be Continued)</p>
+<ul>
+<li>46.Permutations</li>
+<li>47.Permutations II</li>
+<li>17.Letter Combinations of Phone Number</li>
+<li>22.Generate Parentheses <a id="more"></a> <br></li>
+</ul>
+<h2 id="basic-permutations">46.Basic Permutations</h2>
+<h3 id="method-1">Method 1</h3>
+<p>extract all elements one by one, generate permutations that starting by them</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">permute1</span><span class="params">(nums)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type nums: List[int]</span></div><div class="line"><span class="string">    :rtype: List[List[int]]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> len(nums) &lt; <span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> [nums]</div><div class="line"></div><div class="line">    res = []</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</div><div class="line">        cur = nums[i]  <span class="comment"># heading element</span></div><div class="line">        rest = nums[:i] + nums[i + <span class="number">1</span>:]  <span class="comment"># list except cur</span></div><div class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> permute1(rest):</div><div class="line">            <span class="comment"># generate permutations that beginning with cur</span></div><div class="line">            res.append([cur] + p)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h3 id="method-2-dfs">Method 2: DFS</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">permute2</span><span class="params">(nums)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(nums, path, res)</span>:</span></div><div class="line">        <span class="keyword">if</span> len(nums) &lt; <span class="number">1</span>:</div><div class="line">            res.append(path)</div><div class="line">            <span class="comment"># return # backtracking</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</div><div class="line">            cur = nums[i]</div><div class="line">            rest = nums[:i] + nums[i + <span class="number">1</span>:]</div><div class="line">            dfs(rest, path + [cur], res)</div><div class="line"></div><div class="line">    res = []</div><div class="line">    dfs(nums, [], res)</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h2 id="unique-permutations">47.Unique Permutations</h2>
+<h3 id="method-1-384ms">Method 1: 384ms</h3>
+<p>Generaet all permutations, then use dictionary to remove duplicates</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">permuteUnique1</span><span class="params">(nums)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(nums, path, res)</span>:</span></div><div class="line">        <span class="keyword">if</span> len(nums) &lt; <span class="number">1</span>:</div><div class="line">            res.append(path)</div><div class="line">            <span class="comment"># return # backtracking</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</div><div class="line">            cur = nums[i]</div><div class="line">            rest = nums[:i] + nums[i + <span class="number">1</span>:]</div><div class="line">            dfs(rest, path + [cur], res)</div><div class="line"></div><div class="line">    perm = []</div><div class="line">    dfs(nums, [], perm)</div><div class="line">    dic = {}</div><div class="line">    res = []</div><div class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> perm:</div><div class="line">        <span class="keyword">if</span> tuple(p) <span class="keyword">not</span> <span class="keyword">in</span> dic:</div><div class="line">            print(p)</div><div class="line">            dic[tuple(p)] = <span class="number">1</span></div><div class="line">            res.append(p)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h3 id="method-2-60ms">Method 2: 60ms</h3>
+<p>Sort the list first. Then skip redundant element, generate permutations.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">permuteUnique2</span><span class="params">(nums)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type nums: List[int]</span></div><div class="line"><span class="string">    :rtype: List[List[int]]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(nums, path, res)</span>:</span></div><div class="line">        <span class="keyword">if</span> len(nums) &lt; <span class="number">1</span>:</div><div class="line">            res.append(path)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</div><div class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i - <span class="number">1</span>]:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            cur = nums[i]</div><div class="line">            rest = nums[:i] + nums[i + <span class="number">1</span>:]</div><div class="line">            dfs(rest, path + [cur], res)</div><div class="line"></div><div class="line">    nums.sort()</div><div class="line">    res = []</div><div class="line">    dfs(nums, [], res)</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h2 id="letter-combinations-of-phone-number">17. Letter Combinations of Phone Number</h2>
+<p>Runtime: 20 ms, faster than 100.00%</p>
+<p>Memory Usage: 7 MB, less than 89.43%</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">letterCombinations</span><span class="params">(self, digits)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type digits: str</span></div><div class="line"><span class="string">    :rtype: List[str]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    dict = {</div><div class="line">        <span class="string">&apos;2&apos;</span>:<span class="string">&apos;abc&apos;</span>, <span class="string">&apos;3&apos;</span>:<span class="string">&apos;def&apos;</span>, <span class="string">&apos;4&apos;</span>:<span class="string">&apos;ghi&apos;</span>,</div><div class="line">        <span class="string">&apos;5&apos;</span>:<span class="string">&apos;jkl&apos;</span>, <span class="string">&apos;6&apos;</span>:<span class="string">&apos;mno&apos;</span>, <span class="string">&apos;7&apos;</span>:<span class="string">&apos;pqrs&apos;</span>,</div><div class="line">        <span class="string">&apos;8&apos;</span>:<span class="string">&apos;tuv&apos;</span>, <span class="string">&apos;9&apos;</span>:<span class="string">&apos;wxyz&apos;</span>, <span class="string">&apos;1&apos;</span>:<span class="string">&apos;&apos;</span>, <span class="string">&apos;0&apos;</span>:<span class="string">&apos;&apos;</span></div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">if</span> len(digits) &lt; <span class="number">1</span>:</div><div class="line">        <span class="keyword">return</span> []</div><div class="line"></div><div class="line">    res = []</div><div class="line">    chars = []</div><div class="line">    <span class="keyword">for</span> d <span class="keyword">in</span> digits:</div><div class="line">        chars.append(dict[d])   </div><div class="line"></div><div class="line">        self.dfs(digits, dict, <span class="number">0</span>, <span class="string">&apos;&apos;</span>, res)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="comment"># indx: cur digits index</span></div><div class="line"><span class="comment"># chars: mapping dictionary</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self, digits, chars, indx, path, res)</span>:</span></div><div class="line">    <span class="keyword">if</span> indx &gt;= len(digits):</div><div class="line">        print(path)</div><div class="line">        res.append(path)</div><div class="line">        <span class="keyword">return</span></div><div class="line"><span class="keyword">for</span> i, curChar <span class="keyword">in</span> enumerate(chars[digits[indx]]):</div><div class="line">    self.dfs(digits, chars, indx + <span class="number">1</span>, path + curChar, res)</div></pre></td></tr></table></figure>
+<h2 id="generate-parentheses">22.Generate Parentheses</h2>
+<p>BackTracking:</p>
+<p>Log the number or remainning left and right bracket.</p>
+<p>Constrain:</p>
+<p>when left &gt; right, failed. when left &lt; 0 or right &lt; 0, failed.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generateParenthesis</span><span class="params">(self, n)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type n: int</span></div><div class="line"><span class="string">    :rtype: List[str]</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line"></div><div class="line">    res = []</div><div class="line">    self.dfs(n, n, <span class="string">&apos;&apos;</span>, n, res)</div><div class="line">    <span class="keyword">return</span> res</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self, left, right, path, n, res)</span>:</span></div><div class="line">    <span class="comment"># Goal</span></div><div class="line">    <span class="keyword">if</span> left == <span class="number">0</span> <span class="keyword">and</span> right == <span class="number">0</span>:</div><div class="line">        res.append(path)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="comment"># Constrain</span></div><div class="line">    <span class="comment"># the number of remainning left bracket always less than right</span></div><div class="line">    <span class="keyword">if</span> left &gt; right <span class="keyword">or</span> left &lt; <span class="number">0</span> <span class="keyword">or</span> right &lt; <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    self.dfs(left - <span class="number">1</span>, right, path + <span class="string">&apos;(&apos;</span>, n, res)</div><div class="line">    self.dfs(left, right - <span class="number">1</span>, path + <span class="string">&apos;)&apos;</span>, n, res)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/02/07/LeetCode7/">https://testsiling.github.io/2019/02/07/LeetCode7/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/BackTracking/">BackTracking</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/02/07/LeetCode8/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(8) - Combinations, Backtracking</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/12/12/LeetCode6/">
+        <span class="next-text nav-default">LeetCode(6)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/02/07/LeetCode7/';
+        this.page.identifier = '2019/02/07/LeetCode7/';
+        this.page.title = 'LeetCode(7) - Backtracking(DFS), Permutations';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

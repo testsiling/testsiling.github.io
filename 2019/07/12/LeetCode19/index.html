@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(19) - Stack"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, Stack, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/07/12/LeetCode19/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(19) - Stack - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(19) - Stack
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-07-12
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#basic-calculator"><span class="toc-text">224. Basic Calculator</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#solution-1-stack-and-string-reversal"><span class="toc-text">Solution 1: Stack and String Reversal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solution-2-saving-sign-and-middle-result"><span class="toc-text">Solution 2: Saving sign and middle result</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#solution-3-recursion"><span class="toc-text">Solution 3: Recursion</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#basic-calculator-ii"><span class="toc-text">227. Basic Calculator II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#basic-calculator-iii"><span class="toc-text">772. Basic Calculator III</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#recursion"><span class="toc-text">Recursion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iteration"><span class="toc-text">Iteration</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#decode-string"><span class="toc-text">394. Decode String</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#recursion-1"><span class="toc-text">Recursion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stack"><span class="toc-text">Stack</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#daily-temperatures"><span class="toc-text">739. Daily Temperatures</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Loog time no see~ I finally recovered from the last failed interview (I know it takes a long time though &#x1F61D;)</p>
+<p>Last month, I was busying for my graduation. yeah, I got my Master degreed from Drexel University (Big Cong to myself &#x1F389;). And my family came to the US for the commencement. I had a road trip with them. That was the first time I drive since I got my DL. Anyway, I have supercalifragilisticexpialidocious (LOL, I new word I learned, means wonderful) time with my family. I wish my younger brother can join us. But he was frustrating for his incoming final at that time.</p>
+<p>At the beginning of July, I applied a couple of companies, still no reply, all emails are beginning with &#x201C;Unfortunately.&#x201D; However, a staffing company contacted me and I got an interview for a contractor position in a local big firm. I have done the online assessment, coding challenge, and a phone interview (2 days ago). Currently, the feedback is positive, HR said they will contact me by next week. If I pass the phone interview, the final round is onsite.</p>
+<p>Anyway, I think now is the time to back to the battlefield, keep sharpening my code for all further opportunities! &#x1F4AA;</p>
+<ul>
+<li>224.Basic Calculator</li>
+<li>227.Basic Calculator II</li>
+<li>772.Basic Calculator III</li>
+<li>394.Decode String</li>
+<li>739.Daily Temperatures</li>
+</ul>
+<a id="more"></a>
+<h1 id="basic-calculator">224. Basic Calculator</h1>
+<ul>
+<li><p>Since some numbers have multiple digits, like 199, cannot just iterate the whole string. need to clean it up first.</p></li>
+<li><p>Be careful with empty input, like &quot; &#x201C;.</p></li>
+<li><p>Adding a pair if Brackets to the like would make it easier.</p></li>
+<li>Be aware of the calculating logic using stack. <em>(7+8-9) -&gt; )9-8+7( -&gt; (7+8-9)</em></li>
+<li><p>some special cases: &#x201C;2-(5-6)&#x201D;, &#x201C;1-(15)&#x201D;</p></li>
+</ul>
+<h2 id="solution-1-stack-and-string-reversal">Solution 1: Stack and String Reversal</h2>
+<p>Iterating the reversed string. calculate the expression inside &#x201C;)(&#x201D; by poping &amp; adding.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">cal_current</span><span class="params">(stack)</span>:</span></div><div class="line">            isNeg = <span class="keyword">False</span></div><div class="line">            res = <span class="number">0</span></div><div class="line">            <span class="keyword">while</span> stack <span class="keyword">and</span> stack[<span class="number">-1</span>] != <span class="string">&apos;)&apos;</span>:</div><div class="line">                x = stack.pop()</div><div class="line">                <span class="keyword">if</span> isinstance(x, int):</div><div class="line">                    <span class="keyword">if</span> isNeg:</div><div class="line">                        res -= x</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        res += x</div><div class="line">                    isNeg = <span class="keyword">False</span></div><div class="line">                <span class="keyword">elif</span> x == <span class="string">&apos;-&apos;</span>:</div><div class="line">                    isNeg = <span class="keyword">True</span></div><div class="line">            <span class="keyword">return</span> res</div><div class="line">            </div><div class="line"></div><div class="line">        stack = []</div><div class="line">        num = <span class="string">&apos;&apos;</span></div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s[::<span class="number">-1</span>]:</div><div class="line">            <span class="keyword">if</span> x.isdigit():</div><div class="line">                num = x + num</div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> x != <span class="string">&apos; &apos;</span>:</div><div class="line">                <span class="keyword">if</span> num != <span class="string">&apos;&apos;</span>:</div><div class="line">                    stack.append(int(num))</div><div class="line">                    num = <span class="string">&apos;&apos;</span></div><div class="line">                </div><div class="line">                <span class="comment"># Because reversed, &apos;(&apos; is the end of a inner expression</span></div><div class="line">                <span class="keyword">if</span> x == <span class="string">&apos;(&apos;</span>:</div><div class="line">                    <span class="comment"># get the current result of the stack:</span></div><div class="line">                    cur = cal_current(stack)</div><div class="line">                    stack.pop()  <span class="comment"># pop the beginning &apos;)&apos;</span></div><div class="line">                    stack.append(cur)</div><div class="line">                    </div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    stack.append(x)</div><div class="line">                    </div><div class="line">        <span class="keyword">if</span> num != <span class="string">&apos;&apos;</span>:</div><div class="line">            stack.append(int(num))</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> cal_current(stack)</div></pre></td></tr></table></figure>
+<h2 id="solution-2-saving-sign-and-middle-result">Solution 2: Saving sign and middle result</h2>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        stack = []</div><div class="line">        sign = <span class="number">1</span> <span class="comment"># 1 = positive, -1 = negative</span></div><div class="line">        num = <span class="number">0</span></div><div class="line">        res = <span class="number">0</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> x.isdigit():</div><div class="line">                num = (num * <span class="number">10</span>) + int(x) <span class="comment"># 19 = 10 + 9</span></div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> x == <span class="string">&apos;+&apos;</span>:</div><div class="line">                res += sign * num <span class="comment"># the result of previous expression</span></div><div class="line">                sign = <span class="number">1</span></div><div class="line">                num = <span class="number">0</span> <span class="comment"># reset num</span></div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> x == <span class="string">&apos;-&apos;</span>:</div><div class="line">                res += sign * num</div><div class="line">                sign = <span class="number">-1</span></div><div class="line">                num = <span class="number">0</span></div><div class="line">            </div><div class="line">            <span class="keyword">elif</span> x == <span class="string">&apos;(&apos;</span>:</div><div class="line">                stack.append(res)</div><div class="line">                stack.append(sign)</div><div class="line">                sign = <span class="number">1</span></div><div class="line">                res = <span class="number">0</span></div><div class="line">            </div><div class="line">            <span class="keyword">elif</span> x == <span class="string">&apos;)&apos;</span>:</div><div class="line">                res += sign * num <span class="comment"># geting the resule inside the brackets</span></div><div class="line">                res *= stack.pop() <span class="comment"># adding outside sign </span></div><div class="line">                res += stack.pop() <span class="comment"># geting the current result.</span></div><div class="line">                num = <span class="number">0</span></div><div class="line">        </div><div class="line">        <span class="keyword">return</span> res + sign * num</div></pre></td></tr></table></figure></p>
+<h2 id="solution-3-recursion">Solution 3: Recursion</h2>
+<p>Deliver the starting index, jump inner calculation when meets the &#x201C;(&#x201D;, then jump put when &#x201C;)&#x201D; occurs, and update the outter index to the next index of &#x201C;)&#x201D;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        </div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">inner_calculate</span><span class="params">(s, start)</span>:</span></div><div class="line">            </div><div class="line">            num = <span class="number">0</span></div><div class="line">            sign = <span class="number">1</span> <span class="comment"># 1 = positive, -1 = negative</span></div><div class="line">            res = <span class="number">0</span></div><div class="line">            i = start <span class="comment"># start index</span></div><div class="line"></div><div class="line">            <span class="keyword">while</span> i &lt; len(s):</div><div class="line"></div><div class="line">                <span class="keyword">if</span> s[i].isdigit():</div><div class="line">                    num = (num * <span class="number">10</span>) + int(s[i])</div><div class="line"></div><div class="line">                <span class="keyword">elif</span> s[i] == <span class="string">&apos;+&apos;</span>:</div><div class="line">                    res += sign * num</div><div class="line">                    sign = <span class="number">1</span> <span class="comment"># reset sign</span></div><div class="line">                    num = <span class="number">0</span> <span class="comment"># reset num</span></div><div class="line"></div><div class="line">                <span class="keyword">elif</span> s[i] == <span class="string">&apos;-&apos;</span>:</div><div class="line">                    res += sign * num</div><div class="line">                    sign = <span class="number">-1</span></div><div class="line">                    num = <span class="number">0</span></div><div class="line"></div><div class="line">                <span class="keyword">elif</span> s[i] == <span class="string">&apos;(&apos;</span>:</div><div class="line">                    inner, end = inner_calculate(s, i + <span class="number">1</span>)</div><div class="line">                    res += sign * inner</div><div class="line">                    sign = <span class="number">1</span></div><div class="line">                    i = end</div><div class="line"></div><div class="line">                <span class="keyword">elif</span> s[i] == <span class="string">&apos;)&apos;</span>:</div><div class="line">                    res += sign * num</div><div class="line">                    num = <span class="number">0</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">                    </div><div class="line">                i += <span class="number">1</span></div><div class="line"></div><div class="line">            <span class="keyword">return</span> (res + sign * num, i) <span class="comment"># i is the end of the inner expression.</span></div><div class="line">        </div><div class="line">        </div><div class="line">        res, end = inner_calculate(s, <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h1 id="basic-calculator-ii">227. Basic Calculator II</h1>
+<p>Be careful with the case: 10-3/2. Directly calculate &#x201C;-3/2&#x201D; will return -2 in python, which is wrong. should treat is as &#x201C;- (3/2)&#x201D;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        stack = []</div><div class="line">        num = <span class="number">0</span></div><div class="line">        sign = <span class="string">&quot;+&quot;</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> enumerate(s):</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> x.isdigit():</div><div class="line">                num = (num * <span class="number">10</span>) + int(x)</div><div class="line">                </div><div class="line">            <span class="comment"># include the last number</span></div><div class="line">            <span class="keyword">if</span> x <span class="keyword">in</span> <span class="string">&apos;+-*/&apos;</span> <span class="keyword">or</span> i == len(s) - <span class="number">1</span>:</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> sign == <span class="string">&apos;*&apos;</span>:</div><div class="line">                    stack.append(stack.pop() * num)</div><div class="line">                <span class="keyword">elif</span> sign == <span class="string">&apos;/&apos;</span>:</div><div class="line">                    temp = stack.pop()</div><div class="line">                    temp = temp / num <span class="keyword">if</span> temp &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span> * (-temp/num)</div><div class="line">                    stack.append(temp)</div><div class="line">                <span class="keyword">elif</span> sign == <span class="string">&apos;+&apos;</span>:</div><div class="line">                    stack.append(num)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    stack.append(-num)</div><div class="line">                    </div><div class="line">                num = <span class="number">0</span></div><div class="line">                sign = x         </div><div class="line">                </div><div class="line">        <span class="keyword">return</span> sum(stack)</div></pre></td></tr></table></figure>
+<h1 id="basic-calculator-iii">772. Basic Calculator III</h1>
+<h2 id="recursion">Recursion</h2>
+<p>Just a combination of #227 and #224</p>
+<p>sign is the last sign it met. num is the number after that sign</p>
+<p>When meets left bracket, calculate the value inside and gent the length of the inner exprassion.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        num, stack, sign = <span class="number">0</span>, [], <span class="string">&quot;+&quot;</span></div><div class="line">        s += <span class="string">&apos; &apos;</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        </div><div class="line">        <span class="keyword">while</span> i &lt; len(s):</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> s[i].isdigit():</div><div class="line">                num = num * <span class="number">10</span> + int(s[i])</div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&apos;(&apos;</span>:</div><div class="line">                num, offset = self.calculate(s[i+<span class="number">1</span>:])</div><div class="line">                i += offset</div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> s[i] <span class="keyword">in</span> <span class="string">&apos;+-*/)&apos;</span> <span class="keyword">or</span> i == len(s) - <span class="number">1</span>:</div><div class="line">                <span class="keyword">if</span> sign == <span class="string">&apos;+&apos;</span>:</div><div class="line">                    stack.append(num)</div><div class="line">                <span class="keyword">elif</span> sign == <span class="string">&apos;-&apos;</span>:</div><div class="line">                    stack.append(-num)</div><div class="line">                <span class="keyword">elif</span> sign == <span class="string">&apos;*&apos;</span>:</div><div class="line">                    stack.append(stack.pop() * num)</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    x = stack.pop()</div><div class="line">                    x = x / num <span class="keyword">if</span> x &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span> * (-x/num)</div><div class="line">                    stack.append(x)</div><div class="line"></div><div class="line">                <span class="keyword">if</span> s[i] == <span class="string">&apos;)&apos;</span>:</div><div class="line">                    <span class="keyword">return</span> sum(stack), i + <span class="number">1</span></div><div class="line">                num = <span class="number">0</span></div><div class="line">                sign = s[i]</div><div class="line">            i += <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> sum(stack)</div></pre></td></tr></table></figure>
+<h2 id="iteration">Iteration</h2>
+<p>When encounters the left bracket, save the current sign to the stack. then reset <strong>num and sign</strong>, continue to calculate the rest, until meets the right bracket. then sum the result in the stack before the last saved sign.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calculate</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span> </div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">get_current</span><span class="params">(sign, num)</span>:</span></div><div class="line">            <span class="keyword">if</span> sign == <span class="string">&apos;+&apos;</span>:</div><div class="line">                stack.append(num)</div><div class="line">            <span class="keyword">elif</span> sign == <span class="string">&apos;-&apos;</span>:</div><div class="line">                stack.append(-num)</div><div class="line">            <span class="keyword">elif</span> sign == <span class="string">&apos;*&apos;</span>:</div><div class="line">                stack.append(stack.pop() * num)</div><div class="line">            <span class="keyword">elif</span> sign == <span class="string">&apos;/&apos;</span>:</div><div class="line">                x = stack.pop()</div><div class="line">                x = x / num <span class="keyword">if</span> x &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span> * (-x/num)</div><div class="line">                stack.append(x)</div><div class="line">        </div><div class="line">        </div><div class="line">        stack = []</div><div class="line">        num, sign = <span class="number">0</span>, <span class="string">&apos;+&apos;</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> s[i].isdigit():</div><div class="line">                num = num * <span class="number">10</span> + int(s[i])</div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> s[i] <span class="keyword">in</span> <span class="string">&apos;+-*/)&apos;</span>:</div><div class="line">                get_current(sign, num)</div><div class="line">                </div><div class="line">                <span class="keyword">if</span> s[i] == <span class="string">&apos;)&apos;</span>:</div><div class="line">                    num = <span class="number">0</span></div><div class="line">                    <span class="comment"># find the last outter sign</span></div><div class="line">                    <span class="keyword">while</span> isinstance(stack[<span class="number">-1</span>], int):</div><div class="line">                        num += stack.pop() </div><div class="line">                    sign = stack.pop()</div><div class="line">                    get_current(sign, num)</div><div class="line">                    </div><div class="line">                num, sign = <span class="number">0</span>, s[i]</div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&apos;(&apos;</span>:</div><div class="line">                <span class="comment"># push outer sign to stack</span></div><div class="line">                stack.append(sign)</div><div class="line">                num, sign = <span class="number">0</span>, <span class="string">&apos;+&apos;</span></div><div class="line">                </div><div class="line">        get_current(sign, num)</div><div class="line">        <span class="keyword">return</span> sum(stack)</div></pre></td></tr></table></figure>
+<h1 id="decode-string">394. Decode String</h1>
+<h2 id="recursion-1">Recursion</h2>
+<p>The first idea comes into my mind is recursion. everytime meets [, jump into it, meets ], return. Using offset to skip the finished part.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decodeString</span><span class="params">(self, s, k = <span class="number">1</span>)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: str</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span>  </div><div class="line">        cur = <span class="string">&quot;&quot;</span></div><div class="line">        num = <span class="number">0</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        <span class="keyword">while</span> i &lt; len(s):</div><div class="line"></div><div class="line">            <span class="keyword">if</span> s[i].isdigit():</div><div class="line">                num = (num * <span class="number">10</span>) + int(s[i])</div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;[&quot;</span>:</div><div class="line">                temp, offest = self.decodeString(s[i+<span class="number">1</span>:], num)</div><div class="line">                cur += temp</div><div class="line">                i += offest</div><div class="line">                num = <span class="number">0</span></div><div class="line">                </div><div class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&quot;]&quot;</span>:</div><div class="line">                <span class="keyword">return</span> (cur * k, i+<span class="number">1</span>)</div><div class="line">            </div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                cur += s[i]</div><div class="line"></div><div class="line">            i += <span class="number">1</span></div><div class="line"></div><div class="line">        <span class="keyword">return</span> cur</div></pre></td></tr></table></figure>
+<h2 id="stack">Stack</h2>
+<p>when meets a &#x201C;]&#x201D;, pop to get the current result then push it into stack. be careful to the order of the string and numbers.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decodeString</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: str</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span>  </div><div class="line">        stack = []</div><div class="line">        num = <span class="keyword">None</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:</div><div class="line">            <span class="keyword">if</span> x != <span class="string">&quot;]&quot;</span>:</div><div class="line">                stack.append(x)</div><div class="line">            </div><div class="line">            <span class="comment"># find the closest &quot;[&quot;</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                cur = <span class="string">&quot;&quot;</span></div><div class="line">                n = <span class="string">&quot;&quot;</span></div><div class="line">                <span class="keyword">while</span> stack:</div><div class="line">                    x = stack.pop()</div><div class="line">                    <span class="keyword">if</span> x != <span class="string">&quot;[&quot;</span>:</div><div class="line">                        cur = x + cur</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">while</span> stack <span class="keyword">and</span> stack[<span class="number">-1</span>].isdigit():</div><div class="line">                            n = stack.pop() + n</div><div class="line">                        cur = cur * int(n)</div><div class="line">                        <span class="keyword">break</span></div><div class="line">                stack.append(cur)</div><div class="line">        <span class="keyword">return</span> <span class="string">&apos;&apos;</span>.join(stack)</div></pre></td></tr></table></figure>
+<h1 id="daily-temperatures">739. Daily Temperatures</h1>
+<p>When colder than the last day, push into stack.</p>
+<p>When meets a temp that warmer than stack-top, compare elements in stack, the day needs to wait is the offset of index.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dailyTemperatures</span><span class="params">(self, T)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type T: List[int]</span></div><div class="line"><span class="string">        :rtype: List[int]</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        stack = []</div><div class="line">        wait = [<span class="number">0</span>]*len(T)</div><div class="line">        <span class="keyword">for</span> i, temp <span class="keyword">in</span> enumerate(T):</div><div class="line">            <span class="comment"># today warmer that the last day in stack</span></div><div class="line">            <span class="keyword">while</span> len(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> T[stack[<span class="number">-1</span>][<span class="number">0</span>]] &lt; T[i]: </div><div class="line">                j, today = stack.pop()</div><div class="line">                wait[j] = i-j</div><div class="line">            stack.append((i, temp))</div><div class="line">            <span class="comment"># print(stack)   </span></div><div class="line">        <span class="keyword">return</span> wait</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/07/12/LeetCode19/">https://testsiling.github.io/2019/07/12/LeetCode19/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/Stack/">Stack</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/07/17/LeetCode20/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(20) - Two Pointers</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/06/03/mongodb/">
+        <span class="next-text nav-default">MongoDB Notes</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/07/12/LeetCode19/';
+        this.page.identifier = '2019/07/12/LeetCode19/';
+        this.page.title = 'LeetCode(19) - Stack';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

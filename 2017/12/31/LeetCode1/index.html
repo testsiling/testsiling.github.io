@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(1)"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2017/12/31/LeetCode1/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(1) - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(1)
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-12-31
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#solution-2-digital-root"><span class="toc-text">Solution 2: Digital Root</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>LeetCode Solutions Accepted Log 1</p>
+<ul>
+<li>1.Two Sum</li>
+<li>717.1-bit and 2-bit Characters</li>
+<li>455.Assign Cookies</li>
+<li>67.Add Binary</li>
+<li>258.Add Digits</li>
+</ul>
+<a id="more"></a>
+<p><br> # 1. Two Sum https://leetcode.com/problems/two-sum/description/ <strong>Easy</strong> <em>python use brute force will time limit exceed</em> <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span><span class="params">(self, nums, target)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type nums: List[int]</span></div><div class="line"><span class="string">        :type target: int</span></div><div class="line"><span class="string">        :rtype: List[int]</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        mydict = {}</div><div class="line">        <span class="keyword">for</span> i, num <span class="keyword">in</span> enumerate(nums):</div><div class="line">            <span class="keyword">if</span> target - num <span class="keyword">in</span> mydict:</div><div class="line">                <span class="keyword">return</span> [mydict[target - num], i]</div><div class="line">            mydict[num] = i</div></pre></td></tr></table></figure></p>
+<p><br> # 717. 1-bit and 2-bit Characters https://leetcode.com/problems/1-bit-and-2-bit-characters/description/ <strong>Easy</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isOneBitCharacter</span><span class="params">(self, bits)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type bits: List[int]</span></div><div class="line"><span class="string">        :rtype: bool</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        l = len(bits)</div><div class="line">        <span class="comment"># if last character is NOT one-bit character.</span></div><div class="line">        <span class="keyword">if</span> bits[l - <span class="number">1</span>] == <span class="number">1</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">        <span class="comment"># count except the last character</span></div><div class="line">        count = l - <span class="number">1</span></div><div class="line">        i = <span class="number">0</span></div><div class="line">        <span class="keyword">while</span> count &gt; <span class="number">0</span>:</div><div class="line">            <span class="keyword">if</span> bits[i] == <span class="number">1</span>:</div><div class="line">                count -= <span class="number">2</span></div><div class="line">                i += <span class="number">2</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                count -= <span class="number">1</span></div><div class="line">                i += <span class="number">1</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> count == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div></pre></td></tr></table></figure></p>
+<p><br> # 455. Assign Cookies https://leetcode.com/problems/assign-cookies/description/ <strong>Easy</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findContentChildren</span><span class="params">(self, g, s)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type g: List[int]</span></div><div class="line"><span class="string">        :type s: List[int]</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        count = <span class="number">0</span></div><div class="line">        g.sort()</div><div class="line">        s.sort()</div><div class="line"></div><div class="line">        <span class="keyword">for</span> greed <span class="keyword">in</span> g:</div><div class="line">            <span class="keyword">for</span> size <span class="keyword">in</span> s:</div><div class="line">                <span class="keyword">if</span> greed &lt;= size:</div><div class="line">                    count += <span class="number">1</span></div><div class="line">                    s.remove(size)</div><div class="line">                    <span class="keyword">break</span></div><div class="line">        <span class="keyword">return</span> count</div></pre></td></tr></table></figure></p>
+<p><br> # 67. Add Binary https://leetcode.com/problems/add-binary/description/ <strong>Easy</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addBinary</span><span class="params">(self, a, b)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type a: str</span></div><div class="line"><span class="string">        :type b: str</span></div><div class="line"><span class="string">        :rtype: str</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        a = int(a, <span class="number">2</span>)</div><div class="line">        b = int(b, <span class="number">2</span>)</div><div class="line">        <span class="keyword">return</span> bin(a + b)[<span class="number">2</span>::]</div></pre></td></tr></table></figure></p>
+<p><br> # 258. Add Digits https://leetcode.com/problems/add-digits/description/ <strong>Easy</strong> ### Solution 1: Plain Loop <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addDigits</span><span class="params">(self, num)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type num: int</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> num &lt; <span class="number">10</span>:</div><div class="line">            <span class="keyword">return</span> num</div><div class="line">        nums = str(num)</div><div class="line">        ans = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> nums:</div><div class="line">            ans += int(n)</div><div class="line">        <span class="keyword">while</span> ans &gt; <span class="number">9</span>:</div><div class="line">            nums = str(ans)</div><div class="line">            ans = <span class="number">0</span></div><div class="line">            <span class="keyword">for</span> n <span class="keyword">in</span> nums:</div><div class="line">                ans += int(n)</div><div class="line">        <span class="keyword">return</span> ans</div></pre></td></tr></table></figure></p>
+<h3 id="solution-2-digital-root">Solution 2: Digital Root</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> num % <span class="number">9</span>:</div><div class="line">    <span class="keyword">return</span>(num % <span class="number">9</span>)</div><div class="line"><span class="keyword">elif</span> num:</div><div class="line">    <span class="keyword">return</span>(<span class="number">9</span>)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    <span class="keyword">return</span>(<span class="number">0</span>)</div><div class="line"><span class="comment"># One line: return num % 9 if num % 9 else 9 if num else 0</span></div></pre></td></tr></table></figure>
+<p>Explanation: N = a0 * 10^0 + a1 * 10^1 + a2 * 10^2 + &#x2026; an * 10^n Example: 234 = 4 * 10^0 + 3 * 10^1 + 2 * 10^3</p>
+<p>1 % 9 = 1, 10 % 9 = 1,<br>
+100 % 9 = 1, &#x2026;</p>
+<p>a1 % 9 + a2 % 9 + &#x2026; + an % 9 = (a1 + a2 + &#x2026; + an) % 9</p>
+<p>(a * b) % n = (a % n) * (b % n)</p>
+<p>Hence: N % 9 = a0 % 9 + a1 % 9 + a2 % 9 + &#x2026; + an % 9 Because: a[i] &lt; 10 So: a[i] % 9 = a[i] Thus: N % 9 = a0 + a1 + a2 + &#x2026; + an</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2017/12/31/LeetCode1/">https://testsiling.github.io/2017/12/31/LeetCode1/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/03/04/ml-1/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Machine Learning(1) Overview</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/12/29/MitProblemSet2/">
+        <span class="next-text nav-default">MITx 6.00.1x Problem Set 2</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2017/12/31/LeetCode1/';
+        this.page.identifier = '2017/12/31/LeetCode1/';
+        this.page.title = 'LeetCode(1)';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

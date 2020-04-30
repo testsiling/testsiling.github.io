@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="MapReduce Overview"/>
+
+
+
+
+  <meta name="keywords" content="Data Science, Big Data, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2018/08/23/MapReduce/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> MapReduce Overview - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          MapReduce Overview
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-08-23
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-mapreduce"><span class="toc-text">What is MapReduce</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#implementation"><span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map-phase"><span class="toc-text">Map Phase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce-phase"><span class="toc-text">Reduce Phase</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#example-matrix-multiply-in-mapreduce"><span class="toc-text">Example: Matrix Multiply in MapReduce</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#basic-idea"><span class="toc-text">Basic idea</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#in-the-map-phase"><span class="toc-text">In the map phase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#in-the-reduce-phase-emit"><span class="toc-text">In the reduce phase, emit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#example"><span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#map-phase-1"><span class="toc-text">Map Phase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reduce-phase-1"><span class="toc-text">Reduce Phase</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#application---distributes-file-systemdfs"><span class="toc-text">Application - Distributes File System(DFS)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#extensions-contemporaries"><span class="toc-text">Extensions & Contemporaries</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#others"><span class="toc-text">Others</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"><h1 id="what-is-mapreduce">What is MapReduce</h1>
+<p>MapReduce is a high-level programming model and implementation for processing large scale parallel data.</p>
+<a id="more"></a>
+<p>Imaging you need to count the frequency of words across a tremendous amount of documents. It may take years to calculate the result on a single computer. In fact, you can slice all documents into small pieces of words and put all those small segments of documents into a word counting program, which is what we called Mapper. Lots of mappers run on different computational environment in parallel then output every word&#x2019;s frequency. The next step is to shuffle all different word key pairs and load them onto adders, which is the reducer. Finally, we will get what we want.</p>
+<p><img src="/images/mapreduce1.png"></p>
+<p><br></p>
+<h1 id="implementation">Implementation</h1>
+<p>There are 2 phase in MapReduce</p>
+<h3 id="map-phase">Map Phase</h3>
+<p>User provides the <strong>MAP</strong> function:</p>
+<p>Input: <strong>(input key, value)</strong></p>
+<p>Ouput: bag of <strong>(intermediate key, value)</strong></p>
+<p>System applies the map function in parallel to all <strong>(input key, value)</strong> pairs in the input file.</p>
+<h3 id="reduce-phase">Reduce Phase</h3>
+<p>User provides the <strong>REDUCE</strong> function:</p>
+<p>Input: <strong>(intermediate key, bag of values)</strong></p>
+<p>Output: bag of output <strong>(values)</strong></p>
+<p>The system will group all pairs with the same intermediate key, and passes the bag of values to the REDUCE function</p>
+<p><br></p>
+<h1 id="example-matrix-multiply-in-mapreduce">Example: Matrix Multiply in MapReduce</h1>
+<h3 id="basic-idea">Basic idea</h3>
+<p>C= A X B A has dimensions L,M</p>
+<p>B has dimensions M,N</p>
+<h4 id="in-the-map-phase">In the map phase</h4>
+<ul>
+<li>for each element (i,j) of A, emit ((i,k), A[i,j]) for k in 1..N</li>
+<li>for each element (j,k) of B, emit ((i,k), B[j,k]) for i in 1..L</li>
+</ul>
+<h4 id="in-the-reduce-phase-emit">In the reduce phase, emit</h4>
+<ul>
+<li>key = (i,k)</li>
+<li>value = Sumj (A[i,j] * B[j,k])</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>A: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mtable><mtr><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mn>2</mn></mrow></mtd></mtr><mtr><mtd><mrow><mtext>&#xA0;</mtext><mn>3</mn></mrow></mtd><mtd><mrow><mn>4</mn></mrow></mtd></mtr><mtr><mtd><mrow><mtext>&#xA0;</mtext><mn>5</mn></mrow></mtd><mtd><mrow><mn>6</mn></mrow></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\begin{pmatrix} 1 &amp; 2\\\ 3 &amp; 4 \\\ 5 &amp; 6 \end{pmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:2.05002em;"></span><span class="strut bottom" style="height:3.60004em;vertical-align:-1.55002em;"></span><span class="base textstyle uncramped"><span class="minner textstyle uncramped"><span class="mopen style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:0.9049999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x239D;</span></span></span><span style="top:-0.89502em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x239B;</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist"><span style="top:-1.2099999999999997em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">1</span></span></span><span style="top:-0.00999999999999951em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm"><span class="mspace">&#xA0;</span><span class="mord mathrm">3</span></span></span></span><span style="top:1.1900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm"><span class="mspace">&#xA0;</span><span class="mord mathrm">5</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-1.2099999999999997em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">2</span></span></span><span style="top:-0.00999999999999951em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">4</span></span></span><span style="top:1.1900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span><span class="mclose style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:0.9049999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x23A0;</span></span></span><span style="top:-0.89502em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x239E;</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span></span> B: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mtable><mtr><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>2</mn></mrow></mtd></mtr><mtr><mtd><mrow><mtext>&#xA0;</mtext><mn>3</mn></mrow></mtd><mtd><mrow><mn>4</mn></mrow></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\begin{pmatrix} 0 &amp; 2\\\ 3 &amp; 4 \end{pmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.45em;"></span><span class="strut bottom" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="base textstyle uncramped"><span class="minner textstyle uncramped"><span class="mopen style-wrap reset-textstyle textstyle uncramped" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist"><span style="top:-0.6099999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:0.5900000000000003em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm"><span class="mspace">&#xA0;</span><span class="mord mathrm">3</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-0.6099999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">2</span></span></span><span style="top:0.5900000000000003em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">4</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span><span class="mclose style-wrap reset-textstyle textstyle uncramped" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></p>
+<p>In computer, it usaully input as a sequence of list [i, j, value]:</p>
+<p>A:</p>
+<p>[1, 1, 1], [1, 2, 2], [2, 1, 3], [2, 2, 4], [3, 1, 5], [3, 2, 6]</p>
+<p>B:</p>
+<p>[1, 2, 2], [2, 1, 3], [2, 2, 4]</p>
+<h4 id="map-phase-1">Map Phase</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="center">A</th>
+<th align="center"></th>
+<th align="center">B</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">key</td>
+<td align="center">value</td>
+<td align="center">key</td>
+<td align="center">value</td>
+</tr>
+<tr class="even">
+<td align="center">(1,1)</td>
+<td align="center">A,[1, 1, 1]</td>
+<td align="center">(1,2)</td>
+<td align="center">B,[1, 2, 2]</td>
+</tr>
+<tr class="odd">
+<td align="center">(1,2)</td>
+<td align="center">A,[1, 1, 1]</td>
+<td align="center">(2,2)</td>
+<td align="center">B,[1, 2, 2]</td>
+</tr>
+<tr class="even">
+<td align="center">(1,1)</td>
+<td align="center">A,[1, 2, 2]</td>
+<td align="center">(3,2)</td>
+<td align="center">B,[1, 2, 2]</td>
+</tr>
+<tr class="odd">
+<td align="center">(1,2)</td>
+<td align="center">A,[1, 2, 2]</td>
+<td align="center">(1,1)</td>
+<td align="center">B,[2, 1, 3]</td>
+</tr>
+<tr class="even">
+<td align="center">(2,1)</td>
+<td align="center">A,[2, 1, 3]</td>
+<td align="center">(2,1)</td>
+<td align="center">B,[2, 1, 3]</td>
+</tr>
+<tr class="odd">
+<td align="center">(2,2)</td>
+<td align="center">A,[2, 1, 3]</td>
+<td align="center">(3,1)</td>
+<td align="center">B,[2, 1, 3]</td>
+</tr>
+<tr class="even">
+<td align="center">(2,1)</td>
+<td align="center">A,[2, 2, 4]</td>
+<td align="center">(1,2)</td>
+<td align="center">B,[2, 2, 4]</td>
+</tr>
+<tr class="odd">
+<td align="center">(2,2)</td>
+<td align="center">A,[2, 2, 4]</td>
+<td align="center">(2,2)</td>
+<td align="center">B,[2, 2, 4]</td>
+</tr>
+<tr class="even">
+<td align="center">(3,1)</td>
+<td align="center">A,[3, 1, 5]</td>
+<td align="center">(3,2)</td>
+<td align="center">B,[2, 2, 4]</td>
+</tr>
+<tr class="odd">
+<td align="center">(3,2)</td>
+<td align="center">A,[3, 1, 5]</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">(3,1)</td>
+<td align="center">A,[3, 2, 6]</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">(3,2)</td>
+<td align="center">A,[3, 2, 6]</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="shuffle">Shuffle</h4>
+<table>
+<tbody>
+<tr class="odd">
+<td align="center">(1,1)</td>
+<td align="center">A,[1, 1, 1]</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">A,[1, 2, 2]</td>
+<td align="center">B,[2, 1, 3]</td>
+</tr>
+<tr class="odd">
+<td align="center">(1,2)</td>
+<td align="center">A,[1, 1, 1]</td>
+<td align="center">B,[1, 2, 2]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">A,[1, 2, 2]</td>
+<td align="center">B,[2, 2, 4]</td>
+</tr>
+<tr class="odd">
+<td align="center">(2,1)</td>
+<td align="center">A,[2, 1, 3]</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">A,[2, 2, 4]</td>
+<td align="center">B,[2, 1, 3]</td>
+</tr>
+<tr class="odd">
+<td align="center">(2,2)</td>
+<td align="center">A,[2, 1, 3]</td>
+<td align="center">B,[1, 2, 2]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">A,[2, 2, 4]</td>
+<td align="center">B,[2, 2, 4]</td>
+</tr>
+<tr class="odd">
+<td align="center">(3,1)</td>
+<td align="center">A,[3, 1, 5]</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">A,[3, 2, 6]</td>
+<td align="center">B,[2, 1, 3]</td>
+</tr>
+<tr class="odd">
+<td align="center">(3,2)</td>
+<td align="center">A,[3, 1, 5]</td>
+<td align="center">B,[1, 2, 2]</td>
+</tr>
+<tr class="even">
+<td align="center"></td>
+<td align="center">A,[3, 2, 6]</td>
+<td align="center">B,[2, 2, 4]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="reduce-phase-1">Reduce Phase</h4>
+<p>(1,1): 2 * 3 = 6</p>
+<p>(1,2): 1 * 2 + 2 * 4 = 10</p>
+<p>(2,1): 4 * 3 = 12</p>
+<p>(2,2): 3 * 2 + 4 * 4 = 22</p>
+<p>(3,1): 6 * 3 = 18</p>
+<p>(3,2): 5 * 2 + 6 * 4 = 34</p>
+<p>C: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mo fence="true">(</mo><mtable><mtr><mtd><mrow><mn>6</mn></mrow></mtd><mtd><mrow><mn>1</mn><mn>0</mn></mrow></mtd></mtr><mtr><mtd><mrow><mtext>&#xA0;</mtext><mn>1</mn><mn>2</mn></mrow></mtd><mtd><mrow><mn>2</mn><mn>2</mn></mrow></mtd></mtr><mtr><mtd><mrow><mtext>&#xA0;</mtext><mn>1</mn><mn>8</mn></mrow></mtd><mtd><mrow><mn>3</mn><mn>4</mn></mrow></mtd></mtr></mtable><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\begin{pmatrix} 6 &amp; 10\\\ 12 &amp; 22 \\\ 18 &amp; 34 \end{pmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:2.05002em;"></span><span class="strut bottom" style="height:3.60004em;vertical-align:-1.55002em;"></span><span class="base textstyle uncramped"><span class="minner textstyle uncramped"><span class="mopen style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:0.9049999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x239D;</span></span></span><span style="top:-0.89502em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x239B;</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist"><span style="top:-1.2099999999999997em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">6</span></span></span><span style="top:-0.00999999999999951em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm"><span class="mspace">&#xA0;</span><span class="mord mathrm">1</span></span><span class="mord mathrm">2</span></span></span><span style="top:1.1900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm"><span class="mspace">&#xA0;</span><span class="mord mathrm">1</span></span><span class="mord mathrm">8</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-1.2099999999999997em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">0</span></span></span><span style="top:-0.00999999999999951em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">2</span><span class="mord mathrm">2</span></span></span><span style="top:1.1900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="mord textstyle uncramped"><span class="mord mathrm">3</span><span class="mord mathrm">4</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span><span class="mclose style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:0.9049999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x23A0;</span></span></span><span style="top:-0.89502em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="delimsizinginner delim-size4"><span>&#x239E;</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span></span></p>
+<p><br></p>
+<h1 id="application---distributes-file-systemdfs">Application - Distributes File System(DFS)</h1>
+<ul>
+<li>For very large files: TBs, PBs</li>
+<li>Each file is partitioned into chunks, typically 64MB</li>
+<li>Each chunk is replicated several times (&#x2265;3), on different racks, for fault tolerance</li>
+</ul>
+<p>Implementations:</p>
+<p>&#x2022; Google&#x2019;s DFS: GFS, proprietary &#x2022; Hadoop&#x2019;s DFS: HDFS, open source</p>
+<p><br></p>
+<h1 id="extensions-contemporaries">Extensions &amp; Contemporaries</h1>
+<ul>
+<li>Pig: Relational Algebra over Hadoop</li>
+<li>HIVE: SQL over Hadoop</li>
+<li>Impala: SQL over HDFS (uses some HIVE code)</li>
+<li>Cascading: Relational Algebra</li>
+</ul>
+<p><br></p>
+<h1 id="others">Others</h1>
+<p>Finally complete the online course - <a href="https://www.coursera.org/learn/data-manipulation" target="_blank" rel="external">Data Manipulation at Scale: Systems and Algorithms</a></p>
+<p>Here&#x2019;s my solution in mapreduce assignment (Week 3 assignment)</p>
+<p>https://github.com/testsiling/Data-Science-at-Scale-Solution</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2018/08/23/MapReduce/">https://testsiling.github.io/2018/08/23/MapReduce/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Data-Science/">Data Science</a>
+            
+              <a href="/tags/Big-Data/">Big Data</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/10/07/LeetCode2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(2)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/05/25/inteview1/">
+        <span class="next-text nav-default">面试失败经历</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2018/08/23/MapReduce/';
+        this.page.identifier = '2018/08/23/MapReduce/';
+        this.page.title = 'MapReduce Overview';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

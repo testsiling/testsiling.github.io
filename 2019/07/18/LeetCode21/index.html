@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(21) - Union Find"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, Union Find, Graph, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/07/18/LeetCode21/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(21) - Union Find - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(21) - Union Find
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-07-18
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#satisfiability-of-equality-equations"><span class="toc-text">990. Satisfiability of Equality Equations</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#friend-circles"><span class="toc-text">547. Friend Circles</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#union-find"><span class="toc-text">Union-find</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dfs"><span class="toc-text">DFS</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Basic introduction for <a href="https://www.geeksforgeeks.org/union-find/" target="_blank" rel="external">Union Find</a></p>
+<ul>
+<li>990.Satisfiability of Equality Equations</li>
+<li>547.Friend Circles</li>
+</ul>
+<a id="more"></a>
+<h1 id="satisfiability-of-equality-equations">990. Satisfiability of Equality Equations</h1>
+<p>This one is my first Union find problem.</p>
+<p>Union all equal expression first, then go through unequal exp.</p>
+<p>Update element&#x2019;s ancestor every time.</p>
+<p>For example, <strong>[&#x201C;f==a&#x201D;,&#x201C;a==b&#x201D;,&#x201C;f!=e&#x201D;,&#x201C;a==c&#x201D;,&#x201C;b==e&#x201D;,&#x201C;c==f&#x201D;]</strong></p>
+<p>Initial: {a: a, b: b, c: c, e: e, f: f }</p>
+<ol style="list-style-type: decimal">
+<li><strong>&#x201C;f==a&#x201D;</strong> : {a: a, b: b, c: c, e: e, <strong>f: a</strong>}</li>
+<li><strong>&#x201C;a==b&#x201D;</strong> : {<strong>a: b</strong>, b: b, c: c, e: e, f: a}</li>
+<li><strong>&#x201C;a==c&#x201D;</strong> : {a: b, <strong>b: c</strong>, c: c, e: e, f: a}</li>
+<li><strong>&#x201C;b==e&#x201D;</strong> : {a: b, b: c, <strong>c: e</strong>, e: e, f: a}</li>
+<li><strong>&#x201C;c==f&#x201D;</strong> : {<strong>a: e</strong>, <strong>b: c</strong>, <strong>c: e</strong>, e: e, <strong>f: e</strong>}</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">equationsPossible</span><span class="params">(self, equations)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type equations: List[str]</span></div><div class="line"><span class="string">        :rtype: bool</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(x)</span>:</span></div><div class="line">            <span class="keyword">if</span> x != uf[x]: </div><div class="line">                uf[x] = find(uf[x])</div><div class="line">            <span class="keyword">return</span> uf[x]</div><div class="line">        </div><div class="line">        uf = {x: x <span class="keyword">for</span> x <span class="keyword">in</span> string.lowercase}</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> a, e, _, b <span class="keyword">in</span> equations:</div><div class="line">            <span class="keyword">if</span> e == <span class="string">&quot;=&quot;</span>:</div><div class="line">                <span class="comment"># find the ancestor of a, update a&apos;s ancestor to b&apos;s ancestor</span></div><div class="line">                uf[find(a)] = find(b)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">not</span> any(e == <span class="string">&quot;!&quot;</span> <span class="keyword">and</span> find(a) == find(b) <span class="keyword">for</span> a, e, _, b <span class="keyword">in</span> equations)</div></pre></td></tr></table></figure>
+<h1 id="friend-circles">547. Friend Circles</h1>
+<h3 id="union-find">Union-find</h3>
+<p>First is general union find. Then update all union to root. count all unit root.</p>
+<p>Example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>],</div><div class="line"> [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</div><div class="line"> [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>]]</div></pre></td></tr></table></figure>
+<p>first found: <strong>[1, 2, 2]</strong></p>
+<p>Then update to root: <strong>[2, 2, 2]</strong></p>
+<p>So return <strong>1</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findCircleNum</span><span class="params">(self, M)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type M: List[List[int]]</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(x)</span>:</span></div><div class="line">            <span class="keyword">if</span> x != u[x]: </div><div class="line">                u[x] = find(u[x])</div><div class="line">            <span class="keyword">return</span> u[x]</div><div class="line">                </div><div class="line">        </div><div class="line">        u = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(len(M))]</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(M)):</div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span> + i, len(M)):</div><div class="line">                <span class="keyword">if</span> M[i][j] == <span class="number">1</span>:</div><div class="line">                    u[find(i)] = find(j)   </div><div class="line">                    </div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(u)):</div><div class="line">            u[i] = find(u[i])</div><div class="line">            </div><div class="line">        <span class="keyword">return</span> len(set(u))</div></pre></td></tr></table></figure>
+<h3 id="dfs">DFS</h3>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/07/18/LeetCode21/">https://testsiling.github.io/2019/07/18/LeetCode21/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/Union-Find/">Union Find</a>
+            
+              <a href="/tags/Graph/">Graph</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/07/23/BashNotes/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Bash Notes</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/07/17/LeetCode20/">
+        <span class="next-text nav-default">LeetCode(20) - Two Pointers</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/07/18/LeetCode21/';
+        this.page.identifier = '2019/07/18/LeetCode21/';
+        this.page.title = 'LeetCode(21) - Union Find';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

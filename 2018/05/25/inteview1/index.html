@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="面试失败经历"/>
+
+
+
+
+  <meta name="keywords" content="Python, Interview, Pandas, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2018/05/25/inteview1/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 面试失败经历 - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          面试失败经历
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-05-25
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#找重复"><span class="toc-text">1. 找重复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序"><span class="toc-text">2. 排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#找最大连续子集"><span class="toc-text">3. 找最大连续子集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pandas-操作"><span class="toc-text">4. Pandas 操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反思"><span class="toc-text">反思</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>&#x9762;&#x8BD5;&#x4E00;&#x5BB6;&#x516C;&#x53F8;&#xFF0C;&#x51C9;&#x662F;&#x51C9;&#x4E86;&#xFF0C;&#x603B;&#x7ED3;&#x7ECF;&#x9A8C;&#x5427;&#x3002;</p>
+<p>&#x9996;&#x5148;&#x63A5;&#x5230;&#x7535;&#x8BDD;&#x804A;&#x4E86;&#x4E00;&#x4E0B;&#x4EE5;&#x524D;&#x7684;&#x9879;&#x76EE;&#x7ECF;&#x5386;&#xFF0C;&#x7136;&#x540E;&#x95EE;&#x4E86;&#x4E00;&#x4E9B;&#x5173;&#x4E8E;&#x9879;&#x76EE;&#x7684;&#x95EE;&#x9898;&#x5982;&#x4E0B;&#xFF08;&#x53EA;&#x8BB0;&#x5F97;&#x5927;&#x6982;&#x4E86;&#xFF09;</p>
+<a id="more"></a>
+<ol style="list-style-type: decimal">
+<li>&#x4F60;&#x4EEC;&#x4E3A;&#x4EC0;&#x4E48;&#x7528;LR&#xFF0C;&#x800C;&#x4E0D;&#x7528;SVM&#x3002;</li>
+<li>&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;&#x7528;LR&#xFF0C;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;&#x7528;Decision Tree&#xFF0C;&#x600E;&#x4E48;&#x9009;&#x3002;</li>
+<li>&#x4F60;&#x4EEC;&#x4E3A;&#x4EC0;&#x4E48;&#x7528;Pandas&#xFF1F;&#x548C;&#x540C;&#x7C7B;&#x7684;&#x6BD4;&#x6709;&#x4EC0;&#x4E48;&#x4F18;&#x7F3A;&#x70B9;&#x3002;</li>
+</ol>
+<p>&#x7136;&#x540E;&#x5F00;&#x59CB;&#x7ED9;&#x6211;&#x53D1;&#x4E86;&#x4E2A;&#x94FE;&#x63A5;&#x5F00;&#x59CB;&#x5B9E;&#x65F6;&#x7F16;&#x7A0B;&#xFF0C;&#x4E00;&#x5171;4&#x9898;&#x3002;</p>
+<p><br></p>
+<h3 id="&#x627E;&#x91CD;&#x590D;">1. &#x627E;&#x91CD;&#x590D;</h3>
+<p>&#x5148;&#x6765;&#x4E2A;&#x7B80;&#x5355;&#x7684;</p>
+<p>&#x7ED9;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x627E;&#x7B2C;&#x4E00;&#x4E2A;&#x91CD;&#x590D;&#x7684;&#x5B57;&#x7B26;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">def search(string):</div><div class="line">	d = {}</div><div class="line">	for c in string:</div><div class="line">		if c not in d:</div><div class="line">			d[c] = 1</div><div class="line">		else:</div><div class="line">			return c</div><div class="line">	return None</div></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="&#x6392;&#x5E8F;">2. &#x6392;&#x5E8F;</h3>
+<p>&#x6392;&#x5E8F;&#x4E00;&#x4E2A;&#x6709;&#x4E00;&#x767E;&#x4E07;&#x4E2A;&#x6570;&#x5B57;&#x7684;list</p>
+<p>&#x4E00;&#x60F3;&#x5230;&#x6392;&#x5E8F;&#x6211;&#x60F3;&#x5230;&#x7684;&#x662F;&#x5FEB;&#x6392;&#x3002;</p>
+<p>&#x9762;&#x8BD5;&#x5B98;&#xFF1A;&#x5FEB;&#x6392;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x591A;&#x5C11;&#xFF1F;</p>
+<p>&#x6211;&#xFF1A;O(nlogn)</p>
+<p>&#x9762;&#x8BD5;&#x5B98;&#xFF1A;&#x80FD;&#x4E0D;&#x80FD;&#x6392;&#x5230;O(n)&#x5462;&#xFF1F;</p>
+<p>&#x7136;&#x540E;&#x6211;&#x624D;&#x60F3;&#x8D77;&#x7528;&#x5B57;&#x5178;&#x5C31;O(n)&#xFF08;&#x6211;&#x662F;&#x5F88;&#x8822;&#x597D;&#x5427;&#xFF09;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">def mysort(list):</div><div class="line">	d = {}</div><div class="line">	for i in list:</div><div class="line">		if i not in d:</div><div class="line">			d[i] = 1</div><div class="line">		else:</div><div class="line">			d[i] += 1</div><div class="line">			</div><div class="line">	res = []</div><div class="line">	for i in sorted(d):</div><div class="line">		for j in range(d[i]):</div><div class="line">			res.append(i)</div><div class="line">			</div><div class="line">	return res</div></pre></td></tr></table></figure>
+<p>&#x7136;&#x540E;&#x95EE;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x6392;&#x5E8F;&#x53EF;&#x4EE5;&#x7528;&#x5B57;&#x5178;&#x3002;&#x55EF;&#x6CA1;&#x7B54;&#x51FA;&#x6765;&#x3002;&#x73B0;&#x5728;&#x624D;&#x4E00;&#x4E0B;&#x53EF;&#x80FD;&#x548C;sorted&#x6709;&#x5173;&#xFF1F;</p>
+<p><br></p>
+<h3 id="&#x627E;&#x6700;&#x5927;&#x8FDE;&#x7EED;&#x5B50;&#x96C6;">3. &#x627E;&#x6700;&#x5927;&#x8FDE;&#x7EED;&#x5B50;&#x96C6;</h3>
+<p>&#x7ED9;&#x4E00;&#x4E2A;list&#xFF0C;&#x91CC;&#x9762;&#x662F;&#x6570;&#x5B57;&#xFF0C;&#x6709;&#x6B63;&#x6570;&#x6709;&#x8D1F;&#x6570;&#xFF0C;&#x627E;&#x548C;&#x6700;&#x5927;&#x7684;&#x8FDE;&#x7EED;&#x5B50;&#x96C6;&#xFF0C;&#x5982;&#x679C;&#x5B50;&#x96C6;&#x5168;&#x662F;&#x8D1F;&#x6570;&#xFF0C;&#x90A3;&#x5047;&#x8BBE;&#x548C;&#x4E3A;&#x96F6;&#xFF08;&#x8981;&#x6C42;&#x5728;&#x89C4;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#xFF09;</p>
+<p>&#x4F8B;&#x5982; [99, -111, 123, -1, 5]&#xFF0C;&#x6700;&#x5927;&#x5B50;&#x96C6;&#x4E3A; [123, -1, 5]</p>
+<p>&#x7B2C;&#x4E00;&#x60F3;&#x5230;&#x7684;&#x662F;&#x66B4;&#x529B;&#xFF0C;&#x4F46;&#x66B4;&#x529B;&#x80AF;&#x5B9A;&#x4E0D;&#x5165;&#x6D41;&#x3002;&#x7528;&#x5206;&#x6CBB;&#x6CD5;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">def findMax(list):</div><div class="line">    max = 0  # max sum</div><div class="line">    sum = 0  # current sum</div><div class="line">    start = 0  # start index</div><div class="line">    end = 0  # end index</div><div class="line"></div><div class="line">    for i in range(len(list)):</div><div class="line">        if sum &gt; 0:</div><div class="line">            sum += list[i]</div><div class="line">        else:</div><div class="line">            sum = list[i]</div><div class="line">            start = i</div><div class="line">        if sum &gt; max:</div><div class="line">            max = sum</div><div class="line">            end = i</div><div class="line">    return list[start:end+1]</div></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="pandas-&#x64CD;&#x4F5C;">4. Pandas &#x64CD;&#x4F5C;</h3>
+<p>&#x5047;&#x8BBE;&#x6709;&#x4E00;&#x4E2A;table&#xFF0C; &#x5DF2;&#x7ECF;&#x662F;dataframe&#x7C7B;&#x578B;&#xFF0C;&#x5171;4&#x5217;a,b,c,d. &#x8981;&#x6C42; groupby a&#xFF0C;&#x6C42;b&#x7684;&#x5E73;&#x5747;&#xFF0C;c&#x7684;&#x6807;&#x51C6;&#x5DEE;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df.groupby([&apos;a&apos;]).agg({&apos;b&apos;: [&apos;mean&apos;], &apos;c&apos;: [&apos;std&apos;]})</div></pre></td></tr></table></figure>
+<p>&#x5F53;&#x65F6;&#x5F88;&#x50BB;&#x5C31;&#x60F3;&#x60F3;&#x5C31;&#x76F4;&#x63A5;&#x60F3;&#x600E;&#x4E48;pandas&#x904D;&#x5386;&#x7B97;mean&#xFF0C;&#x5C31;&#x5BF9;panda&#x5F88;&#x4E0D;&#x719F;&#x561B;&#xFF0C;&#x7136;&#x540E;&#x5BF9;&#x65B9;&#x8BF4;&#xFF0C;&#x8FD9;&#x6837;&#x4F60;&#x5C31;&#x4E0D;&#x80FD;groupby&#x4E86;&#x5440;&#x3002;&#x60F3;&#x4E86;&#x4E0B;&#x5199;&#x6210;&#x4E86;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df.groupby([&apos;a&apos;])[&apos;b&apos;].mean()</div><div class="line">df.groupby([&apos;a&apos;])[&apos;c&apos;].std()</div></pre></td></tr></table></figure>
+<p>&#x9762;&#x8BD5;&#x5B98;&#x8BF4;&#xFF0C;&#x5176;&#x5B9E;pandas&#x53EF;&#x4EE5;&#x76F4;&#x63A5;aggregate&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x662F;&#x6709;&#x5B9E;&#x9645;&#x610F;&#x4E49;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x62FF;&#x5230;&#x6570;&#x636E;&#x5C31;&#x4F1A;&#x5148;&#x505A;&#x8FD9;&#x79CD;&#x64CD;&#x4F5C;&#xFF0C;&#x770B;&#x770B;&#x80FD;&#x5F97;&#x5230;&#x4EC0;&#x4E48;&#x6709;&#x7528;&#x4FE1;&#x606F;&#x3002;</p>
+<p><br></p>
+<h3 id="&#x53CD;&#x601D;">&#x53CD;&#x601D;</h3>
+<p>&#x53CD;&#x6B63;&#x6211;&#x5F53;&#x573A;&#x5C31;&#x77E5;&#x9053;&#x51C9;&#x4E86;&#x3002;&#x5BF9;pandas&#x4E0D;&#x591F;&#x719F;&#xFF0C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E5F;&#x662F;&#x3002;</p>
+<p>&#x5BF9;&#x65B9;&#x60F3;&#x8981;&#x4E0A;&#x624B;&#x5C31;&#x80FD;&#x5E72;&#x6D3B;&#x7684;&#xFF0C;&#x66F4;&#x7CBE;&#x7684;&#xFF0C;&#x8FD8;&#x5B89;&#x6170;&#x6211;&#xFF0C;&#x4EBA;&#x771F;&#x7684;&#x5F88;nice&#x554A;&#x3002;</p>
+<p>&#x7136;&#x540E;&#x6211;&#x8BF4;volunteer&#x53EF;&#x4EE5;&#x5417;&#xFF0C;&#x5BF9;&#x65B9;&#x8BF4;&#x6709;&#x9002;&#x5408;&#x7684;&#x9879;&#x76EE;&#x518D;&#x901A;&#x77E5;&#x3002;</p>
+<p>&#x5509;&#x8FD8;&#x662F;&#x8981;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#x3002;</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2018/05/25/inteview1/">https://testsiling.github.io/2018/05/25/inteview1/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/Interview/">Interview</a>
+            
+              <a href="/tags/Pandas/">Pandas</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/08/23/MapReduce/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">MapReduce Overview</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/05/18/DecisionTree/">
+        <span class="next-text nav-default">Decision Tree</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2018/05/25/inteview1/';
+        this.page.identifier = '2018/05/25/inteview1/';
+        this.page.title = '面试失败经历';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

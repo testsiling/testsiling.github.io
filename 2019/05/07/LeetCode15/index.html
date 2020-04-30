@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(15) - DP"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, Dynamic Programming, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/05/07/LeetCode15/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(15) - DP - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(15) - DP
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-05-07
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#trapping-rain-water"><span class="toc-text">42. Trapping Rain Water</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dynamic-programming"><span class="toc-text">Dynamic Programming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#two-pointers"><span class="toc-text">Two Pointers</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#unique-binary-search-trees-ii"><span class="toc-text">95. Unique Binary Search Trees II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dfs-beats-100"><span class="toc-text">DFS beats 100%</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#maximum-subarray"><span class="toc-text">53. Maximum Subarray</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#best-time-to-buy-and-sell-stock"><span class="toc-text">121. Best Time to Buy and Sell Stock</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <ul>
+<li>42.Trapping Rain Water</li>
+<li>361.Bomb Enemy</li>
+<li>95.Unique Binary Search Trees II</li>
+<li>53.Maximum Subarray</li>
+<li>121.Best Time to Buy and Sell Stock</li>
+</ul>
+<a id="more"></a>
+<h1 id="trapping-rain-water">42. Trapping Rain Water</h1>
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+<p>Calculate all left highest wall and right highest wall for each point. Then calculate the water.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">trap</span><span class="params">(self, height)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type height: List[int]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    res = <span class="number">0</span></div><div class="line">    <span class="keyword">if</span> len(height) &lt; <span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> res</div><div class="line"></div><div class="line">    l = len(height)</div><div class="line"></div><div class="line">    <span class="comment"># left highest wall for that place</span></div><div class="line">    lwalls = [<span class="number">0</span>]</div><div class="line">    <span class="comment"># right highest wall for that place</span></div><div class="line">    rwalls = [<span class="number">0</span>] * l</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, l):</div><div class="line">        lmax = max(height[i<span class="number">-1</span>], lwalls[i<span class="number">-1</span>])</div><div class="line">        lwalls.append(lmax)</div><div class="line"></div><div class="line">        <span class="comment"># count from the rightest one</span></div><div class="line">        rmax = max(height[l-i], rwalls[l-i])</div><div class="line">        rwalls[l-i<span class="number">-1</span>] = rmax</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div><div class="line">        cur = (min(lwalls[i], rwalls[i]) - height[i])</div><div class="line">        res += max(<span class="number">0</span>, cur)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h3 id="two-pointers">Two Pointers</h3>
+<p>If left higher than right, then right responsible to how many water this point get, update right pointer. If reverse, then left responsible to the water volume, update left pointer.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">trap</span><span class="params">(self, height)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type height: List[int]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="comment"># 2 pointers</span></div><div class="line">    lmax, rmax = <span class="number">0</span>, <span class="number">0</span></div><div class="line">    l = <span class="number">0</span></div><div class="line">    r = len(height) - <span class="number">1</span></div><div class="line">    res = <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> l &lt; r:</div><div class="line">        lmax = max(height[l], lmax)</div><div class="line">        rmax = max(height[r], rmax)</div><div class="line"></div><div class="line">        <span class="comment"># water depends on the lowest size</span></div><div class="line">        <span class="keyword">if</span> lmax &lt; rmax:</div><div class="line">            res += lmax - height[l]</div><div class="line">            l += <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            res += rmax - height[r]</div><div class="line">            r -= <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<p># 361. Bomb Enemy</p>
+<p>Basic idea is search 4 direction&#x2019;s enemy for each cell. log in a matrix, then find the max combination at the end. pretty easy.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxKilledEnemies</span><span class="params">(self, grid)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type grid: List[List[str]]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> grid:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    </div><div class="line">    r = len(grid)</div><div class="line">    c = len(grid[<span class="number">0</span>])</div><div class="line">    num =  r + c</div><div class="line">    </div><div class="line">    up = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(c)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(r)] </div><div class="line">    down = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(c)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(r)] </div><div class="line">    left = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(c)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(r)]</div><div class="line">    right = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(c)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(r)]</div><div class="line">    </div><div class="line">    <span class="comment"># Find upper enemy</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, r):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(c): </div><div class="line">            <span class="keyword">if</span> grid[i - <span class="number">1</span>][j] == <span class="string">&apos;E&apos;</span>:</div><div class="line">                up[i][j] = up[i - <span class="number">1</span>][j] + <span class="number">1</span></div><div class="line">            <span class="keyword">elif</span> grid[i - <span class="number">1</span>][j] == <span class="string">&apos;W&apos;</span>:</div><div class="line">                up[i][j] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                up[i][j] = up[i - <span class="number">1</span>][j]</div><div class="line">    </div><div class="line">    <span class="comment"># Find downward enemy</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(r<span class="number">-2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(c): </div><div class="line">            <span class="keyword">if</span> grid[i + <span class="number">1</span>][j] == <span class="string">&apos;E&apos;</span>:</div><div class="line">                down[i][j] = down[i + <span class="number">1</span>][j] + <span class="number">1</span></div><div class="line">            <span class="keyword">elif</span> grid[i + <span class="number">1</span>][j] == <span class="string">&apos;W&apos;</span>:</div><div class="line">                down[i][j] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                down[i][j] = down[i + <span class="number">1</span>][j]</div><div class="line">    </div><div class="line">    <span class="comment"># Find left enemy</span></div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, c): <span class="comment"># col</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(r): </div><div class="line">            <span class="keyword">if</span> grid[i][j - <span class="number">1</span>] == <span class="string">&apos;E&apos;</span>:</div><div class="line">                left[i][j] = left[i][j - <span class="number">1</span>] + <span class="number">1</span></div><div class="line">            <span class="keyword">elif</span> grid[i][j - <span class="number">1</span>] == <span class="string">&apos;W&apos;</span>:</div><div class="line">                left[i][j] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                left[i][j] = left[i][j - <span class="number">1</span>]</div><div class="line">    </div><div class="line">    <span class="comment"># Find right enemy</span></div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(c - <span class="number">2</span>, <span class="number">-1</span>, <span class="number">-1</span>): <span class="comment"># col</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(r): </div><div class="line">            <span class="keyword">if</span> grid[i][j + <span class="number">1</span>] == <span class="string">&apos;E&apos;</span>:</div><div class="line">                right[i][j] = right[i][j + <span class="number">1</span>] + <span class="number">1</span></div><div class="line">            <span class="keyword">elif</span> grid[i][j + <span class="number">1</span>] == <span class="string">&apos;W&apos;</span>:</div><div class="line">                right[i][j] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                right[i][j] = right[i][j + <span class="number">1</span>]</div><div class="line">    </div><div class="line">    res = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(r):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(c):</div><div class="line">            <span class="keyword">if</span> grid[i][j] == <span class="string">&apos;0&apos;</span>:</div><div class="line">                res = max(res, (up[i][j] + down[i][j] + left[i][j] + right[i][j]))</div><div class="line">        <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h1 id="unique-binary-search-trees-ii">95. Unique Binary Search Trees II</h1>
+<h3 id="dfs-beats-100">DFS beats 100%</h3>
+<p>Built left tree first, then right tree first.</p>
+<p>variable left, and right are tree.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateTrees</span><span class="params">(self, n)</span>:</span></div><div class="line">        <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">        :type n: int</span></div><div class="line"><span class="string">        :rtype: List[TreeNode]</span></div><div class="line"><span class="string">        &quot;&quot;&quot;</span></div><div class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line">        <span class="keyword">return</span> self.dfs(<span class="number">1</span>, n)</div><div class="line">        </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self,start,end)</span>:</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> start &gt; end:</div><div class="line">            <span class="keyword">return</span> [<span class="keyword">None</span>]</div><div class="line">        </div><div class="line">        res = []</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start,end+<span class="number">1</span>):</div><div class="line">            left = self.dfs(start,i<span class="number">-1</span>)</div><div class="line">            right = self.dfs(i+<span class="number">1</span>,end)</div><div class="line">            </div><div class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> left:</div><div class="line">                <span class="keyword">for</span> r <span class="keyword">in</span> right:</div><div class="line">                    node = TreeNode(i)</div><div class="line">                    node.left = l</div><div class="line">                    node.right = r</div><div class="line">                    res.append(node)</div><div class="line">        <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h1 id="maximum-subarray">53. Maximum Subarray</h1>
+<p>calculate a list of sum for subarray end up by input element, find the max one.</p>
+<p>Examples:</p>
+<p>arrary: [-2, 1, -3, 4, -1, 2, 1, -5, -4] dp: [-2, 1, -2, 4, 3, 5, 6, 1, -3]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type nums: List[int]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> nums:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="comment"># calculate a list of sum for subarray end up by input element</span></div><div class="line">    dp = [<span class="number">0</span>] * len(nums)</div><div class="line">    dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(nums)):</div><div class="line">        dp[i] = max(nums[i], dp[i - <span class="number">1</span>] + nums[i])</div><div class="line">        </div><div class="line">    <span class="keyword">return</span> max(dp)</div></pre></td></tr></table></figure>
+<h1 id="best-time-to-buy-and-sell-stock">121. Best Time to Buy and Sell Stock</h1>
+<p><strong>prices[i] - prices[i-1]]</strong> is today&#x2019;s difference, add the profit the day before, get the difference between buy day and sell day.</p>
+<p>if less than 0, today is a low price, buy in this day, profit is 0 today.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type prices: List[int]</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    n = len(prices)</div><div class="line">		<span class="keyword">if</span> n &lt; <span class="number">2</span>:</div><div class="line">    		<span class="keyword">return</span> <span class="number">0</span></div><div class="line"></div><div class="line">		maxPro = <span class="number">0</span></div><div class="line">		profits = [<span class="number">0</span>] * n</div><div class="line"></div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</div><div class="line">    		profits[i] = max(prices[i] - prices[i<span class="number">-1</span>] + profits[i<span class="number">-1</span>], <span class="number">0</span>)</div><div class="line">    		maxPro = max(profits[i], maxPro)</div><div class="line">		<span class="keyword">return</span> maxPro</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/05/07/LeetCode15/">https://testsiling.github.io/2019/05/07/LeetCode15/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/Dynamic-Programming/">Dynamic Programming</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/05/09/LeetCode16/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(16) _Design</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/05/07/LeetCode14/">
+        <span class="next-text nav-default">LeetCode(14) - Google</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/05/07/LeetCode15/';
+        this.page.identifier = '2019/05/07/LeetCode15/';
+        this.page.title = 'LeetCode(15) - DP';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

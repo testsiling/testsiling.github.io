@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="MITx 6.00.1x Problem Set 2"/>
+
+
+
+
+  <meta name="keywords" content="Python, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2017/12/29/MitProblemSet2/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> MITx 6.00.1x Problem Set 2 - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          MITx 6.00.1x Problem Set 2
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-12-29
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#notice-balance-annualinterestrate-and-monthlypaymentrate-are-provided-by-online-judge"><span class="toc-text">NOTICE: balance , annualInterestRate, and monthlyPaymentRate are provided by online judge</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#problem-1"><span class="toc-text">Problem 1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#problem-2"><span class="toc-text">Problem 2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#problem-3"><span class="toc-text">Problem 3</span></a>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>MITx: 6.00.1x</p>
+<p>Introduction to Computer Science and Programming Using Python</p>
+<p>https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-11</p>
+<p>My answers to Problem Set 2</p>
+<a id="more"></a>
+<h3 id="notice-balance-annualinterestrate-and-monthlypaymentrate-are-provided-by-online-judge"><strong>NOTICE: <em>balance</em> , <em>annualInterestRate</em>, and <em>monthlyPaymentRate</em> are provided by online judge</strong></h3>
+<h1 id="problem-1">Problem 1</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">def bal(balance, month):</div><div class="line">    global monthlyInterestRate</div><div class="line">    global monthlyPaymentRate</div><div class="line"></div><div class="line">    if month == 1:</div><div class="line">        unpaid = balance - balance * monthlyPaymentRate</div><div class="line">        currentBal = unpaid + monthlyInterestRate * unpaid</div><div class="line">        # print(&quot;Month %d Remaining balance: %.2f&quot; % (month, currentBal))</div><div class="line">        return currentBal</div><div class="line"></div><div class="line">    # last month balance</div><div class="line">    lastBal = bal(balance, month - 1)</div><div class="line"></div><div class="line">    # this month unpaid</div><div class="line">    unpaid = lastBal - lastBal * monthlyPaymentRate</div><div class="line"></div><div class="line">    # totoal balance of this month</div><div class="line">    currentBal = unpaid + monthlyInterestRate * unpaid</div><div class="line">    # print(&quot;Month %d Remaining balance: %.2f&quot; % (month, currentBal))</div><div class="line">    return currentBal</div><div class="line"></div><div class="line">monthlyInterestRate = annualInterestRate / 12.0</div><div class="line">month = 12</div><div class="line">print(&quot;Remaining balance: %.2f&quot; % (bal(balance, month)))</div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="problem-2">Problem 2</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">def bal(balance, month, fixPay):</div><div class="line">    global monthlyInterestRate</div><div class="line"></div><div class="line">    if month == 1:</div><div class="line">        unpaid = balance - fixPay</div><div class="line">        currentBal = unpaid + monthlyInterestRate * unpaid</div><div class="line">        return currentBal</div><div class="line"></div><div class="line">    lastBal = bal(balance, month - 1, fixPay)</div><div class="line">    unpaid = lastBal - fixPay</div><div class="line">    currentBal = unpaid + monthlyInterestRate * unpaid</div><div class="line"></div><div class="line">    return currentBal</div><div class="line"></div><div class="line"></div><div class="line">monthlyInterestRate = annualInterestRate / 12.0</div><div class="line">month = 12</div><div class="line">guess = 10</div><div class="line"></div><div class="line">while bal(balance, month, guess) &gt;= 0:</div><div class="line">    guess += 10</div><div class="line"></div><div class="line">print(&quot;Lowest Payment: %d&quot; %(guess))</div></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="problem-3">Problem 3</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">def bal(balance, month, fixPay):</div><div class="line">    global monthlyInterestRate</div><div class="line"></div><div class="line">    if month == 1:</div><div class="line">        unpaid = balance - fixPay</div><div class="line">        currentBal = unpaid + monthlyInterestRate * unpaid</div><div class="line">        return currentBal</div><div class="line"></div><div class="line">    # last month balance</div><div class="line">    lastBal = bal(balance, month - 1, fixPay)</div><div class="line">    # this month unpaid</div><div class="line">    unpaid = lastBal - fixPay</div><div class="line">    # total balance of this month</div><div class="line">    currentBal = unpaid + monthlyInterestRate * unpaid</div><div class="line"></div><div class="line">    return currentBal</div><div class="line">    </div><div class="line"></div><div class="line">monthlyInterestRate = annualInterestRate / 12.0</div><div class="line">month = 12</div><div class="line"></div><div class="line">lowerBound = balance / 12</div><div class="line">upperBound = (balance * (1 + monthlyInterestRate)**12) / 12.0</div><div class="line"></div><div class="line">guess = (lowerBound + upperBound) / 2.0</div><div class="line">remain = bal(balance, month, guess)</div><div class="line"></div><div class="line">while round(remain, 2) != 0:</div><div class="line"></div><div class="line">    # if monthly pay not enough</div><div class="line">    if remain &gt; 0:</div><div class="line">        lowerBound = guess</div><div class="line"></div><div class="line">    # if pay too much</div><div class="line">    if remain &lt; 0:</div><div class="line">        upperBound = guess</div><div class="line"></div><div class="line">    guess = (lowerBound + upperBound) / 2.0</div><div class="line">    remain = bal(balance, month, guess)</div><div class="line"></div><div class="line">print(&quot;Lowest Payment: %.2f&quot; % guess)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2017/12/29/MitProblemSet2/">https://testsiling.github.io/2017/12/29/MitProblemSet2/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/12/31/LeetCode1/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(1)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/11/19/SearchMethods/">
+        <span class="next-text nav-default">Three Searching Methods</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2017/12/29/MitProblemSet2/';
+        this.page.identifier = '2017/12/29/MitProblemSet2/';
+        this.page.title = 'MITx 6.00.1x Problem Set 2';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

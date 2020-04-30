@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="LeetCode(10) - Linked List(Easy)"/>
+
+
+
+
+  <meta name="keywords" content="Python, LeetCode, Linked List, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/04/07/LeetCode10/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> LeetCode(10) - Linked List(Easy) - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          LeetCode(10) - Linked List(Easy)
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-04-07
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#reverse-linked-list"><span class="toc-text">206.Reverse Linked List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iterative"><span class="toc-text">Iterative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recursive"><span class="toc-text">Recursive</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#linked-list-cycle"><span class="toc-text">141.Linked List Cycle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#palindrome-linked-list"><span class="toc-text">234. Palindrome Linked List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#approach-1"><span class="toc-text">Approach 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#approach-2"><span class="toc-text">Approach 2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#delete-node-in-a-linked-list"><span class="toc-text">237.Delete Node in a Linked List</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#intersection-of-two-linked-lists"><span class="toc-text">160.Intersection of Two Linked Lists</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hash-table"><span class="toc-text">Hash Table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#two-pointers"><span class="toc-text">Two Pointers</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Problem Set for linked list (Easy)</p>
+<ul>
+<li>206.Reverse Linked List</li>
+<li>141.Linked List Cycle</li>
+<li>234.Palindrome Linked List</li>
+<li>237.Delete Node in a Linked List</li>
+<li>160.Intersection of Two Linked Lists</li>
+</ul>
+<a id="more"></a>
+<p><br></p>
+<h1 id="reverse-linked-list">206.Reverse Linked List</h1>
+<h3 id="iterative">Iterative</h3>
+<p>Iterative is pretty straight forward. <br></p>
+<p>Time Complexity: O(n) <br></p>
+<p>Space complexity : O(1).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseList</span><span class="params">(self, head)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type head: ListNode</span></div><div class="line"><span class="string">    :rtype: ListNode</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    dummy = ListNode(<span class="keyword">None</span>)</div><div class="line">    cur = ListNode(<span class="keyword">None</span>)</div><div class="line">    dummy.next = cur</div><div class="line">    <span class="keyword">while</span> head != <span class="keyword">None</span>:</div><div class="line">        cur.val = head.val</div><div class="line">        cur = ListNode(<span class="keyword">None</span>)</div><div class="line">        cur.next = dummy.next</div><div class="line">        dummy.next = cur</div><div class="line">        head = head.next</div><div class="line">    <span class="keyword">return</span> dummy.next.next</div></pre></td></tr></table></figure>
+<h3 id="recursive">Recursive</h3>
+<p>Pretty cool, should review it next time. <br></p>
+<p>Time Complexity: O(n) <br></p>
+<p>Space complexity : O(n).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseList</span><span class="params">(self, head, prev=None)</span>:</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head:</div><div class="line">        <span class="keyword">return</span> prev</div><div class="line">    cur = head.next</div><div class="line">    head.next = prev</div><div class="line">    <span class="keyword">return</span> self.reverseList(cur, head)</div></pre></td></tr></table></figure>
+<h1 id="linked-list-cycle">141.Linked List Cycle</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hasCycle</span><span class="params">(self, head)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type head: ListNode</span></div><div class="line"><span class="string">    :rtype: bool</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line">    slow = head <span class="comment"># move 1 step</span></div><div class="line">    fast = head.next <span class="comment"># move 2 steps</span></div><div class="line"></div><div class="line">    <span class="keyword">while</span> slow != fast:</div><div class="line">        <span class="keyword">if</span> fast == <span class="keyword">None</span> <span class="keyword">or</span> fast.next == <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            slow = slow.next</div><div class="line">            fast = fast.next.next</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<h1 id="palindrome-linked-list">234. Palindrome Linked List</h1>
+<h3 id="approach-1">Approach 1</h3>
+<p>The first idea came into my mind was pretty straight forward: turn the linked list into a normal list, reverse it and compare. But I guess this approach loses the soul of the linked list. Anyway, it did AC.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, head)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type head: ListNode</span></div><div class="line"><span class="string">    :rtype: bool</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">	rev = []</div><div class="line">	<span class="keyword">while</span> head:</div><div class="line">		rev.append(head.val)</div><div class="line">		head = head.next</div><div class="line">	<span class="keyword">if</span> rev == rev[::<span class="number">-1</span>]:</div><div class="line">		<span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">	<span class="keyword">else</span>:</div><div class="line">		<span class="keyword">return</span> <span class="keyword">False</span></div></pre></td></tr></table></figure>
+<h3 id="approach-2">Approach 2</h3>
+<p>This one is found in the discussion. Using stack. Find the midpoint and compare 2 parts of the list. But the runtime only bests 9.21%. Sometimes I think I am losing too much time to dig a worse answer. Maybe we should just embrace the first light came into our minds?</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, head)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type head: ListNode</span></div><div class="line"><span class="string">    :rtype: bool</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.next:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="comment"># 1. Get the midpoint (slow)</span></div><div class="line">    slow = fast = head</div><div class="line">    <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</div><div class="line">        fast, slow = fast.next.next, slow.next</div><div class="line"></div><div class="line">    <span class="comment"># 2. Push the second half into the stack</span></div><div class="line">    stack = []</div><div class="line">    <span class="keyword">while</span> slow:</div><div class="line">        stack.append(slow.val)</div><div class="line">        slow = slow.next</div><div class="line"></div><div class="line">    <span class="keyword">print</span> stack</div><div class="line">    <span class="comment"># 3. Comparison</span></div><div class="line">    <span class="keyword">while</span> stack:</div><div class="line">        <span class="keyword">if</span> stack.pop() != head.val:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        head = head.next</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<h1 id="delete-node-in-a-linked-list">237.Delete Node in a Linked List</h1>
+<p>I don&#x2019;t like this one. The description is confusing and it doesn&#x2019;t really need to <strong>delete</strong> a node, because it even didn&#x2019;t provide the previous node, but asking &#x201C;how to turn the current representative points to the next node&#x201D;</p>
+<p>So the input <strong>node</strong> is [5, 1, 9], it needs [1, 9]</p>
+<p>Hence, the process would be :</p>
+<ol style="list-style-type: decimal">
+<li>[5, 1, 9] -&gt; [1, 1, 9]</li>
+<li>[1, 1, 9] -&gt; [1, 9]</li>
+</ol>
+<p>Time and space complexity are both O(1). Anyway, this one is meaningless. I disliked it.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">deleteNode</span><span class="params">(self, node)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type node: ListNode</span></div><div class="line"><span class="string">    :rtype: void Do not return anything, modify node in-place instead.</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    node.val = node.next.val</div><div class="line">    node.next = node.next.next</div></pre></td></tr></table></figure>
+<h1 id="intersection-of-two-linked-lists">160.Intersection of Two Linked Lists</h1>
+<p>The description of this question is not well-stated. For instance, in example 1, why the intersection is 8, not1? The answer is that these two nodes, which value = 1, are pointed to different references. So the key here is to compare the reference, instead of simply compare the value.</p>
+<p>BTW, Brute Force will TLE.</p>
+<h3 id="hash-table">Hash Table</h3>
+<p>Time: O(m+n)</p>
+<p>Space: O(m) + O(n)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getIntersectionNode</span><span class="params">(self, headA, headB)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type head1, head1: ListNode</span></div><div class="line"><span class="string">    :rtype: ListNode</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="comment"># hash table</span></div><div class="line">    dic = {}</div><div class="line">    pa, pb = headA, headB</div><div class="line">    <span class="keyword">while</span> pa:</div><div class="line">        dic[pa] = pa</div><div class="line">        pa = pa.next</div><div class="line"></div><div class="line">    <span class="keyword">while</span> pb:</div><div class="line">        <span class="keyword">if</span> pb <span class="keyword">in</span> dic:</div><div class="line">            <span class="keyword">return</span> pb</div><div class="line">        pb = pb.next</div><div class="line">    <span class="keyword">return</span> pb</div></pre></td></tr></table></figure>
+<h3 id="two-pointers">Two Pointers</h3>
+<p>Connecting 2 linked lists and traverse them by 2 pointers. Elements after intersction would be the same if there is a intersection, or else there is no intersection. Example:</p>
+<p>A: [1,2,3,4,5]</p>
+<p>B: [9,8,7,3,4,5]</p>
+<p>A+B would be : [1,2,3,4,5,9,8,7,<strong>3,4,5</strong>]</p>
+<p>B+A would be : [9,8,7,3,4,5,1,2,<strong>3,4,5</strong>]</p>
+<p>once pA and pB is the same, reach the intersection, or reach None if there is no interection.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getIntersectionNode</span><span class="params">(self, headA, headB)</span>:</span></div><div class="line">    <span class="string">&quot;&quot;&quot;</span></div><div class="line"><span class="string">    :type head1, head1: ListNode</span></div><div class="line"><span class="string">    :rtype: ListNode</span></div><div class="line"><span class="string">    &quot;&quot;&quot;</span></div><div class="line">    <span class="comment"># 2 pointers</span></div><div class="line">    <span class="keyword">if</span> headA <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> headB <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    pa, pb = headA, headB</div><div class="line">    <span class="keyword">while</span> pa <span class="keyword">is</span> <span class="keyword">not</span> pb:</div><div class="line">        <span class="keyword">if</span> pa <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            pa = headB</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            pa = pa.next</div><div class="line"></div><div class="line">        <span class="keyword">if</span> pb <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            pb = headA</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            pb = pb.next</div><div class="line"></div><div class="line">    <span class="keyword">return</span> pa</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/04/07/LeetCode10/">https://testsiling.github.io/2019/04/07/LeetCode10/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+              <a href="/tags/LeetCode/">LeetCode</a>
+            
+              <a href="/tags/Linked-List/">Linked List</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/04/08/LeetCode11/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(11)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/03/07/sql/">
+        <span class="next-text nav-default">SQL Review (with examples)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/04/07/LeetCode10/';
+        this.page.identifier = '2019/04/07/LeetCode10/';
+        this.page.title = 'LeetCode(10) - Linked List(Easy)';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

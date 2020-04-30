@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="MongoDB Notes"/>
+
+
+
+
+  <meta name="keywords" content="Database, NoSQL, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2019/06/03/mongodb/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> MongoDB Notes - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          MongoDB Notes
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-06-03
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#syntactic-rule"><span class="toc-text">Syntactic Rule</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#common-term-in-mongodb"><span class="toc-text">Common Term in MongoDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#crud"><span class="toc-text">CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#create"><span class="toc-text">Create</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#read"><span class="toc-text">Read</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#update"><span class="toc-text">Update</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delete"><span class="toc-text">Delete</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#installation"><span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#practices"><span class="toc-text">Practices</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#basic-manipulation"><span class="toc-text">Basic Manipulation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mapreduce-implementation"><span class="toc-text">MapReduce Implementation</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h1 id="introduction">Introduction</h1>
+<p>MongoDB is from &#x201C;Hu<strong>mongo</strong>us&#x201D;</p>
+<p>A document-based NoSQL database by MongoDB, Inc.</p>
+<ul>
+<li>Data is stored in documents in JSON.</li>
+<li>Documents of a similar type are stored in collections.</li>
+<li>Related collections are stored in a database.</li>
+<li>Schemaless</li>
+</ul>
+<a id="more"></a>
+<p><img src="/images/mongo1.png"></p>
+<h1 id="syntactic-rule">Syntactic Rule</h1>
+<ul>
+<li>Case-Sensitive &#x2013; Capitalization matters.</li>
+<li>Semi-colons are not required.</li>
+<li>All <strong>string</strong> data being saved should be in <strong>double quotes</strong>.</li>
+<li>Commands are <strong>space-independent</strong>.</li>
+<li>Comments are indicated by <strong>//</strong></li>
+<li>Data is displayed in the order of insertion order.</li>
+<li>The field names cannot start with the <strong>$</strong> character.</li>
+<li>The field names cannot contain the <strong>.</strong> character.</li>
+</ul>
+<p>Create a database command &#x2013; &#x201C;<strong>use</strong>&#x201D;</p>
+<ul>
+<li>e.g. <strong>use EmployeeDB</strong></li>
+</ul>
+<p>Databases can be displayed by &#x201C;<strong>show dbs</strong>&#x201D; command.</p>
+<ul>
+<li><strong>Admin Database</strong> &#x2013; Records data on database administration issues like users, roles, and privileges for the databases hosted on the server.</li>
+<li><strong>Local Database</strong> &#x2013; Stores data about the server&#x2019;s start-up process and the server&#x2019;s role in sharding operations.</li>
+<li>The Admin and Local database will not store any end-user data.</li>
+<li>use method <strong>db.getName()</strong> to display the database being used.</li>
+</ul>
+<p>Create a collection use <strong>createCollection()</strong> method:</p>
+<ul>
+<li>e.g. <strong>db.createCollection(&#x201C;newproducts&#x201D;)</strong></li>
+</ul>
+<p>Collections can be displayed by &#x201C;<strong>show collections</strong>&#x201D; command.</p>
+<p>Dropping a collection use <strong>drop()</strong></p>
+<p>e.g.</p>
+<ul>
+<li><p>Removes the collection &#x201C;newproducts&#x201D; along with all its documents: <strong>db.newproducts.drop()</strong></p></li>
+<li><p>Delete all the documents in the collection: <strong>db.newproducts.remove({})</strong></p></li>
+<li><p>Rename collections, use the method <strong>renameCollection()</strong></p></li>
+</ul>
+<p>e.g. <strong>db.newproducts.renameCollection(&#x201C;products&#x201D;)</strong></p>
+<h3 id="common-term-in-mongodb">Common Term in MongoDB</h3>
+<p><strong>Field</strong>: key-value pair in a document</p>
+<p>**_id**:</p>
+<ul>
+<li><p>mandatory field for every document. If you don;t assign a value, system will assign a random value this it.</p></li>
+<li>serves as primary key.</li>
+<li><p>unique valye in the collection</p></li>
+</ul>
+<h3 id="crud">CRUD</h3>
+<h4 id="create">Create</h4>
+<ul>
+<li>db.collection.insert(<em>document</em>)</li>
+<li>db.collection.insertOne(<em>document</em>)</li>
+<li>db.collection.insertMany([{d1}, {d2}.., {d3}] )</li>
+<li>db.collection.save(<em>document</em>)</li>
+<li>db.collection.update(<em>query ,update , { upsert: true }</em> )</li>
+</ul>
+<h4 id="read">Read</h4>
+<ul>
+<li>db.collection.find( <em>query, projection</em> )</li>
+<li>db.collection.findOne(<em>query, projection</em> )</li>
+</ul>
+<h4 id="update">Update</h4>
+<ul>
+<li>db.collection.update(<em>query ,update, options</em>)</li>
+<li>db.collection.updateOne(<em>query ,update, options</em>)</li>
+<li>db.collection.updateMany(<em>query ,update, options</em>)</li>
+<li>db.collection.replaceOne(<em>query ,replacement, options</em>)</li>
+</ul>
+<h4 id="delete">Delete</h4>
+<ul>
+<li>db.collection.remove(<em>query, justOne</em>)</li>
+<li>db.collection.deleteOne( <em>query, options</em>)</li>
+<li>db.collection.deleteMany( <em>query, options</em> )</li>
+<li>db.collection.deleteMany({}) <em>// delete all documents</em></li>
+</ul>
+<hr>
+<h1 id="installation">Installation</h1>
+<ol style="list-style-type: decimal">
+<li><p>Download &amp; unzip source code to <strong>cd /usr/local</strong></p></li>
+<li><p>Rename directory to <strong>mongodb</strong></p></li>
+<li><p>Add to PATH:</p></li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/mongodb/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Create a database directory:</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /data/db</div><div class="line">sudo chown -R <span class="variable">$USER</span> /data/db</div></pre></td></tr></table></figure></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Run mongodb</li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mongod</div><div class="line"><span class="comment"># if doesn&apos;t set PATH, entry the following directory</span></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/mongodb/bin</div><div class="line">sudo ./mongod</div></pre></td></tr></table></figure></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Open another terminal:</li>
+</ol>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd /usr/local/mongodb/bin </div><div class="line">$ ./mongo</div></pre></td></tr></table></figure></p>
+<ol start="7" style="list-style-type: decimal">
+<li><em>if your data directory not /data/db, assign it with &#x2014;dbpath</em></li>
+</ol>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mongod --dbpath = /data/db</div></pre></td></tr></table></figure></p>
+<p><br></p>
+<h1 id="practices">Practices</h1>
+<h2 id="basic-manipulation">Basic Manipulation</h2>
+<ol style="list-style-type: decimal">
+<li>Create a collection called &#x201C;customers&#x201D;, input data</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.customers.insert({id: &quot;1&quot;, name : &quot;Bill&quot;, productId: &quot;1&quot;, customerId: &quot;1&quot;, amount: 20.00, state: &quot;PA&quot;})</div><div class="line"></div><div class="line">db.customers.insert({id: &quot;2&quot;, name : &quot;Hillary&quot;, productId: &quot;2&quot;, customerId: &quot;2&quot;, amount: 30.00, state: &quot;DC&quot;})</div><div class="line"></div><div class="line">db.customers.insert({id: &quot;3&quot;, name : &quot;brian&quot;, productId: &quot;1&quot;, customerId: &quot;3&quot;, amount: 25.00, state: &quot;DC&quot;})</div><div class="line"></div><div class="line">db.customers.insert({id: &quot;4&quot;, name : &quot;Donald&quot;, productId: &quot;2&quot;, customerId: &quot;4&quot;, amount: 50.00, state: &quot;PA&quot;})</div></pre></td></tr></table></figure></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Find the name and amount of all the customers whose state is PA</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.customers.find({ state: &quot;PA&quot; }, { name: 1, _id: 0 })</div></pre></td></tr></table></figure></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Find the name and state of customers whose name begin with &#x201C;B&#x201D; or &#x201C;b&#x201D;</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.customers.find({ name: /^(B|b)/ })</div></pre></td></tr></table></figure></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Find the name of customers whose sale amount is greater or equal to 30 but lower than 40</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.customers.find( { amount: { $gte: 30, $lt: 40 } } )</div></pre></td></tr></table></figure></p>
+<ol start="5" style="list-style-type: decimal">
+<li>For each state, find the number of customers and their total amount</li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">db.customers.aggregate( [ </div><div class="line">	{ $group: { </div><div class="line">		_id: &quot;$state&quot;,</div><div class="line">		total_amount: { $sum: &quot;$amount&quot; },</div><div class="line">		num_of_customers: { $sum: 1 } </div><div class="line">		} </div><div class="line">	} </div><div class="line">] )</div></pre></td></tr></table></figure></p>
+<ol start="6" style="list-style-type: decimal">
+<li>To all the documents, increase the salesAmount by 10</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.customers.updateMany( {}, { $inc: { &quot;amount&quot;: 10 } } )</div></pre></td></tr></table></figure></p>
+<ol start="7" style="list-style-type: decimal">
+<li>To all the documents, add the new field called &#x201C;totalSaleAmount&#x201D; whose value is defined by saleAmount*1.06 (i.e, add 6% tax)</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.customers.aggregate( [ {$addFields: {totalSaleAmount: {$multiply: [&quot;$amount&quot;, 1.06] } } } ] )</div></pre></td></tr></table></figure></p>
+<ol start="8" style="list-style-type: decimal">
+<li>To all the documents whose state is PA, add the new field called &#x201C;pastPurchase&#x201D; as an array of products. Document 1 will have [&#x201C;chair&#x201D;, &#x201C;desk&#x201D;], while Document 4 will have [&#x201C;chair&#x201D;, &#x201C;tablet&#x201D;, &#x201C;usb&#x201D;]</li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">db.customers.update(</div><div class="line">      { id : &quot;1&quot; },</div><div class="line">      { $set: { &quot;pastPurchase&quot; : [&quot;chair&quot;, &quot;desk&quot;] } }</div><div class="line">)</div><div class="line"></div><div class="line">db.customers.update(</div><div class="line">      { id : &quot;4&quot; },</div><div class="line">      { $set: { &quot;pastPurchase&quot; : [&quot;chair&quot;, &quot;tablet&quot;, &quot;usb&quot;] } }</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<h2 id="mapreduce-implementation">MapReduce Implementation</h2>
+<p>We need to find some aggregated data from a Grocery Store (Giant, ACME etc.,) by their shoppingCarts. The document structure is:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">    <span class="attr">&quot;_id&quot;</span> : NumberLong(<span class="number">1</span>),</div><div class="line"></div><div class="line">    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Amelia Watson&quot;</span>,</div><div class="line"></div><div class="line">    <span class="attr">&quot;shoppingCart&quot;</span> : <span class="string">&quot;Eggs, Milk, Chicken, Bacon&quot;</span>,</div><div class="line"></div><div class="line">	&#x201C;discount&#x201D;: 1.25</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<ol style="list-style-type: decimal">
+<li>input data</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">db.grocery.insert({name: &quot;Bob&quot;, shoppingCart: &quot;Milk, Corn, Chocolates&quot;, discount: 0.75});</div><div class="line">db.grocery.insert({name: &quot;Alice&quot;, shoppingCart: &quot;Milk, Turkey, Apple&quot;, discount: 0});</div><div class="line">db.grocery.insert({name: &quot;Trudy&quot;, shoppingCart: &quot;Cheese, Corn, Tomatoes, Ginger, Juice, Pork&quot;, discount: 1.50});</div><div class="line">db.grocery.insert({name: &quot;Jacob&#x201D;, shoppingCart: &quot;Ice Cream, Onions, Tomatoes, Vinegar, Chicken, Fish&quot;, discount: 2.60});</div><div class="line">db.grocery.insert({name: &quot;Paul&quot;, shoppingCart: &quot;Cheese, Chocolates, Fish, Bread&quot;});</div><div class="line">db.grocery.insert({name: &quot;Jack&quot;, shoppingCart: &quot;Milk, Corn, Fish&quot;, discount: 0.25});</div><div class="line">db.grocery.insert({name: &quot;Mary&quot;, shoppingCart: &quot;Milk, Turkey, Apple&quot;, discount: 0});</div><div class="line">db.grocery.insert({name: &quot;Kate&quot;, shoppingCart: &quot;Cheese, Apple, Corn, Juice, Pork&quot;, discount: 3.50});</div><div class="line">db.grocery.insert({name: &quot;Chris&quot;, shoppingCart: &quot;Ice Cream&quot;});</div></pre></td></tr></table></figure></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Add the fact that you purchased the following items {Apple, Ice Cream, Chocolates} with the discount of $1.25. That is, use your first name as the name of the new document</li>
+</ol>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.grocery.insert({name: &quot;Celine&quot;, shoppingCart: &quot;Milk, Corn, Chocolates&quot;, discount: 1.25});</div></pre></td></tr></table></figure></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Use Map/Reduce function to count all the people who got any discount at all. Show the complete code and output</li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.grocery.find().pretty()</div></pre></td></tr></table></figure></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Use Map/Reduce function to count all the people who got any discount at all. Show the complete code and output</li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">db.grocery.mapReduce(</div><div class="line">	function() {</div><div class="line">		if(this.discount != undefined &amp;&amp; this.discount &gt; 0){</div><div class="line">			emit(&quot;count&quot;, 1);</div><div class="line">		}</div><div class="line">	}, // mapper</div><div class="line">	function(key,values) {</div><div class="line">		return Array.sum(values);</div><div class="line">	}, // reducer</div><div class="line">	{ out: &quot;discounts&quot; } // output</div><div class="line">).find();</div></pre></td></tr></table></figure></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Use Map/Reduce function to count the total value of discounts of all the customers. Show the complete code and output</li>
+</ol>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">db.grocery.mapReduce(</div><div class="line">	function() {</div><div class="line">		if(this.discount != undefined &amp;&amp; this.discount &gt; 0){</div><div class="line">			emit(&quot;sum&quot;,this.discount);</div><div class="line">		}</div><div class="line">	}, // mapper</div><div class="line">	function(key,values) {</div><div class="line">		return Array.sum(values);</div><div class="line">	}, // reducer</div><div class="line">	{ out: &quot;discounts&quot; } // output</div><div class="line">).find();</div></pre></td></tr></table></figure></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Use Map/Reduce function to find the number of times an item appears in the cart.</li>
+</ol>
+<p>For example, if Chicken was inserted in 5 documents (5 different Carts), the key value pair generated after map reduce should look like: {Chicken: 5}.</p>
+<p>Display the top 5 items most sold</p>
+<p><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">db.grocery.mapReduce(</div><div class="line">	function() {</div><div class="line">		if(this.shoppingCart != undefined) { </div><div class="line">			this.shoppingCart.split(&apos;,&apos;).forEach(</div><div class="line">				function (v) {</div><div class="line">					emit(v.trim(), 1);</div><div class="line">				}</div><div class="line">			);</div><div class="line">		}</div><div class="line">	}, </div><div class="line">	function(key,values) {</div><div class="line">		return Array.sum(values);</div><div class="line">	}, </div><div class="line">	{ out: &quot;top5Sellers&quot; }</div><div class="line">).find().sort({value: -1}).limit(5);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2019/06/03/mongodb/">https://testsiling.github.io/2019/06/03/mongodb/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Database/">Database</a>
+            
+              <a href="/tags/NoSQL/">NoSQL</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/07/12/LeetCode19/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">LeetCode(19) - Stack</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/05/28/LeetCode18/">
+        <span class="next-text nav-default">LeetCode(18) - Amazon 2</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2019/06/03/mongodb/';
+        this.page.identifier = '2019/06/03/mongodb/';
+        this.page.title = 'MongoDB Notes';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

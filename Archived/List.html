@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="List & Array"/>
+
+
+
+
+  <meta name="keywords" content=", , xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/Archived/List.html"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> List & Array - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <article class="post">
+    <div class="post-content">
+      <h2 id="cs61b-week2-note-list-array">CS61B Week2 Note: List &amp; Array</h2>
+<p>&#x53EA;&#x662F;&#x5907;&#x5FD8;&#x7B14;&#x8BB0; <strong>&#x5F3A;&#x70C8;&#x63A8;&#x8350;&#x7528;<a href="https://cscircles.cemc.uwaterloo.ca/java_visualize/" target="_blank" rel="external">Java Visualizer</a></strong></p>
+<a id="more"></a>
+<p>&#x76EE;&#x5F55;&#xFF1A; - <a href="#1">IntList</a> - <a href="#2">static</a> - <a href="#3">SLList</a> - <a href="#4">DLList</a> - <a href="#5">Generic Type</a> - <a href="#6">Array</a></p>
+<hr>
+<p><span id="1"> ## IntList </span><a href="https://github.com/Berkeley-CS61B/lectureCode/blob/master/lists1/live/IntList.java" target="_blank" rel="external">code</a></p>
+<p>naked link, hard to use. naked recursive</p>
+<p>&#x7EC3;&#x4E60;&#xFF1A;&#x5C06;IntList&#x7684;&#x6240;&#x6709;item&#x5E73;&#x65B9;&#xFF0C;&#x7528;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;</p>
+<ol style="list-style-type: decimal">
+<li><p>Destructively <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static IntList SquareDestructive(IntList L) {</div><div class="line">	IntList B = L;</div><div class="line">	while (B != null) {</div><div class="line">		B.first *= B.first;</div><div class="line">		B = B.rest;</div><div class="line">	}</div><div class="line">	return L;</div><div class="line">}</div></pre></td></tr></table></figure></p></li>
+<li><p>Non-destructively <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public static IntList SquareNonDestructive(IntList L) {</div><div class="line">	if (L == null) {</div><div class="line">		return L;</div><div class="line">	} else {</div><div class="line">		IntList rest = SquareNonDestructive(L.rest);</div><div class="line">		IntList M = new IntList(L.first * L.first, rest);</div><div class="line">		return M;</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure></p></li>
+</ol>
+<hr>
+<p><span id="2"> ## static </span>&#x6709;static&#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x7A0B;&#x5E8F;&#x4E00;&#x5F00;&#x59CB;&#x5C31;&#x5206;&#x914D;&#x4E86;static field. &#x540E;&#x9762;&#x8C03;&#x7528;&#x53EA;&#x4F1A;&#x6539;&#x53D8;static&#x91CC;&#x9762;&#x7684;&#x6570;&#x503C;&#x3002; &#x4E3E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public class Cat {</div><div class="line">   public String name;</div><div class="line">   public static String noise;</div><div class="line"></div><div class="line">   public Cat(String name, String noise) {</div><div class="line">      this.name = name;</div><div class="line">      this.noise = noise;</div><div class="line">   }</div><div class="line"></div><div class="line">   public void play() {</div><div class="line">      System.out.println(noise + &quot; I&#x2019;m &quot; + name + &quot; the cat!&quot;);</div><div class="line">   }</div><div class="line"></div><div class="line">   public static void anger() {</div><div class="line">      noise = noise.toUpperCase();</div><div class="line">   }</div><div class="line">   public static void calm() {</div><div class="line">      noise = noise.toLowerCase();</div><div class="line">   }</div><div class="line">   </div><div class="line">   public static void main(String[] args) {</div><div class="line">      Cat a = new Cat(&quot;Cream&quot;, &quot;Meow!&quot;);</div><div class="line">      Cat b = new Cat(&quot;Tubbs&quot;, &quot;Nyan!&quot;);</div><div class="line">      a.play();</div><div class="line">      b.play();</div><div class="line">      Cat.anger();</div><div class="line">      a.calm();</div><div class="line">      a.play();</div><div class="line">      b.play();</div><div class="line">   }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>Output&#xFF1A; Nyan! I&#x2019;m Cream the cat! Nyan! I&#x2019;m Tubbs the cat! nyan! I&#x2019;m Cream the cat! nyan! I&#x2019;m Tubbs the cat!</p>
+<hr>
+<p><span id="3"> ## SLList </span><a href="https://github.com/Berkeley-CS61B/lectureCode/blob/master/lists2/live/SLList.java" target="_blank" rel="external">code</a> (Singly linked list)</p>
+<p>only .next</p>
+<hr>
+<p><span id="4"> ## DLList (doubly linked list) </span>.prev .next</p>
+<p>Naive: .last point at the sentinel in special case (sentinel isn&#x2019;t real node.)</p>
+<p>Solution:</p>
+<ol style="list-style-type: decimal">
+<li><p>Double Sentinel .sentFront sentBack</p></li>
+<li><p>Circular Sentinel [project one]</p></li>
+</ol>
+<hr>
+<p><span id="5"> ## Generic(&#x6CDB;&#x578B;) list: </span> DLList<string> s1 = new DLList&lt;&gt; (&#x201C;hello&#x201D;); s1.addLast(&#x201C;world&#x201D;);</string></p>
+<hr>
+<p><span id="6"> ## Array </span></p>
+<ul>
+<li>fixed length</li>
+<li>All boxes hold the same type</li>
+<li>get one reference when its created</li>
+<li>if you reassign the reference, you can never get the array back.</li>
+</ul>
+<p>Three valid notation: - y = new int[3];//32 * 3 = 96 bit - x = new int[]{1,2,3}; - int[] z = {4,5.6}; //declaring a variable</p>
+<p>Two ways to copy arrays 1. &#x5FAA;&#x73AF;&#x64CD;&#x4F5C;&#x6BCF;&#x4E2A;item 2. arraycopy</p>
+<h3 id="method-arraycopy">Method arraycopy</h3>
+<div style="color: #FF6666;">
+<strong>Fast but hard to read</strong>
+</div>
+<p>Five param: 1) Source array 2) Start position in source 3) Target array 4) Start position in target 5) Number to copy</p>
+<p>Example: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int[] b = {1,2,3};</div><div class="line">int[] x = {4,5,6,7,8,9};</div><div class="line">System.array(b, 0, x, 3, 2);</div></pre></td></tr></table></figure></p>
+<p>Result: x = {4,5,6,1,2,9}</p>
+<h3 id="d-array">2D Array</h3>
+<p>Exercise: x[0][0]=? w[0][0]=? <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">int[][] x = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};</div><div class="line"></div><div class="line">int[][] z = new int[3][];</div><div class="line">z[0] = x[0];</div><div class="line">z[1] = x[1];</div><div class="line">z[2] = x[2];</div><div class="line">z[0][0] = -z[0][0];</div><div class="line"></div><div class="line">int[][] w = new int[3][3];</div><div class="line">System.arraycopy(x[0], 0, w[0], 0, 3);</div><div class="line">System.arraycopy(x[1], 0, w[1], 0, 3);</div><div class="line">System.arraycopy(x[2], 0, w[2], 0, 3);</div><div class="line">w[0][0] = -w[0][0];</div></pre></td></tr></table></figure></p>
+<p><a href="http://goo.gl/fCZ9Dr" target="_blank" rel="external">Answer</a>: x[0][0]=-1 w[0][0]=1 z[0][0] = -z[0][0]; &#x8FD9;&#x53E5;&#xFF0C;z[0][0] &#x4E0E; x[0][0] &#x6307;&#x5411;&#x540C;&#x4E00;&#x4E2A;field, &#x6240;&#x4EE5; x[0][0] &#x7684; item&#x53D8;&#x4E86;&#x3002;</p>
+<br>
+<div style="color: #FF6666; text-align: center;">
+<strong>All codes are provided by <a href="http://datastructur.es/sp17/" target="_blank" rel="external">CS61B</a></strong>
+</div>
+
+    </div>
+  </article>
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/Archived/List.html';
+        this.page.identifier = 'Archived/List.html';
+        this.page.title = 'List & Array';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>

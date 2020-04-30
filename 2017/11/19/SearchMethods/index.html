@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Three Searching Methods"/>
+
+
+
+
+  <meta name="keywords" content="Python, xianyu" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://testsiling.github.io/2017/11/19/SearchMethods/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+  <script id="google_analytics">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-116902119-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> Three Searching Methods - xianyu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="mobile-header-logo">
+    <a href="/." class="logo">xianyu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">xianyu</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              Tags
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Three Searching Methods
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-11-19
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#exhaustive-enumeration"><span class="toc-text">Exhaustive Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cube-root"><span class="toc-text">Cube Root</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bisction-search"><span class="toc-text">Bisction search</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#square-root"><span class="toc-text">Square Root</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cube-root-1"><span class="toc-text">Cube Root</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#newton-raphson"><span class="toc-text">Newton-Raphson</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#square-root-1"><span class="toc-text">Square Root</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Three &#x2018;guess and check&#x2019; methods to search square root and cube root.</p>
+<ol style="list-style-type: decimal">
+<li>Exhaustive Enumeration</li>
+<li>Bisection Search</li>
+<li>Newton-Raphson (for root finding)</li>
+</ol>
+<a id="more"></a>
+<p><em>Sample Codes</em></p>
+<p><br></p>
+<h2 id="exhaustive-enumeration">Exhaustive Enumeration</h2>
+<h3 id="cube-root">Cube Root</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">cube = -64</div><div class="line">epsilon = 0.01</div><div class="line">guess = 0.0</div><div class="line">increment = 0.0001</div><div class="line">num_guesses = 0</div><div class="line"></div><div class="line">while abs(guess**3 - cube) &gt;= epsilon and abs(guess) &lt;= abs(cube):</div><div class="line">    if cube &lt; 0:</div><div class="line">        guess -= increment</div><div class="line">    else:</div><div class="line">        guess += increment</div><div class="line">    num_guesses += 1</div><div class="line"></div><div class="line">print(&apos;num_guesses = &apos;, num_guesses)</div><div class="line"></div><div class="line">if abs(guess**3 - cube) &gt;= epsilon:</div><div class="line">    print(&apos;Failed on cube root of&apos;, cube)</div><div class="line">else:</div><div class="line">    print(&apos;Cube root of &apos; + str(cube) + &apos; is &apos; + str(guess))</div></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="bisction-search">Bisction search</h2>
+<h3 id="square-root">Square Root</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">x = 25</div><div class="line">epsilon = 0.01</div><div class="line">numGuesses = 0</div><div class="line">low = 1.0</div><div class="line">high = x</div><div class="line">ans = (low + high) / 2.0</div><div class="line"></div><div class="line">while abs(ans**2 - x) &gt;= epsilon:</div><div class="line">    print(&apos;low = &apos; + str(low) + &apos; high = &apos; + str(high) + &apos; ans = &apos; + str(ans))</div><div class="line">    numGuesses += 1</div><div class="line">    if ans**2 &lt; x:</div><div class="line">        low = ans</div><div class="line">    else:</div><div class="line">        high = ans</div><div class="line">    ans = (low + high) / 2.0</div><div class="line">print(&apos;numGuesses: &apos; + str(numGuesses))</div><div class="line">print(str(ans) + &apos; is close to square root of &apos; + str(x))</div></pre></td></tr></table></figure>
+<h3 id="cube-root-1">Cube Root</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">cube = -27</div><div class="line">epsilon = 0.01</div><div class="line">numGuesses = 0</div><div class="line"></div><div class="line">if cube &gt;= 0:</div><div class="line">    low = 0</div><div class="line">    high = cube</div><div class="line">else:</div><div class="line">    low = cube</div><div class="line">    high = 0</div><div class="line"></div><div class="line">guess = (low + high) / 2.0</div><div class="line"></div><div class="line">while abs(guess**3 - cube) &gt;= epsilon:</div><div class="line">    print(&apos;low = &apos; + str(low) + &apos; high = &apos; + str(high) + &apos; guess = &apos; + str(guess))</div><div class="line">    if guess**3 &lt; cube:</div><div class="line">        low = guess</div><div class="line">    else:</div><div class="line">        high = guess</div><div class="line">    guess = (low + high) / 2.0</div><div class="line">    numGuesses += 1</div><div class="line"></div><div class="line">print(&apos;numGuesses: &apos; + str(numGuesses))</div><div class="line">print(str(guess) + &apos; is close to square root of &apos; + str(cube))</div></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="newton-raphson">Newton-Raphson</h2>
+<h3 id="square-root-1">Square Root</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">#Newton-Raphson</div><div class="line">#Find the square root of 24</div><div class="line"></div><div class="line">epsilon = 0.01</div><div class="line">y = 24.0</div><div class="line">guess = y/2.0</div><div class="line">numGuesses = 0</div><div class="line"></div><div class="line">while abs(guess**2 - y) &gt;= epsilon:</div><div class="line">	numGuesses += 1</div><div class="line">	guess = guess - ( (guess**2 - y) / (2 * guess) )</div><div class="line"></div><div class="line">print(&apos;numGuesses = &apos; + str(numGuesses))</div><div class="line">print(&apos;Square root of &apos; + str(y) + &apos; is about &apos; + str(guess))</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://testsiling.github.io">Celine Chen</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://testsiling.github.io/2017/11/19/SearchMethods/">https://testsiling.github.io/2017/11/19/SearchMethods/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/12/29/MitProblemSet2/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">MITx 6.00.1x Problem Set 2</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/11/11/NormalForm/">
+        <span class="next-text nav-default">当我重学Database -- 范式(Normal Form)</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:testsiling@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://www.instagram.com/testceline/" class="iconfont icon-instagram" title="instagram"></a>
+        
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Celine Chen</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  <script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'https://testsiling.github.io/2017/11/19/SearchMethods/';
+        this.page.identifier = '2017/11/19/SearchMethods/';
+        this.page.title = 'Three Searching Methods';
+    };
+    (function() {
+    var d = document, s = d.createElement('script');
+
+    s.src = '//xianyu-1.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();  
+  </script>
+
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+<link href="/js/src/katex.min.css"></script>
+<script type="text/javascript" src="/js/src/katex.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  </body>
+</html>
