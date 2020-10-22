@@ -20,6 +20,8 @@
 
 
 
+  <meta name="keywords" content="docker, container, devops, nlvi" />
+
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -80,12 +82,7 @@
 }
 </style>
 
-  <title>
-  BUG DEVELOPER
-  
-    | building the best tool
-  
-</title>
+  <title> Docker Container · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -228,15 +225,11 @@
       <main class="main" id="main">
         <div class="main-wrapper">
           
-  
-
-<section class="posts">
-  
     
   
   <article class="
   post
-  
+   is_post 
   ">
     <header class="post-header">
       <div class="post-time syuanpi fadeInRightShort back-1">
@@ -248,22 +241,69 @@
       </div>
       <h1 class="post-title syuanpi fadeInRightShort back-2">
         
-          <a href="/2020/10/22/docker1/">Docker Container</a>
+          Docker Container
         
       </h1>
     </header>
     <div class="post-content syuanpi fadeInRightShort back-3">
       
-        
-          <p>I heard the words, <em>container</em>, and <em>docker</em> a lot. I know it’s a useful tool related to Dev/Ops, but I never use one before. Recently I am writing a tool to find best apartment (rent goes down since COVID19), so was thinking probably I should try to use it in this porject. this is a note to myself, the first glimpse of docker. I would said, it’s magical. </p>
-        
+        <p>I heard the words, <em>container</em>, and <em>docker</em> a lot. I know it’s a useful tool related to Dev/Ops, but I never use one before. Recently I am writing a tool to find best apartment (rent goes down since COVID19), so was thinking probably I should try to use it in this porject. this is a note to myself, the first glimpse of docker. I would said, it’s magical. </p>
+<a id="more"></a>
+
+<h2 id="What’s-Docker"><a href="#What’s-Docker" class="headerlink" title="What’s Docker?"></a>What’s Docker?</h2><p>Container is a solution of isolating &amp; running different applications on the same infrasturcture.<br><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></p>
+<p>Docker is a type of containers.</p>
+<h2 id="Turorial"><a href="#Turorial" class="headerlink" title="Turorial"></a>Turorial</h2><h3 id="Getting-Start-Container"><a href="#Getting-Start-Container" class="headerlink" title="Getting Start Container"></a>Getting Start Container</h3><ol>
+<li><p>Create Dockerfile</p>
+<p>A Dockerfile is simply a text-based script of instructions that is used to create a container image.</p>
+</li>
+<li><p>Run it!</p>
+<p>Running the new container in “detached” mode (in the background) and creating a mapping between the host’s port 3000 to the container’s port 3000. </p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;app name&gt; .</span><br><span class="line">docker run -dp <span class="number">3000</span>:<span class="number">3000</span> &lt;app name&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Updating-App"><a href="#Updating-App" class="headerlink" title="Updating App"></a>Updating App</h3><ol>
+<li><p>Change source code. </p>
+</li>
+<li><p>Build new image. </p>
+</li>
+<li><p>Find the old container’s id, stop it, remove it. </p>
+</li>
+<li><p>Run the new image.</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;app name&gt; .</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line">docker stop &lt;the-container-id&gt;</span><br><span class="line">docker rm &lt;the-container-id&gt;</span><br><span class="line"></span><br><span class="line">docker run -dp 3000:3000 docker-101</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sharing-App"><a href="#Sharing-App" class="headerlink" title="Sharing App"></a>Sharing App</h3><ol>
+<li><p>Create repo on <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a> </p>
+<p>for example, <em>101-todo-app</em></p>
+</li>
+<li><p>Login from local</p>
+</li>
+<li><p>Give image a new name</p>
+</li>
+<li><p>Push it.</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker tag docker-101 YOUR-USER-NAME/101-todo-app</span><br><span class="line">docker push YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Running image on new instance</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.docker.com/101-tutorial">https://www.docker.com/101-tutorial</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></p>
+</li>
+</ul>
+
       
-    
-      <p class="content-link">
-        <a href="/2020/10/22/docker1/#more">
-          <span>Read More...</span>
-        </a>
-      </p>
     
     </div>
     
@@ -278,118 +318,89 @@
       </div>
     
     
-  </article>
-  
-  
-    
-  
+      
 
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInRightShort back-1">
-        <div class="post-time-wrapper">
-          
-          <time>2020-05-04</time>
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInRightShort back-2">
-        
-          <a href="/2020/05/04/python1/">Closure and Decorator in Python</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInRightShort back-3">
       
-        
-          <h1 id="Closure"><a href="#Closure" class="headerlink" title="Closure"></a>Closure</h1><p>function wraps function. When you want to save state of a function but don’t want to write a decent class, use closure.</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/2020/05/04/python1/#more">
-          <span>Read More...</span>
-        </a>
-      </p>
-    
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
     </div>
-    
-      <div class="post-tags syuanpi fadeInRightShort back-3">
-      
-        <a href="/tags/Python/">Python</a>
-      
-      </div>
-    
-    
-  </article>
-  
-  
-    
-  
-
-  
-    
-  
-  <article class="
-  post
-  
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInRightShort back-1">
-        <div class="post-time-wrapper">
-          
-          <time>2020-04-29</time>
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInRightShort back-2">
-        
-          <a href="/2020/04/29/beginagain/">第 1 篇 - 关于停更，状态更新，续更，和一些屁话</a>
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInRightShort back-3">
-      
-        
-          <p>我回来了</p>
-        
-      
-    
-      <p class="content-link">
-        <a href="/2020/04/29/beginagain/#more">
-          <span>Read More...</span>
-        </a>
-      </p>
-    
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2020/10/22/docker1/">http://testsiling.github.io/2020/10/22/docker1/</a>
     </div>
-    
-      <div class="post-tags syuanpi fadeInRightShort back-3">
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
       
-        <a href="/tags/%E6%97%A5%E5%B8%B8/">日常</a>
-      
-      </div>
-    
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
+  </div>
+
     
   </article>
   
-  
     
-  
-
-  
-</section>
-
-  
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+  <nav class="article-page">
+    
+    
+      <a href="/2020/05/04/python1/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Closure and Decorator in Python<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
   </nav>
 
+
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-Docker"><span class="toc-text">What’s Docker?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Turorial"><span class="toc-text">Turorial</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-Start-Container"><span class="toc-text">Getting Start Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Updating-App"><span class="toc-text">Updating App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharing-App"><span class="toc-text">Sharing App</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
@@ -561,6 +572,20 @@
 <script src="/script/bootstarp.js"></script>
 
 
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
 
 
 
