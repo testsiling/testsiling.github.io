@@ -253,7 +253,8 @@
 <p>And my friend said he can build an interface for the apartment app if I bake the code into a docker 🌝</p>
 <h2 id="What’s-Docker"><a href="#What’s-Docker" class="headerlink" title="What’s Docker?"></a>What’s Docker?</h2><p>Container is a solution of isolating &amp; running different applications on the same infrasturcture.<br><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></p>
 <p>Docker is a type of containers.</p>
-<h2 id="Turorial"><a href="#Turorial" class="headerlink" title="Turorial"></a>Turorial</h2><h3 id="Getting-Start-Container"><a href="#Getting-Start-Container" class="headerlink" title="Getting Start Container"></a>Getting Start Container</h3><ol>
+<h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>Full tutorial: <a target="_blank" rel="noopener" href="https://www.docker.com/101-tutorial">https://www.docker.com/101-tutorial</a></p>
+<h3 id="Getting-Start-Container"><a href="#Getting-Start-Container" class="headerlink" title="Getting Start Container"></a>Getting Start Container</h3><ol>
 <li><p>Create Dockerfile</p>
 <p>A Dockerfile is simply a text-based script of instructions that is used to create a container image.</p>
 </li>
@@ -293,8 +294,28 @@
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
 
+<h3 id="Persisting-DB"><a href="#Persisting-DB" class="headerlink" title="Persisting DB"></a>Persisting DB</h3><p>to-do app as example. Docker will save data file on the host machine and make it available to the next container. Docker maintains the physical location on the disk and you only need to remember the name of the volume. </p>
+<ol>
+<li>create volume</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create todo-db</span><br></pre></td></tr></table></figure>
 
+<ol start="2">
+<li><p>stop the previous todo app container</p>
+</li>
+<li><p>Start a new todo app container with [<strong>-v</strong>]</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 -v todo-db:/etc/todos YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
 
+<ol start="4">
+<li><p>add items into todo list. then stop and remove the container.</p>
+</li>
+<li><p>start a new container with the same <strong>run</strong> command above</p>
+</li>
+<li><p>use <code>docker volume inspect todo-db</code> to check The <code>Mountpoint</code> is the actual location on the disk where the data is stored.</p>
+</li>
+</ol>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><p><a target="_blank" rel="noopener" href="https://www.docker.com/101-tutorial">https://www.docker.com/101-tutorial</a></p>
 </li>
@@ -395,7 +416,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-Docker"><span class="toc-text">What’s Docker?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Turorial"><span class="toc-text">Turorial</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-Start-Container"><span class="toc-text">Getting Start Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Updating-App"><span class="toc-text">Updating App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharing-App"><span class="toc-text">Sharing App</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-Docker"><span class="toc-text">What’s Docker?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-text">Tutorial</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-Start-Container"><span class="toc-text">Getting Start Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Updating-App"><span class="toc-text">Updating App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharing-App"><span class="toc-text">Sharing App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Persisting-DB"><span class="toc-text">Persisting DB</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a>
     </div>
   </aside>
 
