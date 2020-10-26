@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BUG DEVELOPER">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="favicon.ico">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
+
+
+  <meta name="subtitle" content="building the best tool">
+
+
+  <meta name="description" content="Bug Developer">
+
+
+
+  <meta name="keywords" content="Database, Relational Database, nlvi" />
+
+
+<link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
+
+<link rel="stylesheet" href="/style/style.css">
+
+<script>
+  var nlviconfig = {
+    title: "BUG DEVELOPER",
+    author: "Siling Chen",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: false,
+      animate: true,
+      search: true,
+      friends: false,
+      reward: false,
+      pjax: false,
+      lazy: false,
+      toc: true
+    }
+  }
+</script>
+
+
+
+
+
+
+
+    
+<link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+
+    <link rel="icon" href="favicon.ico">
+
+
+
+
+
+
+
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<style>
+@font-face {
+  font-family: "Allura";
+  src: url('/font/allura/allura.ttf');
+}
+</style>
+
+  <title> 当我重学Database -- 范式(Normal Form) · BUG DEVELOPER </title>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
+</head>
+<body>
+  <div class="container">
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn" style="display:none;">
+    <h1><a href="/">BUG DEVELOPER</a></h1>
+    
+      <span id="subtitle">building the best tool</span>
+    
+  </div>
+</div>
+
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+    <li class="menu-item">
+      <a href="javascript:;" id="search-btn" aria-label="Search">
+        <i class="iconfont icon-search"></i>
+      </a>
+    </li>
+  
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">
+          
+            ARTICLE
+          
+        </span>
+      </a>
+    </li>
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">
+          
+            ARCHIVES
+          
+        </span>
+      </a>
+    </li>
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">
+          
+            TAGS
+          
+        </span>
+      </a>
+    </li>
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">
+          
+            ABOUT
+          
+        </span>
+      </a>
+    </li>
+  
+  
+  </ul>
+  
+</nav>
+
+  </div>
+</header>
+<div class="mobile-header" id="mobile-header">
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <div class="header-menu-line"></div>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">BUG DEVELOPER</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+  <div class="mobile-header-body">
+    <ul class="mobile-header-list">
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-0">
+          <a href="/" >
+            
+              ARTICLE
+            
+          </a>
+        </li>
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-1">
+          <a href="/archives" >
+            
+              ARCHIVES
+            
+          </a>
+        </li>
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-2">
+          <a href="javascript:;" id="mobile-tags">
+            
+              TAGS
+            
+          </a>
+        </li>
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-3">
+          <a href="/about" >
+            
+              ABOUT
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+    <div class="container-inner" style="display:none;">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2017-11-11</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
+        
+          当我重学Database -- 范式(Normal Form)
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <p>Note of Drexel INFO605. </p>
+<a id="more"></a>
+<h2 id="Why-do-we-need-Database-Normalization"><a href="#Why-do-we-need-Database-Normalization" class="headerlink" title="Why do we need Database Normalization?"></a>Why do we need Database Normalization?</h2><p><strong>注意：Normalization这个词只限于本篇，现实生活中人们不会这样叫的</strong></p>
+<p>一般的DB设计是先根据事实，主观地理解，然后画出ERD，然后再将ERD转化成DB schema.</p>
+<p>This design approach thus far has been largely intuitive, reliant upon the intuition and common sense of the database designer. So we need a formal criteria that can unambiguously (or at least less ambiguously) determine why some schemas are better than others.</p>
+<p>也就是，噔噔噔噔～～<strong>范式(Normal Form)</strong>～～</p>
+<p>ER modeling and resulting translations to relational schemas are both <strong>top-down</strong> intuitive database design approaches.</p>
+<p>范式就是相反的，<strong>自下而上</strong>的设计DB的方法啦。通常现实中，程序员先用intuitive approaches设计DB，然后检查设计是否符合范式。</p>
+<h2 id="What-is-the-goal-of-Normalization"><a href="#What-is-the-goal-of-Normalization" class="headerlink" title="What is the goal of Normalization?"></a>What is the goal of Normalization?</h2><ol>
+<li>消除冗余啊！(最最最重要的,占99%)</li>
+<li>让表和属性的含义更清晰</li>
+<li>减少空值</li>
+</ol>
+<p>Any given fact recorded in our database should be stored in only one authoritative location. Maintenance of such facts is thereby eased, as we create / modify / delete them one time and in one place, with none of the problems that can result from keeping multiple copies of the same data.</p>
+<p>当然消除冗余出了能避免各种增删改查的异常外，还能减少硬盘用量，还有数据库也能跑得快一点。</p>
+<p><em>突然想起以前写课程设计，有的人的数据库，插入一个数据需要跑数据库几百遍。不过老师也不管的啦能动就行啦，弄一个Fancy的界面什么的就能高分 (摊手</em></p>
+<h2 id="How-to-Normalize-database"><a href="#How-to-Normalize-database" class="headerlink" title="How to Normalize database?"></a>How to Normalize database?</h2><p>范式有第12345范式，不过一般符合到第三范式(3nd Normal Form)就行了。是向上兼容的，也就是符合第二范式的肯定符合第一范式，符合第三范式的也符合第二第一范式，如此类推。通常只要符合第三范式就够了。不过，有时因为性能问题，你也可以违反第三范式的啦。</p>
+<p><em>Steve说如果遇到第四第五范式的请务必打电话给他，太稀有了他要写进案例。</em></p>
+<h3 id="Functional-Dependency"><a href="#Functional-Dependency" class="headerlink" title="Functional Dependency"></a>Functional Dependency</h3><p>The majority of normalization is based on the concept of <strong>functional dependency</strong>.</p>
+<p>我们用X ➔ Y 来表示Y依赖于X，或者说，X决定Y。也就是，如果确定了X值，就能推出唯一的Y值。</p>
+<p>举例，每一个身份证号的值对应一个人名的姓。例如确定身份证号 “1122” 所对应的人的姓是 “陈” 。相反，姓 “陈” 的并不能对应唯一的身份证号。身份证号就是X，姓就是Y。</p>
+<p>Functional dependencies can involve multiple attributes on the left hand (determining) side:</p>
+<p> Building, Room ➔ SeatingCapacity</p>
+<p><strong>左端，要保持最简化。不要增加非必要的属性。</strong></p>
+<p><strong>右端，只写一种属性。</strong>例如：</p>
+<p>Drexel_Id ➔ LastName</p>
+<p>Drexel_Id ➔ FirstName</p>
+<p><strong>不要</strong>合并写成： Drexel_Id ➔ LastName, FirstName</p>
+<p><strong>Remember that FDs are related to schemas (meanings of attributes) and not the extensions (data instances) available at any given time.</strong></p>
+<p>也就是就算你不知道年收入 (例如Salary为Null)，不代表 SSN ➔ Salary 这个依赖关系不存在。</p>
+<h3 id="Keys"><a href="#Keys" class="headerlink" title="Keys"></a>Keys</h3><p>Some further consideration of <strong>keys</strong> is necessary to fully explain the 1st, 2nd and 3rd normal forms</p>
+<p><em>下面这段不想写的，可是我怕自己回头忘了留个底吧。可以不看，直接跳到举例说明</em></p>
+<ul>
+<li><strong>Superkey</strong>: a set of attributes in a relation that will never have the same value acrosstuples (i.e., that can be used to uniquely identify a tuple)</li>
+<li><strong>Key</strong>: aminimal superkey – if it lost any more attributes, it would no longer be a superkey (would no longer be a unique identifier)</li>
+<li>Any key that could be used as the primary key of a relation schema is called a <strong>candidate key</strong></li>
+<li>The designer chooses one key to be the primary key, and all candidate keys not chosen to be the primary key become known as <strong>alternate keys</strong>.</li>
+<li><strong>Prime attribute</strong>: member of some candidate key in a relation</li>
+<li><strong>Non-prime attribute</strong>: not a member of some candidate key</li>
+</ul>
+<p>Example relation (assume that all students have SSNs):</p>
+<p><strong>Student</strong> (DrexelNumber, SSN, FirstName, LastName)</p>
+<p><strong>Superkeys</strong> : {DrexelNumber, SSN, FirstName, LastName}, {SSN, LastName}, {DrexelNumber}, {SSN},. . .</p>
+<p><strong>Candidate Keys</strong> : {DrexelNumber}, {SSN}</p>
+<p><strong>Primary Key</strong> : {DrexelNumber}</p>
+<p><strong>Alternate Key</strong> :{SSN}</p>
+<p><strong>Prime attribute</strong> : DrexelNumber, SSN</p>
+<p><strong>Non-prime attribute</strong> : FirstName, LastName</p>
+<h2 id="Normal-Form"><a href="#Normal-Form" class="headerlink" title="Normal Form"></a>Normal Form</h2><p>We say that a relation is normalized to the form of the highest normal form that is not violated by the structure of the relation. To remove a violation, we decompose the relation (split it vertically, breaking some columns into a separate table)</p>
+<h3 id="1st-Normal-Form"><a href="#1st-Normal-Form" class="headerlink" title="1st Normal Form"></a>1st Normal Form</h3><p>Relations in 1NF do not have <strong>repeating groups</strong>!</p>
+<p>For example: <strong>Athlete (Bib#, FirstName, LastName, Event1, Event2, Event3, Event4)</strong></p>
+<p>‘Event’ attributes is a repeating group.</p>
+<p>We need to move the repeating group to a separate table (one for each repeating group) along with a copy of the Pirmary Key from the original relation.</p>
+<p><strong>Athlete (Bib#, FirstName, LastName)</strong></p>
+<p><strong>AthleteEvents (Bib#, Event) (note composite PK)</strong></p>
+<p>If a relation does not have a repeating group to start with, then it is already in 1NF </p>
+<h3 id="2nd-Normal-Form"><a href="#2nd-Normal-Form" class="headerlink" title="2nd Normal Form"></a>2nd Normal Form</h3><p>First criterion of 2NF is that the relation meets 1NF.</p>
+<p>2NFdepends upon the concept of full functional dependency which means that we can’t remove any attribute from the lefthand side of the dependency and still have the dependency hold for theremaining attributes.</p>
+<p>前面说过candidate key就是那些可以选做PK的属性，都是唯一标志属性。</p>
+<p>举例，有这样的关系 <strong>Room (Building, RoomNum, SeatingCapacity, ZipCode)</strong></p>
+<p>这样写的话就代表有以下Functional Dependency:</p>
+<p>Building,RoomNum ➔ SeatingCapacity (这是full functional dependency)</p>
+<p>Building,RoomNum ➔ ZipCode (这不是)</p>
+<p>因为事实上，只要有Building就能确定ZipCode，不需要RoomNum，所以不是full functional dependency</p>
+<p>改成符合2NF的话要拆分成两个表，将ZipCode和Building拆出来成另一个表：</p>
+<p><strong>Building (Building, ZipCode)</strong></p>
+<p><strong>Room (Building, RoomNum, SeatingCapacity)</strong></p>
+<p>Building 是 Room表的外键</p>
+<p>Rule: Normalize a relation to 2NF by moving attributes that are not fully functionally dependent on all candidate keys out to a separate relation, along with copies of the prime attributes on which they are dependent (now the PK of the new relation).</p>
+<p>The PK of the new relation leaves a corresponding foreign key in the original relation (Building, in example above)</p>
+<h3 id="3nd-Normal-Form"><a href="#3nd-Normal-Form" class="headerlink" title="3nd Normal Form"></a>3nd Normal Form</h3><p>First criterion of 3NF is that the relation is in 2NF</p>
+<p>3NF relies upon the concept of transitive dependency</p>
+<p>也就是存在关系X ➔ Y，Y ➔ Z，而且Y是non-prime attribute，就存在X ➔ Z（很好理解嘛）</p>
+<p>例如 <strong>Employee(SSN, LastName, DateofBirth, DeptNumber, DeptMgr)</strong></p>
+<p>假设存在 DeptNumber ➔ DeptMgr</p>
+<p>那丛SSN就能得到DeptNumber，就能的得到DeptMgr。</p>
+<p>所以改成符合3NF的关系的话：</p>
+<p>将DeptManager (这是non-prime attributes) 分到一个独立的表，这个表的PK为DeptNumber (中间值)</p>
+<p><strong>Employee (SSN, LastName, DateofBirth, DeptNumber)</strong></p>
+<p><strong>Department (DeptNumber, DeptManager)</strong></p>
+<p>DeptNumber 是 Employee表的外键</p>
+<p>Rule: Normalize a relation to 3NF by moving non-prime attributes that are transitively dependent on any candidate key out to a separate relation, along with copies of the attributes upon which they are non-transitively dependent (these become the PK of the new relation).</p>
+<p>The“Y” (hop) becomes a foreign key in the original relation and points at the PKof the new relation</p>
+<hr>
+<p>Here is a mnemonic: <strong>“The key, the whole key, and nothing but the key.”</strong></p>
+<p>当然有时候我们是需要Denormalization，可以提高读数据库的性能。一般建议先将DB设计成符合3NF的，再按需Denormalization.</p>
+<h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><p>尝试一步步将下面关系写到符合1NF，2NF，3NF。</p>
+<p>Flight (Route#, Flight#, DestinationAirport, DepartureDate, DepartureTime, Pilot1, Pilot2, Pilot3, PlaneSerial#, Capacity, LastServicedDate)</p>
+<p>Route#, Flight# ➔ (any non-prime attribute in this relation, but maybe transitively)</p>
+<p>Route# ➔ DestinationAirport</p>
+<p>PlaneSerial# ➔ Capacity</p>
+<p>PlaneSerial# ➔ LastServicedDate</p>
+<h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><p>我就不将外键表示出来了。在Markdown很难画我又懒得插图。</p>
+<h4 id="1NF"><a href="#1NF" class="headerlink" title="1NF:"></a>1NF:</h4><p>Flight (Route#, Flight#, DestinationAirport, DepartureDate, DepartureTime, PlaneSerial#, Capacity, LastServicedDate)</p>
+<p>FlightPilot (Route#, Flight#,Pilot)</p>
+<h4 id="2NF"><a href="#2NF" class="headerlink" title="2NF:"></a>2NF:</h4><p>Flight (Route#, Flight#, DepartureDate, DepartureTime, PlaneSerial#, Capacity, LastServicedDate)</p>
+<p>FlightPilot (Route#, Flight#, Pilot)</p>
+<p>Route (Route#, DestinationAirport)</p>
+<h4 id="3NF"><a href="#3NF" class="headerlink" title="3NF:"></a>3NF:</h4><p>Flight (Route#, Flight#, DepartureDate, DepartureTime, PlaneSerial#)</p>
+<p>FlightPilot (Route#, Flight#, Pilot)</p>
+<p>Route (Route#, DestinationAirport)</p>
+<p>Plane (PlaneSerial#, Capacity, LastServicedDate)</p>
+
+      
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
+      
+        <a href="/tags/Database/">Database</a>
+      
+        <a href="/tags/Relational-Database/">Relational Database</a>
+      
+      </div>
+    
+    
+      
+
+      
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2017/11/11/normalform/">http://testsiling.github.io/2017/11/11/normalform/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
+      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
+  </div>
+
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+      <a href="/2017/11/19/SearchMethods/" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Three Searching Methods
+        </span>
+      </a>
+    
+    
+  </nav>
+
+
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-we-need-Database-Normalization"><span class="toc-text">Why do we need Database Normalization?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-the-goal-of-Normalization"><span class="toc-text">What is the goal of Normalization?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-Normalize-database"><span class="toc-text">How to Normalize database?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Functional-Dependency"><span class="toc-text">Functional Dependency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keys"><span class="toc-text">Keys</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Normal-Form"><span class="toc-text">Normal Form</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1st-Normal-Form"><span class="toc-text">1st Normal Form</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2nd-Normal-Form"><span class="toc-text">2nd Normal Form</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3nd-Normal-Form"><span class="toc-text">3nd Normal Form</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise"><span class="toc-text">Exercise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer"><span class="toc-text">Answer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1NF"><span class="toc-text">1NF:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2NF"><span class="toc-text">2NF:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3NF"><span class="toc-text">3NF:</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+  
+  
+    <a target="_blank" rel="noopener" href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+  
+    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+</div>
+
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2020</span>
+        <span>❤</span>
+        <span>Siling Chen</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a target="_blank" rel="noopener" href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-eye"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-team"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+    <div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-taglist">
+  
+    <div class="tagcloud-tag">
+      <button>Data Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Python</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Computer Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>RegExp</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>docker</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>container</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>devops</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Relational Database</button>
+    </div>
+  
+  </div>
+  
+    <div class="tagcloud-postlist active">
+      <h2>Data Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Mining</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Machine Learning</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/19/SearchMethods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/05/04/python1/">
+            <time class="tagcloud-posttime">2020 / 05 / 04</time>
+            <span>Closure and Decorator in Python</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>日常</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Computer Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>RegExp</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>docker</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>container</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>devops</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Relational Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+</div>
+
+  </div>
+  <div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+  <div class="search" id="search">
+    <div class="input">
+      <input type="text" id="search-input" placeholder="search?" autofocus>
+    </div>
+    <div id="search-result"></div>
+  </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
+
+
+
+
+
+
+
+
+
+  
+<script src="/script/scheme/banderole.js"></script>
+
+
+
+
+<script src="/script/bootstarp.js"></script>
+
+
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
+
+
+
+</body>
+</html>

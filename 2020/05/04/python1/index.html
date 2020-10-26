@@ -12,6 +12,9 @@
 <meta name="msapplication-navbutton-color" content="#666666">
 <meta name= "format-detection" content="telephone=no" />
 
+  <link rel="apple-touch-icon"  sizes="72x72"  href="favicon.ico">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
+
 
   <meta name="subtitle" content="building the best tool">
 
@@ -35,7 +38,7 @@
     baseUrl: "/",
     theme: {
       scheme: "banderole",
-      lightbox: true,
+      lightbox: false,
       animate: true,
       search: true,
       friends: false,
@@ -50,10 +53,6 @@
 
 
 
-    
-<link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
-
-
 
 
 
@@ -64,6 +63,7 @@
 
 
 
+    <link rel="icon" href="favicon.ico">
 
 
 
@@ -72,6 +72,9 @@
 
 
 
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -247,27 +250,16 @@
     </header>
     <div class="post-content syuanpi fadeInRightShort back-3">
       
-        <h1 id="Closure"><a href="#Closure" class="headerlink" title="Closure"></a>Closure</h1><p>function wraps function. When you want to save state of a function but don’t want to write a decent class, use closure.</p>
-<a id="more"></a>
-
+        <h1 id="Closure"><a href="#Closure" class="headerlink" title="Closure"></a>Closure</h1><p>function wraps function. When you want to save state of a function but don’t want to write a decent class, use closure.<br><a id="more"></a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new_counter</span>():</span></span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">count</span>():</span></span><br><span class="line">		<span class="keyword">nonlocal</span> total</span><br><span class="line">		total += <span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> total</span><br><span class="line">	<span class="keyword">return</span> count</span><br></pre></td></tr></table></figure>
-
 <p>then you can use it to count student amount of different classes:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">math = new_counter()</span><br><span class="line">tennis = new_counter()</span><br><span class="line"></span><br><span class="line">math(), math(), math(), math(), math(), math()</span><br><span class="line">tennis(), tennis()</span><br></pre></td></tr></table></figure>
-
 <p>When closure search a variables, Local -&gt; enclosing -&gt; global -&gt; builtin.<br>In the example, <code>total</code> stores in enclosing level.</p>
 <h1 id="Decorator"><a href="#Decorator" class="headerlink" title="Decorator"></a>Decorator</h1><p>Decorator wraps a closure with extra function, but won’t change the inner function, it returns a closure.<br>Example, logger</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_logger</span>(<span class="params">func</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">		print(<span class="string">f&quot;calling <span class="subst">&#123;func.__name__&#125;</span>&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">	<span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@my_logger</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_total</span>(<span class="params">ls</span>):</span></span><br><span class="line">	<span class="keyword">return</span> sum(ls)</span><br><span class="line"></span><br><span class="line">ls = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">get_total(ls)</span><br><span class="line"><span class="comment"># calling get_total</span></span><br><span class="line"><span class="comment"># 45</span></span><br></pre></td></tr></table></figure>
-
 <p>But decorated function’s function will become pretty confused about its identity. <code>get_total.__name__</code> will return <code>&#39;wrapper&#39;</code>.<br>Use <code>@functools.wraps</code> to preserve original function info.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> functools</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_logger</span>(<span class="params">func</span>):</span></span><br><span class="line"><span class="meta">	@functools.wraps(func)</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">		print(<span class="string">f&quot;calling <span class="subst">&#123;func.__name__&#125;</span>&quot;</span>)</span><br><span class="line">		<span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">	<span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@my_logger</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_total</span>(<span class="params">ls</span>):</span></span><br><span class="line">	<span class="keyword">return</span> sum(ls)</span><br><span class="line"></span><br><span class="line">get_total.__name__  <span class="comment"># &#x27;get_total&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
 <h3 id="Implement-Singleton-by-Decorator"><a href="#Implement-Singleton-by-Decorator" class="headerlink" title="Implement Singleton by Decorator"></a>Implement Singleton by Decorator</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">singleton</span>(<span class="params">cls</span>):</span></span><br><span class="line">    instances = &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> instances:</span><br><span class="line">          instances[cls] = cls(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> instances[cls]</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">		self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">submit</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;<span class="subst">&#123;self.name&#125;</span> Submitted!!!&quot;</span></span><br><span class="line"></span><br><span class="line">c1 = MyClass(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">c2 = MyClass(<span class="string">&#x27;world&#x27;</span>)</span><br><span class="line"></span><br><span class="line">c1 == c2  <span class="comment"># True</span></span><br><span class="line">c1.name, c2.name  <span class="comment"># &#x27;hello&#x27;, &#x27;hello&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
 <p><em>So the next step, is refactoring my report &amp; log modules in the next sprint.</em></p>
 
       
@@ -392,7 +384,7 @@
       <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>2020 ~ 2020</span>
+        <span>2017 ~ 2020</span>
         <span>❤</span>
         <span>Siling Chen</span>
     </div>
@@ -407,6 +399,13 @@
         </span>
     </div>
     
+    <div class="visit_count">
+        <i class="iconfont icon-eye"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-team"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
 </div>
 
     </div>
@@ -417,7 +416,39 @@
   <div class="tagcloud-taglist">
   
     <div class="tagcloud-tag">
+      <button>Data Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Python</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Computer Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>RegExp</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -433,18 +464,181 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Python</button>
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Relational Database</button>
     </div>
   
   </div>
   
     <div class="tagcloud-postlist active">
+      <h2>Data Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Mining</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Machine Learning</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/19/SearchMethods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/05/04/python1/">
+            <time class="tagcloud-posttime">2020 / 05 / 04</time>
+            <span>Closure and Decorator in Python</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/04/29/beginagain/">
             <time class="tagcloud-posttime">2020 / 04 / 29</time>
             <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Computer Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>RegExp</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
           </a>
         </div>
       
@@ -487,12 +681,24 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Python</h2>
+      <h2>Database</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/05/04/python1/">
-            <time class="tagcloud-posttime">2020 / 05 / 04</time>
-            <span>Closure and Decorator in Python</span>
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Relational Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
           </a>
         </div>
       
@@ -519,10 +725,10 @@
 
 
 
-  <script></script>
-  <script src="/script/lib/lightbox/js/lightbox.min.js" async></script>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
 
 
 

@@ -12,6 +12,9 @@
 <meta name="msapplication-navbutton-color" content="#666666">
 <meta name= "format-detection" content="telephone=no" />
 
+  <link rel="apple-touch-icon"  sizes="72x72"  href="favicon.ico">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
+
 
   <meta name="subtitle" content="building the best tool">
 
@@ -35,7 +38,7 @@
     baseUrl: "/",
     theme: {
       scheme: "banderole",
-      lightbox: true,
+      lightbox: false,
       animate: true,
       search: true,
       friends: false,
@@ -50,10 +53,6 @@
 
 
 
-    
-<link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
-
-
 
 
 
@@ -64,6 +63,7 @@
 
 
 
+    <link rel="icon" href="favicon.ico">
 
 
 
@@ -72,6 +72,9 @@
 
 
 
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -249,8 +252,6 @@
       
         <p>I heard the words, <em>container</em>, and <em>docker</em> a lot. I know they refer to a tool related to Dev/Ops, but I never use one before. Recently I am writing a tool to find the best apartment (rent goes down since COVID19). Then I I think probably I should use docker in the apt finder project. This article is the first glimpse of docker. I would say it’s magical. </p>
 <a id="more"></a>
-
-<p>And my friend said he can build an interface for the apartment app if I bake the code into a docker 🌝</p>
 <h2 id="What’s-Docker"><a href="#What’s-Docker" class="headerlink" title="What’s Docker?"></a>What’s Docker?</h2><p>Container is a solution of isolating &amp; running different applications on the same infrasturcture.<br><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></p>
 <p>Docker is a type of containers.</p>
 <h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>Full tutorial: <a target="_blank" rel="noopener" href="https://www.docker.com/101-tutorial">https://www.docker.com/101-tutorial</a></p>
@@ -263,7 +264,6 @@
 </li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;app name&gt; .</span><br><span class="line">docker run -dp <span class="number">3000</span>:<span class="number">3000</span> &lt;app name&gt;</span><br></pre></td></tr></table></figure>
-
 <h3 id="Updating-App"><a href="#Updating-App" class="headerlink" title="Updating App"></a>Updating App</h3><ol>
 <li><p>Change source code. </p>
 </li>
@@ -275,7 +275,6 @@
 </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;app name&gt; .</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line">docker stop &lt;the-container-id&gt;</span><br><span class="line">docker rm &lt;the-container-id&gt;</span><br><span class="line"></span><br><span class="line">docker run -dp 3000:3000 docker-101</span><br></pre></td></tr></table></figure>
-
 <h3 id="Sharing-App"><a href="#Sharing-App" class="headerlink" title="Sharing App"></a>Sharing App</h3><ol>
 <li><p>Create repo on <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a> </p>
 <p>for example, <em>101-todo-app</em></p>
@@ -288,29 +287,24 @@
 </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker tag docker-101 YOUR-USER-NAME/101-todo-app</span><br><span class="line">docker push YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
+<ol>
 <li>Running image on new instance</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
-
 <h3 id="Persisting-DB"><a href="#Persisting-DB" class="headerlink" title="Persisting DB"></a>Persisting DB</h3><p>to-do app as example. Docker will save data file on the host machine and make it available to the next container. Docker maintains the physical location on the disk and you only need to remember the name of the volume. </p>
 <ol>
 <li>create volume</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create todo-db</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><p>stop the previous todo app container</p>
 </li>
 <li><p>Start a new todo app container with [<strong>-v</strong>]</p>
 </li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 -v todo-db:/etc/todos YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><p>add items into todo list. then stop and remove the container.</p>
-</li>
+<ol>
+<li>add items into todo list. then stop and remove the container.</li>
 <li><p>start a new container with the same <strong>run</strong> command above</p>
 </li>
 <li><p>use <code>docker volume inspect todo-db</code> to check The <code>Mountpoint</code> is the actual location on the disk where the data is stored.</p>
@@ -321,8 +315,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></li>
 </ul>
 
       
@@ -445,7 +438,7 @@
       <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>2020 ~ 2020</span>
+        <span>2017 ~ 2020</span>
         <span>❤</span>
         <span>Siling Chen</span>
     </div>
@@ -460,6 +453,13 @@
         </span>
     </div>
     
+    <div class="visit_count">
+        <i class="iconfont icon-eye"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-team"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
 </div>
 
     </div>
@@ -470,7 +470,39 @@
   <div class="tagcloud-taglist">
   
     <div class="tagcloud-tag">
+      <button>Data Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Python</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Computer Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>RegExp</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -486,18 +518,181 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Python</button>
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Relational Database</button>
     </div>
   
   </div>
   
     <div class="tagcloud-postlist active">
+      <h2>Data Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Mining</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Machine Learning</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/19/SearchMethods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/05/04/python1/">
+            <time class="tagcloud-posttime">2020 / 05 / 04</time>
+            <span>Closure and Decorator in Python</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/04/29/beginagain/">
             <time class="tagcloud-posttime">2020 / 04 / 29</time>
             <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Computer Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>RegExp</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
           </a>
         </div>
       
@@ -540,12 +735,24 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Python</h2>
+      <h2>Database</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/05/04/python1/">
-            <time class="tagcloud-posttime">2020 / 05 / 04</time>
-            <span>Closure and Decorator in Python</span>
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Relational Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
           </a>
         </div>
       
@@ -572,10 +779,10 @@
 
 
 
-  <script></script>
-  <script src="/script/lib/lightbox/js/lightbox.min.js" async></script>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
 
 
 

@@ -12,6 +12,9 @@
 <meta name="msapplication-navbutton-color" content="#666666">
 <meta name= "format-detection" content="telephone=no" />
 
+  <link rel="apple-touch-icon"  sizes="72x72"  href="favicon.ico">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
+
 
   <meta name="subtitle" content="building the best tool">
 
@@ -35,7 +38,7 @@
     baseUrl: "/",
     theme: {
       scheme: "banderole",
-      lightbox: true,
+      lightbox: false,
       animate: true,
       search: true,
       friends: false,
@@ -50,10 +53,6 @@
 
 
 
-    
-<link rel="stylesheet" href="/script/lib/lightbox/css/lightbox.min.css">
-
-
 
 
 
@@ -64,6 +63,7 @@
 
 
 
+    <link rel="icon" href="favicon.ico">
 
 
 
@@ -72,6 +72,9 @@
 
 
 
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -247,21 +250,13 @@
     </header>
     <div class="post-content syuanpi fadeInRightShort back-3">
       
-        <p>我回来了</p>
-<a id="more"></a>
-
+        <p>我回来了<br><a id="more"></a></p>
 <h1 id="1-为什么停更"><a href="#1-为什么停更" class="headerlink" title="1. 为什么停更?"></a>1. 为什么停更?</h1><p><strong>因为博主电脑被偷啦！偷啦大半年！没钱买新电脑！文章也没有备份全丢啦！</strong></p>
 <p>具体原因是其实是这样的：</p>
-<ol>
-<li><p>在GitHub page上保存的是用静态网页，用hexo将markdown转成html。之前的markdown都没备份！其实也有尝试过用一些html转md的工具想转回来，效果都挺差的，想说有空自己写一个轮子，结果一直拖到了现在。</p>
-</li>
-<li><p>没钱买新的mbp（其实还有因为苹果竟然一直没有出新的13寸mbp就很气）。有一台平时用来打游戏的windows，什么环境都没有，懒得搞。</p>
-</li>
-<li><p>之前的最后一篇blog是2019年7月23号，其实从那时候到现在一直都很忙。接下来会说到。</p>
-</li>
-</ol>
+<p>1) 在GitHub page上保存的是用静态网页，用hexo将markdown转成html。之前的markdown都没备份！其实也有尝试过用一些html转md的工具想转回来，效果都挺差的，想说有空自己写一个轮子，结果一直拖到了现在。</p>
+<p>2) 没钱买新的mbp（其实还有因为苹果竟然一直没有出新的13寸mbp就很气）。有一台平时用来打游戏的windows，什么环境都没有，懒得搞。</p>
+<p>3) 之前的最后一篇blog是2019年7月23号，其实从那时候到现在一直都很忙。接下来会说到。</p>
 <p>其实很遗憾的，毕竟之前的blog记录了我整个读master的过程（其实是刷题的过程）。写了42篇屁话，有空的话会写个小工具将它们恢复回来的。</p>
-<p><img src="/images/1.PNG" alt="1"></p>
 <h1 id="2-近况-从大学生到社畜的进化过程"><a href="#2-近况-从大学生到社畜的进化过程" class="headerlink" title="2. 近况 - 从大学生到社畜的进化过程"></a>2. 近况 - 从大学生到社畜的进化过程</h1><h3 id="06-2019"><a href="#06-2019" class="headerlink" title="06/2019"></a>06/2019</h3><p>2019年6月中旬硕士毕业。光荣地成为一名<strong>待业者</strong>。 陪家长来美国玩了一圈</p>
 <p><img src="/images/1.jpg" alt="1"></p>
 <h3 id="07-2019"><a href="#07-2019" class="headerlink" title="07/2019"></a>07/2019</h3><p>送走了家长，开始疯狂地改简历，投简历，面试，找工作。7/25面了Comcast，python临时工坑，当天就接了，然后就是等EAD</p>
@@ -328,6 +323,12 @@
         </span>
       </a>
     
+    
+      <a href="/2018/05/18/DecisionTree/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Decision Tree<i class="iconfont icon-right"></i>
+        </span>
+      </a>
     
   </nav>
 
@@ -398,7 +399,7 @@
       <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>2020 ~ 2020</span>
+        <span>2017 ~ 2020</span>
         <span>❤</span>
         <span>Siling Chen</span>
     </div>
@@ -413,6 +414,13 @@
         </span>
     </div>
     
+    <div class="visit_count">
+        <i class="iconfont icon-eye"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-team"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
 </div>
 
     </div>
@@ -423,7 +431,39 @@
   <div class="tagcloud-taglist">
   
     <div class="tagcloud-tag">
+      <button>Data Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Python</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Computer Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>RegExp</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -439,18 +479,181 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Python</button>
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Relational Database</button>
     </div>
   
   </div>
   
     <div class="tagcloud-postlist active">
+      <h2>Data Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Mining</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/Apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/FreqPat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Machine Learning</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/DecisionTree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/19/SearchMethods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/05/04/python1/">
+            <time class="tagcloud-posttime">2020 / 05 / 04</time>
+            <span>Closure and Decorator in Python</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/04/29/beginagain/">
             <time class="tagcloud-posttime">2020 / 04 / 29</time>
             <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Computer Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>RegExp</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
           </a>
         </div>
       
@@ -493,12 +696,24 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Python</h2>
+      <h2>Database</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/05/04/python1/">
-            <time class="tagcloud-posttime">2020 / 05 / 04</time>
-            <span>Closure and Decorator in Python</span>
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Relational Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
           </a>
         </div>
       
@@ -525,10 +740,10 @@
 
 
 
-  <script></script>
-  <script src="/script/lib/lightbox/js/lightbox.min.js" async></script>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
 
 
 
