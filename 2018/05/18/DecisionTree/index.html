@@ -313,11 +313,11 @@ Gain(A) = Info(D)-Info_A(D)</script><h3 id="Example"><a href="#Example" class="h
 </div>
 <script type="math/tex; mode=display">
 \begin{align}
-Info(D)=I(9, 5)=-(\frac9{14}log_2(\frac9{14}) + \frac5{14}log_2(\frac5{14})) = 0.94 \\
-I(2, 3)=-(\frac2{5}log_2(\frac2{5}) + \frac3{5}log_2(\frac3{5})) = 0.971\\
-I(4, 0)=-(\frac4{4}log_2(\frac4{4}) + 0) = 0\\
-I(3, 2)=-(\frac3{5}log_2(\frac3{5}) + \frac2{5}log_2(\frac2{5}) = 0.971\\
-Info_{age}(D) = \frac5{14}I(2, 3) + \frac4{14}I(4, 0) + \frac5{14}I(3,2) = 0.694
+Info(D) &= I(9, 5)=-(\frac9{14}log_2(\frac9{14}) + \frac5{14}log_2(\frac5{14})) = 0.94 \\
+I(2, 3) &= -(\frac2{5}log_2(\frac2{5}) + \frac3{5}log_2(\frac3{5})) = 0.971\\
+I(4, 0) &= -(\frac4{4}log_2(\frac4{4}) + 0) = 0\\
+I(3, 2) &= -(\frac3{5}log_2(\frac3{5}) + \frac2{5}log_2(\frac2{5}) = 0.971\\
+Info_{age}(D) &= \frac5{14}I(2, 3) + \frac4{14}I(4, 0) + \frac5{14}I(3,2) = 0.694
 \end{align}</script><script type="math/tex; mode=display">\frac5{14}I(2,3)$$ means “age <= 30” has 5 out of 14 samples, with 2 yes and 3 no.
 
 Hence:
@@ -330,11 +330,13 @@ $$Gain(age) = Info(D) - Info_age(D) = 0.94 - 0.694 = 0.246</script><p>Similarly,
 <h2 id="Gain-Ratio-C4-5"><a href="#Gain-Ratio-C4-5" class="headerlink" title="Gain Ratio (C4.5)"></a>Gain Ratio (C4.5)</h2><p>Gain is another attribute selection measure</p>
 <p>Information gain measure is biased towards attributes with a large number of values. C4.5 (a successor of ID3) uses <strong>gain ratio</strong> to overcome the problem (normalization to information gain)</p>
 <script type="math/tex; mode=display">
-SplitInfo_A(D) = -\sum_{j=1}^v(\frac{\lvert{D_j}\rvert}{D} * log_2(\frac{\lvert{D_j}\rvert}{D})) \\
-GainRatio(A) = \frac{Gain(A)}{SplitInfo_A(D)}</script><p>For example:</p>
+SplitInfo_A(D) &= -\sum_{j=1}^v(\frac{\lvert{D_j}\rvert}{D} * log_2(\frac{\lvert{D_j}\rvert}{D})) \\
+GainRatio(A) &= \frac{Gain(A)}{SplitInfo_A(D)}</script><p>For example:</p>
 <script type="math/tex; mode=display">
-SplitInfo_{income}(D) = -(\frac4{14}*log_2(\frac4{14}) + \frac6{14}*log_2(\frac6{14}) + \frac4{14}*log_2(\frac4{14})) = 0.926 \\
-GainRatio(income) = 0.029/0.926 = 0.031</script><p>The attribute with the <strong>maximum</strong> gain ratio is selected as the splitting attribute.</p>
+\begin{align}
+SplitInfo_{income}(D) &= -(\frac4{14}*log_2(\frac4{14}) + \frac6{14}*log_2(\frac6{14}) + \frac4{14}*log_2(\frac4{14})) = 0.926 \\
+GainRatio(income) &= 0.029/0.926 = 0.031
+\end{align}</script><p>The attribute with the <strong>maximum</strong> gain ratio is selected as the splitting attribute.</p>
 <h2 id="Gini-index-CART-IBM-IntelligentMiner"><a href="#Gini-index-CART-IBM-IntelligentMiner" class="headerlink" title="Gini index (CART, IBM IntelligentMiner)"></a>Gini index (CART, IBM IntelligentMiner)</h2><p>If a data set <em>D</em> contains examples from n classes, and the <script type="math/tex">p_j</script> is the relative frequency of class j in <em>D</em>, the gini index, <em>gini(D)</em> is defined as <script type="math/tex">gini(D)=1-\sum_{j=1}^np_j^2</script></p>
 <p>If a data set <em>D</em> is split on A into two subsets <em>D1</em> and <em>D2</em>, the gini index is defined as</p>
 <script type="math/tex; mode=display">
@@ -345,14 +347,14 @@ gini_A(D) = \frac{D_1}{D}gini(D_1)+\frac{D_2}{D}gini(D_2)</script><p>Reduction i
 <script type="math/tex; mode=display">
 gini(D) = 1-((\frac9{14})^2+(\frac5{14})^2) = 0.459</script><p>Suppose the attribute income partitions D into D1: {low, medium} = 10 and D2: {high} = 4</p>
 <script type="math/tex; mode=display">
-\begin{align}
-gini_{income\in\{low, medium\}}(D) \\
-=\frac{10}{14}gini(D_1)+\frac4{14}gini(D_2) \\
-=\frac{10}{14}(1-(\frac{6}{10})^2 - (\frac{4}{10})^2) + \frac{4}{14}(1-(\frac14)^2-(\frac34)^2) \\
-=0.450\\
-= gini_{income\in\{high\}}
-
-\end{align}</script><p>However, <script type="math/tex">gini_{\{medium, high\}}</script> =0,30 ,which is the lowest thus the best.</p>
+\begin{equation}
+\begin{aligned}
+gini_{income\in\{low, medium\}}(D) &= \frac{10}{14}gini(D_1)+\frac4{14}gini(D_2) \\
+&=\frac{10}{14}(1-(\frac{6}{10})^2 - (\frac{4}{10})^2) + \frac{4}{14}(1-(\frac14)^2-(\frac34)^2) \\
+&= 0.450\\
+&= gini_{income\in\{high\}}
+\end{aligned}
+\end{equation}</script><p>However, <script type="math/tex">gini_{\{medium, high\}}</script> =0,30 ,which is the lowest thus the best.</p>
 <p>All attributes are assumed continuous-valued</p>
 <p>Sometimes we may need other tools, e.g., clustering, to get the possible split values</p>
 <p>Can be modified for categorical attributes</p>
@@ -410,16 +412,16 @@ gini_{income\in\{low, medium\}}(D) \\
     
   <nav class="article-page">
     
-      <a href="/2020/04/29/beginagain/" id="art-left" class="art-left">
+      <a href="/2018/08/23/MapReduce/" id="art-left" class="art-left">
         <span class="next-title">
-          <i class="iconfont icon-left"></i>第 1 篇 - 关于停更，状态更新，续更，和一些屁话
+          <i class="iconfont icon-left"></i>MapReduce Overview
         </span>
       </a>
     
     
-      <a href="/2018/05/09/Apriori/" id="art-right" class="art-right">
+      <a href="/2018/05/18/evaluation/" id="art-right" class="art-right">
         <span class="prev-title">
-          Apriori Algorithm<i class="iconfont icon-right"></i>
+          Accuracy, Precision, Recall, F1<i class="iconfont icon-right"></i>
         </span>
       </a>
     
@@ -532,7 +534,27 @@ gini_{income\in\{low, medium\}}(D) \\
     </div>
   
     <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Big Data</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NoSQL</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -541,6 +563,10 @@ gini_{income\in\{low, medium\}}(D) \\
   
     <div class="tagcloud-tag">
       <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Daily</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -572,10 +598,6 @@ gini_{income\in\{low, medium\}}(D) \\
     </div>
   
     <div class="tagcloud-tag">
-      <button>Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Relational Database</button>
     </div>
   
@@ -602,6 +624,20 @@ gini_{income\in\{low, medium\}}(D) \\
           <a href="/2018/05/09/FreqPat/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/MapReduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
           </a>
         </div>
       
@@ -645,6 +681,37 @@ gini_{income\in\{low, medium\}}(D) \\
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/BashNotes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/BashNotes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -654,6 +721,13 @@ gini_{income\in\{low, medium\}}(D) \\
           <a href="/2018/05/18/DecisionTree/">
             <time class="tagcloud-posttime">2018 / 05 / 18</time>
             <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
           </a>
         </div>
       
@@ -668,6 +742,70 @@ gini_{income\in\{low, medium\}}(D) \\
           <a href="/2018/03/03/ml-overview/">
             <time class="tagcloud-posttime">2018 / 03 / 03</time>
             <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Big Data</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/MapReduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/NoSQL/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/NoSQL/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NoSQL</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/NoSQL/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
           </a>
         </div>
       
@@ -694,6 +832,18 @@ gini_{income\in\{low, medium\}}(D) \\
   
     <div class="tagcloud-postlist ">
       <h2>日常</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Daily</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/04/29/beginagain/">
@@ -783,18 +933,6 @@ gini_{income\in\{low, medium\}}(D) \\
           <a href="/2020/10/22/docker1/">
             <time class="tagcloud-posttime">2020 / 10 / 22</time>
             <span>Docker Container</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Database</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2017/11/11/normalform/">
-            <time class="tagcloud-posttime">2017 / 11 / 11</time>
-            <span>当我重学Database -- 范式(Normal Form)</span>
           </a>
         </div>
       

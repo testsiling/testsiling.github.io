@@ -259,12 +259,12 @@
 <p>{A, B, C}, {A, B, E}, {A, C, E} will bot be generated because {A, B} and {A, E} is not popular and have been removed from <script type="math/tex">L_2</script></p>
 <p><script type="math/tex">C_k</script>: Candidate itemset of size k</p>
 <p><script type="math/tex">L_k</script> : frequent itemset of size k</p>
-<h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><ul>
+<h2 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h2><ul>
 <li>Multiple scans of transaction database (Slow, high cost)</li>
 <li>Huge number of candidates (a 2000 itemset might generate 200 popular rules.)</li>
 <li>Tedious workload of support counting for candidates.</li>
 </ul>
-<h3 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h3><ul>
+<h2 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h2><ul>
 <li>Partition: Scan Database Only Twice (A. Savasere, E. Omiecinski, and S. Navathe. An efficient algorithm for mining association in large databases. In VLDB’95 )</li>
 <li>Hash: Reduce the Number of Candidates (J. Park, M. Chen, and P. Yu. An effective hash-based algorithm for mining association rules. In SIGMOD’95 )</li>
 <li>Sampling for Frequent Patterns (H. Toivonen. Sampling large databases for association rules. In VLDB’96 )</li>
@@ -314,9 +314,9 @@
     
   <nav class="article-page">
     
-      <a href="/2018/05/18/DecisionTree/" id="art-left" class="art-left">
+      <a href="/2018/05/18/evaluation/" id="art-left" class="art-left">
         <span class="next-title">
-          <i class="iconfont icon-left"></i>Decision Tree
+          <i class="iconfont icon-left"></i>Accuracy, Precision, Recall, F1
         </span>
       </a>
     
@@ -367,7 +367,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Apriori-Algorithm-Example"><span class="toc-text">Apriori Algorithm Example</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenges"><span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Improvement"><span class="toc-text">Improvement</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Apriori-Algorithm-Example"><span class="toc-text">Apriori Algorithm Example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges"><span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Improvement"><span class="toc-text">Improvement</span></a></li></ol>
     </div>
   </aside>
 
@@ -436,7 +436,27 @@
     </div>
   
     <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Big Data</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NoSQL</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -445,6 +465,10 @@
   
     <div class="tagcloud-tag">
       <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Daily</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -476,10 +500,6 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Relational Database</button>
     </div>
   
@@ -506,6 +526,20 @@
           <a href="/2018/05/09/FreqPat/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/MapReduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
           </a>
         </div>
       
@@ -549,6 +583,37 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/BashNotes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/BashNotes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -558,6 +623,13 @@
           <a href="/2018/05/18/DecisionTree/">
             <time class="tagcloud-posttime">2018 / 05 / 18</time>
             <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
           </a>
         </div>
       
@@ -572,6 +644,70 @@
           <a href="/2018/03/03/ml-overview/">
             <time class="tagcloud-posttime">2018 / 03 / 03</time>
             <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Big Data</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/MapReduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/NoSQL/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/NoSQL/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NoSQL</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/NoSQL/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
           </a>
         </div>
       
@@ -598,6 +734,18 @@
   
     <div class="tagcloud-postlist ">
       <h2>日常</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Daily</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/04/29/beginagain/">
@@ -687,18 +835,6 @@
           <a href="/2020/10/22/docker1/">
             <time class="tagcloud-posttime">2020 / 10 / 22</time>
             <span>Docker Container</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Database</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2017/11/11/normalform/">
-            <time class="tagcloud-posttime">2017 / 11 / 11</time>
-            <span>当我重学Database -- 范式(Normal Form)</span>
           </a>
         </div>
       
