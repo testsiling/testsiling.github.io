@@ -23,7 +23,7 @@
 
 
 
-  <meta name="keywords" content="Data Science, Big Data, nlvi" />
+  <meta name="keywords" content="Data Science, Data Mining, Machine Learning, nlvi" />
 
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
@@ -85,7 +85,7 @@
 }
 </style>
 
-  <title> MapReduce Overview · BUG DEVELOPER </title>
+  <title> Decision Tree · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -238,259 +238,135 @@
       <div class="post-time syuanpi fadeInRightShort back-1">
         <div class="post-time-wrapper">
           
-          <time>2018-08-23</time>
+          <time>2018-05-18</time>
           
         </div>
       </div>
       <h1 class="post-title syuanpi fadeInRightShort back-2">
         
-          MapReduce Overview
+          Decision Tree
         
       </h1>
     </header>
     <div class="post-content syuanpi fadeInRightShort back-3">
       
-        <p>MapReduce is a high-level programming model and implementation for processing large scale parallel data.</p>
+        <p>Decision Tree algorithm with example.</p>
 <a id="more"></a>
-<p>Imaging you need to count the frequency of words across a tremendous amount of documents. It may take years to calculate the result on a single computer. In fact, you can slice all documents into small pieces of words and put all those small segments of documents into a word counting program, which is what we called Mapper. Lots of mappers run on different computational environment in parallel then output every word’s frequency. The next step is to shuffle all different word key pairs and load them onto adders, which is the reducer. Finally, we will get what we want.</p>
-<p><img src="/images/mapreduce1.png" alt="md"></p>
-<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>There are 2 phase in MapReduce</p>
-<h3 id="Map-Phase"><a href="#Map-Phase" class="headerlink" title="Map Phase"></a>Map Phase</h3><p>User provides the <strong>MAP</strong> function:</p>
-<p>Input: <strong>(input key, value)</strong></p>
-<p>Ouput: bag of <strong>(intermediate key, value)</strong></p>
-<p>System applies the map function in parallel to all <strong>(input key, value)</strong> pairs in the input file.</p>
-<h3 id="Reduce-Phase"><a href="#Reduce-Phase" class="headerlink" title="Reduce Phase"></a>Reduce Phase</h3><p>User provides the <strong>REDUCE</strong> function:</p>
-<p>Input: <strong>(intermediate key, bag of values)</strong></p>
-<p>Output: bag of output <strong>(values)</strong></p>
-<p>The system will group all pairs with the same intermediate key, and passes the bag of values to the REDUCE function</p>
-<h2 id="Example-Matrix-Multiply-in-MapReduce"><a href="#Example-Matrix-Multiply-in-MapReduce" class="headerlink" title="Example: Matrix Multiply in MapReduce"></a>Example: Matrix Multiply in MapReduce</h2><p>A and B are matrix, </p>
-<p>A has dimensions L,M, </p>
-<p>B has dimensions M,N</p>
-<p>Get output C = A * B</p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="In-the-map-phase"><a href="#In-the-map-phase" class="headerlink" title="In the map phase"></a>In the map phase</h4><ul>
-<li>for each element ( i , j ) of A, emit ( ( i , k ), A[ i , j ] ) for k in 1..N</li>
-<li>for each element ( j , k ) of B, emit ( ( i , k ), B[ j , k ] ) for i in 1..L</li>
-</ul>
-<h4 id="In-the-reduce-phase-emit"><a href="#In-the-reduce-phase-emit" class="headerlink" title="In the reduce phase, emit"></a>In the reduce phase, emit</h4><ul>
-<li>key = ( i , k )</li>
-<li>value = Sumj ( A [ i , j ] * B [ j , k ] )</li>
-</ul>
-<h3 id="test-case"><a href="#test-case" class="headerlink" title="test case"></a>test case</h3><script type="math/tex; mode=display">
-A = 
-\begin{pmatrix} 
-1 & 2 \\
-3 & 4 \\ 
-5 & 6 \\
- \end{pmatrix}
-
-B = 
-\begin{pmatrix} 
-0 & 2 \\
-3 & 4 \\ 
- \end{pmatrix} \\
-
-A * B = 
-\begin{pmatrix}
-1 * 0 + 2 * 3 & 1 * 2 + 2 * 4 \\
-3 * 0 + 4 * 3 & 3 * 2 + 4 * 4 \\
-5 * 0 + 6 * 3 & 5 * 2 + 6 * 4
-\end{pmatrix}
-=
-\begin{pmatrix}
-6 & 8 \\
-12 & 22 \\
-18 & 34
-\end{pmatrix}</script><p>L = 3, M = 2, N = 2</p>
-<p>In computer, it usaully input as a sequence of list [i, j, value]:</p>
-<p>A: <code>[1, 1, 1], [1, 2, 2], [2, 1, 3], [2, 2, 4], [3, 1, 5], [3, 2, 6]</code></p>
-<p>B: <code>[1, 2, 2], [2, 1, 3], [2, 2, 4]</code></p>
-<h4 id="Map-Phase-1"><a href="#Map-Phase-1" class="headerlink" title="Map Phase"></a>Map Phase</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th></th>
-<th>B</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>key (i, k)</td>
-<td>value</td>
-<td>key (i, k)</td>
-<td>value ()</td>
-</tr>
-<tr>
-<td>(1,1)</td>
-<td>[A(1, 1), 1]</td>
-<td>(1,2)</td>
-<td>[B(1, 2), 2]</td>
-</tr>
-<tr>
-<td>(1,2)</td>
-<td>[A(1, 1), 1]</td>
-<td>(2,2)</td>
-<td>[B(1, 2), 2]</td>
-</tr>
-<tr>
-<td>(1,1)</td>
-<td>[A(1, 2), 2]</td>
-<td>(3,2)</td>
-<td>[B(1, 2), 2]</td>
-</tr>
-<tr>
-<td>(1,2)</td>
-<td>[A(1, 2), 2]</td>
-<td>(1,1)</td>
-<td>[B(2, 1), 3]</td>
-</tr>
-<tr>
-<td>(2,1)</td>
-<td>[A(2, 1), 3]</td>
-<td>(2,1)</td>
-<td>[B(2, 1), 3]</td>
-</tr>
-<tr>
-<td>(2,2)</td>
-<td>[A(2, 1), 3]</td>
-<td>(3,1)</td>
-<td>[B(2, 1), 3]</td>
-</tr>
-<tr>
-<td>(2,1)</td>
-<td>[A(2, 2), 4]</td>
-<td>(1,2)</td>
-<td>[B(2, 2), 4]</td>
-</tr>
-<tr>
-<td>(2,2)</td>
-<td>[A(2, 2), 4]</td>
-<td>(2,2)</td>
-<td>[B(2, 2), 4]</td>
-</tr>
-<tr>
-<td>(3,1)</td>
-<td>[A(3, 1), 5]</td>
-<td>(3,2)</td>
-<td>[B(2, 2), 4]</td>
-</tr>
-<tr>
-<td>(3,2)</td>
-<td>[A(3, 1), 5]</td>
-<td>(1, 1)</td>
-<td>[B(1, 1), 0]</td>
-</tr>
-<tr>
-<td>(3,1)</td>
-<td>[A(3, 2), 6]</td>
-<td>(2, 1)</td>
-<td>[B(1, 1), 0]</td>
-</tr>
-<tr>
-<td>(3,2)</td>
-<td>[A(3, 2), 6]</td>
-<td>(3, 1)</td>
-<td>[B(1, 1), 0]</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">(1, 1)</th>
-<th style="text-align:left">[A(1, 1), 1]</th>
-<th style="text-align:left">[B(1, 1), 0]</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">[A(1, 2), 2]</td>
-<td style="text-align:left">[B(2, 1), 3]</td>
-</tr>
-<tr>
-<td style="text-align:left">(1, 2)</td>
-<td style="text-align:left">[A(1, 1), 1]</td>
-<td style="text-align:left">[B(1, 2), 2]</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">[A(1, 2), 2]</td>
-<td style="text-align:left">[B(2, 2), 4]</td>
-</tr>
-<tr>
-<td style="text-align:left">(2, 1)</td>
-<td style="text-align:left">[A(2, 1), 3]</td>
-<td style="text-align:left">[B(1, 1), 0]</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">[A(2, 2), 4]</td>
-<td style="text-align:left">[B(2, 1), 3]</td>
-</tr>
-<tr>
-<td style="text-align:left">(2, 2)</td>
-<td style="text-align:left">[A(2, 1), 3]</td>
-<td style="text-align:left">[B(1, 2), 2]</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">[A(2, 2), 4]</td>
-<td style="text-align:left">[B(2, 2), 4]</td>
-</tr>
-<tr>
-<td style="text-align:left">(3, 1)</td>
-<td style="text-align:left">[A(3, 1), 5]</td>
-<td style="text-align:left">[B(1, 1), 0]</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">[A(3, 2), 6]</td>
-<td style="text-align:left">[B(2, 1), 3]</td>
-</tr>
-<tr>
-<td style="text-align:left">(3, 2)</td>
-<td style="text-align:left">[A(3, 1), 5]</td>
-<td style="text-align:left">[B(1, 2), 2]</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">[A(3, 2), 6]</td>
-<td style="text-align:left">[B(2, 2), 4]</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="Reduce-Phase-1"><a href="#Reduce-Phase-1" class="headerlink" title="Reduce Phase"></a>Reduce Phase</h4><p>(1,1): 2 * 3 = 6</p>
-<p>(1,2): 1 <em> 2 + 2 </em> 4 = 10</p>
-<p>(2,1): 4 * 3 = 12</p>
-<p>(2,2): 3 <em> 2 + 4 </em> 4 = 22</p>
-<p>(3,1): 6 * 3 = 18</p>
-<p>(3,2): 5 <em> 2 + 6 </em> 4 = 34</p>
+<h2 id="Basic-algorithm-greedy-algorithm"><a href="#Basic-algorithm-greedy-algorithm" class="headerlink" title="Basic algorithm (greedy algorithm)"></a>Basic algorithm (greedy algorithm)</h2><p>Tree is constructed in a top-down recursive divide-and-conquer manner.</p>
+<p>At start, all the training examples are at the root.</p>
+<p>Attributes are categorical (if continuous-valued, they are discretized in advance).</p>
+<p>Examples are partitioned recursively based on selected attributes.</p>
+<p>Test attributes are selected on the basis of a heuristic or statistical measure (e.g., information gain).</p>
+<p>When all samples for a given node belong to a same class, or no remaining attributes for further partitioning, or no more samples left, partitioning end.</p>
+<h2 id="Information-Gain-ID3-C4-5"><a href="#Information-Gain-ID3-C4-5" class="headerlink" title="Information Gain (ID3/C4.5)"></a>Information Gain (ID3/C4.5)</h2><p>Information Gain is a attribute selection measure.</p>
+<p>The basic idea is to select the attribute with the highest information gain.</p>
+<p><em>D</em> as a data partition</p>
+<script type="math/tex; mode=display">p_i$$ as the probability that an arbitrary tuple in *D* which belongs to class $$C_i</script><script type="math/tex; mode=display">
+p_i=\frac{\lvert{C_{i,D}}\rvert}{\lvert{D}\rvert}</script><h4 id="Expected-information"><a href="#Expected-information" class="headerlink" title="Expected information"></a>Expected information</h4><p>(entropy) needed to classify a tuple in <em>D</em></p>
 <script type="math/tex; mode=display">
-C = \begin{pmatrix} 
-6 & 10 \\
-12 & 22 \\ 
-18 & 34 \\
- \end{pmatrix}</script><h2 id="Application-Distributes-File-System-DFS"><a href="#Application-Distributes-File-System-DFS" class="headerlink" title="Application - Distributes File System(DFS)"></a>Application - Distributes File System(DFS)</h2><ul>
-<li>For very large files: TBs, PBs</li>
-<li>Each file is partitioned into chunks, typically 64MB</li>
-<li>Each chunk is replicated several times (≥3), on different racks, for fault tolerance</li>
+Info(D)=-\sum_{i=1}^{m}p_ilog_2(p_i)</script><h4 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h4><p>needed (after using <em>A</em> to split <em>D</em> into v partitions) to classify <em>D</em></p>
+<script type="math/tex; mode=display">
+Info_A(D)=-\sum_{j=1}^{v}\frac{\lvert{D_j}\rvert}{\lvert{D}\rvert}*I(D_j)</script><h4 id="Information-gained"><a href="#Information-gained" class="headerlink" title="Information gained"></a>Information gained</h4><p>by branching on attribute <em>A</em></p>
+<script type="math/tex; mode=display">
+Gain(A) = Info(D)-Info_A(D)</script><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>if we have a database below and want to build a decision tree for “who will buy the computer”</p>
+<p><img src="/images/dt_1.png" alt="dt1"></p>
+<p>Class N: buys_computer = “yes”</p>
+<p>Class M: buys_computer = “no”</p>
+<p>First, select a attribute to calculate the Gain. Here we choose age.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Age</th>
+<th style="text-align:left"><script type="math/tex">N_i</script></th>
+<th style="text-align:left"><script type="math/tex">M_i</script></th>
+<th style="text-align:left"><script type="math/tex">I(N_i, M_i)</script></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&lt;= 30</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">0.971</td>
+</tr>
+<tr>
+<td style="text-align:left">31-40</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt; 40</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">0.971</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">9</td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">0.940</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="math/tex; mode=display">
+\begin{align}
+Info(D) &= I(9, 5)=-(\frac9{14}log_2(\frac9{14}) + \frac5{14}log_2(\frac5{14})) = 0.94 \\
+I(2, 3) &= -(\frac2{5}log_2(\frac2{5}) + \frac3{5}log_2(\frac3{5})) = 0.971\\
+I(4, 0) &= -(\frac4{4}log_2(\frac4{4}) + 0) = 0\\
+I(3, 2) &= -(\frac3{5}log_2(\frac3{5}) + \frac2{5}log_2(\frac2{5}) = 0.971\\
+Info_{age}(D) &= \frac5{14}I(2, 3) + \frac4{14}I(4, 0) + \frac5{14}I(3,2) = 0.694
+\end{align}</script><script type="math/tex; mode=display">\frac5{14}I(2,3)$$ means “age <= 30” has 5 out of 14 samples, with 2 yes and 3 no.
+
+Hence:
+$$Gain(age) = Info(D) - Info_age(D) = 0.94 - 0.694 = 0.246</script><p>Similarly, we have to calculate Gains of other attributes:</p>
+<p>Gain(income) = 0.029</p>
+<p>Gain(student) = 0.151</p>
+<p>Gain(credit, rating) = 0.048</p>
+<p>Finally we get a decision tree below.</p>
+<p><img src="/images/dt_2.png" alt="dt1"></p>
+<h2 id="Gain-Ratio-C4-5"><a href="#Gain-Ratio-C4-5" class="headerlink" title="Gain Ratio (C4.5)"></a>Gain Ratio (C4.5)</h2><p>Gain is another attribute selection measure</p>
+<p>Information gain measure is biased towards attributes with a large number of values. C4.5 (a successor of ID3) uses <strong>gain ratio</strong> to overcome the problem (normalization to information gain)</p>
+<script type="math/tex; mode=display">
+SplitInfo_A(D) &= -\sum_{j=1}^v(\frac{\lvert{D_j}\rvert}{D} * log_2(\frac{\lvert{D_j}\rvert}{D})) \\
+GainRatio(A) &= \frac{Gain(A)}{SplitInfo_A(D)}</script><p>For example:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+SplitInfo_{income}(D) &= -(\frac4{14}*log_2(\frac4{14}) + \frac6{14}*log_2(\frac6{14}) + \frac4{14}*log_2(\frac4{14})) = 0.926 \\
+GainRatio(income) &= 0.029/0.926 = 0.031
+\end{align}</script><p>The attribute with the <strong>maximum</strong> gain ratio is selected as the splitting attribute.</p>
+<h2 id="Gini-index-CART-IBM-IntelligentMiner"><a href="#Gini-index-CART-IBM-IntelligentMiner" class="headerlink" title="Gini index (CART, IBM IntelligentMiner)"></a>Gini index (CART, IBM IntelligentMiner)</h2><p>If a data set <em>D</em> contains examples from n classes, and the <script type="math/tex">p_j</script> is the relative frequency of class j in <em>D</em>, the gini index, <em>gini(D)</em> is defined as <script type="math/tex">gini(D)=1-\sum_{j=1}^np_j^2</script></p>
+<p>If a data set <em>D</em> is split on A into two subsets <em>D1</em> and <em>D2</em>, the gini index is defined as</p>
+<script type="math/tex; mode=display">
+gini_A(D) = \frac{D_1}{D}gini(D_1)+\frac{D_2}{D}gini(D_2)</script><p>Reduction in impurity:</p>
+<script type="math/tex; mode=display">
+\Delta gini(A) = gini(D)-gini_A(D)</script><p>The attribute that has the lowest <script type="math/tex">gini_{split}(D)</script> (or the greatest reduction in impurity) is chosen to split the node (need to enumerate all the possible splitting points for each attribute)</p>
+<p>In the example above, <em>D</em> Has 9 tuples in buy_computer = “yes” and 5 in “no”</p>
+<script type="math/tex; mode=display">
+gini(D) = 1-((\frac9{14})^2+(\frac5{14})^2) = 0.459</script><p>Suppose the attribute income partitions D into D1: {low, medium} = 10 and D2: {high} = 4</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+gini_{income\in\{low, medium\}}(D) &= \frac{10}{14}gini(D_1)+\frac4{14}gini(D_2) \\
+&=\frac{10}{14}(1-(\frac{6}{10})^2 - (\frac{4}{10})^2) + \frac{4}{14}(1-(\frac14)^2-(\frac34)^2) \\
+&= 0.450\\
+&= gini_{income\in\{high\}}
+\end{aligned}
+\end{equation}</script><p>However, <script type="math/tex">gini_{\{medium, high\}}</script> =0,30 ,which is the lowest thus the best.</p>
+<p>All attributes are assumed continuous-valued</p>
+<p>Sometimes we may need other tools, e.g., clustering, to get the possible split values</p>
+<p>Can be modified for categorical attributes</p>
+<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><p>Information gain: Bias toward multivalued attributes.</p>
+<p>Gain ratio: Tends to prefer unbalanced splits in which one partition is much smaller than the others</p>
+<p>Gini index:</p>
+<ul>
+<li>Bias toward multivalued attributes.</li>
+<li>Hard to deal with the dataset that has large number of classes.</li>
+<li>Tends to favor tests that result in equal-sized partitions and purity in both partitions</li>
 </ul>
-<p>Implementations:</p>
-<p>• Google’s DFS: GFS, proprietary • Hadoop’s DFS: HDFS, open source</p>
-<h2 id="Extensions-amp-Contemporaries"><a href="#Extensions-amp-Contemporaries" class="headerlink" title="Extensions &amp; Contemporaries"></a>Extensions &amp; Contemporaries</h2><ul>
-<li>Pig: Relational Algebra over Hadoop</li>
-<li>HIVE: SQL over Hadoop</li>
-<li>Impala: SQL over HDFS (uses some HIVE code)</li>
-<li>Cascading: Relational Algebra</li>
-</ul>
-<h2 id="Something-else"><a href="#Something-else" class="headerlink" title="Something else"></a>Something else</h2><p>Finally complete the online course - <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/data-manipulation">Data Manipulation at Scale: Systems and Algorithms</a></p>
-<p>Here’s my solution in mapreduce assignment (Week 3 assignment)</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/testsiling/Data-Science-at-Scale-Solution">https://github.com/testsiling/Data-Science-at-Scale-Solution</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>Han, J., Kamber, M., &amp; Pei, J. (2011). <em>Data Mining: Concepts and Techniques</em> (3rd ed.). Burlington: Elsevier Science.</p>
 
       
     
@@ -500,7 +376,9 @@ C = \begin{pmatrix}
       
         <a href="/tags/Data-Science/">Data Science</a>
       
-        <a href="/tags/Big-Data/">Big Data</a>
+        <a href="/tags/Data-Mining/">Data Mining</a>
+      
+        <a href="/tags/Machine-Learning/">Machine Learning</a>
       
       </div>
     
@@ -516,7 +394,7 @@ C = \begin{pmatrix}
     </div>
     <div class="copy-url">
       <span>Url :</span>
-      <a href="http://testsiling.github.io/2018/08/23/MapReduce/">http://testsiling.github.io/2018/08/23/MapReduce/</a>
+      <a href="http://testsiling.github.io/2018/05/18/decision-tree/">http://testsiling.github.io/2018/05/18/decision-tree/</a>
     </div>
     <div class="copy-origin">
       <span>Origin :</span>
@@ -534,16 +412,16 @@ C = \begin{pmatrix}
     
   <nav class="article-page">
     
-      <a href="/2019/05/26/NoSQL/" id="art-left" class="art-left">
+      <a href="/2018/08/23/map-reduce/" id="art-left" class="art-left">
         <span class="next-title">
-          <i class="iconfont icon-left"></i>NoSQL Notes
+          <i class="iconfont icon-left"></i>MapReduce Overview
         </span>
       </a>
     
     
-      <a href="/2018/05/18/DecisionTree/" id="art-right" class="art-right">
+      <a href="/2018/05/18/evaluation/" id="art-right" class="art-right">
         <span class="prev-title">
-          Decision Tree<i class="iconfont icon-right"></i>
+          Accuracy, Precision, Recall, F1<i class="iconfont icon-right"></i>
         </span>
       </a>
     
@@ -587,7 +465,7 @@ C = \begin{pmatrix}
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation"><span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map-Phase"><span class="toc-text">Map Phase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reduce-Phase"><span class="toc-text">Reduce Phase</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-Matrix-Multiply-in-MapReduce"><span class="toc-text">Example: Matrix Multiply in MapReduce</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Solution"><span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#In-the-map-phase"><span class="toc-text">In the map phase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#In-the-reduce-phase-emit"><span class="toc-text">In the reduce phase, emit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#test-case"><span class="toc-text">test case</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Map-Phase-1"><span class="toc-text">Map Phase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reduce-Phase-1"><span class="toc-text">Reduce Phase</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Application-Distributes-File-System-DFS"><span class="toc-text">Application - Distributes File System(DFS)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Extensions-amp-Contemporaries"><span class="toc-text">Extensions &amp; Contemporaries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Something-else"><span class="toc-text">Something else</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-algorithm-greedy-algorithm"><span class="toc-text">Basic algorithm (greedy algorithm)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Information-Gain-ID3-C4-5"><span class="toc-text">Information Gain (ID3&#x2F;C4.5)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Expected-information"><span class="toc-text">Expected information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Information"><span class="toc-text">Information</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Information-gained"><span class="toc-text">Information gained</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-text">Example</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gain-Ratio-C4-5"><span class="toc-text">Gain Ratio (C4.5)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gini-index-CART-IBM-IntelligentMiner"><span class="toc-text">Gini index (CART, IBM IntelligentMiner)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison"><span class="toc-text">Comparison</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     </div>
   </aside>
 
@@ -656,6 +534,14 @@ C = \begin{pmatrix}
     </div>
   
     <div class="tagcloud-tag">
+      <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Bash</button>
     </div>
   
@@ -665,30 +551,6 @@ C = \begin{pmatrix}
   
     <div class="tagcloud-tag">
       <button>Machine Learning</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Big Data</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>NoSQL</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Python</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>日常</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Daily</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -720,6 +582,38 @@ C = \begin{pmatrix}
     </div>
   
     <div class="tagcloud-tag">
+      <button>Algorithm</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Linked List</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Python</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Leetcode</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Two Pointers</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Big Data</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NoSQL</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Relational Database</button>
     </div>
   
@@ -729,30 +623,16 @@ C = \begin{pmatrix}
       <h2>Data Science</h2>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/09/Apriori/">
+          <a href="/2018/05/09/apriori/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Apriori Algorithm</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/18/DecisionTree/">
+          <a href="/2018/05/18/decision-tree/">
             <time class="tagcloud-posttime">2018 / 05 / 18</time>
             <span>Decision Tree</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/05/09/FreqPat/">
-            <time class="tagcloud-posttime">2018 / 05 / 09</time>
-            <span>Frequent Patterns and Association Rules</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/08/23/MapReduce/">
-            <time class="tagcloud-posttime">2018 / 08 / 23</time>
-            <span>MapReduce Overview</span>
           </a>
         </div>
       
@@ -760,6 +640,20 @@ C = \begin{pmatrix}
           <a href="/2018/05/18/evaluation/">
             <time class="tagcloud-posttime">2018 / 05 / 18</time>
             <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/freq-pat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/map-reduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
           </a>
         </div>
       
@@ -783,170 +677,30 @@ C = \begin{pmatrix}
       <h2>Data Mining</h2>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/09/Apriori/">
+          <a href="/2018/05/09/apriori/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Apriori Algorithm</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/18/DecisionTree/">
+          <a href="/2018/05/18/decision-tree/">
             <time class="tagcloud-posttime">2018 / 05 / 18</time>
             <span>Decision Tree</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/09/FreqPat/">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/freq-pat/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Frequent Patterns and Association Rules</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/05/18/evaluation/">
-            <time class="tagcloud-posttime">2018 / 05 / 18</time>
-            <span>Accuracy, Precision, Recall, F1</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/BashNotes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/BashNotes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Machine Learning</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/05/18/DecisionTree/">
-            <time class="tagcloud-posttime">2018 / 05 / 18</time>
-            <span>Decision Tree</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/05/18/evaluation/">
-            <time class="tagcloud-posttime">2018 / 05 / 18</time>
-            <span>Accuracy, Precision, Recall, F1</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/03/04/ml-lr/">
-            <time class="tagcloud-posttime">2018 / 03 / 04</time>
-            <span>Machine Learning(2) Linear Regression</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/03/03/ml-overview/">
-            <time class="tagcloud-posttime">2018 / 03 / 03</time>
-            <span>Machine Learning(1) Overview</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Big Data</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2018/08/23/MapReduce/">
-            <time class="tagcloud-posttime">2018 / 08 / 23</time>
-            <span>MapReduce Overview</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/05/26/NoSQL/">
-            <time class="tagcloud-posttime">2019 / 05 / 26</time>
-            <span>NoSQL Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Database</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/05/26/NoSQL/">
-            <time class="tagcloud-posttime">2019 / 05 / 26</time>
-            <span>NoSQL Notes</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/06/03/mongodb/">
-            <time class="tagcloud-posttime">2019 / 06 / 03</time>
-            <span>MongoDB Notes</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2017/11/11/normalform/">
-            <time class="tagcloud-posttime">2017 / 11 / 11</time>
-            <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>NoSQL</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/05/26/NoSQL/">
-            <time class="tagcloud-posttime">2019 / 05 / 26</time>
-            <span>NoSQL Notes</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/06/03/mongodb/">
-            <time class="tagcloud-posttime">2019 / 06 / 03</time>
-            <span>MongoDB Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Python</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2017/11/19/SearchMethods/">
-            <time class="tagcloud-posttime">2017 / 11 / 19</time>
-            <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/05/04/python1/">
-            <time class="tagcloud-posttime">2020 / 05 / 04</time>
-            <span>Closure and Decorator in Python</span>
           </a>
         </div>
       
@@ -971,6 +725,63 @@ C = \begin{pmatrix}
           <a href="/2020/04/29/beginagain/">
             <time class="tagcloud-posttime">2020 / 04 / 29</time>
             <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Machine Learning</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/decision-tree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
           </a>
         </div>
       
@@ -1055,6 +866,144 @@ C = \begin{pmatrix}
           <a href="/2020/10/22/docker1/">
             <time class="tagcloud-posttime">2020 / 10 / 22</time>
             <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Algorithm</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/11/30/linked-list/">
+            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+            <span>Linked List</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Linked List</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/11/30/linked-list/">
+            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+            <span>Linked List</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/11/30/linked-list/">
+            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+            <span>Linked List</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/05/04/python1/">
+            <time class="tagcloud-posttime">2020 / 05 / 04</time>
+            <span>Closure and Decorator in Python</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/19/search-methods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Leetcode</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/11/30/linked-list/">
+            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+            <span>Linked List</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Two Pointers</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/11/30/linked-list/">
+            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+            <span>Linked List</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Big Data</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/map-reduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NoSQL</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
           </a>
         </div>
       

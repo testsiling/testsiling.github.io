@@ -6,7 +6,7 @@
   <link href="http://testsiling.github.io/atom.xml" rel="self"/>
   
   <link href="http://testsiling.github.io/"/>
-  <updated>2020-10-22T18:07:36.000Z</updated>
+  <updated>2020-11-30T17:16:25.000Z</updated>
   <id>http://testsiling.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linked List</title>
+    <link href="http://testsiling.github.io/2020/11/30/linked-list/"/>
+    <id>http://testsiling.github.io/2020/11/30/linked-list/</id>
+    <published>2020-11-30T17:16:25.000Z</published>
+    <updated>2020-11-30T17:16:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Leetcode linked list collection (1)</p><ul><li>19.Remove Nth Node From End of List</li><li>206.Reverse Linked List</li><li>21.Merge Two Sorted Lists</li><li>234.Palindrome Linked List</li><li>141.Linked List Cycle</li></ul><a id="more"></a><h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19.Remove Nth Node From End of List"></a>19.Remove Nth Node From End of List</h2><p>Two pointers solution: right pointer is <code>n</code> step behind left pointer. When right pointer reache the end of the linked list, <code>left.next</code> is the node that should be removed.<br>Hint: Dummy node usually very useful in linked list algorithms.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:</span><br><span class="line">    dummy &#x3D; ListNode(next&#x3D;head)       </span><br><span class="line">    left &#x3D; dummy</span><br><span class="line">    right &#x3D; left</span><br><span class="line">    for _ in range(n):</span><br><span class="line">        right &#x3D; right.next</span><br><span class="line">    </span><br><span class="line">    while right.next:</span><br><span class="line">        right &#x3D; right.next</span><br><span class="line">        left &#x3D; left.next</span><br><span class="line">    </span><br><span class="line">    left.next &#x3D; left.next.next</span><br><span class="line">    return dummy.next</span><br></pre></td></tr></table></figure><h2 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206.Reverse Linked List"></a>206.Reverse Linked List</h2><h3 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h3><ul><li>None -&gt; 1 -&gt; 2</li><li>None &lt;- 1    2</li><li>None &lt;- 1 &lt;- 2</li></ul><p>The key is use a pointer to track <code>2</code> while adjusting <code>1.next</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def reverseList(self, head: ListNode) -&gt; ListNode:</span><br><span class="line">        pre &#x3D; None</span><br><span class="line">        cur &#x3D; head</span><br><span class="line">        </span><br><span class="line">        while cur:</span><br><span class="line">            nex &#x3D; cur.next</span><br><span class="line">            cur.next &#x3D; pre</span><br><span class="line">            pre &#x3D; cur</span><br><span class="line">            cur &#x3D; nex</span><br><span class="line">        return pre</span><br></pre></td></tr></table></figure></p><h3 id="Recursive"><a href="#Recursive" class="headerlink" title="Recursive"></a>Recursive</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def reverseList(self, head: ListNode) -&gt; ListNode:</span><br><span class="line">    def reverse(pre: ListNode, cur:ListNode) -&gt; ListNode:    </span><br><span class="line">        if not cur:</span><br><span class="line">            return</span><br><span class="line">        nex &#x3D; cur.next</span><br><span class="line">        cur.next &#x3D; pre</span><br><span class="line">        reverse(cur, nex)  </span><br><span class="line">        return cur</span><br><span class="line">    </span><br><span class="line">    if not head:</span><br><span class="line">        return head</span><br><span class="line">    tail &#x3D; head</span><br><span class="line">    while tail.next:</span><br><span class="line">        tail &#x3D; tail.next</span><br><span class="line">    </span><br><span class="line">    reverse(None, head)</span><br><span class="line">    return tail</span><br></pre></td></tr></table></figure><h2 id="21-Merge-Two-Sorted-Lists"><a href="#21-Merge-Two-Sorted-Lists" class="headerlink" title="21.Merge Two Sorted Lists"></a>21.Merge Two Sorted Lists</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:</span><br><span class="line">    cur &#x3D; ListNode()</span><br><span class="line">    dummy &#x3D; cur</span><br><span class="line">    </span><br><span class="line">    while l1 and l2:</span><br><span class="line">        cur.next &#x3D; ListNode()</span><br><span class="line">        cur &#x3D; cur.next</span><br><span class="line">        if l1.val &lt; l2.val:</span><br><span class="line">            cur.val &#x3D; l1.val</span><br><span class="line">            l1 &#x3D; l1.next</span><br><span class="line">        else:</span><br><span class="line">            cur.val &#x3D; l2.val</span><br><span class="line">            l2 &#x3D; l2.next</span><br><span class="line">    </span><br><span class="line">    cur.next &#x3D; l1 if l1 else l2</span><br><span class="line">    return dummy.next</span><br></pre></td></tr></table></figure><h2 id="234-Palindrome-Linked-List"><a href="#234-Palindrome-Linked-List" class="headerlink" title="234.Palindrome Linked List"></a>234.Palindrome Linked List</h2><p>O(n) time<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def isPalindrome(self, head: ListNode) -&gt; bool:</span><br><span class="line">    vals &#x3D; []</span><br><span class="line">    l &#x3D; 0</span><br><span class="line">    while head:</span><br><span class="line">        l +&#x3D; 1</span><br><span class="line">        vals.append(head.val)</span><br><span class="line">        head &#x3D; head.next</span><br><span class="line">    a &#x3D; vals[:l &#x2F;&#x2F; 2]</span><br><span class="line">    b &#x3D; vals[l &#x2F;&#x2F; 2 + l % 2:]</span><br><span class="line">    return a &#x3D;&#x3D; b[::-1]</span><br></pre></td></tr></table></figure></p><h2 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141.Linked List Cycle"></a>141.Linked List Cycle</h2><p>Technically is a hash table. tag visited.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def hasCycle(self, head: ListNode) -&gt; bool:</span><br><span class="line">    cur &#x3D; ListNode(next&#x3D;head)</span><br><span class="line">    </span><br><span class="line">    # set cur val to None if visited</span><br><span class="line">    while cur.next:</span><br><span class="line">        cur &#x3D; cur.next</span><br><span class="line">        if not cur.val:</span><br><span class="line">            return True</span><br><span class="line">        cur.val &#x3D; None</span><br><span class="line">    return False</span><br></pre></td></tr></table></figure></p><p>Two pointers solution<br>This solution is more like a Intelligence test. 🙃</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def hasCycle(self, head: ListNode) -&gt; bool:</span><br><span class="line">    if not head:</span><br><span class="line">        return False</span><br><span class="line">    slow &#x3D; head</span><br><span class="line">    fast &#x3D; head.next</span><br><span class="line">    while (slow !&#x3D; fast):</span><br><span class="line">        </span><br><span class="line">        if not fast or not fast.next:</span><br><span class="line">            # reach an end</span><br><span class="line">            return False</span><br><span class="line">        slow &#x3D; slow.next</span><br><span class="line">        fast &#x3D; fast.next.next</span><br><span class="line">    return True</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Leetcode linked list collection (1)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;19.Remove Nth Node From End of List&lt;/li&gt;
+&lt;li&gt;206.Reverse Linked List&lt;/li&gt;
+&lt;li&gt;21.Merge Two Sorted Lists&lt;/li&gt;
+&lt;li&gt;234.Palindrome Linked List&lt;/li&gt;
+&lt;li&gt;141.Linked List Cycle&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    
+    <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
+    
+    <category term="Linked List" scheme="http://testsiling.github.io/tags/Linked-List/"/>
+    
+    <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
+    
+    <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
+    
+    <category term="Two Pointers" scheme="http://testsiling.github.io/tags/Two-Pointers/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker Container</title>
@@ -82,8 +116,8 @@
   
   <entry>
     <title>Bash Notes</title>
-    <link href="http://testsiling.github.io/2019/07/23/BashNotes/"/>
-    <id>http://testsiling.github.io/2019/07/23/BashNotes/</id>
+    <link href="http://testsiling.github.io/2019/07/23/bash-notes/"/>
+    <id>http://testsiling.github.io/2019/07/23/bash-notes/</id>
     <published>2019-07-23T04:00:00.000Z</published>
     <updated>2019-07-23T04:00:00.000Z</updated>
     
@@ -125,8 +159,8 @@
   
   <entry>
     <title>NoSQL Notes</title>
-    <link href="http://testsiling.github.io/2019/05/26/NoSQL/"/>
-    <id>http://testsiling.github.io/2019/05/26/NoSQL/</id>
+    <link href="http://testsiling.github.io/2019/05/26/nosql/"/>
+    <id>http://testsiling.github.io/2019/05/26/nosql/</id>
     <published>2019-05-26T04:00:00.000Z</published>
     <updated>2019-05-26T04:00:00.000Z</updated>
     
@@ -148,8 +182,8 @@
   
   <entry>
     <title>MapReduce Overview</title>
-    <link href="http://testsiling.github.io/2018/08/23/MapReduce/"/>
-    <id>http://testsiling.github.io/2018/08/23/MapReduce/</id>
+    <link href="http://testsiling.github.io/2018/08/23/map-reduce/"/>
+    <id>http://testsiling.github.io/2018/08/23/map-reduce/</id>
     <published>2018-08-23T04:00:00.000Z</published>
     <updated>2018-08-23T04:00:00.000Z</updated>
     
@@ -169,8 +203,8 @@
   
   <entry>
     <title>Decision Tree</title>
-    <link href="http://testsiling.github.io/2018/05/18/DecisionTree/"/>
-    <id>http://testsiling.github.io/2018/05/18/DecisionTree/</id>
+    <link href="http://testsiling.github.io/2018/05/18/decision-tree/"/>
+    <id>http://testsiling.github.io/2018/05/18/decision-tree/</id>
     <published>2018-05-18T04:00:00.000Z</published>
     <updated>2018-05-18T04:00:00.000Z</updated>
     
@@ -215,8 +249,8 @@
   
   <entry>
     <title>Apriori Algorithm</title>
-    <link href="http://testsiling.github.io/2018/05/09/Apriori/"/>
-    <id>http://testsiling.github.io/2018/05/09/Apriori/</id>
+    <link href="http://testsiling.github.io/2018/05/09/apriori/"/>
+    <id>http://testsiling.github.io/2018/05/09/apriori/</id>
     <published>2018-05-09T04:00:00.000Z</published>
     <updated>2018-05-09T04:00:00.000Z</updated>
     
@@ -238,8 +272,8 @@
   
   <entry>
     <title>Frequent Patterns and Association Rules</title>
-    <link href="http://testsiling.github.io/2018/05/09/FreqPat/"/>
-    <id>http://testsiling.github.io/2018/05/09/FreqPat/</id>
+    <link href="http://testsiling.github.io/2018/05/09/freq-pat/"/>
+    <id>http://testsiling.github.io/2018/05/09/freq-pat/</id>
     <published>2018-05-09T04:00:00.000Z</published>
     <updated>2018-05-09T04:00:00.000Z</updated>
     
@@ -330,8 +364,8 @@
   
   <entry>
     <title>Three Searching Methods</title>
-    <link href="http://testsiling.github.io/2017/11/19/SearchMethods/"/>
-    <id>http://testsiling.github.io/2017/11/19/SearchMethods/</id>
+    <link href="http://testsiling.github.io/2017/11/19/search-methods/"/>
+    <id>http://testsiling.github.io/2017/11/19/search-methods/</id>
     <published>2017-11-19T05:00:00.000Z</published>
     <updated>2017-11-19T05:00:00.000Z</updated>
     
