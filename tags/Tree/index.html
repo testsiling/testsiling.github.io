@@ -23,8 +23,6 @@
 
 
 
-  <meta name="keywords" content="Algorithm, Linked List, Python, Leetcode, Two Pointers, nlvi" />
-
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -85,7 +83,11 @@
 }
 </style>
 
-  <title> Linked List · BUG DEVELOPER </title>
+  <title>
+  
+    Tree · BUG DEVELOPER
+  
+</title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -229,153 +231,44 @@
         <div class="main-wrapper">
           
     
-  
-  <article class="
-  post
-   is_post 
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInRightShort back-1">
-        <div class="post-time-wrapper">
-          
-          <time>2020-11-30</time>
-          
-        </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInRightShort back-2">
-        
-          Linked List
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInRightShort back-3">
+  <div class="archive syuanpi fadeInRightShort" id="archive">
+    
       
-        <p>Leetcode linked list collection (1)</p>
+      
+        
+          </section>
+        
+        <div class="archive-post">
+          <div class="archive-post-content">
+            
+              <p>Leetcode Tree problem collection (1)</p>
 <ul>
-<li>19.Remove Nth Node From End of List</li>
-<li>206.Reverse Linked List</li>
-<li>21.Merge Two Sorted Lists</li>
-<li>234.Palindrome Linked List</li>
-<li>141.Linked List Cycle</li>
+<li>104.Maximum Depth of Binary Tree</li>
+<li>98.Validate Binary Search Tree</li>
+<li>101.Symmetric Tree</li>
 </ul>
-<a id="more"></a>
-<h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19.Remove Nth Node From End of List"></a>19.Remove Nth Node From End of List</h2><p>Two pointers solution: right pointer is <code>n</code> step behind left pointer. When right pointer reache the end of the linked list, <code>left.next</code> is the node that should be removed.<br>Hint: Dummy node usually very useful in linked list algorithms.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:</span><br><span class="line">    dummy &#x3D; ListNode(next&#x3D;head)       </span><br><span class="line">    left &#x3D; dummy</span><br><span class="line">    right &#x3D; left</span><br><span class="line">    for _ in range(n):</span><br><span class="line">        right &#x3D; right.next</span><br><span class="line">    </span><br><span class="line">    while right.next:</span><br><span class="line">        right &#x3D; right.next</span><br><span class="line">        left &#x3D; left.next</span><br><span class="line">    </span><br><span class="line">    left.next &#x3D; left.next.next</span><br><span class="line">    return dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206.Reverse Linked List"></a>206.Reverse Linked List</h2><h3 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h3><ul>
-<li>None -&gt; 1 -&gt; 2</li>
-<li>None &lt;- 1    2</li>
-<li>None &lt;- 1 &lt;- 2</li>
-</ul>
-<p>The key is use a pointer to track <code>2</code> while adjusting <code>1.next</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def reverseList(self, head: ListNode) -&gt; ListNode:</span><br><span class="line">        pre &#x3D; None</span><br><span class="line">        cur &#x3D; head</span><br><span class="line">        </span><br><span class="line">        while cur:</span><br><span class="line">            nex &#x3D; cur.next</span><br><span class="line">            cur.next &#x3D; pre</span><br><span class="line">            pre &#x3D; cur</span><br><span class="line">            cur &#x3D; nex</span><br><span class="line">        return pre</span><br></pre></td></tr></table></figure></p>
-<h3 id="Recursive"><a href="#Recursive" class="headerlink" title="Recursive"></a>Recursive</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def reverseList(self, head: ListNode) -&gt; ListNode:</span><br><span class="line">    def reverse(pre: ListNode, cur:ListNode) -&gt; ListNode:    </span><br><span class="line">        if not cur:</span><br><span class="line">            return</span><br><span class="line">        nex &#x3D; cur.next</span><br><span class="line">        cur.next &#x3D; pre</span><br><span class="line">        reverse(cur, nex)  </span><br><span class="line">        return cur</span><br><span class="line">    </span><br><span class="line">    if not head:</span><br><span class="line">        return head</span><br><span class="line">    tail &#x3D; head</span><br><span class="line">    while tail.next:</span><br><span class="line">        tail &#x3D; tail.next</span><br><span class="line">    </span><br><span class="line">    reverse(None, head)</span><br><span class="line">    return tail</span><br></pre></td></tr></table></figure>
-<h2 id="21-Merge-Two-Sorted-Lists"><a href="#21-Merge-Two-Sorted-Lists" class="headerlink" title="21.Merge Two Sorted Lists"></a>21.Merge Two Sorted Lists</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:</span><br><span class="line">    cur &#x3D; ListNode()</span><br><span class="line">    dummy &#x3D; cur</span><br><span class="line">    </span><br><span class="line">    while l1 and l2:</span><br><span class="line">        cur.next &#x3D; ListNode()</span><br><span class="line">        cur &#x3D; cur.next</span><br><span class="line">        if l1.val &lt; l2.val:</span><br><span class="line">            cur.val &#x3D; l1.val</span><br><span class="line">            l1 &#x3D; l1.next</span><br><span class="line">        else:</span><br><span class="line">            cur.val &#x3D; l2.val</span><br><span class="line">            l2 &#x3D; l2.next</span><br><span class="line">    </span><br><span class="line">    cur.next &#x3D; l1 if l1 else l2</span><br><span class="line">    return dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="234-Palindrome-Linked-List"><a href="#234-Palindrome-Linked-List" class="headerlink" title="234.Palindrome Linked List"></a>234.Palindrome Linked List</h2><p>O(n) time<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def isPalindrome(self, head: ListNode) -&gt; bool:</span><br><span class="line">    vals &#x3D; []</span><br><span class="line">    l &#x3D; 0</span><br><span class="line">    while head:</span><br><span class="line">        l +&#x3D; 1</span><br><span class="line">        vals.append(head.val)</span><br><span class="line">        head &#x3D; head.next</span><br><span class="line">    a &#x3D; vals[:l &#x2F;&#x2F; 2]</span><br><span class="line">    b &#x3D; vals[l &#x2F;&#x2F; 2 + l % 2:]</span><br><span class="line">    return a &#x3D;&#x3D; b[::-1]</span><br></pre></td></tr></table></figure></p>
-<h2 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141.Linked List Cycle"></a>141.Linked List Cycle</h2><p>Technically is a hash table. tag visited.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def hasCycle(self, head: ListNode) -&gt; bool:</span><br><span class="line">    cur &#x3D; ListNode(next&#x3D;head)</span><br><span class="line">    </span><br><span class="line">    # set cur val to None if visited</span><br><span class="line">    while cur.next:</span><br><span class="line">        cur &#x3D; cur.next</span><br><span class="line">        if not cur.val:</span><br><span class="line">            return True</span><br><span class="line">        cur.val &#x3D; None</span><br><span class="line">    return False</span><br></pre></td></tr></table></figure></p>
-<p>Two pointers solution<br>This solution is more like an intelligence test. 🙃</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def hasCycle(self, head: ListNode) -&gt; bool:</span><br><span class="line">    if not head:</span><br><span class="line">        return False</span><br><span class="line">    slow &#x3D; head</span><br><span class="line">    fast &#x3D; head.next</span><br><span class="line">    while (slow !&#x3D; fast):</span><br><span class="line">        </span><br><span class="line">        if not fast or not fast.next:</span><br><span class="line">            # reach an end</span><br><span class="line">            return False</span><br><span class="line">        slow &#x3D; slow.next</span><br><span class="line">        fast &#x3D; fast.next.next</span><br><span class="line">    return True</span><br></pre></td></tr></table></figure>
-
+            
+          </div>
+          <div class="archive-post-info">
+            <time class="archive-post-time">
+              2020-12-02
+            </time>
+            <a  class="archive-post-link" href="/2020/12/02/tree/">
+              Tree
+            </a>
+          </div>
+        </div>
       
-    
-    </div>
-    
-      <div class="post-tags syuanpi fadeInRightShort back-3">
       
-        <a href="/tags/Algorithm/">Algorithm</a>
+        </section></section>
       
-        <a href="/tags/Linked-List/">Linked List</a>
-      
-        <a href="/tags/Python/">Python</a>
-      
-        <a href="/tags/Leetcode/">Leetcode</a>
-      
-        <a href="/tags/Two-Pointers/">Two Pointers</a>
-      
-      </div>
-    
-    
-      
-
-      
-  <hr class="copy-line">
-  <div class="post-copyright">
-    <div class="copy-author">
-      <span>Author :</span>
-      <span>Siling Chen</span>
-    </div>
-    <div class="copy-url">
-      <span>Url :</span>
-      <a href="http://testsiling.github.io/2020/11/30/linked-list/">http://testsiling.github.io/2020/11/30/linked-list/</a>
-    </div>
-    <div class="copy-origin">
-      <span>Origin :</span>
-      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
-    </div>
-    <div class="copy-license">
-      
-      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
-    </div>
   </div>
-
-    
-  </article>
   
-    
-  <nav class="article-page">
-    
-    
-      <a href="/2020/10/22/docker1/" id="art-right" class="art-right">
-        <span class="prev-title">
-          Docker Container<i class="iconfont icon-right"></i>
-        </span>
-      </a>
-    
+  <nav class="pagination">
+      <span class="page-number current">1</span>
   </nav>
 
 
-    
-  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
-  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
-    
-
-    
-    
-<!-- Disqus Comments -->
-<div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-<script type="text/javascript">
-    var disqus_shortname = 'xianyu-1';
-
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-    
-
-  </div>
-
-
-
-  
-  
-    
-  
-  <aside class="post-toc">
-    <div class="title"><span>Index</span></div>
-    <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#19-Remove-Nth-Node-From-End-of-List"><span class="toc-text">19.Remove Nth Node From End of List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#206-Reverse-Linked-List"><span class="toc-text">206.Reverse Linked List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Iterative"><span class="toc-text">Iterative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursive"><span class="toc-text">Recursive</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-Merge-Two-Sorted-Lists"><span class="toc-text">21.Merge Two Sorted Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#234-Palindrome-Linked-List"><span class="toc-text">234.Palindrome Linked List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#141-Linked-List-Cycle"><span class="toc-text">141.Linked List Cycle</span></a></li></ol>
-    </div>
-  </aside>
-
-
-
-  
 
 
         </div>
@@ -519,6 +412,10 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Tree</button>
     </div>
   
   </div>
@@ -779,9 +676,16 @@
       <h2>Algorithm</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/11/30/linked-list/">
-            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+          <a href="/2020/12/01/linked-list/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Linked List</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/tree/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Tree</span>
           </a>
         </div>
       
@@ -791,8 +695,8 @@
       <h2>Linked List</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/11/30/linked-list/">
-            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+          <a href="/2020/12/01/linked-list/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Linked List</span>
           </a>
         </div>
@@ -803,8 +707,8 @@
       <h2>Python</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/11/30/linked-list/">
-            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+          <a href="/2020/12/01/linked-list/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Linked List</span>
           </a>
         </div>
@@ -823,15 +727,29 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/tree/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Tree</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
       <h2>Leetcode</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/11/30/linked-list/">
-            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+          <a href="/2020/12/01/linked-list/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Linked List</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/tree/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Tree</span>
           </a>
         </div>
       
@@ -841,8 +759,8 @@
       <h2>Two Pointers</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/11/30/linked-list/">
-            <time class="tagcloud-posttime">2020 / 11 / 30</time>
+          <a href="/2020/12/01/linked-list/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Linked List</span>
           </a>
         </div>
@@ -925,6 +843,18 @@
       
     </div>
   
+    <div class="tagcloud-postlist ">
+      <h2>Tree</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/tree/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Tree</span>
+          </a>
+        </div>
+      
+    </div>
+  
 </div>
 
   </div>
@@ -968,20 +898,6 @@
 <script src="/script/bootstarp.js"></script>
 
 
-
-<script>
-if (nlviconfig.theme.toc) {
-  setTimeout(function() {
-    if (nlviconfig.theme.scheme === 'balance') {
-      $("#header").addClass("show_toc");
-    } else if (nlviconfig.theme.scheme === 'banderole') {
-      $(".container-inner").addClass("has_toc");
-      $(".post-toc .title").addClass("show");
-      $(".toc-inner").addClass("show");
-    }
-  }, 1000);
-}
-</script>
 
 
 
