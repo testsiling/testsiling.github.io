@@ -23,7 +23,7 @@
 
 
 
-  <meta name="keywords" content="Algorithm, Python, Leetcode, Graph, nlvi" />
+  <meta name="keywords" content="docker, container, devops, nlvi" />
 
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
@@ -85,7 +85,7 @@
 }
 </style>
 
-  <title> Algorithm - Graph · BUG DEVELOPER </title>
+  <title> Docker Container · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -238,32 +238,97 @@
       <div class="post-time syuanpi fadeInRightShort back-1">
         <div class="post-time-wrapper">
           
-          <time>2020-12-05</time>
+          <time>2020-10-22</time>
           
         </div>
       </div>
       <h1 class="post-title syuanpi fadeInRightShort back-2">
         
-          Algorithm - Graph
+          Docker Container
         
       </h1>
     </header>
     <div class="post-content syuanpi fadeInRightShort back-3">
       
-        
+        <p>I heard the words, <em>container</em>, and <em>docker</em> a lot. I know they refer to a tool related to Dev/Ops, but I never use one before. Recently I am writing a tool to find the best apartment (rent goes down since COVID19). Then I I think probably I should use docker in the apt finder project. This article is the first glimpse of docker. I would say it’s magical. </p>
+<a id="more"></a>
+<h2 id="What’s-Docker"><a href="#What’s-Docker" class="headerlink" title="What’s Docker?"></a>What’s Docker?</h2><p>Container is a solution of isolating &amp; running different applications on the same infrasturcture.<br><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></p>
+<p>Docker is a type of containers.</p>
+<h2 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h2><p>Full tutorial: <a target="_blank" rel="noopener" href="https://www.docker.com/101-tutorial">https://www.docker.com/101-tutorial</a></p>
+<h3 id="Getting-Start-Container"><a href="#Getting-Start-Container" class="headerlink" title="Getting Start Container"></a>Getting Start Container</h3><ol>
+<li><p>Create Dockerfile</p>
+<p>A Dockerfile is simply a text-based script of instructions that is used to create a container image.</p>
+</li>
+<li><p>Run it!</p>
+<p>Running the new container in “detached” mode (in the background) and creating a mapping between the host’s port 3000 to the container’s port 3000. </p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;app name&gt; .</span><br><span class="line">docker run -dp <span class="number">3000</span>:<span class="number">3000</span> &lt;app name&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Updating-App"><a href="#Updating-App" class="headerlink" title="Updating App"></a>Updating App</h3><ol>
+<li><p>Change source code. </p>
+</li>
+<li><p>Build new image. </p>
+</li>
+<li><p>Find the old container’s id, stop it, remove it. </p>
+</li>
+<li><p>Run the new image.</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;app name&gt; .</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line">docker stop &lt;the-container-id&gt;</span><br><span class="line">docker rm &lt;the-container-id&gt;</span><br><span class="line"></span><br><span class="line">docker run -dp 3000:3000 docker-101</span><br></pre></td></tr></table></figure>
+<h3 id="Sharing-App"><a href="#Sharing-App" class="headerlink" title="Sharing App"></a>Sharing App</h3><ol>
+<li><p>Create repo on <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a> </p>
+<p>for example, <em>101-todo-app</em></p>
+</li>
+<li><p>Login from local</p>
+</li>
+<li><p>Give image a new name</p>
+</li>
+<li><p>Push it.</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker tag docker-101 YOUR-USER-NAME/101-todo-app</span><br><span class="line">docker push YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Running image on new instance</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
+<h3 id="Persisting-DB"><a href="#Persisting-DB" class="headerlink" title="Persisting DB"></a>Persisting DB</h3><p>to-do app as example. Docker will save data file on the host machine and make it available to the next container. Docker maintains the physical location on the disk and you only need to remember the name of the volume. </p>
+<ol>
+<li>create volume</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create todo-db</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>stop the previous todo app container</p>
+</li>
+<li><p>Start a new todo app container with [<strong>-v</strong>]</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dp 3000:3000 -v todo-db:/etc/todos YOUR-USER-NAME/101-todo-app</span><br></pre></td></tr></table></figure>
+<ol>
+<li>add items into todo list. then stop and remove the container.</li>
+<li><p>start a new container with the same <strong>run</strong> command above</p>
+</li>
+<li><p>use <code>docker volume inspect todo-db</code> to check The <code>Mountpoint</code> is the actual location on the disk where the data is stored.</p>
+</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.docker.com/101-tutorial">https://www.docker.com/101-tutorial</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504</a></p>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.docker.com/resources/what-container">https://www.docker.com/resources/what-container</a></li>
+</ul>
+
       
     
     </div>
     
       <div class="post-tags syuanpi fadeInRightShort back-3">
       
-        <a href="/tags/Algorithm/">Algorithm</a>
+        <a href="/tags/docker/">docker</a>
       
-        <a href="/tags/Python/">Python</a>
+        <a href="/tags/container/">container</a>
       
-        <a href="/tags/Leetcode/">Leetcode</a>
-      
-        <a href="/tags/Graph/">Graph</a>
+        <a href="/tags/devops/">devops</a>
       
       </div>
     
@@ -279,7 +344,7 @@
     </div>
     <div class="copy-url">
       <span>Url :</span>
-      <a href="http://testsiling.github.io/2020/12/05/al-graph/">http://testsiling.github.io/2020/12/05/al-graph/</a>
+      <a href="http://testsiling.github.io/2020/10/22/docker-1/">http://testsiling.github.io/2020/10/22/docker-1/</a>
     </div>
     <div class="copy-origin">
       <span>Origin :</span>
@@ -297,10 +362,16 @@
     
   <nav class="article-page">
     
+      <a href="/2020/12/01/al-linked-list-1/" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Algorithm - Linked List
+        </span>
+      </a>
     
-      <a href="/2020/12/04/al-lc-amazon/" id="art-right" class="art-right">
+    
+      <a href="/2020/05/04/python1/" id="art-right" class="art-right">
         <span class="prev-title">
-          Leetcode Amazon Problem Collections<i class="iconfont icon-right"></i>
+          Closure and Decorator in Python<i class="iconfont icon-right"></i>
         </span>
       </a>
     
@@ -344,7 +415,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What%E2%80%99s-Docker"><span class="toc-text">What’s Docker?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tutorial"><span class="toc-text">Tutorial</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Getting-Start-Container"><span class="toc-text">Getting Start Container</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Updating-App"><span class="toc-text">Updating App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sharing-App"><span class="toc-text">Sharing App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Persisting-DB"><span class="toc-text">Persisting DB</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a>
     </div>
   </aside>
 
@@ -414,10 +485,6 @@
   
     <div class="tagcloud-tag">
       <button>Leetcode</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Graph</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -508,17 +575,26 @@
       <button>Relational Database</button>
     </div>
   
+    <div class="tagcloud-tag">
+      <button>BFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Sorting</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Searching</button>
+    </div>
+  
   </div>
   
     <div class="tagcloud-postlist active">
       <h2>Algorithm</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/05/al-graph/">
-            <time class="tagcloud-posttime">2020 / 12 / 05</time>
-            <span>Algorithm - Graph</span>
-          </a>
-        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/04/al-lc-amazon/">
@@ -528,14 +604,21 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list/">
+          <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Algorithm - Linked List</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree/">
+          <a href="/2020/12/06/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Sorting & Searching</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
             <span>Algorithm - Tree</span>
           </a>
@@ -547,30 +630,9 @@
       <h2>Python</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/05/al-graph/">
-            <time class="tagcloud-posttime">2020 / 12 / 05</time>
-            <span>Algorithm - Graph</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/04/al-lc-amazon/">
             <time class="tagcloud-posttime">2020 / 12 / 04</time>
             <span>Leetcode Amazon Problem Collections</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list/">
-            <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
           </a>
         </div>
       
@@ -588,17 +650,31 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Sorting & Searching</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
       <h2>Leetcode</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/05/al-graph/">
-            <time class="tagcloud-posttime">2020 / 12 / 05</time>
-            <span>Algorithm - Graph</span>
-          </a>
-        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/04/al-lc-amazon/">
@@ -608,28 +684,23 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list/">
+          <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Algorithm - Linked List</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+          <a href="/2020/12/06/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Sorting & Searching</span>
           </a>
         </div>
       
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Graph</h2>
-      
         <div class="tagcloud-post">
-          <a href="/2020/12/05/al-graph/">
-            <time class="tagcloud-posttime">2020 / 12 / 05</time>
-            <span>Algorithm - Graph</span>
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree</span>
           </a>
         </div>
       
@@ -651,7 +722,7 @@
       <h2>Linked List</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list/">
+          <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Algorithm - Linked List</span>
           </a>
@@ -663,7 +734,7 @@
       <h2>Two Pointers</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list/">
+          <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Algorithm - Linked List</span>
           </a>
@@ -675,7 +746,7 @@
       <h2>Tree</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree/">
+          <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
             <span>Algorithm - Tree</span>
           </a>
@@ -903,7 +974,7 @@
       <h2>docker</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/10/22/docker1/">
+          <a href="/2020/10/22/docker-1/">
             <time class="tagcloud-posttime">2020 / 10 / 22</time>
             <span>Docker Container</span>
           </a>
@@ -915,7 +986,7 @@
       <h2>container</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/10/22/docker1/">
+          <a href="/2020/10/22/docker-1/">
             <time class="tagcloud-posttime">2020 / 10 / 22</time>
             <span>Docker Container</span>
           </a>
@@ -927,7 +998,7 @@
       <h2>devops</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/10/22/docker1/">
+          <a href="/2020/10/22/docker-1/">
             <time class="tagcloud-posttime">2020 / 10 / 22</time>
             <span>Docker Container</span>
           </a>
@@ -1006,6 +1077,54 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>BFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Sorting</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Sorting & Searching</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Searching</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Sorting & Searching</span>
           </a>
         </div>
       
