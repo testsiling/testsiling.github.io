@@ -6,7 +6,7 @@
   <link href="http://testsiling.github.io/atom.xml" rel="self"/>
   
   <link href="http://testsiling.github.io/"/>
-  <updated>2020-12-03T01:15:03.000Z</updated>
+  <updated>2020-12-05T19:05:22.000Z</updated>
   <id>http://testsiling.github.io/</id>
   
   <author>
@@ -17,9 +17,65 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Tree</title>
-    <link href="http://testsiling.github.io/2020/12/02/tree/"/>
-    <id>http://testsiling.github.io/2020/12/02/tree/</id>
+    <title>Algorithm - Graph</title>
+    <link href="http://testsiling.github.io/2020/12/05/al-graph/"/>
+    <id>http://testsiling.github.io/2020/12/05/al-graph/</id>
+    <published>2020-12-05T19:05:22.000Z</published>
+    <updated>2020-12-05T19:05:22.000Z</updated>
+    
+    
+    
+    
+    
+    <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
+    
+    <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
+    
+    <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
+    
+    <category term="Graph" scheme="http://testsiling.github.io/tags/Graph/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode Amazon Problem Collections</title>
+    <link href="http://testsiling.github.io/2020/12/04/al-lc-amazon/"/>
+    <id>http://testsiling.github.io/2020/12/04/al-lc-amazon/</id>
+    <published>2020-12-04T18:21:41.000Z</published>
+    <updated>2020-12-04T18:21:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Leetcode Amazon collection - high freq</p><ul><li><ol><li>Reorder Data in Log Files</li></ol></li><li>763.Partition Labels</li><li>200.Number of Islands</li><li>819.Most Common Word</li><li>692.Top K Frequent Words</li></ul><a id="more"></a><h2 id="937-Reorder-Data-in-Log-Files"><a href="#937-Reorder-Data-in-Log-Files" class="headerlink" title="937. Reorder Data in Log Files"></a>937. Reorder Data in Log Files</h2><p>use sort augment<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reorderLogFiles</span>(<span class="params">self, logs: List[str]</span>) -&gt; List[str]:</span></span><br><span class="line">    let, dig = [], []</span><br><span class="line">    <span class="keyword">for</span> log <span class="keyword">in</span> logs:</span><br><span class="line">        x = log.split()</span><br><span class="line">        <span class="keyword">if</span> x[<span class="number">1</span>].isdigit():</span><br><span class="line">            dig.append(log)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            let.append(log)</span><br><span class="line">    let.sort(key = <span class="keyword">lambda</span> x: (x.split()[<span class="number">1</span>:],x.split()[<span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">return</span> let + dig</span><br></pre></td></tr></table></figure></p><h2 id="763-Partition-Labels"><a href="#763-Partition-Labels" class="headerlink" title="763.Partition Labels"></a>763.Partition Labels</h2><p>Greedy<br>set a sliding window, update the right boundary when a char falls into this window. update the left boundary when a new char outside of the window occur.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partitionLabels</span>(<span class="params">self, S: str</span>) -&gt; List[int]:</span></span><br><span class="line">    chars = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i, char <span class="keyword">in</span> enumerate(S):</span><br><span class="line">        <span class="keyword">if</span> char <span class="keyword">not</span> <span class="keyword">in</span> chars:</span><br><span class="line">            chars[char] = [i]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            chars[char].append(i)</span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># window of subs string</span></span><br><span class="line">    left, right = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> char, occur <span class="keyword">in</span> chars.items():</span><br><span class="line">        first, last = min(occur), max(occur)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> first &gt; right:</span><br><span class="line">            res.append(right-left + <span class="number">1</span>)</span><br><span class="line">            left = first</span><br><span class="line">            right = last</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            right = max(right, last)</span><br><span class="line">    </span><br><span class="line">    res.append(right-left + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p><h2 id="200-Number-of-Islands"><a href="#200-Number-of-Islands" class="headerlink" title="200.Number of Islands"></a>200.Number of Islands</h2><p>DFS is super slow<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numIslands</span>(<span class="params">self, grid: List[List[str]]</span>) -&gt; int:</span></span><br><span class="line">    visited = set()</span><br><span class="line">    rows = len(grid)</span><br><span class="line">    cols = len(grid[<span class="number">0</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_island</span>(<span class="params">row, col</span>):</span></span><br><span class="line">        <span class="comment"># reach edges</span></span><br><span class="line">        <span class="keyword">if</span> row &gt;= rows <span class="keyword">or</span> col &gt;= cols <span class="keyword">or</span> col &lt; <span class="number">0</span> <span class="keyword">or</span> row &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> grid[row][col] == <span class="string">&#x27;0&#x27;</span> <span class="keyword">or</span> (row, col) <span class="keyword">in</span> visited:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># is island and never visit</span></span><br><span class="line">        visited.add((row, col))</span><br><span class="line">        is_island(row + <span class="number">1</span>, col)</span><br><span class="line">        is_island(row - <span class="number">1</span>, col)</span><br><span class="line">        is_island(row, col + <span class="number">1</span>)</span><br><span class="line">        is_island(row, col - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(rows):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(cols):</span><br><span class="line">            <span class="keyword">if</span> </span><br><span class="line">            res += is_island(r, c)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p><h2 id="819-Most-Common-Word"><a href="#819-Most-Common-Word" class="headerlink" title="819.Most Common Word"></a>819.Most Common Word</h2><p>can use <code>re</code> or just replace.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mostCommonWord</span>(<span class="params">self, paragraph: str, banned: List[str]</span>) -&gt; str:</span></span><br><span class="line">    <span class="keyword">for</span> symbol <span class="keyword">in</span> [<span class="string">&quot;!&quot;</span>, <span class="string">&quot;?&quot;</span>, <span class="string">&quot;&#x27;&quot;</span>,<span class="string">&quot;,&quot;</span>, <span class="string">&quot;;&quot;</span>, <span class="string">&quot;.&quot;</span>]:</span><br><span class="line">        paragraph = paragraph.replace(symbol, <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    freq = &#123;&#125;</span><br><span class="line">    maxx = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> paragraph.lower().split():</span><br><span class="line">        <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> banned:</span><br><span class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> freq:</span><br><span class="line">                freq[word] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                freq[word] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> freq[word] &gt; maxx:</span><br><span class="line">                maxx = freq[word]</span><br><span class="line">                res = word</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p><h2 id="692-Top-K-Frequent-Words"><a href="#692-Top-K-Frequent-Words" class="headerlink" title="692.Top K Frequent Words"></a>692.Top K Frequent Words</h2><p>Hash map<br>My initial AC:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">topKFrequent</span>(<span class="params">self, words: List[str], k: int</span>) -&gt; List[str]:</span></span><br><span class="line">    counter = Counter(words)</span><br><span class="line">    freq = defaultdict(list)</span><br><span class="line">    <span class="keyword">for</span> word, f <span class="keyword">in</span> counter.items():</span><br><span class="line">        freq[f].append(word)</span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    sorted_freq = sorted(list(freq.keys()), reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> sorted_freq:</span><br><span class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> sorted(freq[f]):</span><br><span class="line">            res.append(word)</span><br><span class="line">            k -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> k == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure><br>I tried to use sort keys, but the combo keys with different reverse states kinda block me a while. Here’s a neater version.<br>The <code>-</code> is the spark!</p><p>Neater version:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">topKFrequent</span>(<span class="params">self, words: List[str], k: int</span>) -&gt; List[str]:</span></span><br><span class="line">    freq = Counter(words)</span><br><span class="line">    res = list(freq.keys())</span><br><span class="line">    res.sort(key = <span class="keyword">lambda</span> word: (-freq[word], word))</span><br><span class="line">    <span class="keyword">return</span> res[:k]</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Leetcode Amazon collection - high freq&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;ol&gt;
+&lt;li&gt;Reorder Data in Log Files&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;763.Partition Labels&lt;/li&gt;
+&lt;li&gt;200.Number of Islands&lt;/li&gt;
+&lt;li&gt;819.Most Common Word&lt;/li&gt;
+&lt;li&gt;692.Top K Frequent Words&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    
+    <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
+    
+    <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
+    
+    <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
+    
+    <category term="Greedy" scheme="http://testsiling.github.io/tags/Greedy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Algorithm - Tree</title>
+    <link href="http://testsiling.github.io/2020/12/02/al-tree/"/>
+    <id>http://testsiling.github.io/2020/12/02/al-tree/</id>
     <published>2020-12-03T01:15:03.000Z</published>
     <updated>2020-12-03T01:15:03.000Z</updated>
     
@@ -47,9 +103,9 @@
   </entry>
   
   <entry>
-    <title>Linked List</title>
-    <link href="http://testsiling.github.io/2020/12/01/linked-list/"/>
-    <id>http://testsiling.github.io/2020/12/01/linked-list/</id>
+    <title>Algorithm - Linked List</title>
+    <link href="http://testsiling.github.io/2020/12/01/al-linked-list/"/>
+    <id>http://testsiling.github.io/2020/12/01/al-linked-list/</id>
     <published>2020-12-01T17:16:25.000Z</published>
     <updated>2020-12-01T17:16:25.000Z</updated>
     
@@ -75,11 +131,11 @@
     
     <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
     
-    <category term="Linked List" scheme="http://testsiling.github.io/tags/Linked-List/"/>
-    
     <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
     
     <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
+    
+    <category term="Linked List" scheme="http://testsiling.github.io/tags/Linked-List/"/>
     
     <category term="Two Pointers" scheme="http://testsiling.github.io/tags/Two-Pointers/"/>
     
