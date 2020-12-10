@@ -23,8 +23,6 @@
 
 
 
-  <meta name="keywords" content="Big Data, Database, NoSQL, nlvi" />
-
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -85,7 +83,11 @@
 }
 </style>
 
-  <title> NoSQL Notes · BUG DEVELOPER </title>
+  <title>
+  
+    Hash Table · BUG DEVELOPER
+  
+</title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -229,224 +231,46 @@
         <div class="main-wrapper">
           
     
-  
-  <article class="
-  post
-   is_post 
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInRightShort back-1">
-        <div class="post-time-wrapper">
-          
-          <time>2019-05-26</time>
-          
+  <div class="archive syuanpi fadeInRightShort" id="archive">
+    
+      
+      
+        
+          </section>
+        
+        <div class="archive-post">
+          <div class="archive-post-content">
+            
+              <p>Leetcode Tree problem collection (2)</p>
+<ul>
+<li>199.Binary Tree Right Side View</li>
+<li>105.Construct Binary Tree from Preorder and Inorder Traversal</li>
+<li>236.Lowest Common Ancestor of a Binary Tree</li>
+<li>987.Vertical Order Traversal of a Binary Tree</li>
+<li>103.Binary Tree Zigzag Level Order Traversal</li>
+</ul>
+            
+          </div>
+          <div class="archive-post-info">
+            <time class="archive-post-time">
+              2020-12-06
+            </time>
+            <a  class="archive-post-link" href="/2020/12/06/al-tree-2/">
+              Algorithm - Tree (2)
+            </a>
+          </div>
         </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInRightShort back-2">
-        
-          NoSQL Notes
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInRightShort back-3">
       
-        <p>NoSQL = Not Only SQL</p>
-<a id="more"></a>
-<p><strong>ACID</strong> - Atomic, Consistent, Isolated, Durable</p>
-<p><strong>BASE</strong> - Basic Availability, Soft-state, Eventual consistency</p>
-<h2 id="CAP-Theroem"><a href="#CAP-Theroem" class="headerlink" title="CAP Theroem"></a>CAP Theroem</h2><ul>
-<li>Consistency: Every read receives the most recent value</li>
-<li>Availability: Every request receives a (non-error) response without the guarantee that it contains the most recent write. no downtime.</li>
-<li>Partition Tolerance: The system continues to operate despite an arbitrary number of nodes being dropped.</li>
-</ul>
-<p><img src="/images/cap.png" alt="cap"></p>
-<h2 id="NoSQL-Database"><a href="#NoSQL-Database" class="headerlink" title="NoSQL Database"></a>NoSQL Database</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">Key-value Store</th>
-<th style="text-align:left">Column Store</th>
-<th style="text-align:left">Document Store</th>
-<th style="text-align:left">Graph Store</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Usage</td>
-<td style="text-align:left">- image stores <br />- Key-tased file systems <br />- Object cache <br />- System designed to scale</td>
-<td style="text-align:left">- Web crawler results <br />- Big data problem with relaxed consistency riles</td>
-<td style="text-align:left">- High variability data <br />- Document search <br />- Web content management <br />- Publishing</td>
-<td style="text-align:left">- Social network <br />- Fraud detection <br />- Relationship heavy data</td>
-</tr>
-<tr>
-<td style="text-align:left">Example</td>
-<td style="text-align:left">Memcache Redis Riak</td>
-<td style="text-align:left">Hbase Cassandra Hypertable</td>
-<td style="text-align:left">MongoDB CoutchDB CouchBase</td>
-<td style="text-align:left">Neo4J InfinteGraph(Objectively)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="NoSQL-Models-Key-Value-Systems"><a href="#NoSQL-Models-Key-Value-Systems" class="headerlink" title="NoSQL Models: Key/Value Systems"></a>NoSQL Models: Key/Value Systems</h3><ul>
-<li>A store of two fields: (Key, Value) pairs.</li>
-<li>Only one way to access the data through hashing(Key) = value</li>
-<li>No query language: only get/put/delete/update</li>
-<li>Limited multi-record transactional consistency</li>
-<li>Each row has timestemp</li>
-</ul>
-<h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><ul>
-<li>lookup(key) -&gt; value</li>
-<li>lookup(key range) -&gt; value</li>
-<li>getNext -&gt; value</li>
-<li>insert(key, value)</li>
-<li>delete(key)</li>
-</ul>
-<h4 id="Use-Cases"><a href="#Use-Cases" class="headerlink" title="Use Cases"></a>Use Cases</h4><ul>
-<li>Storing data for customer preferences and profiles</li>
-<li>Customized product recommendations, Ads, coupons</li>
-<li>User profiles</li>
-<li>Using cache to accelerate application responses</li>
-<li>As a cache for heavily accessed but rarely updated data</li>
-</ul>
-<h3 id="NoSQL-Models-Column-Store"><a href="#NoSQL-Models-Column-Store" class="headerlink" title="NoSQL Models: Column Store"></a>NoSQL Models: Column Store</h3><ul>
-<li>Motivated by Google’s BigTable</li>
-<li>Extension of the K/V system, where columns can have a complex structure, rather than a blob value</li>
-<li>Supports complex modeling structure (nested tables, repeating groups, set, list, etc.)</li>
-<li>Big Table, Cassandra, HBase, Vertica, Accumulo, Hypertable, etc</li>
-</ul>
-<h3 id="NoSQL-Models-Document-Store"><a href="#NoSQL-Models-Document-Store" class="headerlink" title="NoSQL Models: Document Store"></a>NoSQL Models: Document Store</h3><ul>
-<li>Similar to Key-value store, but the value is a complete document, such as JSON, XML, etc.</li>
-<li>Any collection of documents such as maps, collections, and scalar values.</li>
-</ul>
-<h3 id="NoSQL-Models-Graph-Databases"><a href="#NoSQL-Models-Graph-Databases" class="headerlink" title="NoSQL Models: Graph Databases"></a>NoSQL Models: Graph Databases</h3><ul>
-<li>Models data in terms of nodes and connections</li>
-<li>Useful for inter-connected data such as communication patterns, social networks, bio interactions.</li>
-<li>Allows us to ask deeper and more complex questions</li>
-<li>Difficult to distribute components of a graph among a network of servers as graphs become larger.</li>
-</ul>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Advantages</th>
-<th style="text-align:left">Disadvantages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">- Utilize the scale-out architecture that supports scalability, fault tolerance, and high availability <br />- Rapid insertion of arbitrary heterogeneous data with schema-on-read <br />- High performance of sequential scan (good for batch-oriented job such as OLAP workload)</td>
-<td style="text-align:left">- Lack of ACID - Not adequate for OLTP workload that requires random access and ACID <br />- Lack of high-level functionality such as SQL, schemas, and secondary indexes</td>
-</tr>
-</tbody>
-</table>
-</div>
-
       
-    
-    </div>
-    
-      <div class="post-tags syuanpi fadeInRightShort back-3">
+        </section></section>
       
-        <a href="/tags/Big-Data/">Big Data</a>
-      
-        <a href="/tags/Database/">Database</a>
-      
-        <a href="/tags/NoSQL/">NoSQL</a>
-      
-      </div>
-    
-    
-      
-
-      
-  <hr class="copy-line">
-  <div class="post-copyright">
-    <div class="copy-author">
-      <span>Author :</span>
-      <span>Siling Chen</span>
-    </div>
-    <div class="copy-url">
-      <span>Url :</span>
-      <a href="http://testsiling.github.io/2019/05/26/nosql/">http://testsiling.github.io/2019/05/26/nosql/</a>
-    </div>
-    <div class="copy-origin">
-      <span>Origin :</span>
-      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
-    </div>
-    <div class="copy-license">
-      
-      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
-    </div>
   </div>
-
-    
-  </article>
   
-    
-  <nav class="article-page">
-    
-      <a href="/2019/06/03/mongodb/" id="art-left" class="art-left">
-        <span class="next-title">
-          <i class="iconfont icon-left"></i>MongoDB Notes
-        </span>
-      </a>
-    
-    
-      <a href="/2018/08/23/map-reduce/" id="art-right" class="art-right">
-        <span class="prev-title">
-          MapReduce Overview<i class="iconfont icon-right"></i>
-        </span>
-      </a>
-    
+  <nav class="pagination">
+      <span class="page-number current">1</span>
   </nav>
 
 
-    
-  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
-  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
-    
-
-    
-    
-<!-- Disqus Comments -->
-<div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-<script type="text/javascript">
-    var disqus_shortname = 'xianyu-1';
-
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-    
-
-  </div>
-
-
-
-  
-  
-    
-  
-  <aside class="post-toc">
-    <div class="title"><span>Index</span></div>
-    <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAP-Theroem"><span class="toc-text">CAP Theroem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL-Database"><span class="toc-text">NoSQL Database</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NoSQL-Models-Key-Value-Systems"><span class="toc-text">NoSQL Models: Key&#x2F;Value Systems</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#API"><span class="toc-text">API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-Cases"><span class="toc-text">Use Cases</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NoSQL-Models-Column-Store"><span class="toc-text">NoSQL Models: Column Store</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NoSQL-Models-Document-Store"><span class="toc-text">NoSQL Models: Document Store</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NoSQL-Models-Graph-Databases"><span class="toc-text">NoSQL Models: Graph Databases</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li></ol>
-    </div>
-  </aside>
-
-
-
-  
 
 
         </div>
@@ -1219,20 +1043,6 @@
 <script src="/script/bootstarp.js"></script>
 
 
-
-<script>
-if (nlviconfig.theme.toc) {
-  setTimeout(function() {
-    if (nlviconfig.theme.scheme === 'balance') {
-      $("#header").addClass("show_toc");
-    } else if (nlviconfig.theme.scheme === 'banderole') {
-      $(".container-inner").addClass("has_toc");
-      $(".post-toc .title").addClass("show");
-      $(".toc-inner").addClass("show");
-    }
-  }, 1000);
-}
-</script>
 
 
 

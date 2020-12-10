@@ -16,7 +16,7 @@
   <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
 
 
-  <meta name="subtitle" content="building the best tool">
+  <meta name="subtitle" content="Debugging the world">
 
 
   <meta name="description" content="Bug Developer">
@@ -85,7 +85,7 @@
 }
 </style>
 
-  <title> Algorithm - Linked List · BUG DEVELOPER </title>
+  <title> Algorithm - Linked List (1) · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -96,7 +96,7 @@
   <div class="logo-inner syuanpi tvIn" style="display:none;">
     <h1><a href="/">BUG DEVELOPER</a></h1>
     
-      <span id="subtitle">building the best tool</span>
+      <span id="subtitle">Debugging the world</span>
     
   </div>
 </div>
@@ -244,7 +244,7 @@
       </div>
       <h1 class="post-title syuanpi fadeInRightShort back-2">
         
-          Algorithm - Linked List
+          Algorithm - Linked List (1)
         
       </h1>
     </header>
@@ -264,25 +264,25 @@
 <li>369.Plus One Linked List</li>
 </ul>
 <a id="more"></a>
-<h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19.Remove Nth Node From End of List"></a>19.Remove Nth Node From End of List</h2><p>Two pointers solution: right pointer is <code>n</code> step behind left pointer. When right pointer reache the end of the linked list, <code>left.next</code> is the node that should be removed.<br>Hint: Dummy node usually very useful in linked list algorithms.</p>
+<h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19. Remove Nth Node From End of List"></a>19. Remove Nth Node From End of List</h2><p>Two pointers solution: right pointer is <code>n</code> step behind left pointer. When right pointer reache the end of the linked list, <code>left.next</code> is the node that should be removed.<br>Hint: Dummy node usually very useful in linked list algorithms.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeNthFromEnd</span>(<span class="params">self, head: ListNode, n: int</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode(next=head)       </span><br><span class="line">    left = dummy</span><br><span class="line">    right = left</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        right = right.next</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right.next:</span><br><span class="line">        right = right.next</span><br><span class="line">        left = left.next</span><br><span class="line">    </span><br><span class="line">    left.next = left.next.next</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206.Reverse Linked List"></a>206.Reverse Linked List</h2><h3 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h3><ul>
+<h2 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206. Reverse Linked List"></a>206. Reverse Linked List</h2><h3 id="Iterative"><a href="#Iterative" class="headerlink" title="Iterative"></a>Iterative</h3><ul>
 <li>None -&gt; 1 -&gt; 2</li>
 <li>None &lt;- 1    2</li>
 <li>None &lt;- 1 &lt;- 2</li>
 </ul>
 <p>The key is use a pointer to track <code>2</code> while adjusting <code>1.next</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseList</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">        pre = <span class="literal">None</span></span><br><span class="line">        cur = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            nex = cur.next</span><br><span class="line">            cur.next = pre</span><br><span class="line">            pre = cur</span><br><span class="line">            cur = nex</span><br><span class="line">        <span class="keyword">return</span> pre</span><br></pre></td></tr></table></figure></p>
 <h3 id="Recursive"><a href="#Recursive" class="headerlink" title="Recursive"></a>Recursive</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reverseList</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverse</span>(<span class="params">pre: ListNode, cur:ListNode</span>) -&gt; ListNode:</span>    </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> cur:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        nex = cur.next</span><br><span class="line">        cur.next = pre</span><br><span class="line">        reverse(cur, nex)  </span><br><span class="line">        <span class="keyword">return</span> cur</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">    tail = head</span><br><span class="line">    <span class="keyword">while</span> tail.next:</span><br><span class="line">        tail = tail.next</span><br><span class="line">    </span><br><span class="line">    reverse(<span class="literal">None</span>, head)</span><br><span class="line">    <span class="keyword">return</span> tail</span><br></pre></td></tr></table></figure>
-<h2 id="21-Merge-Two-Sorted-Lists"><a href="#21-Merge-Two-Sorted-Lists" class="headerlink" title="21.Merge Two Sorted Lists"></a>21.Merge Two Sorted Lists</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    cur = ListNode()</span><br><span class="line">    dummy = cur</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">        cur.next = ListNode()</span><br><span class="line">        cur = cur.next</span><br><span class="line">        <span class="keyword">if</span> l1.val &lt; l2.val:</span><br><span class="line">            cur.val = l1.val</span><br><span class="line">            l1 = l1.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cur.val = l2.val</span><br><span class="line">            l2 = l2.next</span><br><span class="line">    </span><br><span class="line">    cur.next = l1 <span class="keyword">if</span> l1 <span class="keyword">else</span> l2</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="234-Palindrome-Linked-List"><a href="#234-Palindrome-Linked-List" class="headerlink" title="234.Palindrome Linked List"></a>234.Palindrome Linked List</h2><p>O(n) time<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span>(<span class="params">self, head: ListNode</span>) -&gt; bool:</span></span><br><span class="line">    vals = []</span><br><span class="line">    l = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> head:</span><br><span class="line">        l += <span class="number">1</span></span><br><span class="line">        vals.append(head.val)</span><br><span class="line">        head = head.next</span><br><span class="line">    a = vals[:l // <span class="number">2</span>]</span><br><span class="line">    b = vals[l // <span class="number">2</span> + l % <span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> a == b[::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
-<h2 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141.Linked List Cycle"></a>141.Linked List Cycle</h2><p>Technically is a hash table. tag visited.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hasCycle</span>(<span class="params">self, head: ListNode</span>) -&gt; bool:</span></span><br><span class="line">    cur = ListNode(next=head)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># set cur val to None if visited</span></span><br><span class="line">    <span class="keyword">while</span> cur.next:</span><br><span class="line">        cur = cur.next</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> cur.val:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        cur.val = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="21-Merge-Two-Sorted-Lists"><a href="#21-Merge-Two-Sorted-Lists" class="headerlink" title="21. Merge Two Sorted Lists"></a>21. Merge Two Sorted Lists</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    cur = ListNode()</span><br><span class="line">    dummy = cur</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">        cur.next = ListNode()</span><br><span class="line">        cur = cur.next</span><br><span class="line">        <span class="keyword">if</span> l1.val &lt; l2.val:</span><br><span class="line">            cur.val = l1.val</span><br><span class="line">            l1 = l1.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cur.val = l2.val</span><br><span class="line">            l2 = l2.next</span><br><span class="line">    </span><br><span class="line">    cur.next = l1 <span class="keyword">if</span> l1 <span class="keyword">else</span> l2</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+<h2 id="234-Palindrome-Linked-List"><a href="#234-Palindrome-Linked-List" class="headerlink" title="234. Palindrome Linked List"></a>234. Palindrome Linked List</h2><p>O(n) time<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span>(<span class="params">self, head: ListNode</span>) -&gt; bool:</span></span><br><span class="line">    vals = []</span><br><span class="line">    l = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> head:</span><br><span class="line">        l += <span class="number">1</span></span><br><span class="line">        vals.append(head.val)</span><br><span class="line">        head = head.next</span><br><span class="line">    a = vals[:l // <span class="number">2</span>]</span><br><span class="line">    b = vals[l // <span class="number">2</span> + l % <span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> a == b[::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141. Linked List Cycle"></a>141. Linked List Cycle</h2><p>Technically is a hash table. tag visited.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hasCycle</span>(<span class="params">self, head: ListNode</span>) -&gt; bool:</span></span><br><span class="line">    cur = ListNode(next=head)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># set cur val to None if visited</span></span><br><span class="line">    <span class="keyword">while</span> cur.next:</span><br><span class="line">        cur = cur.next</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> cur.val:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        cur.val = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
 <p>Two pointers solution<br>This solution is more like an intelligence test. 🙃</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hasCycle</span>(<span class="params">self, head: ListNode</span>) -&gt; bool:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    slow = head</span><br><span class="line">    fast = head.next</span><br><span class="line">    <span class="keyword">while</span> (slow != fast):</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> fast <span class="keyword">or</span> <span class="keyword">not</span> fast.next:</span><br><span class="line">            <span class="comment"># reach an end</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        slow = slow.next</span><br><span class="line">        fast = fast.next.next</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<h2 id="203-Remove-Linked-List-Elements"><a href="#203-Remove-Linked-List-Elements" class="headerlink" title="203.Remove Linked List Elements"></a>203.Remove Linked List Elements</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeElements</span>(<span class="params">self, head: ListNode, val: int</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode(next=head)</span><br><span class="line">    pre = dummy</span><br><span class="line">    cur = head</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        <span class="keyword">if</span> cur.val == val:</span><br><span class="line">            pre.next = cur.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pre = pre.next</span><br><span class="line">        cur = pre.next</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="83-Remove-Duplicates-from-Sorted-List"><a href="#83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="83.Remove Duplicates from Sorted List"></a>83.Remove Duplicates from Sorted List</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode(next=head)</span><br><span class="line">    pre, cur = dummy, head</span><br><span class="line">    val = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        <span class="keyword">if</span> val == <span class="literal">None</span> <span class="keyword">or</span> cur.val != val:</span><br><span class="line">            val = cur.val</span><br><span class="line">            pre = cur</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pre.next = cur.next</span><br><span class="line">        cur = cur.next</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="2-Add-Two-Numbers"><a href="#2-Add-Two-Numbers" class="headerlink" title="2.Add Two Numbers"></a>2.Add Two Numbers</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode()</span><br><span class="line">    cur = dummy</span><br><span class="line">    carry = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l1:</span><br><span class="line">            l1 = ListNode(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l2:</span><br><span class="line">            l2 = ListNode(<span class="number">0</span>)</span><br><span class="line">        val = l1.val + l2.val + carry</span><br><span class="line">        carry = val // <span class="number">10</span>            </span><br><span class="line">        cur.next = ListNode(val % <span class="number">10</span>)</span><br><span class="line">        cur = cur.next</span><br><span class="line">        l1 = l1.next</span><br><span class="line">        l2 = l2.next</span><br><span class="line">    <span class="keyword">if</span> carry:</span><br><span class="line">        cur.next = ListNode(carry)</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-<h2 id="876-Middle-of-the-Linked-List"><a href="#876-Middle-of-the-Linked-List" class="headerlink" title="876.Middle of the Linked List"></a>876.Middle of the Linked List</h2><p>O(n) time<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">middleNode</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    l = <span class="number">0</span></span><br><span class="line">    mid = head</span><br><span class="line">    cur = head</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        l += <span class="number">1</span></span><br><span class="line">        cur = cur.next</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l % <span class="number">2</span>:</span><br><span class="line">            mid = mid.next</span><br><span class="line">    <span class="keyword">return</span> mid</span><br></pre></td></tr></table></figure></p>
-<h2 id="369-Plus-One-Linked-List"><a href="#369-Plus-One-Linked-List" class="headerlink" title="369.Plus One Linked List"></a>369.Plus One Linked List</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plusOne</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">node</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node.next:</span><br><span class="line">            val = node.val + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            val = node.val + helper(node.next)</span><br><span class="line">        node.val = val % <span class="number">10</span></span><br><span class="line">        <span class="keyword">return</span> val // <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ListNode(<span class="number">1</span>, head) <span class="keyword">if</span> helper(head) <span class="keyword">else</span> head</span><br></pre></td></tr></table></figure>
+<h2 id="203-Remove-Linked-List-Elements"><a href="#203-Remove-Linked-List-Elements" class="headerlink" title="203. Remove Linked List Elements"></a>203. Remove Linked List Elements</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeElements</span>(<span class="params">self, head: ListNode, val: int</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode(next=head)</span><br><span class="line">    pre = dummy</span><br><span class="line">    cur = head</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        <span class="keyword">if</span> cur.val == val:</span><br><span class="line">            pre.next = cur.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pre = pre.next</span><br><span class="line">        cur = pre.next</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+<h2 id="83-Remove-Duplicates-from-Sorted-List"><a href="#83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="83. Remove Duplicates from Sorted List"></a>83. Remove Duplicates from Sorted List</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode(next=head)</span><br><span class="line">    pre, cur = dummy, head</span><br><span class="line">    val = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        <span class="keyword">if</span> val == <span class="literal">None</span> <span class="keyword">or</span> cur.val != val:</span><br><span class="line">            val = cur.val</span><br><span class="line">            pre = cur</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pre.next = cur.next</span><br><span class="line">        cur = cur.next</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+<h2 id="2-Add-Two-Numbers"><a href="#2-Add-Two-Numbers" class="headerlink" title="2. Add Two Numbers"></a>2. Add Two Numbers</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addTwoNumbers</span>(<span class="params">self, l1: ListNode, l2: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    dummy = ListNode()</span><br><span class="line">    cur = dummy</span><br><span class="line">    carry = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l1:</span><br><span class="line">            l1 = ListNode(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l2:</span><br><span class="line">            l2 = ListNode(<span class="number">0</span>)</span><br><span class="line">        val = l1.val + l2.val + carry</span><br><span class="line">        carry = val // <span class="number">10</span>            </span><br><span class="line">        cur.next = ListNode(val % <span class="number">10</span>)</span><br><span class="line">        cur = cur.next</span><br><span class="line">        l1 = l1.next</span><br><span class="line">        l2 = l2.next</span><br><span class="line">    <span class="keyword">if</span> carry:</span><br><span class="line">        cur.next = ListNode(carry)</span><br><span class="line">    <span class="keyword">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+<h2 id="876-Middle-of-the-Linked-List"><a href="#876-Middle-of-the-Linked-List" class="headerlink" title="876. Middle of the Linked List"></a>876. Middle of the Linked List</h2><p>O(n) time<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">middleNode</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    l = <span class="number">0</span></span><br><span class="line">    mid = head</span><br><span class="line">    cur = head</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">        l += <span class="number">1</span></span><br><span class="line">        cur = cur.next</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l % <span class="number">2</span>:</span><br><span class="line">            mid = mid.next</span><br><span class="line">    <span class="keyword">return</span> mid</span><br></pre></td></tr></table></figure></p>
+<h2 id="369-Plus-One-Linked-List"><a href="#369-Plus-One-Linked-List" class="headerlink" title="369. Plus One Linked List"></a>369. Plus One Linked List</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plusOne</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">node</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node.next:</span><br><span class="line">            val = node.val + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            val = node.val + helper(node.next)</span><br><span class="line">        node.val = val % <span class="number">10</span></span><br><span class="line">        <span class="keyword">return</span> val // <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ListNode(<span class="number">1</span>, head) <span class="keyword">if</span> helper(head) <span class="keyword">else</span> head</span><br></pre></td></tr></table></figure>
       
     
     </div>
@@ -333,7 +333,7 @@
     
       <a href="/2020/12/02/al-tree-1/" id="art-left" class="art-left">
         <span class="next-title">
-          <i class="iconfont icon-left"></i>Algorithm - Tree
+          <i class="iconfont icon-left"></i>Algorithm - Tree (1)
         </span>
       </a>
     
@@ -384,7 +384,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#19-Remove-Nth-Node-From-End-of-List"><span class="toc-text">19.Remove Nth Node From End of List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#206-Reverse-Linked-List"><span class="toc-text">206.Reverse Linked List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Iterative"><span class="toc-text">Iterative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursive"><span class="toc-text">Recursive</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-Merge-Two-Sorted-Lists"><span class="toc-text">21.Merge Two Sorted Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#234-Palindrome-Linked-List"><span class="toc-text">234.Palindrome Linked List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#141-Linked-List-Cycle"><span class="toc-text">141.Linked List Cycle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#203-Remove-Linked-List-Elements"><span class="toc-text">203.Remove Linked List Elements</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#83-Remove-Duplicates-from-Sorted-List"><span class="toc-text">83.Remove Duplicates from Sorted List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Add-Two-Numbers"><span class="toc-text">2.Add Two Numbers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#876-Middle-of-the-Linked-List"><span class="toc-text">876.Middle of the Linked List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#369-Plus-One-Linked-List"><span class="toc-text">369.Plus One Linked List</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#19-Remove-Nth-Node-From-End-of-List"><span class="toc-text">19. Remove Nth Node From End of List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#206-Reverse-Linked-List"><span class="toc-text">206. Reverse Linked List</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Iterative"><span class="toc-text">Iterative</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recursive"><span class="toc-text">Recursive</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-Merge-Two-Sorted-Lists"><span class="toc-text">21. Merge Two Sorted Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#234-Palindrome-Linked-List"><span class="toc-text">234. Palindrome Linked List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#141-Linked-List-Cycle"><span class="toc-text">141. Linked List Cycle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#203-Remove-Linked-List-Elements"><span class="toc-text">203. Remove Linked List Elements</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#83-Remove-Duplicates-from-Sorted-List"><span class="toc-text">83. Remove Duplicates from Sorted List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Add-Two-Numbers"><span class="toc-text">2. Add Two Numbers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#876-Middle-of-the-Linked-List"><span class="toc-text">876. Middle of the Linked List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#369-Plus-One-Linked-List"><span class="toc-text">369. Plus One Linked List</span></a></li></ol>
     </div>
   </aside>
 
@@ -457,10 +457,6 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Linked List</button>
     </div>
   
@@ -469,7 +465,23 @@
     </div>
   
     <div class="tagcloud-tag">
+      <button>Sorting</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Searching</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Tree</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>BFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -478,6 +490,10 @@
   
     <div class="tagcloud-tag">
       <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -544,52 +560,36 @@
       <button>Relational Database</button>
     </div>
   
-    <div class="tagcloud-tag">
-      <button>BFS</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>DFS</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Sorting</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Searching</button>
-    </div>
-  
   </div>
   
     <div class="tagcloud-postlist active">
       <h2>Algorithm</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -599,9 +599,30 @@
       <h2>Python</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -619,69 +640,36 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
       <h2>Leetcode</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+            <span>Algorithm - Tree (1)</span>
           </a>
         </div>
       
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -693,7 +681,7 @@
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
@@ -705,7 +693,31 @@
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Sorting</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Searching</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
           </a>
         </div>
       
@@ -717,7 +729,52 @@
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>BFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -805,6 +862,18 @@
           <a href="/2018/05/09/freq-pat/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Hash Table</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1046,54 +1115,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>BFS</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Sorting</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Searching</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
           </a>
         </div>
       

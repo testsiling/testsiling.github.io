@@ -16,12 +16,14 @@
   <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
 
 
-  <meta name="subtitle" content="building the best tool">
+  <meta name="subtitle" content="Debugging the world">
 
 
   <meta name="description" content="Bug Developer">
 
 
+
+  <meta name="keywords" content="Algorithm, Python, Leetcode, Sorting, Searching, nlvi" />
 
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
@@ -83,11 +85,7 @@
 }
 </style>
 
-  <title>
-  
-    Greedy · BUG DEVELOPER
-  
-</title>
+  <title> Algorithm - Sorting & Searching (1) · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -98,7 +96,7 @@
   <div class="logo-inner syuanpi tvIn" style="display:none;">
     <h1><a href="/">BUG DEVELOPER</a></h1>
     
-      <span id="subtitle">building the best tool</span>
+      <span id="subtitle">Debugging the world</span>
     
   </div>
 </div>
@@ -231,49 +229,142 @@
         <div class="main-wrapper">
           
     
-  <div class="archive syuanpi fadeInRightShort" id="archive">
-    
-      
-      
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2020-12-07</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
         
-          </section>
+          Algorithm - Sorting & Searching (1)
         
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Leetcode Amazon collection - high freq</p>
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <p>Leetcode Sorting &amp; Searching Problem Collection (1)</p>
 <ul>
+<li>88.Merge Sorted Array</li>
 <li><ol>
-<li>Reorder Data in Log Files</li>
+<li>First Bad Version</li>
 </ol>
 </li>
-<li>763.Partition Labels</li>
-<li>200.Number of Islands</li>
-<li>819.Most Common Word</li>
-<li>692.Top K Frequent Words</li>
 </ul>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2020-12-04
-            </time>
-            <a  class="archive-post-link" href="/2020/12/04/al-lc-amazon/">
-              Leetcode Amazon Problem Collections
-            </a>
-          </div>
-        </div>
+<a id="more"></a>
+<h2 id="88-Merge-Sorted-Array"><a href="#88-Merge-Sorted-Array" class="headerlink" title="88. Merge Sorted Array"></a>88. Merge Sorted Array</h2><p>I don’t think it is an Easy at all.<br>My initial solution: maintain 2 pointers, current index of nums1, and nums2. If n1 &gt; n2, need ro insert n2 before n1. which means swap all the following digit from n1 till the end of num1.<br>This solution is pretty slow. Time complexity is O(m^n)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, nums1: List[int], m: int, nums2: List[int], n: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    i1, i2 = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i2 &lt; n <span class="keyword">and</span> i1 &lt; m:</span><br><span class="line">        <span class="keyword">if</span> nums1[i1 + i2] &gt; nums2[i2]:</span><br><span class="line">            pre = nums2[i2]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(i1 + i2, m + i2 + <span class="number">1</span>):</span><br><span class="line">                temp = nums1[i]</span><br><span class="line">                nums1[i] = pre</span><br><span class="line">                pre = temp</span><br><span class="line">            i2 += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i1 += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i2 &lt; n:</span><br><span class="line">        nums1[i1 + i2: ] = nums2[i2:]</span><br></pre></td></tr></table></figure></p>
+<p>Assign descending can avoid swapping.<br>time: O(n+m)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, nums1: List[int], m: int, nums2: List[int], n: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    i1 = m - <span class="number">1</span></span><br><span class="line">    i2 = n - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m + n - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> i1 &lt; <span class="number">0</span>: </span><br><span class="line">            nums1[i] = nums2[i2]</span><br><span class="line">            i2 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> i2 &lt; <span class="number">0</span>:</span><br><span class="line">            nums1[i] = nums1[i1]</span><br><span class="line">            i1 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> nums2[i2] &gt; nums1[i1]:</span><br><span class="line">            nums1[i] = nums2[i2]</span><br><span class="line">            i2 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            nums1[i] = nums1[i1]</span><br><span class="line">            i1 -= <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="278-First-Bad-Version"><a href="#278-First-Bad-Version" class="headerlink" title="278. First Bad Version"></a>278. First Bad Version</h2><p>Binary Search<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">firstBadVersion</span>(<span class="params">self, right</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    :type right: int</span></span><br><span class="line"><span class="string">    :rtype: int</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> right &gt;= left:</span><br><span class="line">        mid = left + (right - left) // <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> isBadVersion(mid):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> isBadVersion(mid - <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+
       
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
       
-        </section></section>
+        <a href="/tags/Algorithm/">Algorithm</a>
       
+        <a href="/tags/Python/">Python</a>
+      
+        <a href="/tags/Leetcode/">Leetcode</a>
+      
+        <a href="/tags/Sorting/">Sorting</a>
+      
+        <a href="/tags/Searching/">Searching</a>
+      
+      </div>
+    
+    
+      
+
+      
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2020/12/07/al-sort-search-1/">http://testsiling.github.io/2020/12/07/al-sort-search-1/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
+      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
   </div>
+
+    
+  </article>
   
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+    
+  <nav class="article-page">
+    
+    
+      <a href="/2020/12/06/al-tree-2/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Algorithm - Tree (2)<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
   </nav>
 
 
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#88-Merge-Sorted-Array"><span class="toc-text">88. Merge Sorted Array</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#278-First-Bad-Version"><span class="toc-text">278. First Bad Version</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
@@ -340,10 +431,6 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Linked List</button>
     </div>
   
@@ -352,7 +439,23 @@
     </div>
   
     <div class="tagcloud-tag">
+      <button>Sorting</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Searching</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Tree</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>BFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -361,6 +464,10 @@
   
     <div class="tagcloud-tag">
       <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -427,52 +534,36 @@
       <button>Relational Database</button>
     </div>
   
-    <div class="tagcloud-tag">
-      <button>BFS</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>DFS</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Sorting</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Searching</button>
-    </div>
-  
   </div>
   
     <div class="tagcloud-postlist active">
       <h2>Algorithm</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -482,9 +573,30 @@
       <h2>Python</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -502,69 +614,36 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
       <h2>Leetcode</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+            <span>Algorithm - Tree (1)</span>
           </a>
         </div>
       
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
         <div class="tagcloud-post">
-          <a href="/2020/12/04/al-lc-amazon/">
-            <time class="tagcloud-posttime">2020 / 12 / 04</time>
-            <span>Leetcode Amazon Problem Collections</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -576,7 +655,7 @@
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
@@ -588,7 +667,31 @@
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List</span>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Sorting</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Searching</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/07/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 07</time>
+            <span>Algorithm - Sorting & Searching (1)</span>
           </a>
         </div>
       
@@ -600,7 +703,52 @@
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>BFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -688,6 +836,18 @@
           <a href="/2018/05/09/freq-pat/">
             <time class="tagcloud-posttime">2018 / 05 / 09</time>
             <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Hash Table</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -934,54 +1094,6 @@
       
     </div>
   
-    <div class="tagcloud-postlist ">
-      <h2>BFS</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Sorting</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Searching</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-sort-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Sorting & Searching</span>
-          </a>
-        </div>
-      
-    </div>
-  
 </div>
 
   </div>
@@ -1025,6 +1137,20 @@
 <script src="/script/bootstarp.js"></script>
 
 
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
 
 
 
