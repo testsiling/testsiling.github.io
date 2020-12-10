@@ -261,7 +261,7 @@
 <a id="more"></a>
 <h2 id="104-Maximum-Depth-of-Binary-Tree"><a href="#104-Maximum-Depth-of-Binary-Tree" class="headerlink" title="104. Maximum Depth of Binary Tree"></a>104. Maximum Depth of Binary Tree</h2><p>DFS:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span>(<span class="params">self, root: TreeNode</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    left, right = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> root.left:</span><br><span class="line">        left = self.maxDepth(root.left)</span><br><span class="line">    <span class="keyword">if</span> root.right:</span><br><span class="line">        right = self.maxDepth(root.right)</span><br><span class="line">    <span class="keyword">return</span> max(left, right) + <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>BFS:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span>(<span class="params">self, root: TreeNode</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    q = [(root, <span class="number">1</span>)]</span><br><span class="line">    depth = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        cur, d = q.pop()</span><br><span class="line">        depth = max(d, depth)</span><br><span class="line">        <span class="keyword">if</span> cur.left:</span><br><span class="line">            q.append((cur.left, d + <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">if</span> cur.right:</span><br><span class="line">            q.append((cur.right, d + <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> depth</span><br></pre></td></tr></table></figure></p>
-<h2 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a>98. Validate Binary Search Tree</h2><p>This one is interesting<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValidBST</span>(<span class="params">self, root: TreeNode,  floor=float(<span class="params"><span class="string">&#x27;-inf&#x27;</span></span>), ceil = float(<span class="params"><span class="string">&#x27;inf&#x27;</span></span>)</span>) -&gt; bool:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> floor &lt; root.val &lt; ceil:</span><br><span class="line">            <span class="keyword">return</span> self.isValidBST(root.left, floor, root.val) <span class="keyword">and</span> self.isValidBST(root.right, root.val, ceil)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a>98. Validate Binary Search Tree</h2><p>This one is interesting<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValidBST</span>(<span class="params">self, root: TreeNode,  floor=float(<span class="params"><span class="string">&#x27;-inf&#x27;</span></span>), ceil = float(<span class="params"><span class="string">&#x27;inf&#x27;</span></span>)</span>) -&gt; bool:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> floor &lt; root.val &lt; ceil:</span><br><span class="line">        <span class="keyword">return</span> self.isValidBST(root.left, floor, root.val) <span class="keyword">and</span> self.isValidBST(root.right, root.val, ceil)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="101-Symmetric-Tree"><a href="#101-Symmetric-Tree" class="headerlink" title="101. Symmetric Tree"></a>101. Symmetric Tree</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isSymmetric</span>(<span class="params">self, root: TreeNode</span>) -&gt; bool:</span></span><br><span class="line">    q = [root, root]</span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        right = q.pop()</span><br><span class="line">        left = q.pop()</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># empty sub tree</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> left <span class="keyword">and</span> <span class="keyword">not</span> right:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> (left <span class="keyword">and</span> <span class="keyword">not</span> right) <span class="keyword">or</span> (<span class="keyword">not</span> left <span class="keyword">and</span> right) <span class="keyword">or</span> (left.val != right.val):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">        <span class="comment"># mirror check</span></span><br><span class="line">        q += [left.left, right.right, left.right, right.left]</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
 <h2 id="102-Binary-Tree-Level-Order-Traversal"><a href="#102-Binary-Tree-Level-Order-Traversal" class="headerlink" title="102. Binary Tree Level Order Traversal"></a>102. Binary Tree Level Order Traversal</h2><h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span>(<span class="params">self, root: TreeNode</span>) -&gt; List[List[int]]:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    </span><br><span class="line">    q = [root]</span><br><span class="line">    cur_nodes = <span class="number">1</span></span><br><span class="line">    child_nodes = <span class="number">0</span></span><br><span class="line">    res = []</span><br><span class="line">    cur = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        node = q.pop(<span class="number">0</span>)</span><br><span class="line">        cur_nodes  -= <span class="number">1</span></span><br><span class="line">        cur.append(node.val)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> node.left:</span><br><span class="line">            q.append(node.left)</span><br><span class="line">            child_nodes += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> node.right:</span><br><span class="line">            q.append(node.right)</span><br><span class="line">            child_nodes += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> cur_nodes == <span class="number">0</span>:</span><br><span class="line">            res.append(cur)</span><br><span class="line">            cur = []</span><br><span class="line">            cur_nodes = child_nodes</span><br><span class="line">            child_nodes = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span>(<span class="params">self, root: TreeNode</span>) -&gt; List[List[int]]:</span></span><br><span class="line">    levels = []</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> levels</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">node, level</span>):</span></span><br><span class="line">        <span class="keyword">if</span> len(levels) == level:</span><br><span class="line">            levels.append([])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># append the current node value</span></span><br><span class="line">        levels[level].append(node.val)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># process child nodes for the next level</span></span><br><span class="line">        <span class="keyword">if</span> node.left:</span><br><span class="line">            dfs(node.left, level + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> node.right:</span><br><span class="line">            dfs(node.right, level + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">    dfs(root, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> levels</span><br></pre></td></tr></table></figure>
@@ -435,15 +435,15 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Linked List</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Python</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Leetcode</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Linked List</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -589,18 +589,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Linked List</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List (1)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>Python</h2>
       
         <div class="tagcloud-post">
@@ -682,6 +670,18 @@
           <a href="/2020/12/06/al-tree-2/">
             <time class="tagcloud-posttime">2020 / 12 / 06</time>
             <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Linked List</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
@@ -824,16 +824,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/09/freq-pat/">
-            <time class="tagcloud-posttime">2018 / 05 / 09</time>
-            <span>Frequent Patterns and Association Rules</span>
+          <a href="/2018/08/23/map-reduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/08/23/map-reduce/">
-            <time class="tagcloud-posttime">2018 / 08 / 23</time>
-            <span>MapReduce Overview</span>
+          <a href="/2018/05/09/freq-pat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
           </a>
         </div>
       
