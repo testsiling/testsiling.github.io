@@ -23,6 +23,8 @@
 
 
 
+  <meta name="keywords" content="Algorithm, Python, Sorting, nlvi" />
+
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -83,11 +85,7 @@
 }
 </style>
 
-  <title>
-  
-    docker · BUG DEVELOPER
-  
-</title>
+  <title> Classical Sorting Algorithms · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -231,39 +229,191 @@
         <div class="main-wrapper">
           
     
-  <div class="archive syuanpi fadeInRightShort" id="archive">
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2020-12-09</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
+        
+          Classical Sorting Algorithms
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Time Complexity</th>
+<th>Sapce Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble Sort</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Selection Sort</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Insertion Sort</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Merge Sort</td>
+<td>O(n log(n))</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>Quick Sort</td>
+<td>O(n^2)</td>
+<td>O(log(n))</td>
+</tr>
+<tr>
+<td>Heap Sort</td>
+<td>O(n log(n))</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Counting Sort</td>
+<td>O(n+k)</td>
+<td>O(k)</td>
+</tr>
+<tr>
+<td>Radix Sort</td>
+<td>O(nk)</td>
+<td>O(n+k)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<a id="more"></a>
+<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls) - <span class="number">1</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(len(ls) - <span class="number">1</span>  - i):</span><br><span class="line">			<span class="keyword">if</span> ls[j] &gt; ls[j + <span class="number">1</span>]:</span><br><span class="line">				ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line">	<span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
+<h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls)):</span><br><span class="line">		mini = i</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(ls)):</span><br><span class="line">			<span class="keyword">if</span> ls[j] &lt; ls[mini]:</span><br><span class="line">				mini = j</span><br><span class="line">		ls[mini], ls[i] = ls[i], ls[mini]</span><br><span class="line">	<span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
+<h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(ls)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">      <span class="keyword">if</span> ls[j] &gt;= ls[j - <span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      ls[j], ls[j - <span class="number">1</span>] = ls[j - <span class="number">1</span>], ls[j]</span><br><span class="line">  <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
+<h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>An <code>divide and conquer</code> approch.</p>
+<ol>
+<li>If the list is of length 0 or 1, then it is already sorted. Otherwise:</li>
+<li>Divide the unsorted list into two sublists of about half the size.</li>
+<li>Sort each sublist recursively by re-applying merge sort.</li>
+<li>Merge the two sublists back into one sorted list.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">ls1, ls2</span>):</span></span><br><span class="line">	res = []</span><br><span class="line">	<span class="keyword">while</span> ls1 <span class="keyword">and</span> ls2:</span><br><span class="line">		<span class="keyword">if</span> ls1[<span class="number">0</span>] &lt;= ls2[<span class="number">0</span>]:</span><br><span class="line">			res.append(ls1.pop(<span class="number">0</span>))</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			res.append(ls2.pop(<span class="number">0</span>))</span><br><span class="line">	res += ls1 <span class="keyword">if</span> ls1 <span class="keyword">else</span> ls2</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">	<span class="keyword">if</span> len(ls) &lt; <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">return</span> ls</span><br><span class="line">	left = ls[:len(ls) // <span class="number">2</span>]</span><br><span class="line">	right = ls[len(ls) // <span class="number">2</span>:]</span><br><span class="line">	<span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br></pre></td></tr></table></figure>
+
+      
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
+      
+        <a href="/tags/Algorithm/">Algorithm</a>
+      
+        <a href="/tags/Python/">Python</a>
+      
+        <a href="/tags/Sorting/">Sorting</a>
+      
+      </div>
+    
     
       
+
       
-        
-          </section>
-        
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>I heard the words, <em>container</em>, and <em>docker</em> a lot. I know they refer to a tool related to Dev/Ops, but I never use one before. Recently I am writing a tool to find the best apartment (rent goes down since COVID19). Then I I think probably I should use docker in the apt finder project. This article is the first glimpse of docker. I would say it’s magical. </p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2020-10-22
-            </time>
-            <a  class="archive-post-link" href="/2020/10/22/docker-1/">
-              Docker Container
-            </a>
-          </div>
-        </div>
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2020/12/09/al-sort-classical/">http://testsiling.github.io/2020/12/09/al-sort-classical/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
       
-      
-        </section></section>
-      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
   </div>
+
+    
+  </article>
   
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+    
+  <nav class="article-page">
+    
+    
+      <a href="/2020/12/07/al-sort-search-1/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Algorithm - Sorting & Searching (1)<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
   </nav>
 
 
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bubble-Sort"><span class="toc-text">Bubble Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selection-Sort"><span class="toc-text">Selection Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Insertion-Sort"><span class="toc-text">Insertion Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-Sort"><span class="toc-text">Merge Sort</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
@@ -1057,6 +1207,20 @@
 <script src="/script/bootstarp.js"></script>
 
 
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
 
 
 

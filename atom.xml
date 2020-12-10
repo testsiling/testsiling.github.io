@@ -6,7 +6,7 @@
   <link href="http://testsiling.github.io/atom.xml" rel="self"/>
   
   <link href="http://testsiling.github.io/"/>
-  <updated>2020-12-07T19:00:29.000Z</updated>
+  <updated>2020-12-10T04:02:28.000Z</updated>
   <id>http://testsiling.github.io/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Classical Sorting Algorithms</title>
+    <link href="http://testsiling.github.io/2020/12/09/al-sort-classical/"/>
+    <id>http://testsiling.github.io/2020/12/09/al-sort-classical/</id>
+    <published>2020-12-10T04:02:28.000Z</published>
+    <updated>2020-12-10T04:02:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<div class="table-container"><table><thead><tr><th>Name</th><th>Time Complexity</th><th>Sapce Complexity</th></tr></thead><tbody><tr><td>Bubble Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Selection Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Insertion Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Merge Sort</td><td>O(n log(n))</td><td>O(n)</td></tr><tr><td>Quick Sort</td><td>O(n^2)</td><td>O(log(n))</td></tr><tr><td>Heap Sort</td><td>O(n log(n))</td><td>O(1)</td></tr><tr><td>Counting Sort</td><td>O(n+k)</td><td>O(k)</td></tr><tr><td>Radix Sort</td><td>O(nk)</td><td>O(n+k)</td></tr></tbody></table></div><a id="more"></a><h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">ls</span>):</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls) - <span class="number">1</span>):</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(ls) - <span class="number">1</span>  - i):</span><br><span class="line"><span class="keyword">if</span> ls[j] &gt; ls[j + <span class="number">1</span>]:</span><br><span class="line">ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line"><span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span>(<span class="params">ls</span>):</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls)):</span><br><span class="line">mini = i</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(ls)):</span><br><span class="line"><span class="keyword">if</span> ls[j] &lt; ls[mini]:</span><br><span class="line">mini = j</span><br><span class="line">ls[mini], ls[i] = ls[i], ls[mini]</span><br><span class="line"><span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(ls)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">      <span class="keyword">if</span> ls[j] &gt;= ls[j - <span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      ls[j], ls[j - <span class="number">1</span>] = ls[j - <span class="number">1</span>], ls[j]</span><br><span class="line">  <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>An <code>divide and conquer</code> approch.</p><ol><li>If the list is of length 0 or 1, then it is already sorted. Otherwise:</li><li>Divide the unsorted list into two sublists of about half the size.</li><li>Sort each sublist recursively by re-applying merge sort.</li><li>Merge the two sublists back into one sorted list.</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">ls1, ls2</span>):</span></span><br><span class="line">res = []</span><br><span class="line"><span class="keyword">while</span> ls1 <span class="keyword">and</span> ls2:</span><br><span class="line"><span class="keyword">if</span> ls1[<span class="number">0</span>] &lt;= ls2[<span class="number">0</span>]:</span><br><span class="line">res.append(ls1.pop(<span class="number">0</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">res.append(ls2.pop(<span class="number">0</span>))</span><br><span class="line">res += ls1 <span class="keyword">if</span> ls1 <span class="keyword">else</span> ls2</span><br><span class="line"><span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">ls</span>):</span></span><br><span class="line"><span class="keyword">if</span> len(ls) &lt; <span class="number">2</span>:</span><br><span class="line"><span class="keyword">return</span> ls</span><br><span class="line">left = ls[:len(ls) // <span class="number">2</span>]</span><br><span class="line">right = ls[len(ls) // <span class="number">2</span>:]</span><br><span class="line"><span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Time Complexity&lt;/th&gt;
+&lt;th&gt;Sapce Complexity&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Bubble Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Selection Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Insertion Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Merge Sort&lt;/td&gt;
+&lt;td&gt;O(n log(n))&lt;/td&gt;
+&lt;td&gt;O(n)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Quick Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(log(n))&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Heap Sort&lt;/td&gt;
+&lt;td&gt;O(n log(n))&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Counting Sort&lt;/td&gt;
+&lt;td&gt;O(n+k)&lt;/td&gt;
+&lt;td&gt;O(k)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Radix Sort&lt;/td&gt;
+&lt;td&gt;O(nk)&lt;/td&gt;
+&lt;td&gt;O(n+k)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;</summary>
+    
+    
+    
+    
+    <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
+    
+    <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
+    
+    <category term="Sorting" scheme="http://testsiling.github.io/tags/Sorting/"/>
+    
+  </entry>
   
   <entry>
     <title>Algorithm - Sorting &amp; Searching (1)</title>
@@ -150,11 +225,11 @@
     
     <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
     
+    <category term="Linked List" scheme="http://testsiling.github.io/tags/Linked-List/"/>
+    
     <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
     
     <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
-    
-    <category term="Linked List" scheme="http://testsiling.github.io/tags/Linked-List/"/>
     
     <category term="Two Pointers" scheme="http://testsiling.github.io/tags/Two-Pointers/"/>
     
@@ -493,27 +568,6 @@
     
     
     <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>当我重学Database -- 范式(Normal Form)</title>
-    <link href="http://testsiling.github.io/2017/11/11/normalform/"/>
-    <id>http://testsiling.github.io/2017/11/11/normalform/</id>
-    <published>2017-11-11T05:00:00.000Z</published>
-    <updated>2017-11-11T05:00:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Note of Drexel INFO605. </p><a id="more"></a><h2 id="Why-do-we-need-Database-Normalization"><a href="#Why-do-we-need-Database-Normalization" class="headerlink" title="Why do we need Database Normalization?"></a>Why do we need Database Normalization?</h2><p><strong>注意：Normalization这个词只限于本篇，现实生活中人们不会这样叫的</strong></p><p>一般的DB设计是先根据事实，主观地理解，然后画出ERD，然后再将ERD转化成DB schema.</p><p>This design approach thus far has been largely intuitive, reliant upon the intuition and common sense of the database designer. So we need a formal criteria that can unambiguously (or at least less ambiguously) determine why some schemas are better than others.</p><p>也就是，噔噔噔噔～～<strong>范式(Normal Form)</strong>～～</p><p>ER modeling and resulting translations to relational schemas are both <strong>top-down</strong> intuitive database design approaches.</p><p>范式就是相反的，<strong>自下而上</strong>的设计DB的方法啦。通常现实中，程序员先用intuitive approaches设计DB，然后检查设计是否符合范式。</p><h2 id="What-is-the-goal-of-Normalization"><a href="#What-is-the-goal-of-Normalization" class="headerlink" title="What is the goal of Normalization?"></a>What is the goal of Normalization?</h2><ol><li>消除冗余啊！(最最最重要的,占99%)</li><li>让表和属性的含义更清晰</li><li>减少空值</li></ol><p>Any given fact recorded in our database should be stored in only one authoritative location. Maintenance of such facts is thereby eased, as we create / modify / delete them one time and in one place, with none of the problems that can result from keeping multiple copies of the same data.</p><p>当然消除冗余出了能避免各种增删改查的异常外，还能减少硬盘用量，还有数据库也能跑得快一点。</p><p><em>突然想起以前写课程设计，有的人的数据库，插入一个数据需要跑数据库几百遍。不过老师也不管的啦能动就行啦，弄一个Fancy的界面什么的就能高分 (摊手</em></p><h2 id="How-to-Normalize-database"><a href="#How-to-Normalize-database" class="headerlink" title="How to Normalize database?"></a>How to Normalize database?</h2><p>范式有第12345范式，不过一般符合到第三范式(3nd Normal Form)就行了。是向上兼容的，也就是符合第二范式的肯定符合第一范式，符合第三范式的也符合第二第一范式，如此类推。通常只要符合第三范式就够了。不过，有时因为性能问题，你也可以违反第三范式的啦。</p><p><em>Steve说如果遇到第四第五范式的请务必打电话给他，太稀有了他要写进案例。</em></p><h3 id="Functional-Dependency"><a href="#Functional-Dependency" class="headerlink" title="Functional Dependency"></a>Functional Dependency</h3><p>The majority of normalization is based on the concept of <strong>functional dependency</strong>.</p><p>我们用X ➔ Y 来表示Y依赖于X，或者说，X决定Y。也就是，如果确定了X值，就能推出唯一的Y值。</p><p>举例，每一个身份证号的值对应一个人名的姓。例如确定身份证号 “1122” 所对应的人的姓是 “陈” 。相反，姓 “陈” 的并不能对应唯一的身份证号。身份证号就是X，姓就是Y。</p><p>Functional dependencies can involve multiple attributes on the left hand (determining) side:</p><p> Building, Room ➔ SeatingCapacity</p><p><strong>左端，要保持最简化。不要增加非必要的属性。</strong></p><p><strong>右端，只写一种属性。</strong>例如：</p><p>Drexel_Id ➔ LastName</p><p>Drexel_Id ➔ FirstName</p><p><strong>不要</strong>合并写成： Drexel_Id ➔ LastName, FirstName</p><p><strong>Remember that FDs are related to schemas (meanings of attributes) and not the extensions (data instances) available at any given time.</strong></p><p>也就是就算你不知道年收入 (例如Salary为Null)，不代表 SSN ➔ Salary 这个依赖关系不存在。</p><h3 id="Keys"><a href="#Keys" class="headerlink" title="Keys"></a>Keys</h3><p>Some further consideration of <strong>keys</strong> is necessary to fully explain the 1st, 2nd and 3rd normal forms</p><p><em>下面这段不想写的，可是我怕自己回头忘了留个底吧。可以不看，直接跳到举例说明</em></p><ul><li><strong>Superkey</strong>: a set of attributes in a relation that will never have the same value acrosstuples (i.e., that can be used to uniquely identify a tuple)</li><li><strong>Key</strong>: aminimal superkey – if it lost any more attributes, it would no longer be a superkey (would no longer be a unique identifier)</li><li>Any key that could be used as the primary key of a relation schema is called a <strong>candidate key</strong></li><li>The designer chooses one key to be the primary key, and all candidate keys not chosen to be the primary key become known as <strong>alternate keys</strong>.</li><li><strong>Prime attribute</strong>: member of some candidate key in a relation</li><li><strong>Non-prime attribute</strong>: not a member of some candidate key</li></ul><p>Example relation (assume that all students have SSNs):</p><p><strong>Student</strong> (DrexelNumber, SSN, FirstName, LastName)</p><p><strong>Superkeys</strong> : {DrexelNumber, SSN, FirstName, LastName}, {SSN, LastName}, {DrexelNumber}, {SSN},. . .</p><p><strong>Candidate Keys</strong> : {DrexelNumber}, {SSN}</p><p><strong>Primary Key</strong> : {DrexelNumber}</p><p><strong>Alternate Key</strong> :{SSN}</p><p><strong>Prime attribute</strong> : DrexelNumber, SSN</p><p><strong>Non-prime attribute</strong> : FirstName, LastName</p><h2 id="Normal-Form"><a href="#Normal-Form" class="headerlink" title="Normal Form"></a>Normal Form</h2><p>We say that a relation is normalized to the form of the highest normal form that is not violated by the structure of the relation. To remove a violation, we decompose the relation (split it vertically, breaking some columns into a separate table)</p><h3 id="1st-Normal-Form"><a href="#1st-Normal-Form" class="headerlink" title="1st Normal Form"></a>1st Normal Form</h3><p>Relations in 1NF do not have <strong>repeating groups</strong>!</p><p>For example: <strong>Athlete (Bib#, FirstName, LastName, Event1, Event2, Event3, Event4)</strong></p><p>‘Event’ attributes is a repeating group.</p><p>We need to move the repeating group to a separate table (one for each repeating group) along with a copy of the Pirmary Key from the original relation.</p><p><strong>Athlete (Bib#, FirstName, LastName)</strong></p><p><strong>AthleteEvents (Bib#, Event) (note composite PK)</strong></p><p>If a relation does not have a repeating group to start with, then it is already in 1NF </p><h3 id="2nd-Normal-Form"><a href="#2nd-Normal-Form" class="headerlink" title="2nd Normal Form"></a>2nd Normal Form</h3><p>First criterion of 2NF is that the relation meets 1NF.</p><p>2NFdepends upon the concept of full functional dependency which means that we can’t remove any attribute from the lefthand side of the dependency and still have the dependency hold for theremaining attributes.</p><p>前面说过candidate key就是那些可以选做PK的属性，都是唯一标志属性。</p><p>举例，有这样的关系 <strong>Room (Building, RoomNum, SeatingCapacity, ZipCode)</strong></p><p>这样写的话就代表有以下Functional Dependency:</p><p>Building,RoomNum ➔ SeatingCapacity (这是full functional dependency)</p><p>Building,RoomNum ➔ ZipCode (这不是)</p><p>因为事实上，只要有Building就能确定ZipCode，不需要RoomNum，所以不是full functional dependency</p><p>改成符合2NF的话要拆分成两个表，将ZipCode和Building拆出来成另一个表：</p><p><strong>Building (Building, ZipCode)</strong></p><p><strong>Room (Building, RoomNum, SeatingCapacity)</strong></p><p>Building 是 Room表的外键</p><p>Rule: Normalize a relation to 2NF by moving attributes that are not fully functionally dependent on all candidate keys out to a separate relation, along with copies of the prime attributes on which they are dependent (now the PK of the new relation).</p><p>The PK of the new relation leaves a corresponding foreign key in the original relation (Building, in example above)</p><h3 id="3nd-Normal-Form"><a href="#3nd-Normal-Form" class="headerlink" title="3nd Normal Form"></a>3nd Normal Form</h3><p>First criterion of 3NF is that the relation is in 2NF</p><p>3NF relies upon the concept of transitive dependency</p><p>也就是存在关系X ➔ Y，Y ➔ Z，而且Y是non-prime attribute，就存在X ➔ Z（很好理解嘛）</p><p>例如 <strong>Employee(SSN, LastName, DateofBirth, DeptNumber, DeptMgr)</strong></p><p>假设存在 DeptNumber ➔ DeptMgr</p><p>那丛SSN就能得到DeptNumber，就能的得到DeptMgr。</p><p>所以改成符合3NF的关系的话：</p><p>将DeptManager (这是non-prime attributes) 分到一个独立的表，这个表的PK为DeptNumber (中间值)</p><p><strong>Employee (SSN, LastName, DateofBirth, DeptNumber)</strong></p><p><strong>Department (DeptNumber, DeptManager)</strong></p><p>DeptNumber 是 Employee表的外键</p><p>Rule: Normalize a relation to 3NF by moving non-prime attributes that are transitively dependent on any candidate key out to a separate relation, along with copies of the attributes upon which they are non-transitively dependent (these become the PK of the new relation).</p><p>The“Y” (hop) becomes a foreign key in the original relation and points at the PKof the new relation</p><hr><p>Here is a mnemonic: <strong>“The key, the whole key, and nothing but the key.”</strong></p><p>当然有时候我们是需要Denormalization，可以提高读数据库的性能。一般建议先将DB设计成符合3NF的，再按需Denormalization.</p><h2 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h2><p>尝试一步步将下面关系写到符合1NF，2NF，3NF。</p><p>Flight (Route#, Flight#, DestinationAirport, DepartureDate, DepartureTime, Pilot1, Pilot2, Pilot3, PlaneSerial#, Capacity, LastServicedDate)</p><p>Route#, Flight# ➔ (any non-prime attribute in this relation, but maybe transitively)</p><p>Route# ➔ DestinationAirport</p><p>PlaneSerial# ➔ Capacity</p><p>PlaneSerial# ➔ LastServicedDate</p><h3 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h3><p>我就不将外键表示出来了。在Markdown很难画我又懒得插图。</p><h4 id="1NF"><a href="#1NF" class="headerlink" title="1NF:"></a>1NF:</h4><p>Flight (Route#, Flight#, DestinationAirport, DepartureDate, DepartureTime, PlaneSerial#, Capacity, LastServicedDate)</p><p>FlightPilot (Route#, Flight#,Pilot)</p><h4 id="2NF"><a href="#2NF" class="headerlink" title="2NF:"></a>2NF:</h4><p>Flight (Route#, Flight#, DepartureDate, DepartureTime, PlaneSerial#, Capacity, LastServicedDate)</p><p>FlightPilot (Route#, Flight#, Pilot)</p><p>Route (Route#, DestinationAirport)</p><h4 id="3NF"><a href="#3NF" class="headerlink" title="3NF:"></a>3NF:</h4><p>Flight (Route#, Flight#, DepartureDate, DepartureTime, PlaneSerial#)</p><p>FlightPilot (Route#, Flight#, Pilot)</p><p>Route (Route#, DestinationAirport)</p><p>Plane (PlaneSerial#, Capacity, LastServicedDate)</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;Note of Drexel INFO605. &lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Database" scheme="http://testsiling.github.io/tags/Database/"/>
-    
-    <category term="Relational Database" scheme="http://testsiling.github.io/tags/Relational-Database/"/>
     
   </entry>
   
