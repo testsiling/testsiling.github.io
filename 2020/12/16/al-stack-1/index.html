@@ -23,6 +23,8 @@
 
 
 
+  <meta name="keywords" content="Algorithm, Python, Leetcode, Stack, nlvi" />
+
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -83,11 +85,7 @@
 }
 </style>
 
-  <title>
-  
-    Archives · BUG DEVELOPER
-  
-</title>
+  <title> Algorithm - Stack (1) · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -231,111 +229,139 @@
         <div class="main-wrapper">
           
     
-  <div class="archive syuanpi fadeInRightShort" id="archive">
-    
-      <aside class="archive-title">Total</aside>
-      <span class="archive-num">23 Posts In Total</span>
-    
-      
-      
-        
-          
-          
-            
-            
-            <div class="archive-group">
-            <time class="archive-year"> 2018 </time>
-            <div class="archive-list">
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Decision Tree algorithm with example.</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-18
-            </time>
-            <a  class="archive-post-link" href="/2018/05/18/decision-tree/">
-              Decision Tree
-            </a>
-          </div>
-        </div>
-      
-        
-          
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Accuracy, precision, recall, and f1 are 4 common metrics in classification evaluation.</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-18
-            </time>
-            <a  class="archive-post-link" href="/2018/05/18/evaluation/">
-              Accuracy, Precision, Recall, F1
-            </a>
-          </div>
-        </div>
-      
-        
-          
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Apriori Algorithm (Agrawal &amp; Srikant, 1994) is one of scalable methods for mining frequent patterns.</p>
-<p>It is a Candidate Generation and Test Approach</p>
-<p>According to the downward closure property of frequent patterns: <strong>If there is any itemset which is infrequent, its superset should not be generated/tested</strong> (Apriori pruning principle)</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-09
-            </time>
-            <a  class="archive-post-link" href="/2018/05/09/apriori/">
-              Apriori Algorithm
-            </a>
-          </div>
-        </div>
-      
-        
-          
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Frequent pattern is a pattern (a set of items, subsequences, substructures, etc.) that occurs frequently in a data set. It used for finding inherent regularities in data.</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-09
-            </time>
-            <a  class="archive-post-link" href="/2018/05/09/freq-pat/">
-              Frequent Patterns and Association Rules
-            </a>
-          </div>
-        </div>
-      
-      
-        </section></section>
-      
-  </div>
   
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2020-12-16</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
+        
+          Algorithm - Stack (1)
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <p>Leetcode Stack Problem Collection (1)</p>
+<ul>
+<li>20.Valid Parentheses</li>
+<li>1249.Minimum Remove to Make Valid Parentheses</li>
+</ul>
+<a id="more"></a>
+<h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a>20. Valid Parentheses</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValid</span>(<span class="params">self, s: str</span>) -&gt; bool:</span></span><br><span class="line">    right = &#123;</span><br><span class="line">        <span class="string">&#x27;)&#x27;</span>: <span class="string">&#x27;(&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;&#125;&#x27;</span>: <span class="string">&#x27;&#123;&#x27;</span>, </span><br><span class="line">        <span class="string">&#x27;]&#x27;</span>: <span class="string">&#x27;[&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="comment"># left bracket</span></span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> right:</span><br><span class="line">            stack.append(c)</span><br><span class="line">        <span class="comment"># right bracket</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> stack <span class="keyword">or</span> stack.pop() != right[c]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> stack</span><br></pre></td></tr></table></figure>
+<h2 id="1249-Minimum-Remove-to-Make-Valid-Parentheses"><a href="#1249-Minimum-Remove-to-Make-Valid-Parentheses" class="headerlink" title="1249. Minimum Remove to Make Valid Parentheses"></a>1249. Minimum Remove to Make Valid Parentheses</h2><ul>
+<li>for right bracket, must match to an existed left bracket, or remove it.</li>
+<li>for left bracket, log its index<br>After scan the whole string, remove open left bracket<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minRemoveToMakeValid</span>(<span class="params">self, s: str</span>) -&gt; str:</span></span><br><span class="line">    open_left = []</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">            res += c</span><br><span class="line">            open_left.append(len(res) - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">elif</span> c == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> open_left:</span><br><span class="line">                res += c</span><br><span class="line">                open_left.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res += c</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> reversed(open_left):</span><br><span class="line">        res = res[:i] + res[i + <span class="number">1</span>: ]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
+      
+        <a href="/tags/Algorithm/">Algorithm</a>
+      
+        <a href="/tags/Python/">Python</a>
+      
+        <a href="/tags/Leetcode/">Leetcode</a>
+      
+        <a href="/tags/Stack/">Stack</a>
+      
+      </div>
+    
+    
+      
+
+      
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2020/12/16/al-stack-1/">http://testsiling.github.io/2020/12/16/al-stack-1/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
+      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
+  </div>
+
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/2020/12/14/al-dp-1/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Algorithm - Dynamic Programming (1)<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
   </nav>
 
 
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#20-Valid-Parentheses"><span class="toc-text">20. Valid Parentheses</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1249-Minimum-Remove-to-Make-Valid-Parentheses"><span class="toc-text">1249. Minimum Remove to Make Valid Parentheses</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
@@ -1235,6 +1261,20 @@
 <script src="/script/bootstarp.js"></script>
 
 
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
 
 
 

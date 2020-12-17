@@ -23,6 +23,8 @@
 
 
 
+  <meta name="keywords" content="Algorithm, Python, Leetcode, Greedy, Dynamic Programming, nlvi" />
+
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -83,11 +85,7 @@
 }
 </style>
 
-  <title>
-  
-    Archives · BUG DEVELOPER
-  
-</title>
+  <title> Algorithm - Dynamic Programming (1) · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -231,111 +229,158 @@
         <div class="main-wrapper">
           
     
-  <div class="archive syuanpi fadeInRightShort" id="archive">
-    
-      <aside class="archive-title">Total</aside>
-      <span class="archive-num">23 Posts In Total</span>
-    
-      
-      
-        
-          
-          
-            
-            
-            <div class="archive-group">
-            <time class="archive-year"> 2018 </time>
-            <div class="archive-list">
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Decision Tree algorithm with example.</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-18
-            </time>
-            <a  class="archive-post-link" href="/2018/05/18/decision-tree/">
-              Decision Tree
-            </a>
-          </div>
-        </div>
-      
-        
-          
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Accuracy, precision, recall, and f1 are 4 common metrics in classification evaluation.</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-18
-            </time>
-            <a  class="archive-post-link" href="/2018/05/18/evaluation/">
-              Accuracy, Precision, Recall, F1
-            </a>
-          </div>
-        </div>
-      
-        
-          
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Apriori Algorithm (Agrawal &amp; Srikant, 1994) is one of scalable methods for mining frequent patterns.</p>
-<p>It is a Candidate Generation and Test Approach</p>
-<p>According to the downward closure property of frequent patterns: <strong>If there is any itemset which is infrequent, its superset should not be generated/tested</strong> (Apriori pruning principle)</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-09
-            </time>
-            <a  class="archive-post-link" href="/2018/05/09/apriori/">
-              Apriori Algorithm
-            </a>
-          </div>
-        </div>
-      
-        
-          
-          
-          
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Frequent pattern is a pattern (a set of items, subsequences, substructures, etc.) that occurs frequently in a data set. It used for finding inherent regularities in data.</p>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2018-05-09
-            </time>
-            <a  class="archive-post-link" href="/2018/05/09/freq-pat/">
-              Frequent Patterns and Association Rules
-            </a>
-          </div>
-        </div>
-      
-      
-        </section></section>
-      
-  </div>
   
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2020-12-14</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
+        
+          Algorithm - Dynamic Programming (1)
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <p>Leetcode Dynamic Programming Problem Collection (1)</p>
+<p>I really not good at DP problem…<br>The key of Dynamic Programming is to get local result, then get global result. </p>
+<ul>
+<li>70.Climbing Stairs</li>
+<li>121.Best Time to Buy and Sell Stock *</li>
+<li>53.Maximum Subarray</li>
+<li>198.House Robber</li>
+<li>91.Decode Ways</li>
+<li>746.Min Cost Climbing Stairs</li>
+</ul>
+<a id="more"></a>
+<h2 id="70-Climbing-Stairs"><a href="#70-Climbing-Stairs" class="headerlink" title="70. Climbing Stairs"></a>70. Climbing Stairs</h2><script type="math/tex; mode=display">
+step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was super slow. Use iteration is much faster.</p>
+<p>calculate the previous step 1 and step 2, keep tracking it. Time = O(n)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">climbStairs</span>(<span class="params">self, n: int</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">2</span>:</span><br><span class="line">    	<span class="keyword">return</span> n</span><br><span class="line">    p1, p2 = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>, n + <span class="number">1</span>):</span><br><span class="line">        cur = p1 + p2</span><br><span class="line">        p1, p2 = p2, cur</span><br><span class="line">    <span class="keyword">return</span> cur</span><br></pre></td></tr></table></figure>
+<h2 id="121-Best-Time-to-Buy-and-Sell-Stock"><a href="#121-Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="121. Best Time to Buy and Sell Stock"></a>121. Best Time to Buy and Sell Stock</h2><p>I like this one. logging the lowest buying price while updating max profit<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span>(<span class="params">self, prices: List[int]</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> len(prices) &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    lowest = prices[<span class="number">0</span>]</span><br><span class="line">    profit = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> price <span class="keyword">in</span> prices:</span><br><span class="line">        lowest = min(lowest, price)</span><br><span class="line">        profit = max(profit, price - lowest)</span><br><span class="line">    <span class="keyword">return</span> profit</span><br></pre></td></tr></table></figure></p>
+<h2 id="53-Maximum-Subarray"><a href="#53-Maximum-Subarray" class="headerlink" title="53. Maximum Subarray"></a>53. Maximum Subarray</h2><h3 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a>Greedy</h3><p>find local max sum, update global max sum if greater.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    max_sum = nums[<span class="number">0</span>]</span><br><span class="line">    cur_sum = nums[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums[<span class="number">1</span>:]:</span><br><span class="line">        cur_sum = max(cur_sum + num, num)</span><br><span class="line">        max_sum = max(cur_sum, max_sum)</span><br><span class="line">    <span class="keyword">return</span> max_sum</span><br></pre></td></tr></table></figure></p>
+<h3 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    dp = [<span class="number">0</span>] * len(nums)</span><br><span class="line">    <span class="keyword">for</span> i, num <span class="keyword">in</span> enumerate(nums)</span><br><span class="line">        dp[i] = max(dp[i - <span class="number">1</span>] + num, num)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
+<h2 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a>198. House Robber</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rob</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> len(nums) &lt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">return</span> max(nums, default=<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    gain = [<span class="number">0</span>] * len(nums)</span><br><span class="line">    gain[<span class="number">0</span>], gain[<span class="number">1</span>] = nums[<span class="number">0</span>], max(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(nums)):</span><br><span class="line">        <span class="comment"># Two options:</span></span><br><span class="line">        <span class="comment"># 1) rob it, gain(i) = gain(i-2) + current money</span></span><br><span class="line">        <span class="comment"># 2) don&#x27;t rob it, current max gain is gain(i - 1)</span></span><br><span class="line">        gain[i] = max(gain[i - <span class="number">2</span>] + nums[i], gain[i - <span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> gain[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="91-Decode-Way"><a href="#91-Decode-Way" class="headerlink" title="91. Decode Way"></a>91. Decode Way</h2><p>The second base case is so…. fu k.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numDecodings</span>(<span class="params">self, s: str</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> len(s) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    dp = [<span class="number">0</span>] * len(s)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    dp[<span class="number">1</span>] += s[<span class="number">1</span>] != <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    dp[<span class="number">1</span>] += <span class="number">10</span> &lt;= int(s[:<span class="number">2</span>]) &lt;= <span class="number">26</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(s)):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># single digit</span></span><br><span class="line">        <span class="keyword">if</span> s[i] != <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            dp[i] += dp[i - <span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># double digits</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">10</span> &lt;= int(s[i - <span class="number">1</span> : i + <span class="number">1</span>]) &lt;= <span class="number">26</span>:</span><br><span class="line">            dp[i] += dp[i - <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="746-Min-Cost-Climbing-Stairs"><a href="#746-Min-Cost-Climbing-Stairs" class="headerlink" title="746. Min Cost Climbing Stairs"></a>746. Min Cost Climbing Stairs</h2><p>Either pay the last step, or pay the second last step<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minCostClimbingStairs</span>(<span class="params">self, cost: List[int]</span>) -&gt; int:</span></span><br><span class="line">    s0, s1 = cost[<span class="number">0</span>], cost[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(cost)):</span><br><span class="line">        s1, s0 = min(cost[i] + s0, cost[i] + s1), s1</span><br><span class="line">    <span class="keyword">return</span> min(s0, s1)</span><br></pre></td></tr></table></figure></p>
+
+      
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
+      
+        <a href="/tags/Algorithm/">Algorithm</a>
+      
+        <a href="/tags/Python/">Python</a>
+      
+        <a href="/tags/Leetcode/">Leetcode</a>
+      
+        <a href="/tags/Greedy/">Greedy</a>
+      
+        <a href="/tags/Dynamic-Programming/">Dynamic Programming</a>
+      
+      </div>
+    
+    
+      
+
+      
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2020/12/14/al-dp-1/">http://testsiling.github.io/2020/12/14/al-dp-1/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
+      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
+  </div>
+
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+      <a href="/2020/12/16/al-stack-1/" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Algorithm - Stack (1)
+        </span>
+      </a>
+    
+    
+      <a href="/2020/12/10/al-sort-search-1/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Algorithm - Sorting (1)<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
   </nav>
 
 
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#70-Climbing-Stairs"><span class="toc-text">70. Climbing Stairs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#121-Best-Time-to-Buy-and-Sell-Stock"><span class="toc-text">121. Best Time to Buy and Sell Stock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#53-Maximum-Subarray"><span class="toc-text">53. Maximum Subarray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Greedy"><span class="toc-text">Greedy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming"><span class="toc-text">Dynamic Programming</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#198-House-Robber"><span class="toc-text">198. House Robber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#91-Decode-Way"><span class="toc-text">91. Decode Way</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#746-Min-Cost-Climbing-Stairs"><span class="toc-text">746. Min Cost Climbing Stairs</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
@@ -1235,6 +1280,20 @@
 <script src="/script/bootstarp.js"></script>
 
 
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
 
 
 
