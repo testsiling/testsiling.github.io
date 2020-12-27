@@ -23,7 +23,7 @@
 
 
 
-  <meta name="keywords" content="Algorithm, Python, Leetcode, Tree, BFS, DFS, nlvi" />
+  <meta name="keywords" content="Algorithm, Python, Leetcode, DFS, Tree, Data Structure, BFS, nlvi" />
 
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
@@ -258,7 +258,7 @@
 <li>102.Binary Tree Level Order Traversal</li>
 <li>108.Convert Sorted Array to Binary Search Tree</li>
 </ul>
-<a id="more"></a>
+<p>Inorder (Left, Root, Right)<br>Preorder (Root, Left, Right)<br>Postorder (Left, Right, Root)<br><a id="more"></a></p>
 <h2 id="104-Maximum-Depth-of-Binary-Tree"><a href="#104-Maximum-Depth-of-Binary-Tree" class="headerlink" title="104. Maximum Depth of Binary Tree"></a>104. Maximum Depth of Binary Tree</h2><p>DFS:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span>(<span class="params">self, root: TreeNode</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    left, right = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> root.left:</span><br><span class="line">        left = self.maxDepth(root.left)</span><br><span class="line">    <span class="keyword">if</span> root.right:</span><br><span class="line">        right = self.maxDepth(root.right)</span><br><span class="line">    <span class="keyword">return</span> max(left, right) + <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>BFS:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span>(<span class="params">self, root: TreeNode</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    q = [(root, <span class="number">1</span>)]</span><br><span class="line">    depth = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        cur, d = q.pop()</span><br><span class="line">        depth = max(d, depth)</span><br><span class="line">        <span class="keyword">if</span> cur.left:</span><br><span class="line">            q.append((cur.left, d + <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">if</span> cur.right:</span><br><span class="line">            q.append((cur.right, d + <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> depth</span><br></pre></td></tr></table></figure></p>
 <h2 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a>98. Validate Binary Search Tree</h2><p>This one is interesting<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValidBST</span>(<span class="params">self, root: TreeNode,  floor=float(<span class="params"><span class="string">&#x27;-inf&#x27;</span></span>), ceil = float(<span class="params"><span class="string">&#x27;inf&#x27;</span></span>)</span>) -&gt; bool:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> floor &lt; root.val &lt; ceil:</span><br><span class="line">        <span class="keyword">return</span> self.isValidBST(root.left, floor, root.val) <span class="keyword">and</span> self.isValidBST(root.right, root.val, ceil)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
@@ -279,11 +279,13 @@
       
         <a href="/tags/Leetcode/">Leetcode</a>
       
+        <a href="/tags/DFS/">DFS</a>
+      
         <a href="/tags/Tree/">Tree</a>
       
-        <a href="/tags/BFS/">BFS</a>
+        <a href="/tags/Data-Structure/">Data Structure</a>
       
-        <a href="/tags/DFS/">DFS</a>
+        <a href="/tags/BFS/">BFS</a>
       
       </div>
     
@@ -435,15 +437,27 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Linked List</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Python</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Leetcode</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Linked List</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -455,7 +469,15 @@
     </div>
   
     <div class="tagcloud-tag">
+      <button>Heap</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Searching</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Stack</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -463,11 +485,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>BFS</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>BFS</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -503,18 +525,6 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>docker</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>container</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>devops</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>DFA</button>
     </div>
   
@@ -528,6 +538,18 @@
   
     <div class="tagcloud-tag">
       <button>RegExp</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>docker</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>container</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>devops</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -546,26 +568,24 @@
       <button>Relational Database</button>
     </div>
   
-    <div class="tagcloud-tag">
-      <button>Greedy</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Heap</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Stack</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Dynamic Programming</button>
-    </div>
-  
   </div>
   
     <div class="tagcloud-postlist active">
       <h2>Algorithm</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/20/al-dfs-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 20</time>
+            <span>Algorithm - Depth-first Search (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
@@ -585,20 +605,6 @@
           <a href="/2020/12/10/al-sort-search-1/">
             <time class="tagcloud-posttime">2020 / 12 / 10</time>
             <span>Algorithm - Sorting (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -610,21 +616,30 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
           </a>
         </div>
       
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Linked List</h2>
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/01/al-linked-list-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 01</time>
-            <span>Algorithm - Linked List (1)</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/data-strcture-cheatsheet/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Data Structure Cheat Sheet</span>
           </a>
         </div>
       
@@ -632,6 +647,20 @@
   
     <div class="tagcloud-postlist ">
       <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/20/al-dfs-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 20</time>
+            <span>Algorithm - Depth-first Search (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
@@ -655,6 +684,13 @@
         </div>
       
         <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
             <time class="tagcloud-posttime">2020 / 12 / 02</time>
             <span>Algorithm - Tree (1)</span>
@@ -665,6 +701,13 @@
           <a href="/2020/12/06/al-tree-2/">
             <time class="tagcloud-posttime">2020 / 12 / 06</time>
             <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
           </a>
         </div>
       
@@ -682,12 +725,10 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2020/12/16/al-stack-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 16</time>
-            <span>Algorithm - Stack (1)</span>
-          </a>
-        </div>
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Leetcode</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/14/al-dp-1/">
@@ -696,10 +737,12 @@
           </a>
         </div>
       
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Leetcode</h2>
+        <div class="tagcloud-post">
+          <a href="/2020/12/20/al-dfs-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 20</time>
+            <span>Algorithm - Depth-first Search (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
@@ -712,6 +755,13 @@
           <a href="/2020/12/10/al-sort-search-1/">
             <time class="tagcloud-posttime">2020 / 12 / 10</time>
             <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
           </a>
         </div>
       
@@ -730,16 +780,71 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/16/al-stack-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 16</time>
-            <span>Algorithm - Stack (1)</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
           </a>
         </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/14/al-dp-1/">
             <time class="tagcloud-posttime">2020 / 12 / 14</time>
             <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Dynamic Programming</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/20/al-dfs-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 20</time>
+            <span>Algorithm - Depth-first Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Linked List</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
           </a>
         </div>
       
@@ -777,12 +882,36 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Heap</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/09/al-sort-classical/">
+            <time class="tagcloud-posttime">2020 / 12 / 09</time>
+            <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Searching</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/10/al-sort-search-1/">
             <time class="tagcloud-posttime">2020 / 12 / 10</time>
             <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Stack</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
           </a>
         </div>
       
@@ -805,10 +934,17 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>BFS</h2>
+      <h2>Data Structure</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
@@ -818,16 +954,23 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/data-strcture-cheatsheet/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Data Structure Cheat Sheet</span>
           </a>
         </div>
       
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>BFS</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/02/al-tree-1/">
@@ -1026,42 +1169,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>docker</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/10/22/docker-1/">
-            <time class="tagcloud-posttime">2020 / 10 / 22</time>
-            <span>Docker Container</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>container</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/10/22/docker-1/">
-            <time class="tagcloud-posttime">2020 / 10 / 22</time>
-            <span>Docker Container</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>devops</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/10/22/docker-1/">
-            <time class="tagcloud-posttime">2020 / 10 / 22</time>
-            <span>Docker Container</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>DFA</h2>
       
         <div class="tagcloud-post">
@@ -1110,6 +1217,42 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>docker</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker-1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>container</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker-1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>devops</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker-1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Big Data</h2>
       
         <div class="tagcloud-post">
@@ -1139,16 +1282,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2019/05/26/nosql/">
-            <time class="tagcloud-posttime">2019 / 05 / 26</time>
-            <span>NoSQL Notes</span>
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2017/11/11/normalform/">
-            <time class="tagcloud-posttime">2017 / 11 / 11</time>
-            <span>当我重学Database -- 范式(Normal Form)</span>
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
           </a>
         </div>
       
@@ -1180,54 +1323,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Heap</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/09/al-sort-classical/">
-            <time class="tagcloud-posttime">2020 / 12 / 09</time>
-            <span>Classical Sorting Algorithms</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Stack</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/16/al-stack-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 16</time>
-            <span>Algorithm - Stack (1)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Dynamic Programming</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
           </a>
         </div>
       
