@@ -23,8 +23,6 @@
 
 
 
-  <meta name="keywords" content="Algorithm, Python, Leetcode, DFS, nlvi" />
-
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -85,7 +83,11 @@
 }
 </style>
 
-  <title> Algorithm - Depth-first Search (1) · BUG DEVELOPER </title>
+  <title>
+  
+    Backtracking · BUG DEVELOPER
+  
+</title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -229,144 +231,45 @@
         <div class="main-wrapper">
           
     
-  
-  <article class="
-  post
-   is_post 
-  ">
-    <header class="post-header">
-      <div class="post-time syuanpi fadeInRightShort back-1">
-        <div class="post-time-wrapper">
-          
-          <time>2020-12-20</time>
-          
+  <div class="archive syuanpi fadeInRightShort" id="archive">
+    
+      
+      
+        
+          </section>
+        
+        <div class="archive-post">
+          <div class="archive-post-content">
+            
+              <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Backtracking">Backtracking</a> is a general algorithm for finding all (or some) solutions to some computational problems.<br>Leetcode Backtracking problems:</p>
+<ul>
+<li>46.Permutations</li>
+<li>51.N-Queens</li>
+<li>78.Subsets</li>
+<li>77.Combinations</li>
+<li>22.Generate Parentheses
+            
+          </div>
+          <div class="archive-post-info">
+            <time class="archive-post-time">
+              2020-12-27
+            </time>
+            <a  class="archive-post-link" href="/2020/12/27/al-backtracking-1/">
+              al-backtracking-1
+            </a>
+          </div>
         </div>
-      </div>
-      <h1 class="post-title syuanpi fadeInRightShort back-2">
-        
-          Algorithm - Depth-first Search (1)
-        
-      </h1>
-    </header>
-    <div class="post-content syuanpi fadeInRightShort back-3">
       
-        <ul>
-<li>17.Letter Combinations of a Phone Number</li>
-<li>695.Max Area of Island</li>
-<li>124.Binary Tree Maximum Path Sum *</li>
-<li>938.Range Sum of BST</li>
-</ul>
-<a id="more"></a>
-<h2 id="17-Letter-Combinations-of-a-Phone-Number"><a href="#17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="17. Letter Combinations of a Phone Number"></a>17. Letter Combinations of a Phone Number</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">letterCombinations</span>(<span class="params">self, digits: str, path = <span class="string">&#x27;&#x27;</span>, res = []</span>) -&gt; List[str]:</span></span><br><span class="line">    nums = &#123;</span><br><span class="line">	    <span class="string">&#x27;2&#x27;</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>],</span><br><span class="line">	    <span class="string">&#x27;3&#x27;</span>: [<span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>], </span><br><span class="line">	    <span class="string">&#x27;4&#x27;</span>: [<span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;i&#x27;</span>], </span><br><span class="line">	    <span class="string">&#x27;5&#x27;</span>: [<span class="string">&#x27;j&#x27;</span>, <span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;l&#x27;</span>], </span><br><span class="line">	    <span class="string">&#x27;6&#x27;</span>: [<span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;o&#x27;</span>], </span><br><span class="line">	    <span class="string">&#x27;7&#x27;</span>: [<span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;s&#x27;</span>],</span><br><span class="line">	    <span class="string">&#x27;8&#x27;</span>: [<span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;u&#x27;</span>, <span class="string">&#x27;v&#x27;</span>], </span><br><span class="line">	    <span class="string">&#x27;9&#x27;</span>: [<span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;x&#x27;</span>, <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;z&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">digits, path = <span class="string">&#x27;&#x27;</span></span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> digits:</span><br><span class="line">            <span class="keyword">if</span> path:</span><br><span class="line">                res.append(path)</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        d = digits[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> nums[d]:</span><br><span class="line">            helper(digits[<span class="number">1</span>:], path + c)</span><br><span class="line">    </span><br><span class="line">    helper(digits)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h2 id="695-Max-Area-of-Island"><a href="#695-Max-Area-of-Island" class="headerlink" title="695. Max Area of Island"></a>695. Max Area of Island</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxAreaOfIsland</span>(<span class="params">self, grid: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    visited = [[<span class="literal">False</span>] * len(grid[<span class="number">0</span>]) <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(grid))]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">row, col</span>):</span></span><br><span class="line">        <span class="keyword">if</span> row &gt;= len(grid) <span class="keyword">or</span> col &gt;= len(grid[<span class="number">0</span>]) <span class="keyword">or</span> row &lt; <span class="number">0</span> <span class="keyword">or</span> col &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> visited[row][col] <span class="keyword">or</span> <span class="keyword">not</span> grid[row][col]:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        visited[row][col] = <span class="number">1</span></span><br><span class="line">        area = <span class="number">1</span></span><br><span class="line">        area += helper(row - <span class="number">1</span>, col) + helper(row + <span class="number">1</span>, col)</span><br><span class="line">        area += helper(row, col - <span class="number">1</span>) + helper(row, col + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> area</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(len(grid)):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(len(grid[<span class="number">0</span>])):</span><br><span class="line">            res = max(res, helper(r, c))</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h2 id="124-Binary-Tree-Maximum-Path-Sum"><a href="#124-Binary-Tree-Maximum-Path-Sum" class="headerlink" title="124. Binary Tree Maximum Path Sum"></a>124. Binary Tree Maximum Path Sum</h2><p>Hard! here’s the standard solution. Need to review again later.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxPathSum</span>(<span class="params">self, root: TreeNode</span>) -&gt; int:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">max_gain</span>(<span class="params">node</span>):</span></span><br><span class="line">        <span class="keyword">nonlocal</span> max_sum</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        left = max(max_gain(node.left), <span class="number">0</span>)</span><br><span class="line">        right = max(max_gain(node.right), <span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        cur_sum = node.val + left + right</span><br><span class="line">        max_sum = max(max_sum, cur_sum)</span><br><span class="line">        <span class="keyword">return</span> node.val + max(left, right)</span><br><span class="line">    </span><br><span class="line">    max_sum = float(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">    max_gain(root)</span><br><span class="line">    <span class="keyword">return</span> max_sum</span><br></pre></td></tr></table></figure></p>
-<h2 id="938-Range-Sum-of-BST"><a href="#938-Range-Sum-of-BST" class="headerlink" title="938. Range Sum of BST"></a>938. Range Sum of BST</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rangeSumBST</span>(<span class="params">self, root: TreeNode, low: int, high: int</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> low &lt;= root.val &lt;= high:</span><br><span class="line">        res += root.val</span><br><span class="line">    <span class="keyword">if</span> low &lt; root.val:</span><br><span class="line">        res += self.rangeSumBST(root.left, low, high)</span><br><span class="line">    <span class="keyword">if</span> root.val &lt; high:</span><br><span class="line">        res += self.rangeSumBST(root.right, low, high)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
       
-    
-    </div>
-    
-      <div class="post-tags syuanpi fadeInRightShort back-3">
+        </section></section>
       
-        <a href="/tags/Algorithm/">Algorithm</a>
-      
-        <a href="/tags/Python/">Python</a>
-      
-        <a href="/tags/Leetcode/">Leetcode</a>
-      
-        <a href="/tags/DFS/">DFS</a>
-      
-      </div>
-    
-    
-      
-
-      
-  <hr class="copy-line">
-  <div class="post-copyright">
-    <div class="copy-author">
-      <span>Author :</span>
-      <span>Siling Chen</span>
-    </div>
-    <div class="copy-url">
-      <span>Url :</span>
-      <a href="http://testsiling.github.io/2020/12/20/al-dfs-1/">http://testsiling.github.io/2020/12/20/al-dfs-1/</a>
-    </div>
-    <div class="copy-origin">
-      <span>Origin :</span>
-      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
-    </div>
-    <div class="copy-license">
-      
-      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
-    </div>
   </div>
-
-    
-  </article>
   
-    
-  <nav class="article-page">
-    
-      <a href="/2020/12/26/data-strcture-cheatsheet/" id="art-left" class="art-left">
-        <span class="next-title">
-          <i class="iconfont icon-left"></i>Data Structure Cheat Sheet
-        </span>
-      </a>
-    
-    
-      <a href="/2020/12/16/al-stack-1/" id="art-right" class="art-right">
-        <span class="prev-title">
-          Algorithm - Stack (1)<i class="iconfont icon-right"></i>
-        </span>
-      </a>
-    
+  <nav class="pagination">
+      <span class="page-number current">1</span>
   </nav>
 
 
-    
-  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
-  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
-    
-
-    
-    
-<!-- Disqus Comments -->
-<div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-<script type="text/javascript">
-    var disqus_shortname = 'xianyu-1';
-
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-    
-
-  </div>
-
-
-
-  
-  
-    
-  
-  <aside class="post-toc">
-    <div class="title"><span>Index</span></div>
-    <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#17-Letter-Combinations-of-a-Phone-Number"><span class="toc-text">17. Letter Combinations of a Phone Number</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#695-Max-Area-of-Island"><span class="toc-text">695. Max Area of Island</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#124-Binary-Tree-Maximum-Path-Sum"><span class="toc-text">124. Binary Tree Maximum Path Sum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#938-Range-Sum-of-BST"><span class="toc-text">938. Range Sum of BST</span></a></li></ol>
-    </div>
-  </aside>
-
-
-
-  
 
 
         </div>
@@ -429,11 +332,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Leetcode</button>
+      <button>Backtracking</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Leetcode</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -441,7 +344,7 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Greedy</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -478,6 +381,10 @@
   
     <div class="tagcloud-tag">
       <button>BFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -562,16 +469,16 @@
       <h2>Algorithm</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>al-backtracking-1</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/20/al-dfs-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 20</time>
-            <span>Algorithm - Depth-first Search (1)</span>
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
           </a>
         </div>
       
@@ -637,16 +544,16 @@
       <h2>Python</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>al-backtracking-1</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/20/al-dfs-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 20</time>
-            <span>Algorithm - Depth-first Search (1)</span>
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
           </a>
         </div>
       
@@ -700,16 +607,28 @@
         </div>
       
         <div class="tagcloud-post">
+          <a href="/2017/11/19/search-methods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
           <a href="/2020/05/04/python1/">
             <time class="tagcloud-posttime">2020 / 05 / 04</time>
             <span>Closure and Decorator in Python</span>
           </a>
         </div>
       
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
         <div class="tagcloud-post">
-          <a href="/2017/11/19/search-methods/">
-            <time class="tagcloud-posttime">2017 / 11 / 19</time>
-            <span>Three Searching Methods</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>al-backtracking-1</span>
           </a>
         </div>
       
@@ -719,16 +638,16 @@
       <h2>Leetcode</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>al-backtracking-1</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/20/al-dfs-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 20</time>
-            <span>Algorithm - Depth-first Search (1)</span>
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
           </a>
         </div>
       
@@ -777,18 +696,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>Dynamic Programming</h2>
       
         <div class="tagcloud-post">
@@ -801,26 +708,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Greedy</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/20/al-dfs-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 20</time>
-            <span>Algorithm - Depth-first Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
           </a>
         </div>
       
@@ -977,6 +870,25 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
@@ -1006,16 +918,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/18/evaluation/">
-            <time class="tagcloud-posttime">2018 / 05 / 18</time>
-            <span>Accuracy, Precision, Recall, F1</span>
+          <a href="/2018/05/09/freq-pat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/09/freq-pat/">
-            <time class="tagcloud-posttime">2018 / 05 / 09</time>
-            <span>Frequent Patterns and Association Rules</span>
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
           </a>
         </div>
       
@@ -1060,16 +972,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/18/evaluation/">
-            <time class="tagcloud-posttime">2018 / 05 / 18</time>
-            <span>Accuracy, Precision, Recall, F1</span>
+          <a href="/2018/05/09/freq-pat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2018/05/09/freq-pat/">
-            <time class="tagcloud-posttime">2018 / 05 / 09</time>
-            <span>Frequent Patterns and Association Rules</span>
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
           </a>
         </div>
       
@@ -1359,20 +1271,6 @@
 <script src="/script/bootstarp.js"></script>
 
 
-
-<script>
-if (nlviconfig.theme.toc) {
-  setTimeout(function() {
-    if (nlviconfig.theme.scheme === 'balance') {
-      $("#header").addClass("show_toc");
-    } else if (nlviconfig.theme.scheme === 'banderole') {
-      $(".container-inner").addClass("has_toc");
-      $(".post-toc .title").addClass("show");
-      $(".toc-inner").addClass("show");
-    }
-  }, 1000);
-}
-</script>
 
 
 
