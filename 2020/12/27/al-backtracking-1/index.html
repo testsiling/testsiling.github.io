@@ -267,7 +267,7 @@
 <li>choices: remaining options</li>
 <li>terminal criteria: reach the end of decision tree.</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">res = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtracking</span>(<span class="params">path, choices</span>):</span></span><br><span class="line">    <span class="keyword">if</span> terminal criteria:</span><br><span class="line">        res.append(path)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> choice <span class="keyword">in</span> choices:</span><br><span class="line">        make decision</span><br><span class="line">        backtracking(path, choices)</span><br><span class="line">        cancel choose</span><br></pre></td></tr></table></figure>
+<h2 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">res = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtracking</span>(<span class="params">path, choices</span>):</span></span><br><span class="line">    <span class="keyword">if</span> terminal criteria:</span><br><span class="line">        res.append(path)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> choice <span class="keyword">in</span> choices:</span><br><span class="line">        make decision</span><br><span class="line">        backtracking(path, choices)</span><br><span class="line">        cancel choose</span><br></pre></td></tr></table></figure>
 <h2 id="46-Permutations"><a href="#46-Permutations" class="headerlink" title="46. Permutations"></a>46. Permutations</h2><p>Technically backtracking is brute force, it will exhaust all possible solutions. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums: List[int]</span>) -&gt; List[List[int]]:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">nums, path</span>):</span></span><br><span class="line">        <span class="keyword">if</span> len(nums) == len(path):</span><br><span class="line">            res.append(path)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nums):</span><br><span class="line">            <span class="keyword">if</span> n <span class="keyword">in</span> path:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            backtrack(nums, path + [n])</span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    backtrack(nums, [])</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <h2 id="78-Subsets"><a href="#78-Subsets" class="headerlink" title="78. Subsets"></a>78. Subsets</h2><p>pre-order search.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">subsets</span>(<span class="params">self, nums: List[int]</span>) -&gt; List[List[int]]:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">start, path</span>):</span></span><br><span class="line">        res.append(path)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start, len(nums)):</span><br><span class="line">            backtrack(i + <span class="number">1</span>, path + [nums[i]])</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    backtrack(<span class="number">0</span>, [])</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
@@ -379,7 +379,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Difference-between-backtracking-and-DFS"><span class="toc-text">Difference between backtracking and DFS:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-backtrack"><span class="toc-text">How to backtrack?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#46-Permutations"><span class="toc-text">46. Permutations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#78-Subsets"><span class="toc-text">78. Subsets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#77-Combinations"><span class="toc-text">77. Combinations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#39-Combination-Sum"><span class="toc-text">39. Combination Sum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-Generate-Parentheses"><span class="toc-text">22. Generate Parentheses</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Difference-between-backtracking-and-DFS"><span class="toc-text">Difference between backtracking and DFS:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-backtrack"><span class="toc-text">How to backtrack?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Template"><span class="toc-text">Template</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#46-Permutations"><span class="toc-text">46. Permutations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#78-Subsets"><span class="toc-text">78. Subsets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#77-Combinations"><span class="toc-text">77. Combinations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#39-Combination-Sum"><span class="toc-text">39. Combination Sum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-Generate-Parentheses"><span class="toc-text">22. Generate Parentheses</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     </div>
   </aside>
 
@@ -408,7 +408,7 @@
       <div class="copyright">
     <div class="info">
         <span>&copy;</span>
-        <span>2017 ~ 2020</span>
+        <span>2017 ~ 2021</span>
         <span>❤</span>
         <span>Siling Chen</span>
     </div>
@@ -672,6 +672,13 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -761,6 +768,20 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -833,6 +854,13 @@
           <a href="/2020/12/29/al-binary-search-1/">
             <time class="tagcloud-posttime">2020 / 12 / 29</time>
             <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
           </a>
         </div>
       
@@ -1397,6 +1425,13 @@
           <a href="/2020/12/29/al-binary-search-1/">
             <time class="tagcloud-posttime">2020 / 12 / 29</time>
             <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
           </a>
         </div>
       
