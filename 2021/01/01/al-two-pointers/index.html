@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BUG DEVELOPER">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+
+  <link rel="apple-touch-icon"  sizes="72x72"  href="favicon.ico">
+  <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="favicon.ico">
+
+
+  <meta name="subtitle" content="Debugging the world">
+
+
+  <meta name="description" content="Bug Developer">
+
+
+
+  <meta name="keywords" content="Algorithm, Python, Leetcode, Two Pointers, Sliding windows, nlvi" />
+
+
+<link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
+
+<link rel="stylesheet" href="/style/style.css">
+
+<script>
+  var nlviconfig = {
+    title: "BUG DEVELOPER",
+    author: "Siling Chen",
+    baseUrl: "/",
+    theme: {
+      scheme: "banderole",
+      lightbox: false,
+      animate: true,
+      search: true,
+      friends: false,
+      reward: false,
+      pjax: false,
+      lazy: false,
+      toc: true
+    }
+  }
+</script>
+
+
+
+
+
+
+
+    
+<link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+
+    <link rel="icon" href="favicon.ico">
+
+
+
+
+
+
+
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<style>
+@font-face {
+  font-family: "Allura";
+  src: url('/font/allura/allura.ttf');
+}
+</style>
+
+  <title> Algorithm - Two Pointers (1) · BUG DEVELOPER </title>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
+</head>
+<body>
+  <div class="container">
+    <header class="header" id="header">
+  <div class="header-wrapper">
+    <div class="logo">
+  <div class="logo-inner syuanpi tvIn" style="display:none;">
+    <h1><a href="/">BUG DEVELOPER</a></h1>
+    
+      <span id="subtitle">Debugging the world</span>
+    
+  </div>
+</div>
+
+    <nav class="main-nav">
+  
+  <ul class="main-nav-list syuanpi tvIn">
+  
+    <li class="menu-item">
+      <a href="javascript:;" id="search-btn" aria-label="Search">
+        <i class="iconfont icon-search"></i>
+      </a>
+    </li>
+  
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="/" id="article">
+        <span class="base-name">
+          
+            ARTICLE
+          
+        </span>
+      </a>
+    </li>
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="/archives" id="archives">
+        <span class="base-name">
+          
+            ARCHIVES
+          
+        </span>
+      </a>
+    </li>
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="javascript:;" id="tags">
+        <span class="base-name">
+          
+            TAGS
+          
+        </span>
+      </a>
+    </li>
+  
+  
+    
+  
+    <li class="menu-item">
+      <a href="/about" id="about">
+        <span class="base-name">
+          
+            ABOUT
+          
+        </span>
+      </a>
+    </li>
+  
+  
+  </ul>
+  
+</nav>
+
+  </div>
+</header>
+<div class="mobile-header" id="mobile-header">
+  <div class="mobile-header-nav">
+    <div class="mobile-header-item" id="mobile-left">
+      <div class="header-menu-item">
+        <div class="header-menu-line"></div>
+      </div>
+    </div>
+    <h1 class="mobile-header-title">
+      <a href="/">BUG DEVELOPER</a>
+    </h1>
+    <div class="mobile-header-item"></div>
+  </div>
+  <div class="mobile-header-body">
+    <ul class="mobile-header-list">
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-0">
+          <a href="/" >
+            
+              ARTICLE
+            
+          </a>
+        </li>
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-1">
+          <a href="/archives" >
+            
+              ARCHIVES
+            
+          </a>
+        </li>
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-2">
+          <a href="javascript:;" id="mobile-tags">
+            
+              TAGS
+            
+          </a>
+        </li>
+      
+        <li class="mobile-nav-item syuanpi fadeInRightShort back-3">
+          <a href="/about" >
+            
+              ABOUT
+            
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+    <div class="container-inner" style="display:none;">
+      <main class="main" id="main">
+        <div class="main-wrapper">
+          
+    
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2021-01-01</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
+        
+          Algorithm - Two Pointers (1)
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <p>Two pointers problem set (1) - Sliding Window</p>
+<ul>
+<li>76.Minimum Window Substring</li>
+<li>567.Permutation in String</li>
+<li>438.Find All Anagrams in a String</li>
+<li>3.Longest Substring Without Repeating Characters</li>
+<li>239.Sliding Window Maximum</li>
+</ul>
+<a id="more"></a>
+<h2 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find string t in string s</span></span><br><span class="line"><span class="keyword">from</span> collection <span class="keyword">import</span> Counter, defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sliding_window</span>(<span class="params">s, t</span>):</span></span><br><span class="line">	need = Counter(t)</span><br><span class="line">	valid = <span class="number">0</span></span><br><span class="line">	left = right = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">		c = s[right]</span><br><span class="line">		right += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">		<span class="comment"># do something</span></span><br><span class="line">		...</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> window needs shrink:</span><br><span class="line">			d = s[left]</span><br><span class="line">			left += <span class="number">1</span></span><br><span class="line">			<span class="comment"># do something</span></span><br><span class="line">			...</span><br></pre></td></tr></table></figure>
+<h2 id="76-Minimum-Window-Substring"><a href="#76-Minimum-Window-Substring" class="headerlink" title="76. Minimum Window Substring"></a>76. Minimum Window Substring</h2><ol>
+<li>Extend right pointer until all characters found</li>
+<li>Log smallest window</li>
+<li>Shrink left pointer until found the next valid window<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minWindow</span>(<span class="params">self, s: str, t: str</span>) -&gt; str:</span></span><br><span class="line">    needs = dict(Counter(t))</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    counter = len(t)</span><br><span class="line">    min_len = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># search [left. right)</span></span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        </span><br><span class="line">        c = s[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">        	<span class="comment"># is a valid character</span></span><br><span class="line">        	needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># update res</span></span><br><span class="line">            <span class="keyword">if</span> (right - left) &lt; min_len:</span><br><span class="line">                min_len = right - left</span><br><span class="line">                res = s[left: right]</span><br><span class="line">            </span><br><span class="line">            c = s[left]</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="567-Permutation-in-String"><a href="#567-Permutation-in-String" class="headerlink" title="567. Permutation in String"></a>567. Permutation in String</h2><p>True criteria is <code>len(s1) == window size</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkInclusion</span>(<span class="params">self, s1: str, s2: str</span>) -&gt; bool:</span></span><br><span class="line">    </span><br><span class="line">    needs = Counter(s1)</span><br><span class="line">    counter = len(s1)</span><br><span class="line">    </span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s2):</span><br><span class="line">        </span><br><span class="line">        c = s2[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">            needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            <span class="keyword">if</span> right - left == len(s1):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            c = s2[left]</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="438-Find-All-Anagrams-in-a-String"><a href="#438-Find-All-Anagrams-in-a-String" class="headerlink" title="438. Find All Anagrams in a String"></a>438. Find All Anagrams in a String</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findAnagrams</span>(<span class="params">self, s: str, p: str</span>) -&gt; List[int]:</span></span><br><span class="line">    needs = Counter(p)</span><br><span class="line">    counter = len(p)</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    res = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        c = s[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">            needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># is a valid window</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            c = s[left]</span><br><span class="line">            <span class="keyword">if</span> (right - left) == len(p):</span><br><span class="line">                res.append(left)</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h2 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3. Longest Substring Without Repeating Characters"></a>3. Longest Substring Without Repeating Characters</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span>(<span class="params">self, s: str</span>) -&gt; int:</span></span><br><span class="line">    </span><br><span class="line">    cur = defaultdict(int)</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        cur[s[right]] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> cur[s[right]] &gt; <span class="number">1</span>:</span><br><span class="line">            cur[s[left]] -= <span class="number">1</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        res = max(res, right - left)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> res </span><br></pre></td></tr></table></figure>
+<h2 id="239-Sliding-Window-Maximum"><a href="#239-Sliding-Window-Maximum" class="headerlink" title="239. Sliding Window Maximum"></a>239. Sliding Window Maximum</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums: List[int], k: int</span>) -&gt; List[int]:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">window_push</span>(<span class="params">n</span>):</span></span><br><span class="line">        <span class="comment"># delete all element less than n</span></span><br><span class="line">        <span class="keyword">while</span> window <span class="keyword">and</span> window[<span class="number">-1</span>] &lt; n:</span><br><span class="line">            window.pop()</span><br><span class="line">        window.append(n)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">window_get_max</span>():</span></span><br><span class="line">        <span class="keyword">return</span> window[<span class="number">0</span>] <span class="keyword">if</span> window <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">window_pop</span>(<span class="params">n</span>):</span></span><br><span class="line">        <span class="keyword">return</span> window.popleft() <span class="keyword">if</span> window <span class="keyword">and</span> n == window[<span class="number">0</span>] <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    window = deque([])</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> i, n <span class="keyword">in</span> enumerate(nums):</span><br><span class="line">        window_push(n)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i &gt;= k - <span class="number">1</span>:</span><br><span class="line">            <span class="comment"># generate res when i &gt;= k - 1</span></span><br><span class="line">            res.append(window_get_max())</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># remove left</span></span><br><span class="line">            window_pop(nums[i - k + <span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+      
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
+      
+        <a href="/tags/Algorithm/">Algorithm</a>
+      
+        <a href="/tags/Python/">Python</a>
+      
+        <a href="/tags/Leetcode/">Leetcode</a>
+      
+        <a href="/tags/Two-Pointers/">Two Pointers</a>
+      
+        <a href="/tags/Sliding-windows/">Sliding windows</a>
+      
+      </div>
+    
+    
+      
+
+      
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2021/01/01/al-two-pointers/">http://testsiling.github.io/2021/01/01/al-two-pointers/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
+      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
+  </div>
+
+    
+  </article>
+  
+    
+  <nav class="article-page">
+    
+    
+      <a href="/2020/12/30/al-binary-search-2/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Algorithm - Binary Search (2)<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
+  </nav>
+
+
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Template"><span class="toc-text">Template</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#76-Minimum-Window-Substring"><span class="toc-text">76. Minimum Window Substring</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#567-Permutation-in-String"><span class="toc-text">567. Permutation in String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#438-Find-All-Anagrams-in-a-String"><span class="toc-text">438. Find All Anagrams in a String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Longest-Substring-Without-Repeating-Characters"><span class="toc-text">3. Longest Substring Without Repeating Characters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#239-Sliding-Window-Maximum"><span class="toc-text">239. Sliding Window Maximum</span></a></li></ol>
+    </div>
+  </aside>
+
+
+
+  
+
+
+        </div>
+      </main>
+      <footer class="footer syuanpi fadeIn" id="footer">
+  <hr>
+  <div class="footer-wrapper">
+    <div class="left">
+      <div class="contact-icon">
+  
+  
+    <a target="_blank" rel="noopener" href="https://github.com/testsiling" class="iconfont icon-github" title="github"></a>
+  
+    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/silingchen0" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+</div>
+
+    </div>
+    <div class="right">
+      <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>2017 ~ 2021</span>
+        <span>❤</span>
+        <span>Siling Chen</span>
+    </div>
+    <div class="theme">
+        <span>
+            Powered by
+            <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo </a>
+        </span>
+        <span>
+            Theme
+            <a target="_blank" rel="noopener" href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-eye"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-team"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+
+    </div>
+  </div>
+</footer>
+    </div>
+    <div class="tagcloud" id="tagcloud">
+  <div class="tagcloud-taglist">
+  
+    <div class="tagcloud-tag">
+      <button>Algorithm</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Python</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Leetcode</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Backtracking</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Binary Search</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Linked List</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Two Pointers</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Sorting</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Heap</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Searching</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Stack</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Tree</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Structure</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>BFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Hash Table</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Sliding windows</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Data Mining</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>DFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Computer Science</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NFA</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>RegExp</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>docker</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>container</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>devops</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Big Data</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Database</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>NoSQL</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Relational Database</button>
+    </div>
+  
+  </div>
+  
+    <div class="tagcloud-postlist active">
+      <h2>Algorithm</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/09/al-sort-classical/">
+            <time class="tagcloud-posttime">2020 / 12 / 09</time>
+            <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/10/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 10</time>
+            <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/01/al-two-pointers/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/data-strcture-cheatsheet/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Data Structure Cheat Sheet</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Python</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/09/al-sort-classical/">
+            <time class="tagcloud-posttime">2020 / 12 / 09</time>
+            <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/10/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 10</time>
+            <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/01/al-two-pointers/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/05/04/python1/">
+            <time class="tagcloud-posttime">2020 / 05 / 04</time>
+            <span>Closure and Decorator in Python</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/19/search-methods/">
+            <time class="tagcloud-posttime">2017 / 11 / 19</time>
+            <span>Three Searching Methods</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Leetcode</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/10/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 10</time>
+            <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/01/al-two-pointers/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Dynamic Programming</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Linked List</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Two Pointers</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/01/al-linked-list-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 01</time>
+            <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/01/al-two-pointers/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Sorting</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/09/al-sort-classical/">
+            <time class="tagcloud-posttime">2020 / 12 / 09</time>
+            <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/10/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 10</time>
+            <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Heap</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/09/al-sort-classical/">
+            <time class="tagcloud-posttime">2020 / 12 / 09</time>
+            <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Searching</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/10/al-sort-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 10</time>
+            <span>Algorithm - Sorting (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Stack</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/16/al-stack-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 16</time>
+            <span>Algorithm - Stack (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Tree</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Structure</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/data-strcture-cheatsheet/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Data Structure Cheat Sheet</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>BFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Hash Table</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Sliding windows</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/01/al-two-pointers/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/decision-tree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/freq-pat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/map-reduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Data Mining</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/apriori/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Apriori Algorithm</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/decision-tree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/09/freq-pat/">
+            <time class="tagcloud-posttime">2018 / 05 / 09</time>
+            <span>Frequent Patterns and Association Rules</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>日常</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Daily</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Machine Learning</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/decision-tree/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Decision Tree</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/05/18/evaluation/">
+            <time class="tagcloud-posttime">2018 / 05 / 18</time>
+            <span>Accuracy, Precision, Recall, F1</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/04/ml-lr/">
+            <time class="tagcloud-posttime">2018 / 03 / 04</time>
+            <span>Machine Learning(2) Linear Regression</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/03/03/ml-overview/">
+            <time class="tagcloud-posttime">2018 / 03 / 03</time>
+            <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>DFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Computer Science</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NFA</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>RegExp</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/04/19/dfa/">
+            <time class="tagcloud-posttime">2018 / 04 / 19</time>
+            <span>DFA & NFA</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>docker</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker-1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>container</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker-1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>devops</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/10/22/docker-1/">
+            <time class="tagcloud-posttime">2020 / 10 / 22</time>
+            <span>Docker Container</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Big Data</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2018/08/23/map-reduce/">
+            <time class="tagcloud-posttime">2018 / 08 / 23</time>
+            <span>MapReduce Overview</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>NoSQL</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/06/03/mongodb/">
+            <time class="tagcloud-posttime">2019 / 06 / 03</time>
+            <span>MongoDB Notes</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/05/26/nosql/">
+            <time class="tagcloud-posttime">2019 / 05 / 26</time>
+            <span>NoSQL Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Relational Database</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2017/11/11/normalform/">
+            <time class="tagcloud-posttime">2017 / 11 / 11</time>
+            <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+</div>
+
+  </div>
+  <div class="backtop syuanpi melt toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+
+  <div class="search" id="search">
+    <div class="input">
+      <input type="text" id="search-input" placeholder="search?" autofocus>
+    </div>
+    <div id="search-result"></div>
+  </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config;executed=true">MathJax.Hub.Config({tex2jax: {inlineMath: [["$","$"], ["\\(","\\)"]]}});</script>
+
+
+
+
+
+
+
+
+
+  
+<script src="/script/scheme/banderole.js"></script>
+
+
+
+
+<script src="/script/bootstarp.js"></script>
+
+
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
+
+
+
+</body>
+</html>
