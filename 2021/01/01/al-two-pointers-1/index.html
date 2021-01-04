@@ -263,9 +263,9 @@
 <h2 id="76-Minimum-Window-Substring"><a href="#76-Minimum-Window-Substring" class="headerlink" title="76. Minimum Window Substring"></a>76. Minimum Window Substring</h2><ol>
 <li>Extend right pointer until all characters found</li>
 <li>Log smallest window</li>
-<li>Shrink left pointer until found the next valid window<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minWindow</span>(<span class="params">self, s: str, t: str</span>) -&gt; str:</span></span><br><span class="line">    needs = dict(Counter(t))</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    counter = len(t)</span><br><span class="line">    min_len = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># search [left. right)</span></span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        </span><br><span class="line">        c = s[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">        	<span class="comment"># is a valid character</span></span><br><span class="line">        	needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># update res</span></span><br><span class="line">            <span class="keyword">if</span> (right - left) &lt; min_len:</span><br><span class="line">                min_len = right - left</span><br><span class="line">                res = s[left: right]</span><br><span class="line">            </span><br><span class="line">            c = s[left]</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-</li>
+<li>Shrink left pointer until found the next valid window</li>
 </ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minWindow</span>(<span class="params">self, s: str, t: str</span>) -&gt; str:</span></span><br><span class="line">    needs = dict(Counter(t))</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    counter = len(t)</span><br><span class="line">    min_len = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># search [left. right)</span></span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        </span><br><span class="line">        c = s[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">        	<span class="comment"># is a valid character</span></span><br><span class="line">        	needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># update res</span></span><br><span class="line">            <span class="keyword">if</span> (right - left) &lt; min_len:</span><br><span class="line">                min_len = right - left</span><br><span class="line">                res = s[left: right]</span><br><span class="line">            </span><br><span class="line">            c = s[left]</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <h2 id="567-Permutation-in-String"><a href="#567-Permutation-in-String" class="headerlink" title="567. Permutation in String"></a>567. Permutation in String</h2><p>True criteria is <code>len(s1) == window size</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkInclusion</span>(<span class="params">self, s1: str, s2: str</span>) -&gt; bool:</span></span><br><span class="line">    </span><br><span class="line">    needs = Counter(s1)</span><br><span class="line">    counter = len(s1)</span><br><span class="line">    </span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s2):</span><br><span class="line">        </span><br><span class="line">        c = s2[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">            needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            <span class="keyword">if</span> right - left == len(s1):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            c = s2[left]</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="438-Find-All-Anagrams-in-a-String"><a href="#438-Find-All-Anagrams-in-a-String" class="headerlink" title="438. Find All Anagrams in a String"></a>438. Find All Anagrams in a String</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findAnagrams</span>(<span class="params">self, s: str, p: str</span>) -&gt; List[int]:</span></span><br><span class="line">    needs = Counter(p)</span><br><span class="line">    counter = len(p)</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    res = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        c = s[right]</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">            needs[c] -= <span class="number">1</span></span><br><span class="line">            counter -= needs[c] &gt;= <span class="number">0</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># is a valid window</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> counter:</span><br><span class="line">            c = s[left]</span><br><span class="line">            <span class="keyword">if</span> (right - left) == len(p):</span><br><span class="line">                res.append(left)</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> needs:</span><br><span class="line">                needs[c] += <span class="number">1</span></span><br><span class="line">                counter += needs[c] &gt; <span class="number">0</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <h2 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3. Longest Substring Without Repeating Characters"></a>3. Longest Substring Without Repeating Characters</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span>(<span class="params">self, s: str</span>) -&gt; int:</span></span><br><span class="line">    </span><br><span class="line">    cur = defaultdict(int)</span><br><span class="line">    left = right = <span class="number">0</span></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> right &lt; len(s):</span><br><span class="line">        cur[s[right]] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> cur[s[right]] &gt; <span class="number">1</span>:</span><br><span class="line">            cur[s[left]] -= <span class="number">1</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        right += <span class="number">1</span></span><br><span class="line">        res = max(res, right - left)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> res </span><br></pre></td></tr></table></figure>
@@ -444,6 +444,14 @@
     </div>
   
     <div class="tagcloud-tag">
+      <button>DFS</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>Backtracking</button>
     </div>
   
@@ -453,10 +461,6 @@
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Greedy</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -496,10 +500,6 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Hash Table</button>
     </div>
   
@@ -516,19 +516,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>日常</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Daily</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Bash</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Shell</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>日常</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Daily</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -585,13 +585,6 @@
       <h2>Algorithm</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/28/al-backtracking-2/">
             <time class="tagcloud-posttime">2020 / 12 / 28</time>
             <span>Algorithm - Backtracking (2)</span>
@@ -599,9 +592,9 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
           </a>
         </div>
       
@@ -609,6 +602,13 @@
           <a href="/2020/12/30/al-binary-search-2/">
             <time class="tagcloud-posttime">2020 / 12 / 30</time>
             <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
           </a>
         </div>
       
@@ -662,16 +662,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/01/al-two-pointers-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 01</time>
-            <span>Algorithm - Two Pointers (1) - Sliding Window</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/26/al-tree-3/">
-            <time class="tagcloud-posttime">2020 / 12 / 26</time>
-            <span>Algorithm - Tree (3)</span>
+          <a href="/2021/01/01/al-two-pointers-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1) - Sliding Window</span>
           </a>
         </div>
       
@@ -695,13 +695,6 @@
       <h2>Python</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/28/al-backtracking-2/">
             <time class="tagcloud-posttime">2020 / 12 / 28</time>
             <span>Algorithm - Backtracking (2)</span>
@@ -709,9 +702,9 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
           </a>
         </div>
       
@@ -719,6 +712,13 @@
           <a href="/2020/12/30/al-binary-search-2/">
             <time class="tagcloud-posttime">2020 / 12 / 30</time>
             <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
           </a>
         </div>
       
@@ -772,16 +772,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/01/al-two-pointers-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 01</time>
-            <span>Algorithm - Two Pointers (1) - Sliding Window</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/26/al-tree-3/">
-            <time class="tagcloud-posttime">2020 / 12 / 26</time>
-            <span>Algorithm - Tree (3)</span>
+          <a href="/2021/01/01/al-two-pointers-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1) - Sliding Window</span>
           </a>
         </div>
       
@@ -812,13 +812,6 @@
       <h2>Leetcode</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/28/al-backtracking-2/">
             <time class="tagcloud-posttime">2020 / 12 / 28</time>
             <span>Algorithm - Backtracking (2)</span>
@@ -826,9 +819,9 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
           </a>
         </div>
       
@@ -836,6 +829,13 @@
           <a href="/2020/12/30/al-binary-search-2/">
             <time class="tagcloud-posttime">2020 / 12 / 30</time>
             <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
           </a>
         </div>
       
@@ -882,16 +882,16 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/01/al-two-pointers-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 01</time>
-            <span>Algorithm - Two Pointers (1) - Sliding Window</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/26/al-tree-3/">
-            <time class="tagcloud-posttime">2020 / 12 / 26</time>
-            <span>Algorithm - Tree (3)</span>
+          <a href="/2021/01/01/al-two-pointers-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 01</time>
+            <span>Algorithm - Two Pointers (1) - Sliding Window</span>
           </a>
         </div>
       
@@ -905,45 +905,26 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
+      <h2>DFS</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Dynamic Programming</h2>
+      <h2>Greedy</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/14/al-dp-1/">
@@ -955,7 +936,45 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Dynamic Programming</h2>
       
         <div class="tagcloud-post">
           <a href="/2020/12/14/al-dp-1/">
@@ -1131,25 +1150,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
@@ -1268,30 +1268,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>日常</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/04/29/beginagain/">
-            <time class="tagcloud-posttime">2020 / 04 / 29</time>
-            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Daily</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/04/29/beginagain/">
-            <time class="tagcloud-posttime">2020 / 04 / 29</time>
-            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>Bash</h2>
       
         <div class="tagcloud-post">
@@ -1310,6 +1286,30 @@
           <a href="/2019/07/23/bash-notes/">
             <time class="tagcloud-posttime">2019 / 07 / 23</time>
             <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>日常</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Daily</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
           </a>
         </div>
       
