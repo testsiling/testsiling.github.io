@@ -23,7 +23,7 @@
 
 
 
-  <meta name="keywords" content="Algorithm, Python, Leetcode, Dynamic Programming, nlvi" />
+  <meta name="keywords" content="Algorithm, Python, Leetcode, Greedy, Dynamic Programming, nlvi" />
 
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
@@ -255,13 +255,25 @@
 <li>322.Coin Change</li>
 <li>55.Jump Game</li>
 <li>62.Unique Paths</li>
+<li>300.Longest Increasing Subsequence</li>
+<li>91.Decode Way</li>
 </ul>
 <a id="more"></a>
-<h2 id="322-Coin-Change"><a href="#322-Coin-Change" class="headerlink" title="322. Coin Change"></a>322. Coin Change</h2><h3 id="Bottom-up"><a href="#Bottom-up" class="headerlink" title="Bottom up"></a>Bottom up</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">self, coins: List[int], amount: int</span>) -&gt; int:</span></span><br><span class="line">    dp = [amount + <span class="number">1</span>] * (amount + <span class="number">1</span>)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(dp)):</span><br><span class="line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            <span class="keyword">if</span> i - coin &gt;= <span class="number">0</span>:</span><br><span class="line">                dp[i] = min(dp[i], <span class="number">1</span> + dp[i - coin])</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span> <span class="keyword">if</span> dp[amount] == amount + <span class="number">1</span> <span class="keyword">else</span> dp[amount]</span><br></pre></td></tr></table></figure>
+<h2 id="322-Coin-Change"><a href="#322-Coin-Change" class="headerlink" title="322. Coin Change"></a>322. Coin Change</h2><p>for example coins = [1,2,5], x = 11<br>Three cases for selecting the last coin:</p>
+<ol>
+<li>the last coin is $1, f(x) = f(x - 1) + 1</li>
+<li>the last coin is $2, f(x) = f(x - 2) + 1</li>
+<li>the last coin is $5, f(x) = f(x - 5) + 1</li>
+</ol>
+<p>Hense, <code>f(x) = min(f(x - 1), f(x - 2), f(x - 5)) + 1</code><br>we can use recursion to eaisly get the global optimized result, with lot of redandunt calculation (TLE)<br>Or we can pre-calculate and save f(0) ~ f(x), to avoid repeating calculation.<br><code>f(0) = 0</code> is the base case. <code>x - coin &lt; 0</code> is invalid, for instance, f(1) = -1, no result. </p>
+<h3 id="Bottom-up"><a href="#Bottom-up" class="headerlink" title="Bottom up"></a>Bottom up</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">self, coins: List[int], amount: int</span>) -&gt; int:</span></span><br><span class="line">    dp = [amount + <span class="number">1</span>] * (amount + <span class="number">1</span>)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(dp)):</span><br><span class="line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            <span class="keyword">if</span> i - coin &gt;= <span class="number">0</span>:</span><br><span class="line">                dp[i] = min(dp[i], <span class="number">1</span> + dp[i - coin])</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span> <span class="keyword">if</span> dp[amount] == amount + <span class="number">1</span> <span class="keyword">else</span> dp[amount]</span><br></pre></td></tr></table></figure>
 <h3 id="Top-down"><a href="#Top-down" class="headerlink" title="Top down"></a>Top down</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">self, coins: List[int], amount: int</span>) -&gt; int:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">amount</span>):</span></span><br><span class="line">        <span class="keyword">if</span> amount <span class="keyword">in</span> found:</span><br><span class="line">            <span class="keyword">return</span> found[amount]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> amount == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> amount &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        </span><br><span class="line">        res = float(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            cur = change(amount - coin)</span><br><span class="line">            <span class="keyword">if</span> cur != <span class="number">-1</span>:</span><br><span class="line">                res = min(res, <span class="number">1</span> + cur)</span><br><span class="line">        </span><br><span class="line">        found[amount] = res <span class="keyword">if</span> res != float(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">else</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    </span><br><span class="line">    found = &#123;&#125;</span><br><span class="line">    change(amount)</span><br><span class="line">    <span class="keyword">return</span> found[amount] <span class="keyword">if</span> amount != <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<h2 id="55-Jump-Game"><a href="#55-Jump-Game" class="headerlink" title="55. Jump Game"></a>55. Jump Game</h2><p>This is a top-down solution. start the the second last element, if <code>nums[i] + i &gt;= last element</code>, find the previous step from </p>
+<h2 id="55-Jump-Game"><a href="#55-Jump-Game" class="headerlink" title="55. Jump Game"></a>55. Jump Game</h2><p>This is a top-down solution. start the the second last element, if <code>nums[i] + i &gt;= last element</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">canJump</span>(<span class="params">self, nums: List[int]</span>) -&gt; bool:</span></span><br><span class="line">    last = len(nums) - <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># from the second last element</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums) - <span class="number">2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> (nums[i] + i) &gt;= last:</span><br><span class="line">            last = i</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> last == <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<h2 id="62-Unique-Paths"><a href="#62-Unique-Paths" class="headerlink" title="62. Unique Paths"></a>62. Unique Paths</h2><p>if you draw the board, for example m = 3, n = 7<br>the number is the number of ways you can get to that grid.<br>the right-bottom coner is thr right resule. A bottom-up solution<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1, 1, 1, 1,  1,  1,  1</span><br><span class="line">1, 2, 3, 4,  5,  6,  7</span><br><span class="line">1, 3, 6, 10, 15, 21, 28</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uniquePaths</span>(<span class="params">self, m: int, n: int</span>) -&gt; int:</span></span><br><span class="line">    paths = [[<span class="number">1</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)]</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">1</span>, m):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            paths[r][c] = paths[r - <span class="number">1</span>][c] + paths[r][c - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> paths[<span class="number">-1</span>][<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="62-Unique-Paths"><a href="#62-Unique-Paths" class="headerlink" title="62. Unique Paths"></a>62. Unique Paths</h2><p>If you draw the board, for example m = 3, n = 7, then fill in the number of ways you can get to that a cell, the right-bottom coner is thr right resule. A bottom-up solution.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1, 1, 1, 1,  1,  1,  1</span><br><span class="line">1, 2, 3, 4,  5,  6,  7</span><br><span class="line">1, 3, 6, 10, 15, 21, 28</span><br></pre></td></tr></table></figure><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uniquePaths</span>(<span class="params">self, m: int, n: int</span>) -&gt; int:</span></span><br><span class="line">    paths = [[<span class="number">1</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)]</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">1</span>, m):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            paths[r][c] = paths[r - <span class="number">1</span>][c] + paths[r][c - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> paths[<span class="number">-1</span>][<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
+<h2 id="300-Longest-Increasing-Subsequence"><a href="#300-Longest-Increasing-Subsequence" class="headerlink" title="300. Longest Increasing Subsequence"></a>300. Longest Increasing Subsequence</h2><p>I don’t think anyone can really thinkof the greedy + binary search solution. Probaly excepting the author, and pro poker players?<br>Anyway, here’s the DP solution. Time complexity is O(n^2). dp table logs the LIS ending with <code>nums[i]</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lengthOfLIS</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    dp = [<span class="number">1</span>] * len(nums)</span><br><span class="line">    res = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; nums[j]:</span><br><span class="line">                dp[i] = max(dp[i], dp[j] + <span class="number">1</span>)</span><br><span class="line">        res = max(res, dp[i])</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
+<h2 id="91-Decode-Way"><a href="#91-Decode-Way" class="headerlink" title="91. Decode Way"></a>91. Decode Way</h2><p>Recursion with memorization. If you draw down the decision tree, that will be pretty straightward.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numDecodings</span>(<span class="params">self, s: str</span>) -&gt; int:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode</span>(<span class="params">s</span>):</span></span><br><span class="line">        <span class="keyword">if</span> s <span class="keyword">in</span> memo:</span><br><span class="line">            <span class="keyword">return</span> memo[s]</span><br><span class="line">        <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> len(s) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        ways = decode(s[<span class="number">1</span>:])</span><br><span class="line">        <span class="keyword">if</span> int(s[:<span class="number">2</span>]) &lt;= <span class="number">26</span>:</span><br><span class="line">            ways += decode(s[<span class="number">2</span>:])</span><br><span class="line">        memo[s] = ways</span><br><span class="line">        <span class="keyword">return</span> ways</span><br><span class="line">    </span><br><span class="line">    memo = &#123;<span class="string">&#x27;&#x27;</span>: <span class="number">1</span>&#125;</span><br><span class="line">    <span class="keyword">return</span> decode(s)</span><br></pre></td></tr></table></figure></p>
+<p>DP<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numDecodings</span>(<span class="params">self, s: str</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> len(s) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    dp = [<span class="number">0</span>] * len(s)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    dp[<span class="number">1</span>] += s[<span class="number">1</span>] != <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    dp[<span class="number">1</span>] += <span class="number">10</span> &lt;= int(s[:<span class="number">2</span>]) &lt;= <span class="number">26</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(s)):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># single digit</span></span><br><span class="line">        <span class="keyword">if</span> s[i] != <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            dp[i] += dp[i - <span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># double digits</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">10</span> &lt;= int(s[i - <span class="number">1</span> : i + <span class="number">1</span>]) &lt;= <span class="number">26</span>:</span><br><span class="line">            dp[i] += dp[i - <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure></p>
 
       
     
@@ -274,6 +286,8 @@
         <a href="/tags/Python/">Python</a>
       
         <a href="/tags/Leetcode/">Leetcode</a>
+      
+        <a href="/tags/Greedy/">Greedy</a>
       
         <a href="/tags/Dynamic-Programming/">Dynamic Programming</a>
       
@@ -308,6 +322,12 @@
   
     
   <nav class="article-page">
+    
+      <a href="/2021/01/10/al-dp-3/" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!
+        </span>
+      </a>
     
     
       <a href="/2021/01/03/al-two-pointers-2/" id="art-right" class="art-right">
@@ -356,7 +376,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#322-Coin-Change"><span class="toc-text">322. Coin Change</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bottom-up"><span class="toc-text">Bottom up</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-down"><span class="toc-text">Top down</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#55-Jump-Game"><span class="toc-text">55. Jump Game</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#62-Unique-Paths"><span class="toc-text">62. Unique Paths</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#322-Coin-Change"><span class="toc-text">322. Coin Change</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bottom-up"><span class="toc-text">Bottom up</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-down"><span class="toc-text">Top down</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#55-Jump-Game"><span class="toc-text">55. Jump Game</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#62-Unique-Paths"><span class="toc-text">62. Unique Paths</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#300-Longest-Increasing-Subsequence"><span class="toc-text">300. Longest Increasing Subsequence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#91-Decode-Way"><span class="toc-text">91. Decode Way</span></a></li></ol>
     </div>
   </aside>
 
@@ -564,6 +584,10 @@
       <button>Relational Database</button>
     </div>
   
+    <div class="tagcloud-tag">
+      <button>Design</button>
+    </div>
+  
   </div>
   
     <div class="tagcloud-postlist active">
@@ -678,6 +702,13 @@
           <a href="/2021/01/06/al-dp-2/">
             <time class="tagcloud-posttime">2021 / 01 / 06</time>
             <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -805,6 +836,20 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -908,6 +953,20 @@
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -936,6 +995,13 @@
           <a href="/2020/12/14/al-dp-1/">
             <time class="tagcloud-posttime">2020 / 12 / 14</time>
             <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
           </a>
         </div>
       
@@ -993,6 +1059,13 @@
           <a href="/2021/01/06/al-dp-2/">
             <time class="tagcloud-posttime">2021 / 01 / 06</time>
             <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -1138,6 +1211,13 @@
           <a href="/2020/12/26/data-strcture-cheatsheet/">
             <time class="tagcloud-posttime">2020 / 12 / 26</time>
             <span>Data Structure Cheat Sheet</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
@@ -1516,6 +1596,18 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Design</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       

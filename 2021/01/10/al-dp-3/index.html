@@ -23,6 +23,8 @@
 
 
 
+  <meta name="keywords" content="Algorithm, Python, Leetcode, Dynamic Programming, nlvi" />
+
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
 <link rel="apple-touch-startup-image" media="(orientation: landscape)" href="assets/apple-touch-startup-image-2048x1496.png">
@@ -83,11 +85,7 @@
 }
 </style>
 
-  <title>
-  
-    Sliding windows · BUG DEVELOPER
-  
-</title>
+  <title> Algorithm - Dynamic Programming (3) - Buy & Sell Stock! · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -231,77 +229,150 @@
         <div class="main-wrapper">
           
     
-  <div class="archive syuanpi fadeInRightShort" id="archive">
+  
+  <article class="
+  post
+   is_post 
+  ">
+    <header class="post-header">
+      <div class="post-time syuanpi fadeInRightShort back-1">
+        <div class="post-time-wrapper">
+          
+          <time>2021-01-10</time>
+          
+        </div>
+      </div>
+      <h1 class="post-title syuanpi fadeInRightShort back-2">
+        
+          Algorithm - Dynamic Programming (3) - Buy & Sell Stock!
+        
+      </h1>
+    </header>
+    <div class="post-content syuanpi fadeInRightShort back-3">
+      
+        <h1 id="Best-Time-to-Buy-and-Sell-Stock-Problem-Set"><a href="#Best-Time-to-Buy-and-Sell-Stock-Problem-Set" class="headerlink" title="[Best Time to Buy and Sell Stock] Problem Set"></a>[Best Time to Buy and Sell Stock] Problem Set</h1><p>Leetcode Dynamic Programming Problem Set (3)</p>
+<ul>
+<li>121.Best Time to Buy and Sell Stock</li>
+<li>122.Best Time to Buy and Sell Stock II</li>
+<li>123.Best Time to Buy and Sell Stock III</li>
+</ul>
+<a id="more"></a>
+<p>There are 3 options in each trade day: <strong>buy, sell, hold</strong><br>We can use a 3d array to log all situations:<br><code>dp[i][k][1 or 0]</code> = <code>the maximum profit at the end of the i-th day with at most k transactions and with 0 or 1 stock in our hand AFTER taking the action</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># either always haven&#x27;t got stock, or sold a stock. </span></span><br><span class="line">dp[i][k][<span class="number">0</span>] = max(dp[i<span class="number">-1</span>][k][<span class="number">0</span>], dp[i<span class="number">-1</span>][k][<span class="number">1</span>] + prices[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># either I kept the existed stock, or bought one.</span></span><br><span class="line">dp[i][k][<span class="number">1</span>] = max(dp[i<span class="number">-1</span>][k][<span class="number">1</span>], dp[i<span class="number">-1</span>][k<span class="number">-1</span>][<span class="number">0</span>] - prices[i])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Base case：dp[-1] means before day 0, haven&#x27;t start yet.</span></span><br><span class="line">dp[<span class="number">-1</span>][k][<span class="number">0</span>] = dp[i][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">dp[<span class="number">-1</span>][k][<span class="number">1</span>] = dp[i][<span class="number">0</span>][<span class="number">1</span>] = float(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Recurrence relations:</span></span><br><span class="line">dp[i][k][<span class="number">0</span>] = max(dp[i<span class="number">-1</span>][k][<span class="number">0</span>], dp[i<span class="number">-1</span>][k][<span class="number">1</span>] + prices[i])</span><br><span class="line">dp[i][k][<span class="number">1</span>] = max(dp[i<span class="number">-1</span>][k][<span class="number">1</span>], dp[i<span class="number">-1</span>][k<span class="number">-1</span>][<span class="number">0</span>] - prices[i])</span><br></pre></td></tr></table></figure>
+<h2 id="121-Best-Time-to-Buy-and-Sell-Stock"><a href="#121-Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="121. Best Time to Buy and Sell Stock"></a>121. Best Time to Buy and Sell Stock</h2><p>k = 1.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span>(<span class="params">self, prices: List[int]</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> len(prices) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    buy = prices[<span class="number">0</span>]</span><br><span class="line">    profit = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(prices)):</span><br><span class="line">        buy = min(prices[i], buy)</span><br><span class="line">        profit = max(profit, prices[i] - buy)</span><br><span class="line">    <span class="keyword">return</span> profit</span><br></pre></td></tr></table></figure></p>
+<h2 id="122-Best-Time-to-Buy-and-Sell-Stock-II"><a href="#122-Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="122. Best Time to Buy and Sell Stock II"></a>122. Best Time to Buy and Sell Stock II</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span>(<span class="params">self, prices: List[int]</span>) -&gt; int:</span></span><br><span class="line">    last_buy = -prices[<span class="number">0</span>]  <span class="comment"># have one stock, either bought or kept</span></span><br><span class="line">    last_sell = <span class="number">0</span>  <span class="comment"># have no stock, either sold or kept</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(prices)):</span><br><span class="line">        cur_buy = max(last_buy, last_sell - prices[i])</span><br><span class="line">        cur_sell = max(last_sell, last_buy+ prices[i])</span><br><span class="line">        last_buy = cur_buy</span><br><span class="line">        last_sell = cur_sell</span><br><span class="line">    <span class="keyword">return</span> last_sell</span><br></pre></td></tr></table></figure>
+<h2 id="123-Best-Time-to-Buy-and-Sell-Stock-III"><a href="#123-Best-Time-to-Buy-and-Sell-Stock-III" class="headerlink" title="123. Best Time to Buy and Sell Stock III"></a>123. Best Time to Buy and Sell Stock III</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span>(<span class="params">self, prices: List[int]</span>) -&gt; int:</span></span><br><span class="line">    <span class="comment"># last_k_numberOfStock</span></span><br><span class="line">    gain_1_1, gain_2_1 = float(<span class="string">&#x27;-inf&#x27;</span>), float(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">    gain_1_0, gain_2_0 = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> prices:</span><br><span class="line">        gain_2_0 = max(gain_2_0, gain_2_1 + p)</span><br><span class="line">        gain_2_1 = max(gain_2_1, gain_1_0 - p)</span><br><span class="line">        gain_1_0 = max(gain_1_0, gain_1_1 + p)</span><br><span class="line">        gain_1_1 = max(gain_1_1, -p)</span><br><span class="line">    <span class="keyword">return</span> gain_2_0</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems">Most consistent ways of dealing with the series of stock problems</a></li>
+</ul>
+
+      
+    
+    </div>
+    
+      <div class="post-tags syuanpi fadeInRightShort back-3">
+      
+        <a href="/tags/Algorithm/">Algorithm</a>
+      
+        <a href="/tags/Python/">Python</a>
+      
+        <a href="/tags/Leetcode/">Leetcode</a>
+      
+        <a href="/tags/Dynamic-Programming/">Dynamic Programming</a>
+      
+      </div>
+    
     
       
+
       
-        
-          </section>
-        
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Two pointers problem set (2)</p>
-<ul>
-<li>11.Container With Most Water</li>
-<li>532.K-diff Pairs in an Array</li>
-</ul>
-<p>N Sum problem set:</p>
-<ul>
-<li>1.Two Sum</li>
-<li>167.Two Sum II - Input array is sorted</li>
-<li>15.3Sum</li>
-<li>16.3Sum Closest</li>
-<li>18.4Sum</li>
-</ul>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2021-01-03
-            </time>
-            <a  class="archive-post-link" href="/2021/01/03/al-two-pointers-2/">
-              Algorithm - Two Pointers (2)
-            </a>
-          </div>
-        </div>
+  <hr class="copy-line">
+  <div class="post-copyright">
+    <div class="copy-author">
+      <span>Author :</span>
+      <span>Siling Chen</span>
+    </div>
+    <div class="copy-url">
+      <span>Url :</span>
+      <a href="http://testsiling.github.io/2021/01/10/al-dp-3/">http://testsiling.github.io/2021/01/10/al-dp-3/</a>
+    </div>
+    <div class="copy-origin">
+      <span>Origin :</span>
+      <a href="http://testsiling.github.io">http://testsiling.github.io</a>
+    </div>
+    <div class="copy-license">
       
-        
-          </section>
-        
-        <div class="archive-post">
-          <div class="archive-post-content">
-            
-              <p>Two pointers problem set (1) - Sliding Window</p>
-<ul>
-<li>76.Minimum Window Substring</li>
-<li>567.Permutation in String</li>
-<li>438.Find All Anagrams in a String</li>
-<li>3.Longest Substring Without Repeating Characters</li>
-<li>239.Sliding Window Maximum</li>
-</ul>
-            
-          </div>
-          <div class="archive-post-info">
-            <time class="archive-post-time">
-              2021-01-01
-            </time>
-            <a  class="archive-post-link" href="/2021/01/01/al-two-pointers-1/">
-              Algorithm - Two Pointers (1) - Sliding Window
-            </a>
-          </div>
-        </div>
-      
-      
-        </section></section>
-      
+      <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-ND 4.0</a>
+    </div>
   </div>
+
+    
+  </article>
   
-  <nav class="pagination">
-      <span class="page-number current">1</span>
+    
+  <nav class="article-page">
+    
+      <a href="/2021/01/12/al-design-1/" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Algorithm - Design (1)
+        </span>
+      </a>
+    
+    
+      <a href="/2021/01/06/al-dp-2/" id="art-right" class="art-right">
+        <span class="prev-title">
+          Algorithm - Dynamic Programming (2)<i class="iconfont icon-right"></i>
+        </span>
+      </a>
+    
   </nav>
 
 
+    
+  <i id="com-switch" class="iconfont icon-down jumping-in long infinite" style="font-size:24px;display:block;text-align:center;transform:rotate(180deg);"></i>
+  <div class="post-comments" id="post-comments" style="display: block;margin: auto 16px;">
+    
+
+    
+    
+<!-- Disqus Comments -->
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+<script type="text/javascript">
+    var disqus_shortname = 'xianyu-1';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+    
+
+  </div>
+
+
+
+  
+  
+    
+  
+  <aside class="post-toc">
+    <div class="title"><span>Index</span></div>
+    <div class="toc-inner">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Best-Time-to-Buy-and-Sell-Stock-Problem-Set"><span class="toc-text">[Best Time to Buy and Sell Stock] Problem Set</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#121-Best-Time-to-Buy-and-Sell-Stock"><span class="toc-text">121. Best Time to Buy and Sell Stock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#122-Best-Time-to-Buy-and-Sell-Stock-II"><span class="toc-text">122. Best Time to Buy and Sell Stock II</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#123-Best-Time-to-Buy-and-Sell-Stock-III"><span class="toc-text">123. Best Time to Buy and Sell Stock III</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    </div>
+  </aside>
+
+
+
+  
 
 
         </div>
@@ -1575,6 +1646,20 @@
 <script src="/script/bootstarp.js"></script>
 
 
+
+<script>
+if (nlviconfig.theme.toc) {
+  setTimeout(function() {
+    if (nlviconfig.theme.scheme === 'balance') {
+      $("#header").addClass("show_toc");
+    } else if (nlviconfig.theme.scheme === 'banderole') {
+      $(".container-inner").addClass("has_toc");
+      $(".post-toc .title").addClass("show");
+      $(".toc-inner").addClass("show");
+    }
+  }, 1000);
+}
+</script>
 
 
 

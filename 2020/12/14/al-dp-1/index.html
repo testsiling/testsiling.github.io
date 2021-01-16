@@ -257,7 +257,6 @@
 <li>121.Best Time to Buy and Sell Stock *</li>
 <li>53.Maximum Subarray</li>
 <li>198.House Robber</li>
-<li>91.Decode Ways</li>
 <li>746.Min Cost Climbing Stairs</li>
 <li>42.Trapping Rain Water</li>
 </ul>
@@ -270,8 +269,6 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
 <h2 id="53-Maximum-Subarray"><a href="#53-Maximum-Subarray" class="headerlink" title="53. Maximum Subarray"></a>53. Maximum Subarray</h2><h3 id="Greedy"><a href="#Greedy" class="headerlink" title="Greedy"></a>Greedy</h3><p>find local max sum, update global max sum if greater.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    max_sum = nums[<span class="number">0</span>]</span><br><span class="line">    cur_sum = nums[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums[<span class="number">1</span>:]:</span><br><span class="line">        cur_sum = max(cur_sum + num, num)</span><br><span class="line">        max_sum = max(cur_sum, max_sum)</span><br><span class="line">    <span class="keyword">return</span> max_sum</span><br></pre></td></tr></table></figure></p>
 <h3 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    dp = [<span class="number">0</span>] * len(nums)</span><br><span class="line">    <span class="keyword">for</span> i, num <span class="keyword">in</span> enumerate(nums)</span><br><span class="line">        dp[i] = max(dp[i - <span class="number">1</span>] + num, num)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
 <h2 id="198-House-Robber"><a href="#198-House-Robber" class="headerlink" title="198. House Robber"></a>198. House Robber</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rob</span>(<span class="params">self, nums: List[int]</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> len(nums) &lt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">return</span> max(nums, default=<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    gain = [<span class="number">0</span>] * len(nums)</span><br><span class="line">    gain[<span class="number">0</span>], gain[<span class="number">1</span>] = nums[<span class="number">0</span>], max(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(nums)):</span><br><span class="line">        <span class="comment"># Two options:</span></span><br><span class="line">        <span class="comment"># 1) rob it, gain(i) = gain(i-2) + current money</span></span><br><span class="line">        <span class="comment"># 2) don&#x27;t rob it, current max gain is gain(i - 1)</span></span><br><span class="line">        gain[i] = max(gain[i - <span class="number">2</span>] + nums[i], gain[i - <span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> gain[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="91-Decode-Way"><a href="#91-Decode-Way" class="headerlink" title="91. Decode Way"></a>91. Decode Way</h2><p>The second base case is so…. fu k.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numDecodings</span>(<span class="params">self, s: str</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> len(s) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    dp = [<span class="number">0</span>] * len(s)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">    dp[<span class="number">1</span>] += s[<span class="number">1</span>] != <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    dp[<span class="number">1</span>] += <span class="number">10</span> &lt;= int(s[:<span class="number">2</span>]) &lt;= <span class="number">26</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(s)):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># single digit</span></span><br><span class="line">        <span class="keyword">if</span> s[i] != <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">            dp[i] += dp[i - <span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># double digits</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">10</span> &lt;= int(s[i - <span class="number">1</span> : i + <span class="number">1</span>]) &lt;= <span class="number">26</span>:</span><br><span class="line">            dp[i] += dp[i - <span class="number">2</span>]</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
 <h2 id="746-Min-Cost-Climbing-Stairs"><a href="#746-Min-Cost-Climbing-Stairs" class="headerlink" title="746. Min Cost Climbing Stairs"></a>746. Min Cost Climbing Stairs</h2><p>Either pay the last step, or pay the second last step<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minCostClimbingStairs</span>(<span class="params">self, cost: List[int]</span>) -&gt; int:</span></span><br><span class="line">    s0, s1 = cost[<span class="number">0</span>], cost[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, len(cost)):</span><br><span class="line">        s1, s0 = min(cost[i] + s0, cost[i] + s1), s1</span><br><span class="line">    <span class="keyword">return</span> min(s0, s1)</span><br></pre></td></tr></table></figure></p>
 <h2 id="42-Trapping-Rain-Water"><a href="#42-Trapping-Rain-Water" class="headerlink" title="42. Trapping Rain Water"></a>42. Trapping Rain Water</h2><p>DP solution, log left max, then log right max<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trap</span>(<span class="params">self, height: List[int]</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> len(height) &lt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    left_max, right_max = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># left, right, rain</span></span><br><span class="line">    dp = [[<span class="number">0</span>, <span class="number">0</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(height))]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># find left max:</span></span><br><span class="line">    <span class="keyword">for</span> i, h <span class="keyword">in</span> enumerate(height):</span><br><span class="line">        dp[i][<span class="number">0</span>] = left_max</span><br><span class="line">        left_max = max(h, left_max)</span><br><span class="line">    </span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line">    <span class="comment"># find right max, calculate rain</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(height) - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        dp[i][<span class="number">1</span>] = right_max</span><br><span class="line">        right_max = max(right_max, height[i])</span><br><span class="line">        res += max(min(dp[i][<span class="number">0</span>], dp[i][<span class="number">1</span>]) - height[i], <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure><br>It also has a stack solution.</p>
 
@@ -376,7 +373,7 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#70-Climbing-Stairs"><span class="toc-text">70. Climbing Stairs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#121-Best-Time-to-Buy-and-Sell-Stock"><span class="toc-text">121. Best Time to Buy and Sell Stock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#53-Maximum-Subarray"><span class="toc-text">53. Maximum Subarray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Greedy"><span class="toc-text">Greedy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming"><span class="toc-text">Dynamic Programming</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#198-House-Robber"><span class="toc-text">198. House Robber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#91-Decode-Way"><span class="toc-text">91. Decode Way</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#746-Min-Cost-Climbing-Stairs"><span class="toc-text">746. Min Cost Climbing Stairs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#42-Trapping-Rain-Water"><span class="toc-text">42. Trapping Rain Water</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#70-Climbing-Stairs"><span class="toc-text">70. Climbing Stairs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#121-Best-Time-to-Buy-and-Sell-Stock"><span class="toc-text">121. Best Time to Buy and Sell Stock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#53-Maximum-Subarray"><span class="toc-text">53. Maximum Subarray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Greedy"><span class="toc-text">Greedy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic-Programming"><span class="toc-text">Dynamic Programming</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#198-House-Robber"><span class="toc-text">198. House Robber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#746-Min-Cost-Climbing-Stairs"><span class="toc-text">746. Min Cost Climbing Stairs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#42-Trapping-Rain-Water"><span class="toc-text">42. Trapping Rain Water</span></a></li></ol>
     </div>
   </aside>
 
@@ -584,6 +581,10 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
       <button>Relational Database</button>
     </div>
   
+    <div class="tagcloud-tag">
+      <button>Design</button>
+    </div>
+  
   </div>
   
     <div class="tagcloud-postlist active">
@@ -698,6 +699,13 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           <a href="/2021/01/06/al-dp-2/">
             <time class="tagcloud-posttime">2021 / 01 / 06</time>
             <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -825,6 +833,20 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -928,6 +950,20 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           </a>
         </div>
       
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -956,6 +992,13 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           <a href="/2020/12/14/al-dp-1/">
             <time class="tagcloud-posttime">2020 / 12 / 14</time>
             <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
           </a>
         </div>
       
@@ -1013,6 +1056,13 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           <a href="/2021/01/06/al-dp-2/">
             <time class="tagcloud-posttime">2021 / 01 / 06</time>
             <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -1158,6 +1208,13 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           <a href="/2020/12/26/data-strcture-cheatsheet/">
             <time class="tagcloud-posttime">2020 / 12 / 26</time>
             <span>Data Structure Cheat Sheet</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
@@ -1536,6 +1593,18 @@ step_i = step_{i-1} + step_{i-2}</script><p>Tried to use recursion but it was su
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Design</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
