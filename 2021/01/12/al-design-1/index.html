@@ -253,14 +253,22 @@
         <p>Leetcode Data Structure Design Problem Set (1)</p>
 <ul>
 <li>146.LRU Cache</li>
+<li>460.LFU Cache</li>
 <li>284.Peeking Iterator</li>
 <li>341.Flatten Nested List Iterator</li>
+<li>295.Find Median from Data Stream</li>
 </ul>
 <a id="more"></a>
-<h2 id="146-LRU-Cache"><a href="#146-LRU-Cache" class="headerlink" title="146. LRU Cache"></a>146. LRU Cache</h2><p>Use double-linked list as cache, disconnect the old node and reconnect it to the tail of the list when <code>get</code> an value. add new node to the tail and drop the first (the least used) node if exceed capacity.<br>use a dictionary to log {key: node}<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, k=<span class="number">0</span>, v=<span class="number">0</span></span>):</span></span><br><span class="line">        self.k = k</span><br><span class="line">        self.v = v</span><br><span class="line">        self.prev = <span class="literal">None</span></span><br><span class="line">        self.next = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, capacity: int</span>):</span></span><br><span class="line">        self.head = Node()</span><br><span class="line">        self.tail = Node()</span><br><span class="line">        self.head.next = self.tail</span><br><span class="line">        self.tail.prev = self.head</span><br><span class="line">        self.dict = &#123;&#125;</span><br><span class="line">        self.cap = capacity</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_remove</span>(<span class="params">self, node</span>):</span></span><br><span class="line">        <span class="comment"># remove the least used node</span></span><br><span class="line">        node.prev.next = node.next</span><br><span class="line">        node.next.prev = node.prev</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_add</span>(<span class="params">self, node</span>):</span></span><br><span class="line">        last = self.tail.prev</span><br><span class="line">        self.tail.prev = node</span><br><span class="line">        last.next = node</span><br><span class="line">        node.next = self.tail</span><br><span class="line">        node.prev = last</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, key: int</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.dict:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># move recent used node to tail</span></span><br><span class="line">        node = self.dict[key]</span><br><span class="line">        self._remove(node)</span><br><span class="line">        self._add(node)</span><br><span class="line">        <span class="keyword">return</span> node.v</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span>(<span class="params">self, key: int, value: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="comment"># remove the existed key first, we will add new anyway</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.dict:</span><br><span class="line">            node = self.dict[key]</span><br><span class="line">            self._remove(node)</span><br><span class="line">            <span class="keyword">del</span> self.dict[key]</span><br><span class="line">        </span><br><span class="line">        node = Node(key, value)</span><br><span class="line">        self._add(node)</span><br><span class="line">        self.dict[key] = node</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> len(self.dict) &gt; self.cap:</span><br><span class="line">            least = self.head.next</span><br><span class="line">            self._remove(least)</span><br><span class="line">            <span class="keyword">del</span> self.dict[least.k]</span><br></pre></td></tr></table></figure></p>
+<h2 id="146-LRU-Cache"><a href="#146-LRU-Cache" class="headerlink" title="146. LRU Cache"></a>146. LRU Cache</h2><p>Design Least Recently Used (LRU) Cache<br>Use double-linked list as cache, disconnect the old node and reconnect it to the tail of the list when <code>get</code> an value. add new node to the tail and drop the first (the least used) node if exceed capacity.<br>use a dictionary to log {key: node}<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, k=<span class="number">0</span>, v=<span class="number">0</span></span>):</span></span><br><span class="line">        self.k = k</span><br><span class="line">        self.v = v</span><br><span class="line">        self.prev = <span class="literal">None</span></span><br><span class="line">        self.next = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, capacity: int</span>):</span></span><br><span class="line">        self.head = Node()</span><br><span class="line">        self.tail = Node()</span><br><span class="line">        self.head.next = self.tail</span><br><span class="line">        self.tail.prev = self.head</span><br><span class="line">        self.dict = &#123;&#125;</span><br><span class="line">        self.cap = capacity</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_remove</span>(<span class="params">self, node</span>):</span></span><br><span class="line">        <span class="comment"># remove the least used node</span></span><br><span class="line">        node.prev.next = node.next</span><br><span class="line">        node.next.prev = node.prev</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_add</span>(<span class="params">self, node</span>):</span></span><br><span class="line">        last = self.tail.prev</span><br><span class="line">        self.tail.prev = node</span><br><span class="line">        last.next = node</span><br><span class="line">        node.next = self.tail</span><br><span class="line">        node.prev = last</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, key: int</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.dict:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># move recent used node to tail</span></span><br><span class="line">        node = self.dict[key]</span><br><span class="line">        self._remove(node)</span><br><span class="line">        self._add(node)</span><br><span class="line">        <span class="keyword">return</span> node.v</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put</span>(<span class="params">self, key: int, value: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="comment"># remove the existed key first, we will add new anyway</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.dict:</span><br><span class="line">            node = self.dict[key]</span><br><span class="line">            self._remove(node)</span><br><span class="line">            <span class="keyword">del</span> self.dict[key]</span><br><span class="line">        </span><br><span class="line">        node = Node(key, value)</span><br><span class="line">        self._add(node)</span><br><span class="line">        self.dict[key] = node</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> len(self.dict) &gt; self.cap:</span><br><span class="line">            least = self.head.next</span><br><span class="line">            self._remove(least)</span><br><span class="line">            <span class="keyword">del</span> self.dict[least.k]</span><br></pre></td></tr></table></figure></p>
+<h2 id="460-LFU-Cache"><a href="#460-LFU-Cache" class="headerlink" title="460. LFU Cache"></a>460. LFU Cache</h2><p>Least Frequently Used (LFU) cache<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></p>
 <h2 id="284-Peeking-Iterator"><a href="#284-Peeking-Iterator" class="headerlink" title="284. Peeking Iterator"></a>284. Peeking Iterator</h2><p>My initial idea was create a one-way linked list, or initialize a normal list, which is too easy. But if so, it lose the meaning as iterator. Then I second thought, I don’t even need a list, I just need a buffer for the peak value.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PeekingIterator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, iterator</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Initialize your data structure here.</span></span><br><span class="line"><span class="string">        :type iterator: Iterator</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self._iterator = iterator</span><br><span class="line">        self._peak = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">peek</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Returns the next element in the iteration without advancing the iterator.</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self._peak <span class="keyword">and</span> self._iterator.hasNext():</span><br><span class="line">            self._peak = self._iterator.next()</span><br><span class="line">        <span class="keyword">return</span> self._peak</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> self._peak:</span><br><span class="line">            peak = self._peak</span><br><span class="line">            self._peak = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">return</span> peak</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> self._iterator.next()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasNext</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> self._peak:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> self._iterator.hasNext()</span><br></pre></td></tr></table></figure></p>
 <h2 id="341-Flatten-Nested-List-Iterator"><a href="#341-Flatten-Nested-List-Iterator" class="headerlink" title="341. Flatten Nested List Iterator"></a>341. Flatten Nested List Iterator</h2><p>Flatten nested list in init. Use deque to faster pop the first element.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NestedIterator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, nestedList: [NestedInteger]</span>):</span></span><br><span class="line">        self.ls = deque()</span><br><span class="line">        self.flatten(nestedList)</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">self, nestedList</span>):</span></span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> nestedList:</span><br><span class="line">            <span class="keyword">if</span> l.isInteger():</span><br><span class="line">                self.ls.append(l.getInteger())</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.flatten(l.getList())      </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span>(<span class="params">self</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">return</span> self.ls.popleft() <span class="keyword">if</span> self.hasNext <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">            </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hasNext</span>(<span class="params">self</span>) -&gt; bool:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.ls) &gt; <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
-
+<h2 id="295-Find-Median-from-Data-Stream"><a href="#295-Find-Median-from-Data-Stream" class="headerlink" title="295. Find Median from Data Stream"></a>295. Find Median from Data Stream</h2><p>Dividing data into 2 heaps (length as equal as possible):</p>
+<ul>
+<li>Use max heap to store a chunk of smaller elements</li>
+<li>Use min heap to store another chunk of larger elements.<br>Reference:<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/oklQN_xjYy--_fbFkd9wMg">https://mp.weixin.qq.com/s/oklQN_xjYy--_fbFkd9wMg</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        initialize your data structure here.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.small = []  <span class="comment"># store smaller data, maxHeap</span></span><br><span class="line">        self.large = []  <span class="comment"># store larger data, minHeap</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addNum</span>(<span class="params">self, num: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># insert into large</span></span><br><span class="line">        <span class="keyword">if</span> len(self.small) &gt;= len(self.large):</span><br><span class="line">            heapq.heappush(self.small, -num)</span><br><span class="line">            heapq.heappush(self.large, -heapq.heappop(self.small))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            heapq.heappush(self.large, num)</span><br><span class="line">            heapq.heappush(self.small, -heapq.heappop(self.large))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMedian</span>(<span class="params">self</span>) -&gt; float:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.small) &gt; len(self.large):</span><br><span class="line">            <span class="keyword">return</span>  -self.small[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">elif</span> len(self.large) &gt; len(self.small):</span><br><span class="line">            <span class="keyword">return</span> self.large[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># even len</span></span><br><span class="line">            <span class="keyword">return</span> (-self.small[<span class="number">0</span>] + self.large[<span class="number">0</span>]) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
       
     
     </div>
@@ -306,6 +314,12 @@
   
     
   <nav class="article-page">
+    
+      <a href="/2021/01/15/python2/" id="art-left" class="art-left">
+        <span class="next-title">
+          <i class="iconfont icon-left"></i>Some Useful Tricks in Python 3
+        </span>
+      </a>
     
     
       <a href="/2021/01/10/al-dp-3/" id="art-right" class="art-right">
@@ -354,7 +368,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#146-LRU-Cache"><span class="toc-text">146. LRU Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#284-Peeking-Iterator"><span class="toc-text">284. Peeking Iterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#341-Flatten-Nested-List-Iterator"><span class="toc-text">341. Flatten Nested List Iterator</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#146-LRU-Cache"><span class="toc-text">146. LRU Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#460-LFU-Cache"><span class="toc-text">460. LFU Cache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#284-Peeking-Iterator"><span class="toc-text">284. Peeking Iterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#341-Flatten-Nested-List-Iterator"><span class="toc-text">341. Flatten Nested List Iterator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#295-Find-Median-from-Data-Stream"><span class="toc-text">295. Find Median from Data Stream</span></a></li></ol>
     </div>
   </aside>
 
@@ -443,7 +457,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Dynamic Programming</button>
+      <button>Data Structure</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -452,6 +470,10 @@
   
     <div class="tagcloud-tag">
       <button>Two Pointers</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Dynamic Programming</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -472,10 +494,6 @@
   
     <div class="tagcloud-tag">
       <button>Tree</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -507,15 +525,15 @@
     </div>
   
     <div class="tagcloud-tag">
+      <button>Machine Learning</button>
+    </div>
+  
+    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Machine Learning</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -562,10 +580,6 @@
       <button>Relational Database</button>
     </div>
   
-    <div class="tagcloud-tag">
-      <button>Design</button>
-    </div>
-  
   </div>
   
     <div class="tagcloud-postlist active">
@@ -600,13 +614,6 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Algorithm - Linked List (1)</span>
@@ -614,9 +621,30 @@
         </div>
       
         <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
           <a href="/2020/12/09/al-sort-classical/">
             <time class="tagcloud-posttime">2020 / 12 / 09</time>
             <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -676,20 +704,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/10/al-dp-3/">
-            <time class="tagcloud-posttime">2021 / 01 / 10</time>
-            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -724,9 +738,9 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
@@ -738,9 +752,30 @@
         </div>
       
         <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
           <a href="/2020/12/09/al-sort-classical/">
             <time class="tagcloud-posttime">2020 / 12 / 09</time>
             <span>Classical Sorting Algorithms</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -801,30 +836,16 @@
         </div>
       
         <div class="tagcloud-post">
+          <a href="/2021/01/15/python2/">
+            <time class="tagcloud-posttime">2021 / 01 / 15</time>
+            <span>Some Useful Tricks in Python 3</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/12/al-design-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 12</time>
-            <span>Algorithm - Design (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/10/al-dp-3/">
-            <time class="tagcloud-posttime">2021 / 01 / 10</time>
-            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -862,9 +883,9 @@
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
@@ -872,6 +893,27 @@
           <a href="/2020/12/01/al-linked-list-1/">
             <time class="tagcloud-posttime">2020 / 12 / 01</time>
             <span>Algorithm - Linked List (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -924,27 +966,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/12/al-design-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 12</time>
-            <span>Algorithm - Design (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/10/al-dp-3/">
-            <time class="tagcloud-posttime">2021 / 01 / 10</time>
-            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -970,16 +991,16 @@
       <h2>Greedy</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
           </a>
         </div>
       
@@ -1024,26 +1045,45 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Dynamic Programming</h2>
+      <h2>Data Structure</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
           </a>
         </div>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/10/al-dp-3/">
-            <time class="tagcloud-posttime">2021 / 01 / 10</time>
-            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          <a href="/2020/12/26/al-tree-3/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Algorithm - Tree (3)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/26/data-strcture-cheatsheet/">
+            <time class="tagcloud-posttime">2020 / 12 / 26</time>
+            <span>Data Structure Cheat Sheet</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Design</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/12/al-design-1/">
+            <time class="tagcloud-posttime">2021 / 01 / 12</time>
+            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
@@ -1082,6 +1122,32 @@
           <a href="/2021/01/03/al-two-pointers-2/">
             <time class="tagcloud-posttime">2021 / 01 / 03</time>
             <span>Algorithm - Two Pointers (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Dynamic Programming</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/10/al-dp-3/">
+            <time class="tagcloud-posttime">2021 / 01 / 10</time>
+            <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
           </a>
         </div>
       
@@ -1163,39 +1229,6 @@
           <a href="/2020/12/26/al-tree-3/">
             <time class="tagcloud-posttime">2020 / 12 / 26</time>
             <span>Algorithm - Tree (3)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Data Structure</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/26/al-tree-3/">
-            <time class="tagcloud-posttime">2020 / 12 / 26</time>
-            <span>Algorithm - Tree (3)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/26/data-strcture-cheatsheet/">
-            <time class="tagcloud-posttime">2020 / 12 / 26</time>
-            <span>Data Structure Cheat Sheet</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/12/al-design-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 12</time>
-            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
@@ -1363,30 +1396,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>日常</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/04/29/beginagain/">
-            <time class="tagcloud-posttime">2020 / 04 / 29</time>
-            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Daily</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/04/29/beginagain/">
-            <time class="tagcloud-posttime">2020 / 04 / 29</time>
-            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>Machine Learning</h2>
       
         <div class="tagcloud-post">
@@ -1414,6 +1423,30 @@
           <a href="/2018/03/03/ml-overview/">
             <time class="tagcloud-posttime">2018 / 03 / 03</time>
             <span>Machine Learning(1) Overview</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>日常</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Daily</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/04/29/beginagain/">
+            <time class="tagcloud-posttime">2020 / 04 / 29</time>
+            <span>第 1 篇 - 关于停更，状态更新，续更，和一些屁话</span>
           </a>
         </div>
       
@@ -1574,18 +1607,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Design</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/12/al-design-1/">
-            <time class="tagcloud-posttime">2021 / 01 / 12</time>
-            <span>Algorithm - Design (1)</span>
           </a>
         </div>
       
