@@ -131,9 +131,9 @@
     
     <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
     
-    <category term="Greedy" scheme="http://testsiling.github.io/tags/Greedy/"/>
-    
     <category term="Dynamic Programming" scheme="http://testsiling.github.io/tags/Dynamic-Programming/"/>
+    
+    <category term="Greedy" scheme="http://testsiling.github.io/tags/Greedy/"/>
     
   </entry>
   
@@ -453,9 +453,9 @@
     
     <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
     
-    <category term="Greedy" scheme="http://testsiling.github.io/tags/Greedy/"/>
-    
     <category term="Dynamic Programming" scheme="http://testsiling.github.io/tags/Dynamic-Programming/"/>
+    
+    <category term="Greedy" scheme="http://testsiling.github.io/tags/Greedy/"/>
     
   </entry>
   
@@ -598,11 +598,11 @@
     
     <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
     
-    <category term="DFS" scheme="http://testsiling.github.io/tags/DFS/"/>
-    
     <category term="Tree" scheme="http://testsiling.github.io/tags/Tree/"/>
     
     <category term="BFS" scheme="http://testsiling.github.io/tags/BFS/"/>
+    
+    <category term="DFS" scheme="http://testsiling.github.io/tags/DFS/"/>
     
     <category term="Hash Table" scheme="http://testsiling.github.io/tags/Hash-Table/"/>
     
@@ -637,13 +637,13 @@
     
     <category term="Leetcode" scheme="http://testsiling.github.io/tags/Leetcode/"/>
     
-    <category term="DFS" scheme="http://testsiling.github.io/tags/DFS/"/>
-    
     <category term="Data Structure" scheme="http://testsiling.github.io/tags/Data-Structure/"/>
     
     <category term="Tree" scheme="http://testsiling.github.io/tags/Tree/"/>
     
     <category term="BFS" scheme="http://testsiling.github.io/tags/BFS/"/>
+    
+    <category term="DFS" scheme="http://testsiling.github.io/tags/DFS/"/>
     
   </entry>
   
