@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>Algorithm - KMP</title>
+      <link href="2021/02/21/al-kmp/"/>
+      <url>2021/02/21/al-kmp/</url>
+      
+        <content type="html"><![CDATA[<p>Knuth–Morris–Pratt algorithm, efficient single pattern searching algorithm.<br><a id="more"></a></p><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">p</span>):</span></span><br><span class="line">    kmp = [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(p)):</span><br><span class="line">        <span class="keyword">while</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> p[i] != p[j]:</span><br><span class="line">            j = kmp[j]</span><br><span class="line">        <span class="keyword">if</span> p[i] == p[j]:</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        kmp.append(j)</span><br><span class="line">    <span class="keyword">return</span> kmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">match</span>(<span class="params">s, p</span>):</span></span><br><span class="line">    kmp = build(p)</span><br><span class="line">    ans = []</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        <span class="keyword">while</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> s[i] != p[j]:</span><br><span class="line">            j = kmp[j]</span><br><span class="line">        <span class="keyword">if</span> s[i] == p[j]:</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> j == len(p):</span><br><span class="line">            ans.append(i - len(p) + <span class="number">1</span>)</span><br><span class="line">            j = kmp[j]</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure><h2 id="Exercises"><a href="#Exercises" class="headerlink" title="Exercises"></a>Exercises</h2><h3 id="1392-Longest-Happy-Prefix"><a href="#1392-Longest-Happy-Prefix" class="headerlink" title="1392. Longest Happy Prefix"></a>1392. Longest Happy Prefix</h3><p>using the KMP table.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">longestPrefix</span>(<span class="params">self, s: str</span>) -&gt; str:</span></span><br><span class="line">    nxt = [<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(s)):</span><br><span class="line">        <span class="keyword">while</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> s[i] != s[j]:</span><br><span class="line">            j = nxt[j]</span><br><span class="line">        <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        nxt.append(j)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> s[:nxt[<span class="number">-1</span>]]</span><br></pre></td></tr></table></figure></p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://zxi.mytechroad.com/blog/sp/kmp-algorithm-sp19/">huahua</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> KMP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Algorithm - Union Find - Overview</title>
       <link href="2021/02/02/al-union-find-0/"/>
       <url>2021/02/02/al-union-find-0/</url>
