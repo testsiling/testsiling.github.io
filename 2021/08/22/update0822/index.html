@@ -23,7 +23,7 @@
 
 
 
-  <meta name="keywords" content="Algorithm, Python, Leetcode, Sorting, Searching, nlvi" />
+  <meta name="keywords" content="日常, Daily, nlvi" />
 
 
 <link rel="apple-touch-startup-image" media="(device-width: 375px)" href="assets/apple-launch-1125x2436.png">
@@ -96,7 +96,7 @@
 }
 </style>
 
-  <title> Algorithm - Sorting (1) · BUG DEVELOPER </title>
+  <title> 最近 · BUG DEVELOPER </title>
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="BUG DEVELOPER" type="application/atom+xml">
 </head>
 <body>
@@ -249,35 +249,36 @@
       <div class="post-time syuanpi fadeInRightShort back-1">
         <div class="post-time-wrapper">
           
-          <time>2020-12-10</time>
+          <time>2021-08-22</time>
           
         </div>
       </div>
       <h1 class="post-title syuanpi fadeInRightShort back-2">
         
-          Algorithm - Sorting (1)
+          最近
         
       </h1>
     </header>
     <div class="post-content syuanpi fadeInRightShort back-3">
       
-        <p>Leetcode Sorting Problem Collection (1)</p>
-<ul>
-<li>56.Merge Intervals</li>
-<li>253.Meeting Rooms II</li>
-<li>973.K Closest Points to Origin</li>
-<li>148.Sort List *</li>
-<li>88.Merge Sorted Array</li>
-</ul>
-<a id="more"></a>
-<h2 id="56-Merge-Intervals"><a href="#56-Merge-Intervals" class="headerlink" title="56. Merge Intervals"></a>56. Merge Intervals</h2><p>Sort first, then merge. Pretty straight forward.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, intervals: List[List[int]]</span>) -&gt; List[List[int]]:</span></span><br><span class="line">    intervals.sort()</span><br><span class="line">    begin, end = intervals[<span class="number">0</span>]</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> cur_begin, cur_end <span class="keyword">in</span> intervals[<span class="number">1</span>:]:</span><br><span class="line">        <span class="keyword">if</span> cur_begin &lt;= end:</span><br><span class="line">            end = max(end, cur_end)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append([begin, end])</span><br><span class="line">            begin, end = cur_begin, cur_end</span><br><span class="line">    res.append([begin, end])</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
-<h2 id="253-Meeting-Rooms-II"><a href="#253-Meeting-Rooms-II" class="headerlink" title="253. Meeting Rooms II"></a>253. Meeting Rooms II</h2><p>I use hashmap to log current using rooms. <code>free</code> variable is for reducing times of <code>sum(rooms.values())</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minMeetingRooms</span>(<span class="params">self, intervals: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">    intervals.sort()</span><br><span class="line">    rooms = defaultdict(int)</span><br><span class="line">    cnt, free = <span class="number">0</span>, <span class="number">0</span>  </span><br><span class="line">    <span class="keyword">for</span> start, end <span class="keyword">in</span> intervals:</span><br><span class="line">        <span class="keyword">for</span> time <span class="keyword">in</span> list(rooms.keys()):</span><br><span class="line">            <span class="keyword">if</span> start &gt;= time[<span class="number">-1</span>]:</span><br><span class="line">                free += rooms[time]</span><br><span class="line">                <span class="keyword">del</span> rooms[time] </span><br><span class="line">        rooms[(start, end)] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> free &gt; <span class="number">0</span>:</span><br><span class="line">            free -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> cnt</span><br></pre></td></tr></table></figure></p>
-<h2 id="973-K-Closest-Points-to-Origin"><a href="#973-K-Closest-Points-to-Origin" class="headerlink" title="973. K Closest Points to Origin"></a>973. K Closest Points to Origin</h2><p>I feels like it is a hack… pretty straight forward though.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kClosest</span>(<span class="params">self, points: List[List[int]], K: int</span>) -&gt; List[List[int]]:</span></span><br><span class="line">    points.sort(key = <span class="keyword">lambda</span> p: p[<span class="number">0</span>]**<span class="number">2</span> + p[<span class="number">1</span>]**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> points[:K]</span><br></pre></td></tr></table></figure></p>
-<h2 id="148-Sort-List"><a href="#148-Sort-List" class="headerlink" title="148. Sort List"></a>148. Sort List</h2><p>A nice one, bascially is a merge sort</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sortList</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">l1, l2</span>):</span></span><br><span class="line">      dummy = ListNode()</span><br><span class="line">      cur = dummy</span><br><span class="line">      <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">        <span class="keyword">if</span> l1.val &lt; l2.val:</span><br><span class="line">          cur.next = l1</span><br><span class="line">          l1 = l1.next</span><br><span class="line">          <span class="keyword">else</span>:</span><br><span class="line">            cur.next = l2</span><br><span class="line">            l2 = l2.next</span><br><span class="line">            cur = cur.next</span><br><span class="line">            cur.next = l1 <span class="keyword">if</span> l1 <span class="keyword">else</span> l2</span><br><span class="line">            <span class="keyword">return</span> dummy.next</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.next:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">          </span><br><span class="line">          <span class="comment"># use 2 pointers to divide into 2 lsits</span></span><br><span class="line">          <span class="comment"># slow is list 2</span></span><br><span class="line">          p, slow, fast = <span class="literal">None</span>, head, head</span><br><span class="line">          <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</span><br><span class="line">            p = slow</span><br><span class="line">            slow = slow.next</span><br><span class="line">            fast = fast.next.next</span><br><span class="line">            p.next = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">return</span> merge(self.sortList(head), self.sortList(slow))</span><br></pre></td></tr></table></figure>
-<h2 id="88-Merge-Sorted-Array"><a href="#88-Merge-Sorted-Array" class="headerlink" title="88. Merge Sorted Array"></a>88. Merge Sorted Array</h2><p>I don’t think it is an Easy at all.<br>My initial solution: maintain 2 pointers, current index of nums1, and nums2. If n1 &gt; n2, need ro insert n2 before n1. which means swap all the following digit from n1 till the end of num1.<br>This solution is pretty slow. Time complexity is O(m^n)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, nums1: List[int], m: int, nums2: List[int], n: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    i1, i2 = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i2 &lt; n <span class="keyword">and</span> i1 &lt; m:</span><br><span class="line">        <span class="keyword">if</span> nums1[i1 + i2] &gt; nums2[i2]:</span><br><span class="line">            pre = nums2[i2]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(i1 + i2, m + i2 + <span class="number">1</span>):</span><br><span class="line">                temp = nums1[i]</span><br><span class="line">                nums1[i] = pre</span><br><span class="line">                pre = temp</span><br><span class="line">            i2 += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i1 += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i2 &lt; n:</span><br><span class="line">        nums1[i1 + i2: ] = nums2[i2:]</span><br></pre></td></tr></table></figure></p>
-<p>Assign descending can avoid swapping.<br>time: O(n+m)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, nums1: List[int], m: int, nums2: List[int], n: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    i1 = m - <span class="number">1</span></span><br><span class="line">    i2 = n - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m + n - <span class="number">1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> i1 &lt; <span class="number">0</span>: </span><br><span class="line">            nums1[i] = nums2[i2]</span><br><span class="line">            i2 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> i2 &lt; <span class="number">0</span>:</span><br><span class="line">            nums1[i] = nums1[i1]</span><br><span class="line">            i1 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> nums2[i2] &gt; nums1[i1]:</span><br><span class="line">            nums1[i] = nums2[i2]</span><br><span class="line">            i2 -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            nums1[i] = nums1[i1]</span><br><span class="line">            i1 -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+        <p>好久没更新啦，大家还好吗？也不知道这个blog有没有人在看。我最后一次更新是02/21/21，换了一个工作。新公司在湾区，不过目前是remote，大概明年Q1会搬到湾区，如果疫情好转的话。</p>
+<p>我是4月离开老东家，然后跟Lawrence度了一个长假，5月中入职新公司。刚刚过去的8月刚过了我的社畜两周年纪念日。</p>
+<span id="more"></span>
+<h2 id="关于新工作"><a href="#关于新工作" class="headerlink" title="关于新工作"></a>关于新工作</h2><p>新工作跟以前完全不一样！现在是backend engineer，写API，micro service。刚进去啥都不会，连java都不会，不过边看边写感觉还蛮容易pickup的。关键是新公司的codebase很清晰！ramp up的时候感觉简直像“乡下人进城”一样，全都“哇好厉害”， “哇原来是这样”！用的工具全都没见过，在老东家手动完成的东西，新公司都有健全的工具链，然后各种guideline也很清晰，文档我觉得很健全（反正老东家是完全没有）。同事们都很友善，问什么问题都会得到回应，就整个反馈都很正向，work life balance我觉得客观来讲是很好的，业务熟悉之后很快就完成。很舒适！</p>
+<p>刚开始的时候好多东西不会，学了一些grpc，java，restful，还有一些乱七八糟的东西（有时间会总结出来）。最大的感受就是“有些东西就是你见过就会知道，没见过就是不知道”。很多东西不是多高深，就是没听说过。前三个月读很多文档，我们组管很多个service，每一个都有设计文档，一些自己以前“希望做到但不知道best practice”的东西，这里都有。就收获很多吧。读文档跟挖矿一样，学到很多。</p>
+<p>最近在做一个数据库的项目，一开始是先看了项目的设计文档，然后就觉得哇好厉害啊，每一步给出很多potential solution，分析优缺，跟其他组讨论推进，最后得到这个文档的我，看着就知道我应该要做什么，很清晰。跟别的同事闲聊的时候我就赞这个项目很清晰，同事说lead这个项目的engineer其实跟我差不多经验，相信我很快也可以做到。然后就感叹觉得自己其实并没有从上一份工作中得到很多软件工程上的指引，毕竟是一个非科技公司的偏硬件的组。也感谢自己去新公司的决定。希望不久的将来能成长成独当一面的工程师吧。</p>
+<h2 id="关于找工作"><a href="#关于找工作" class="headerlink" title="关于找工作"></a>关于找工作</h2><p>其实一开始是Sherry老师要跳槽，喊我一起刷题。于是我们俩从12月开始正式刷题，还开了一个刷题打卡群，每天至少刷一题。我们一般新题一天5题，复习的时候高频题一天5-10题也有。我专门新开了一个session，最后一共刷了240题(101 easy, 111 medium, 28 hard)。wepay是我收到的第一个offer，觉得聊得挺好，包裹也满意，就接了，后面其他的就推了不想面了。Sherry老师很快拿到了相当好的offer，比我先走一步去西雅图。刷题打卡还蛮有用的！</p>
+<p>感觉是觉得招工市场真的很好，开始海投之后就拿到了一些不错的面试，都懒得找内推了，跟newgrad的时候简历石沉大海真的差别很大。</p>
+<h2 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h2><p>在我找工的时候就跟Lawrence达成一致：我去哪他去哪。所以当我确定湾区之后，他也开始学习啦。虽然他也是软件工程师，但不知道刷题为何物。给了他Sherry老师留下的cracking the technical interview，对他来说比直接上leetcode硬刷有用。其实我觉得问题不大，毕竟有工作经验。又不是每个公司都考很难的algorithm。我会支持他的！</p>
+<p>最近半年就很顺利，感情甜蜜，工作轻松。5月刚度假完，又定了11月跟朋友们再去一次夏威夷。</p>
+<p>唯一问题可能是之前欠太多信用卡，今年又想max out 401k，现在基本就是月欠族，paycheck还没到手已经被信用卡债/房租预定了，算了一下2022年之前我的财务状况大概不会有任何改善。</p>
+<p>“那没钱怎么去度假呢？” —- 刷信用卡呀。看出来了吧这就是我没钱剩的原因。</p>
+<p>真的好穷。加州税太贵了。我现在交加州税+Philly城市税。没房贷没孩子未婚，税务就一言难尽吧。</p>
+<p>还有一个问题是睡眠问题卷土重来。这次我是完全不懂，以前是读书压力大，工作压力大，但我现在没压力啊，就是睡不了。晚上12am - 1am吃melatonin能睡着，早上4am-5am就醒，有时连续两三天直到真的累得不行，就请假连睡10小时。正在打这篇文章的我，早上4点醒了睡不回去，实在没事做所以来更新了。</p>
+<h2 id="Bottom-Line"><a href="#Bottom-Line" class="headerlink" title="Bottom Line"></a>Bottom Line</h2><p>工作顺利，感情甜蜜。</p>
+<p>希望明年升职加薪。</p>
+<p>希望疫情尽快结束。希望中美关系缓和，签证/运输早日无障碍互通，好久没回国了。</p>
+<p>祝各位万事顺遂！</p>
 
       
     
@@ -285,15 +286,9 @@
     
       <div class="post-tags syuanpi fadeInRightShort back-3">
       
-        <a href="/tags/Algorithm/">Algorithm</a>
+        <a href="/tags/%E6%97%A5%E5%B8%B8/">日常</a>
       
-        <a href="/tags/Python/">Python</a>
-      
-        <a href="/tags/Leetcode/">Leetcode</a>
-      
-        <a href="/tags/Sorting/">Sorting</a>
-      
-        <a href="/tags/Searching/">Searching</a>
+        <a href="/tags/Daily/">Daily</a>
       
       </div>
     
@@ -309,7 +304,7 @@
     </div>
     <div class="copy-url">
       <span>Url :</span>
-      <a href="http://testsiling.github.io/2020/12/10/al-sort-search-1/">http://testsiling.github.io/2020/12/10/al-sort-search-1/</a>
+      <a href="http://testsiling.github.io/2021/08/22/update0822/">http://testsiling.github.io/2021/08/22/update0822/</a>
     </div>
     <div class="copy-origin">
       <span>Origin :</span>
@@ -327,16 +322,10 @@
     
   <nav class="article-page">
     
-      <a href="/2020/12/14/al-dp-1/" id="art-left" class="art-left">
-        <span class="next-title">
-          <i class="iconfont icon-left"></i>Algorithm - Dynamic Programming (1)
-        </span>
-      </a>
     
-    
-      <a href="/2020/12/09/al-sort-classical/" id="art-right" class="art-right">
+      <a href="/2021/02/21/al-kmp-0/" id="art-right" class="art-right">
         <span class="prev-title">
-          Classical Sorting Algorithms<i class="iconfont icon-right"></i>
+          Algorithm - KMP - Overview<i class="iconfont icon-right"></i>
         </span>
       </a>
     
@@ -380,7 +369,7 @@
   <aside class="post-toc">
     <div class="title"><span>Index</span></div>
     <div class="toc-inner">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#56-Merge-Intervals"><span class="toc-text">56. Merge Intervals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#253-Meeting-Rooms-II"><span class="toc-text">253. Meeting Rooms II</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#973-K-Closest-Points-to-Origin"><span class="toc-text">973. K Closest Points to Origin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#148-Sort-List"><span class="toc-text">148. Sort List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#88-Merge-Sorted-Array"><span class="toc-text">88. Merge Sorted Array</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%96%B0%E5%B7%A5%E4%BD%9C"><span class="toc-text">关于新工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%89%BE%E5%B7%A5%E4%BD%9C"><span class="toc-text">关于找工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%94%9F%E6%B4%BB"><span class="toc-text">关于生活</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bottom-Line"><span class="toc-text">Bottom Line</span></a></li></ol>
     </div>
   </aside>
 
