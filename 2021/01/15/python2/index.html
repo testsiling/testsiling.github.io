@@ -265,13 +265,13 @@
 <li>f-string</li>
 <li>:= Walrus Operator</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="f-string"><a href="#f-string" class="headerlink" title="f-string"></a>f-string</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Celine&#x27;</span></span><br><span class="line">score = <span class="number">123.4567</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plus</span>(<span class="params">x</span>)</span></span><br><span class="line"><span class="function">    <span class="title">return</span> <span class="title">score</span> + <span class="title">x</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="params"><span class="string">f&#x27;name = <span class="subst">&#123;name&#125;</span>, score = <span class="subst">&#123;score:<span class="number">.3</span>f&#125;</span>&#x27;</span></span>)  # <span class="title">python</span> 3.6+</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="params"><span class="string">f&#x27;<span class="subst">&#123;name = &#125;</span>, <span class="subst">&#123;score = :<span class="number">.3</span>f&#125;</span>&#x27;</span></span>)  #<span class="title">python</span> 3.8+</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="params"><span class="string">f&#x27;<span class="subst">&#123;score = &#125;</span>, <span class="subst">&#123;plus(<span class="number">100</span>) = &#125;</span>&#x27;</span></span>)</span></span><br></pre></td></tr></table></figure>
 <p>I usually use the first one, just found the new feature in after 3.8.</p>
 <h2 id=""><a href="#" class="headerlink" title=":="></a>:=</h2><p>:= Assignment Expressions (after 3.8)</p>
-<h3 id="scenario-1-local-variable"><a href="#scenario-1-local-variable" class="headerlink" title="scenario 1: local variable"></a>scenario 1: local variable</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0</span>] * <span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># call len(a) twice</span></span><br><span class="line"><span class="keyword">if</span> len(a) &gt; <span class="number">10</span>:</span><br><span class="line">    print(<span class="string">f&#x27;list too long, <span class="subst">&#123;len(a)&#125;</span> elements&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call len(a) once</span></span><br><span class="line">n = len(a)</span><br><span class="line"><span class="keyword">if</span> n &gt; <span class="number">10</span>:</span><br><span class="line">    print(<span class="string">f&#x27;list too long, <span class="subst">&#123;n&#125;</span> elements&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call len(a) once and assign it to x</span></span><br><span class="line"><span class="comment"># needs parenthesis, := piority lower than other operator</span></span><br><span class="line"><span class="keyword">if</span> (x := len(a)) &gt; <span class="number">10</span>:</span><br><span class="line">    print(<span class="string">f&#x27;list too long, <span class="subst">&#123;x&#125;</span> elements&#x27;</span>)</span><br><span class="line">    print(<span class="string">f&#x27;list too long, <span class="subst">&#123;x&#125;</span> elements&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="scanrio-2-while-loop"><a href="#scanrio-2-while-loop" class="headerlink" title="scanrio 2: while loop"></a>scanrio 2: while loop</h3><p>read a string flow till the end.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># basic</span></span><br><span class="line">f1 = io.StringIO(<span class="string">&#x27;123456789&#x27;</span>)</span><br><span class="line">x1 = f1.read(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">while</span> x1:</span><br><span class="line">    print(x1)</span><br><span class="line">    x1 = f1.read(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># better</span></span><br><span class="line">f2 = io.StringIO(<span class="string">&#x27;123456789&#x27;</span>)</span><br><span class="line"><span class="keyword">while</span> (x2 := f2.read(<span class="number">2</span>)) != <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">    print(x2)</span><br></pre></td></tr></table></figure></p>
-<h3 id="scenario-3-in-list-comprehension"><a href="#scenario-3-in-list-comprehension" class="headerlink" title="scenario 3: in list comprehension"></a>scenario 3: in list comprehension</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">targets = [<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>]</span><br><span class="line">my = [<span class="string">&#x27;Apple&#x27;</span>, <span class="string">&#x27;Orange&#x27;</span>, <span class="string">&#x27;Melon&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print all element in my list match in target list</span></span><br><span class="line"><span class="comment"># call lower() twice</span></span><br><span class="line">l1 = [f.lower() <span class="keyword">for</span> f <span class="keyword">in</span> my <span class="keyword">if</span> f.lower() <span class="keyword">in</span> targets]</span><br><span class="line">print(l1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call lower() once</span></span><br><span class="line">l2 = [f <span class="keyword">for</span> fruit <span class="keyword">in</span> my <span class="keyword">if</span> (f:= fruit.lower()) <span class="keyword">in</span> targets]</span><br><span class="line">print(l2)</span><br></pre></td></tr></table></figure>
+<h3 id="scenario-1-local-variable"><a href="#scenario-1-local-variable" class="headerlink" title="scenario 1: local variable"></a>scenario 1: local variable</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0</span>] * <span class="number">11</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># call len(a) twice</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(a) &gt; <span class="number">10</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;list too long, <span class="subst">&#123;<span class="built_in">len</span>(a)&#125;</span> elements&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call len(a) once</span></span><br><span class="line">n = <span class="built_in">len</span>(a)</span><br><span class="line"><span class="keyword">if</span> n &gt; <span class="number">10</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;list too long, <span class="subst">&#123;n&#125;</span> elements&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call len(a) once and assign it to x</span></span><br><span class="line"><span class="comment"># needs parenthesis, := piority lower than other operator</span></span><br><span class="line"><span class="keyword">if</span> (x := <span class="built_in">len</span>(a)) &gt; <span class="number">10</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;list too long, <span class="subst">&#123;x&#125;</span> elements&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;list too long, <span class="subst">&#123;x&#125;</span> elements&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="scanrio-2-while-loop"><a href="#scanrio-2-while-loop" class="headerlink" title="scanrio 2: while loop"></a>scanrio 2: while loop</h3><p>read a string flow till the end.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># basic</span></span><br><span class="line">f1 = io.StringIO(<span class="string">&#x27;123456789&#x27;</span>)</span><br><span class="line">x1 = f1.read(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">while</span> x1:</span><br><span class="line">    <span class="built_in">print</span>(x1)</span><br><span class="line">    x1 = f1.read(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># better</span></span><br><span class="line">f2 = io.StringIO(<span class="string">&#x27;123456789&#x27;</span>)</span><br><span class="line"><span class="keyword">while</span> (x2 := f2.read(<span class="number">2</span>)) != <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(x2)</span><br></pre></td></tr></table></figure></p>
+<h3 id="scenario-3-in-list-comprehension"><a href="#scenario-3-in-list-comprehension" class="headerlink" title="scenario 3: in list comprehension"></a>scenario 3: in list comprehension</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">targets = [<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>]</span><br><span class="line">my = [<span class="string">&#x27;Apple&#x27;</span>, <span class="string">&#x27;Orange&#x27;</span>, <span class="string">&#x27;Melon&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print all element in my list match in target list</span></span><br><span class="line"><span class="comment"># call lower() twice</span></span><br><span class="line">l1 = [f.lower() <span class="keyword">for</span> f <span class="keyword">in</span> my <span class="keyword">if</span> f.lower() <span class="keyword">in</span> targets]</span><br><span class="line"><span class="built_in">print</span>(l1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># call lower() once</span></span><br><span class="line">l2 = [f <span class="keyword">for</span> fruit <span class="keyword">in</span> my <span class="keyword">if</span> (f:= fruit.lower()) <span class="keyword">in</span> targets]</span><br><span class="line"><span class="built_in">print</span>(l2)</span><br></pre></td></tr></table></figure>
       
     
     </div>
@@ -438,11 +438,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -454,15 +454,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -498,11 +502,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -522,19 +526,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -583,10 +587,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -640,6 +640,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -727,13 +734,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -792,6 +792,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -890,13 +897,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1027,76 +1027,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1143,6 +1079,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1175,6 +1149,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1319,7 +1324,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1331,12 +1343,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1461,30 +1473,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1517,6 +1505,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1710,18 +1722,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

@@ -273,17 +273,17 @@
 </ol>
 </li>
 </ul>
-<a id="more"></a>
-<h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a>20. Valid Parentheses</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValid</span>(<span class="params">self, s: str</span>) -&gt; bool:</span></span><br><span class="line">    right = &#123;</span><br><span class="line">        <span class="string">&#x27;)&#x27;</span>: <span class="string">&#x27;(&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;&#125;&#x27;</span>: <span class="string">&#x27;&#123;&#x27;</span>, </span><br><span class="line">        <span class="string">&#x27;]&#x27;</span>: <span class="string">&#x27;[&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="comment"># left bracket</span></span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> right:</span><br><span class="line">            stack.append(c)</span><br><span class="line">        <span class="comment"># right bracket</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> stack <span class="keyword">or</span> stack.pop() != right[c]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> stack</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a>20. Valid Parentheses</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span></span><br><span class="line">    right = &#123;</span><br><span class="line">        <span class="string">&#x27;)&#x27;</span>: <span class="string">&#x27;(&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;&#125;&#x27;</span>: <span class="string">&#x27;&#123;&#x27;</span>, </span><br><span class="line">        <span class="string">&#x27;]&#x27;</span>: <span class="string">&#x27;[&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="comment"># left bracket</span></span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> right:</span><br><span class="line">            stack.append(c)</span><br><span class="line">        <span class="comment"># right bracket</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> stack <span class="keyword">or</span> stack.pop() != right[c]:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> stack</span><br></pre></td></tr></table></figure>
 <h2 id="1249-Minimum-Remove-to-Make-Valid-Parentheses"><a href="#1249-Minimum-Remove-to-Make-Valid-Parentheses" class="headerlink" title="1249. Minimum Remove to Make Valid Parentheses"></a>1249. Minimum Remove to Make Valid Parentheses</h2><ul>
 <li>for right bracket, must match to an existed left bracket, or remove it.</li>
-<li>for left bracket, log its index<br>After scan the whole string, remove open left bracket<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minRemoveToMakeValid</span>(<span class="params">self, s: str</span>) -&gt; str:</span></span><br><span class="line">    open_left = []</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">            res += c</span><br><span class="line">            open_left.append(len(res) - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">elif</span> c == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> open_left:</span><br><span class="line">                res += c</span><br><span class="line">                open_left.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res += c</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> reversed(open_left):</span><br><span class="line">        res = res[:i] + res[i + <span class="number">1</span>: ]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<li>for left bracket, log its index<br>After scan the whole string, remove open left bracket<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minRemoveToMakeValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">    open_left = []</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">            res += c</span><br><span class="line">            open_left.append(<span class="built_in">len</span>(res) - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">elif</span> c == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> open_left:</span><br><span class="line">                res += c</span><br><span class="line">                open_left.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res += c</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(open_left):</span><br><span class="line">        res = res[:i] + res[i + <span class="number">1</span>: ]</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="394-Decode-String"><a href="#394-Decode-String" class="headerlink" title="394. Decode String"></a>394. Decode String</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decodeString</span>(<span class="params">self, s: str</span>) -&gt; str:</span></span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c == <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">            repeat = <span class="string">&#x27;&#x27;</span></span><br><span class="line">            <span class="keyword">while</span> stack:</span><br><span class="line">                x = stack.pop()</span><br><span class="line">                </span><br><span class="line">                <span class="comment"># found substring</span></span><br><span class="line">                <span class="keyword">if</span> x == <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">                    <span class="comment"># find number</span></span><br><span class="line">                    num = <span class="string">&#x27;&#x27;</span></span><br><span class="line">                    <span class="keyword">while</span> stack <span class="keyword">and</span> stack[<span class="number">-1</span>].isdigit():</span><br><span class="line">                        num = stack.pop() + num</span><br><span class="line">                    num = int(num)</span><br><span class="line">                    repeat = repeat * int(num)</span><br><span class="line">                    stack.append(repeat)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                repeat = x + repeat</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append(c)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>
-<h2 id="1209-Remove-All-Adjacent-Duplicates-in-String-II"><a href="#1209-Remove-All-Adjacent-Duplicates-in-String-II" class="headerlink" title="1209. Remove All Adjacent Duplicates in String II"></a>1209. Remove All Adjacent Duplicates in String II</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeDuplicates</span>(<span class="params">self, s: str, k: int</span>) -&gt; str:</span></span><br><span class="line">    stack = []  <span class="comment"># (element, cnt)</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> stack <span class="keyword">and</span> c == stack[<span class="number">-1</span>][<span class="number">0</span>]:</span><br><span class="line">            cnt = stack[<span class="number">-1</span>][<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">            stack.append((c, cnt))</span><br><span class="line">            <span class="keyword">if</span> cnt == k:</span><br><span class="line">                <span class="keyword">for</span> _ <span class="keyword">in</span> range(k):</span><br><span class="line">                    stack.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append((c, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join([x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> stack])</span><br></pre></td></tr></table></figure>
-<h2 id="739-Daily-Temperatures"><a href="#739-Daily-Temperatures" class="headerlink" title="739. Daily Temperatures"></a>739. Daily Temperatures</h2><p>use index to calculate days<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dailyTemperatures</span>(<span class="params">self, T: List[int]</span>) -&gt; List[int]:</span></span><br><span class="line">    stack = []  <span class="comment"># temp, index</span></span><br><span class="line">    warmer = [<span class="number">0</span>] * len(T)</span><br><span class="line">    <span class="keyword">for</span> i, temp <span class="keyword">in</span> enumerate(T):</span><br><span class="line">        <span class="keyword">while</span> stack <span class="keyword">and</span> temp &gt; stack[<span class="number">-1</span>][<span class="number">0</span>]:</span><br><span class="line">            pre_temp, j = stack.pop()</span><br><span class="line">            warmer[j] = i - j</span><br><span class="line">        stack.append((temp, i))</span><br><span class="line">    <span class="keyword">return</span> warmer</span><br></pre></td></tr></table></figure></p>
-<h2 id="71-Simplify-Path"><a href="#71-Simplify-Path" class="headerlink" title="71. Simplify Path"></a>71. Simplify Path</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">simplifyPath</span>(<span class="params">self, path: str</span>) -&gt; str:</span></span><br><span class="line">    stack = []</span><br><span class="line">    paths = path.split(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> paths:</span><br><span class="line">        <span class="keyword">if</span> p == <span class="string">&#x27;..&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> stack:</span><br><span class="line">                stack.pop()</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">elif</span> p == <span class="string">&#x27;.&#x27;</span> <span class="keyword">or</span> p == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append(p)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;/&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>
+<h2 id="394-Decode-String"><a href="#394-Decode-String" class="headerlink" title="394. Decode String"></a>394. Decode String</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decodeString</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> c == <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">            repeat = <span class="string">&#x27;&#x27;</span></span><br><span class="line">            <span class="keyword">while</span> stack:</span><br><span class="line">                x = stack.pop()</span><br><span class="line">                </span><br><span class="line">                <span class="comment"># found substring</span></span><br><span class="line">                <span class="keyword">if</span> x == <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">                    <span class="comment"># find number</span></span><br><span class="line">                    num = <span class="string">&#x27;&#x27;</span></span><br><span class="line">                    <span class="keyword">while</span> stack <span class="keyword">and</span> stack[-<span class="number">1</span>].isdigit():</span><br><span class="line">                        num = stack.pop() + num</span><br><span class="line">                    num = <span class="built_in">int</span>(num)</span><br><span class="line">                    repeat = repeat * <span class="built_in">int</span>(num)</span><br><span class="line">                    stack.append(repeat)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                repeat = x + repeat</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append(c)</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>
+<h2 id="1209-Remove-All-Adjacent-Duplicates-in-String-II"><a href="#1209-Remove-All-Adjacent-Duplicates-in-String-II" class="headerlink" title="1209. Remove All Adjacent Duplicates in String II"></a>1209. Remove All Adjacent Duplicates in String II</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">removeDuplicates</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">    stack = []  <span class="comment"># (element, cnt)</span></span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> stack <span class="keyword">and</span> c == stack[-<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">            cnt = stack[-<span class="number">1</span>][<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">            stack.append((c, cnt))</span><br><span class="line">            <span class="keyword">if</span> cnt == k:</span><br><span class="line">                <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">                    stack.pop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append((c, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join([x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> stack])</span><br></pre></td></tr></table></figure>
+<h2 id="739-Daily-Temperatures"><a href="#739-Daily-Temperatures" class="headerlink" title="739. Daily Temperatures"></a>739. Daily Temperatures</h2><p>use index to calculate days<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dailyTemperatures</span>(<span class="params">self, T: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">    stack = []  <span class="comment"># temp, index</span></span><br><span class="line">    warmer = [<span class="number">0</span>] * <span class="built_in">len</span>(T)</span><br><span class="line">    <span class="keyword">for</span> i, temp <span class="keyword">in</span> <span class="built_in">enumerate</span>(T):</span><br><span class="line">        <span class="keyword">while</span> stack <span class="keyword">and</span> temp &gt; stack[-<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">            pre_temp, j = stack.pop()</span><br><span class="line">            warmer[j] = i - j</span><br><span class="line">        stack.append((temp, i))</span><br><span class="line">    <span class="keyword">return</span> warmer</span><br></pre></td></tr></table></figure></p>
+<h2 id="71-Simplify-Path"><a href="#71-Simplify-Path" class="headerlink" title="71. Simplify Path"></a>71. Simplify Path</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">simplifyPath</span>(<span class="params">self, path: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    paths = path.split(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> paths:</span><br><span class="line">        <span class="keyword">if</span> p == <span class="string">&#x27;..&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> stack:</span><br><span class="line">                stack.pop()</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">elif</span> p == <span class="string">&#x27;.&#x27;</span> <span class="keyword">or</span> p == <span class="string">&#x27;&#x27;</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            stack.append(p)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;/&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>
       
     
     </div>
@@ -456,11 +456,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -472,15 +472,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -516,11 +520,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -540,19 +544,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -601,10 +605,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -658,6 +658,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -745,13 +752,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -810,6 +810,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -908,13 +915,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1045,76 +1045,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1161,6 +1097,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1193,6 +1167,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1337,7 +1342,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1349,12 +1361,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1479,30 +1491,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1535,6 +1523,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1728,18 +1740,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

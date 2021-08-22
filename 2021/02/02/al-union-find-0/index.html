@@ -262,9 +262,9 @@
     <div class="post-content syuanpi fadeInRightShort back-3">
       
         <p>Union find is a algorithm that widly used in check connectivity in a graph. </p>
-<a id="more"></a>
+<span id="more"></span>
 <p>Imagine connecting node as tree. Need to balance it while union and find, or else the time complexity for traversal would be O(N) instead of the height of the tree.</p>
-<h2 id="Sample-Implementation"><a href="#Sample-Implementation" class="headerlink" title="Sample Implementation"></a>Sample Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UF</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, n=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="comment"># n disconnected node</span></span><br><span class="line">        <span class="comment"># number of tree</span></span><br><span class="line">        self.count = n</span><br><span class="line"></span><br><span class="line">        <span class="comment"># the parent of each node</span></span><br><span class="line">        self.parent = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># size of each tree</span></span><br><span class="line">        self.size = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            self.parent[i] = i</span><br><span class="line">            self.size[i] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self, p, q</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        connect p and q</span></span><br><span class="line"><span class="string">        Parameter:</span></span><br><span class="line"><span class="string">            p: int</span></span><br><span class="line"><span class="string">            q: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        rootP = self.find(p)</span><br><span class="line">        rootQ = self.find(q)</span><br><span class="line">        <span class="keyword">if</span> rootP == rootQ:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># for balance purpose </span></span><br><span class="line">        <span class="comment"># append the smaller party to the larger party</span></span><br><span class="line">        <span class="keyword">if</span> self.size[rootP] &gt; self.size[rootQ]:</span><br><span class="line">            self.parent[rootQ] = rootP</span><br><span class="line">            self.size[rootP] += self.size[rootQ]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.parent[rootP] = rootQ</span><br><span class="line">            self.size[rootQ] += self.size[rootQ]</span><br><span class="line">        self.count -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connected</span>(<span class="params">self, p, q</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        check connectivity between p and q</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> self.find(p) == self.find(q)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        find the root of x</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">while</span> self.parent[x] != x:</span><br><span class="line"></span><br><span class="line">            <span class="comment"># balance the tree while finding</span></span><br><span class="line">            self.parent[x] = self.parent[self.parent[x]]</span><br><span class="line">            x = self.parent[x]</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Sample-Implementation"><a href="#Sample-Implementation" class="headerlink" title="Sample Implementation"></a>Sample Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UF</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, n=<span class="number">0</span></span>):</span></span><br><span class="line">        <span class="comment"># n disconnected node</span></span><br><span class="line">        <span class="comment"># number of tree</span></span><br><span class="line">        self.count = n</span><br><span class="line"></span><br><span class="line">        <span class="comment"># the parent of each node</span></span><br><span class="line">        self.parent = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># size of each tree</span></span><br><span class="line">        self.size = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            self.parent[i] = i</span><br><span class="line">            self.size[i] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self, p, q</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        connect p and q</span></span><br><span class="line"><span class="string">        Parameter:</span></span><br><span class="line"><span class="string">            p: int</span></span><br><span class="line"><span class="string">            q: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        rootP = self.find(p)</span><br><span class="line">        rootQ = self.find(q)</span><br><span class="line">        <span class="keyword">if</span> rootP == rootQ:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># for balance purpose </span></span><br><span class="line">        <span class="comment"># append the smaller party to the larger party</span></span><br><span class="line">        <span class="keyword">if</span> self.size[rootP] &gt; self.size[rootQ]:</span><br><span class="line">            self.parent[rootQ] = rootP</span><br><span class="line">            self.size[rootP] += self.size[rootQ]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.parent[rootP] = rootQ</span><br><span class="line">            self.size[rootQ] += self.size[rootQ]</span><br><span class="line">        self.count -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">connected</span>(<span class="params">self, p, q</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        check connectivity between p and q</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> self.find(p) == self.find(q)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        find the root of x</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">while</span> self.parent[x] != x:</span><br><span class="line"></span><br><span class="line">            <span class="comment"># balance the tree while finding</span></span><br><span class="line">            self.parent[x] = self.parent[self.parent[x]]</span><br><span class="line">            x = self.parent[x]</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">wiki</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&amp;mid=2247484751&amp;idx=1&amp;sn=a873c1f51d601bac17f5078c408cc3f6&amp;chksm=9bd7fb47aca07251dd9146e745b4cc5cfdbc527abe93767691732dfba166dfc02fbb7237ddbf&amp;scene=21#wechat_redirect">labuladong - union find (in Chinese)</a></p>
 
       
@@ -437,11 +437,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -453,15 +453,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -497,11 +501,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -521,19 +525,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -582,10 +586,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -639,6 +639,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -726,13 +733,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -791,6 +791,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -889,13 +896,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1026,76 +1026,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1142,6 +1078,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1174,6 +1148,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1318,7 +1323,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1330,12 +1342,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1460,30 +1472,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1516,6 +1504,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1709,18 +1721,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

@@ -270,17 +270,17 @@
 <li>654.Maximum Binary Tree</li>
 <li>106.Construct Binary Tree from Inorder and Postorder Traversal</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 <p>Inorder (Left, Root, Right)<br>Preorder (Root, Left, Right)<br>Postorder (Left, Right, Root)</p>
-<h2 id="99-Recover-Binary-Search-Tree"><a href="#99-Recover-Binary-Search-Tree" class="headerlink" title="99. Recover Binary Search Tree"></a>99. Recover Binary Search Tree</h2><p>In-order tranversal in a Binary Search Tree should get an ascending array. So when <script type="math/tex">Node_i < Node_{i-1}</script> means <script type="math/tex">Node_i</script> is the error node. It should swao with either <script type="math/tex">Node_{i-1}</script> or another error node if found.<br>x, y are pointers of error nodes, <em>pre</em> is used to log the previous node val. <em>node.val</em> shoule always less than <em>pre.val</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recoverTree</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findError</span>(<span class="params">node</span>):</span></span><br><span class="line">        <span class="keyword">nonlocal</span> x, y, pre</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        findError(node.left)</span><br><span class="line">        <span class="keyword">if</span> pre <span class="keyword">and</span> node.val &lt; pre.val:</span><br><span class="line">            y = node</span><br><span class="line">            <span class="comment"># 1st error</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> x:</span><br><span class="line">                x = pre</span><br><span class="line">            <span class="comment"># 2nd error</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        pre = node</span><br><span class="line">        findError(node.right)</span><br><span class="line">    </span><br><span class="line">    x = y = pre = <span class="literal">None</span></span><br><span class="line">    findError(root)</span><br><span class="line">    x.val, y.val = y.val, x.val</span><br></pre></td></tr></table></figure></p>
-<h2 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a>94. Binary Tree Inorder Traversal</h2><p>Classic in-order search: left - root-right<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTraversal</span>(<span class="params">self, root: TreeNode</span>) -&gt; List[int]:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">traversal</span>(<span class="params">root</span>):</span></span><br><span class="line">        <span class="keyword">nonlocal</span> res</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        traversal(root.left)</span><br><span class="line">        res.append(root.val)</span><br><span class="line">        traversal(root.right)</span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    traversal(root)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
-<h2 id="116-Populating-Next-Right-Pointers-in-Each-Node"><a href="#116-Populating-Next-Right-Pointers-in-Each-Node" class="headerlink" title="116. Populating Next Right Pointers in Each Node"></a>116. Populating Next Right Pointers in Each Node</h2><h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self, root: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># connect local left, right</span></span><br><span class="line">    <span class="keyword">if</span> root.left:</span><br><span class="line">        root.left.next = root.right</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> root.right <span class="keyword">and</span> root.next:</span><br><span class="line">        root.right.next = root.next.left</span><br><span class="line">    self.connect(root.left)</span><br><span class="line">    self.connect(root.right)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
-<h3 id="BFS-deque"><a href="#BFS-deque" class="headerlink" title="BFS / deque"></a>BFS / deque</h3><p>using Deque<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self, root: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    </span><br><span class="line">    q = deque([root])</span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        size = len(q)</span><br><span class="line">        <span class="keyword">while</span> size &gt; <span class="number">0</span>:</span><br><span class="line">            node = q.popleft()</span><br><span class="line">            <span class="keyword">if</span> size &gt; <span class="number">1</span>: <span class="comment">## not the right most:</span></span><br><span class="line">                node.next = q[<span class="number">0</span>]</span><br><span class="line">            size -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                q.append(node.left)</span><br><span class="line">                q.append(node.right)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
-<p>Or BFS with improvement, get rid of the deque, use the next pointer.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self, root: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    </span><br><span class="line">    cur  = root</span><br><span class="line">    next = root.left</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> next :</span><br><span class="line">        cur.left.next = cur.right</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># not the right-most node</span></span><br><span class="line">        <span class="keyword">if</span> cur.next:</span><br><span class="line">            cur.right.next = cur.next.left</span><br><span class="line">            cur = cur.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># go to the next level</span></span><br><span class="line">            <span class="comment"># start from the left most element</span></span><br><span class="line">            cur = next</span><br><span class="line">            next = cur.left</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
-<h2 id="114-Flatten-Binary-Tree-to-Linked-List"><a href="#114-Flatten-Binary-Tree-to-Linked-List" class="headerlink" title="114. Flatten Binary Tree to Linked List"></a>114. Flatten Binary Tree to Linked List</h2><h3 id="DFS-1"><a href="#DFS-1" class="headerlink" title="DFS"></a>DFS</h3><p>post-order, flatten left, then flatten right, move left child to right and append the original right child to the end of new right child<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    self.flatten(root.left)</span><br><span class="line">    self.flatten(root.right)</span><br><span class="line">    </span><br><span class="line">    right = root.right</span><br><span class="line">    left = root.left</span><br><span class="line">    </span><br><span class="line">    root.left = <span class="literal">None</span></span><br><span class="line">    root.right = left</span><br><span class="line">    </span><br><span class="line">    p = root</span><br><span class="line">    <span class="keyword">while</span> p.right:</span><br><span class="line">        p = p.right</span><br><span class="line">    p.right = right</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
-<h3 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> root:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root.left:</span><br><span class="line">            root = root.right</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># find rightest element</span></span><br><span class="line">            p = root.left</span><br><span class="line">            <span class="keyword">while</span> p.right:</span><br><span class="line">                p = p.right</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># move right child to left.right</span></span><br><span class="line">            p.right = root.right</span><br><span class="line">            <span class="comment"># move left child to right</span></span><br><span class="line">            root.right = root.left</span><br><span class="line">            root.left = <span class="literal">None</span></span><br><span class="line">            root = root.right</span><br></pre></td></tr></table></figure>
-<h2 id="654-Maximum-Binary-Tree"><a href="#654-Maximum-Binary-Tree" class="headerlink" title="654. Maximum Binary Tree"></a>654. Maximum Binary Tree</h2><p>Classic recursion<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">constructMaximumBinaryTree</span>(<span class="params">self, nums: List[int]</span>) -&gt; TreeNode:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    val = max(nums)</span><br><span class="line">    i = nums.index(val)</span><br><span class="line">    root = TreeNode(val)</span><br><span class="line">    root.left = self.constructMaximumBinaryTree(nums[:i])</span><br><span class="line">    root.right = self.constructMaximumBinaryTree(nums[i + <span class="number">1</span>: ])</span><br><span class="line">    <span class="keyword">return</span> root  </span><br></pre></td></tr></table></figure></p>
-<h2 id="106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal"><a href="#106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal" class="headerlink" title="106. Construct Binary Tree from Inorder and Postorder Traversal"></a>106. Construct Binary Tree from Inorder and Postorder Traversal</h2><p>Pretty straightforward solution, but not the best!<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildTree</span>(<span class="params">self, inorder: List[int], postorder: List[int]</span>) -&gt; TreeNode:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> inorder <span class="keyword">or</span> <span class="keyword">not</span> postorder:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    val = postorder[<span class="number">-1</span>]</span><br><span class="line">    root = TreeNode(val)</span><br><span class="line">    </span><br><span class="line">    i = inorder.index(val)</span><br><span class="line">    in_left = inorder[:i]</span><br><span class="line">    in_right = inorder[i + <span class="number">1</span>:]</span><br><span class="line">    </span><br><span class="line">    post_left = postorder[:len(in_left)]</span><br><span class="line">    post_right = postorder[len(in_left): <span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">    root.left = self.buildTree(in_left, post_left)</span><br><span class="line">    root.right = self.buildTree(in_right, post_right)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure><br>Finding index is O(n). Slicing array is O(k), k = slicing size. And extra space. Overall time and extra space is O(n^2)<br>So, to avoid finding index and slicing, use hash map<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildTree</span>(<span class="params">self, inorder: List[int], postorder: List[int]</span>) -&gt; TreeNode:</span></span><br><span class="line">        </span><br><span class="line">    dic = &#123;v: i <span class="keyword">for</span> i, v <span class="keyword">in</span> enumerate(inorder)&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">lo, hi</span>):</span></span><br><span class="line">        <span class="keyword">if</span> lo &gt; hi:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        node = TreeNode(postorder.pop())</span><br><span class="line">        i = dic[node.val]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># poping from post order, so should construct right child first</span></span><br><span class="line">        node.right = build(i + <span class="number">1</span>, hi)</span><br><span class="line">        node.left = build(lo, i - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> build(<span class="number">0</span>, len(inorder) - <span class="number">1</span>)</span><br></pre></td></tr></table></figure><br>And LC105 can be imporved in similar way.</p>
+<h2 id="99-Recover-Binary-Search-Tree"><a href="#99-Recover-Binary-Search-Tree" class="headerlink" title="99. Recover Binary Search Tree"></a>99. Recover Binary Search Tree</h2><p>In-order tranversal in a Binary Search Tree should get an ascending array. So when <script type="math/tex">Node_i < Node_{i-1}</script> means <script type="math/tex">Node_i</script> is the error node. It should swao with either <script type="math/tex">Node_{i-1}</script> or another error node if found.<br>x, y are pointers of error nodes, <em>pre</em> is used to log the previous node val. <em>node.val</em> shoule always less than <em>pre.val</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recoverTree</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findError</span>(<span class="params">node</span>):</span></span><br><span class="line">        <span class="keyword">nonlocal</span> x, y, pre</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        findError(node.left)</span><br><span class="line">        <span class="keyword">if</span> pre <span class="keyword">and</span> node.val &lt; pre.val:</span><br><span class="line">            y = node</span><br><span class="line">            <span class="comment"># 1st error</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> x:</span><br><span class="line">                x = pre</span><br><span class="line">            <span class="comment"># 2nd error</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">        pre = node</span><br><span class="line">        findError(node.right)</span><br><span class="line">    </span><br><span class="line">    x = y = pre = <span class="literal">None</span></span><br><span class="line">    findError(root)</span><br><span class="line">    x.val, y.val = y.val, x.val</span><br></pre></td></tr></table></figure></p>
+<h2 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a>94. Binary Tree Inorder Traversal</h2><p>Classic in-order search: left - root-right<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inorderTraversal</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">traversal</span>(<span class="params">root</span>):</span></span><br><span class="line">        <span class="keyword">nonlocal</span> res</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        traversal(root.left)</span><br><span class="line">        res.append(root.val)</span><br><span class="line">        traversal(root.right)</span><br><span class="line">    </span><br><span class="line">    res = []</span><br><span class="line">    traversal(root)</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></p>
+<h2 id="116-Populating-Next-Right-Pointers-in-Each-Node"><a href="#116-Populating-Next-Right-Pointers-in-Each-Node" class="headerlink" title="116. Populating Next Right Pointers in Each Node"></a>116. Populating Next Right Pointers in Each Node</h2><h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self, root: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># connect local left, right</span></span><br><span class="line">    <span class="keyword">if</span> root.left:</span><br><span class="line">        root.left.<span class="built_in">next</span> = root.right</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> root.right <span class="keyword">and</span> root.<span class="built_in">next</span>:</span><br><span class="line">        root.right.<span class="built_in">next</span> = root.<span class="built_in">next</span>.left</span><br><span class="line">    self.connect(root.left)</span><br><span class="line">    self.connect(root.right)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+<h3 id="BFS-deque"><a href="#BFS-deque" class="headerlink" title="BFS / deque"></a>BFS / deque</h3><p>using Deque<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self, root: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    </span><br><span class="line">    q = deque([root])</span><br><span class="line">    <span class="keyword">while</span> q:</span><br><span class="line">        size = <span class="built_in">len</span>(q)</span><br><span class="line">        <span class="keyword">while</span> size &gt; <span class="number">0</span>:</span><br><span class="line">            node = q.popleft()</span><br><span class="line">            <span class="keyword">if</span> size &gt; <span class="number">1</span>: <span class="comment">## not the right most:</span></span><br><span class="line">                node.<span class="built_in">next</span> = q[<span class="number">0</span>]</span><br><span class="line">            size -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                q.append(node.left)</span><br><span class="line">                q.append(node.right)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
+<p>Or BFS with improvement, get rid of the deque, use the next pointer.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self, root: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    </span><br><span class="line">    cur  = root</span><br><span class="line">    <span class="built_in">next</span> = root.left</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">next</span> :</span><br><span class="line">        cur.left.<span class="built_in">next</span> = cur.right</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># not the right-most node</span></span><br><span class="line">        <span class="keyword">if</span> cur.<span class="built_in">next</span>:</span><br><span class="line">            cur.right.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.left</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># go to the next level</span></span><br><span class="line">            <span class="comment"># start from the left most element</span></span><br><span class="line">            cur = <span class="built_in">next</span></span><br><span class="line">            <span class="built_in">next</span> = cur.left</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
+<h2 id="114-Flatten-Binary-Tree-to-Linked-List"><a href="#114-Flatten-Binary-Tree-to-Linked-List" class="headerlink" title="114. Flatten Binary Tree to Linked List"></a>114. Flatten Binary Tree to Linked List</h2><h3 id="DFS-1"><a href="#DFS-1" class="headerlink" title="DFS"></a>DFS</h3><p>post-order, flatten left, then flatten right, move left child to right and append the original right child to the end of new right child<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    self.flatten(root.left)</span><br><span class="line">    self.flatten(root.right)</span><br><span class="line">    </span><br><span class="line">    right = root.right</span><br><span class="line">    left = root.left</span><br><span class="line">    </span><br><span class="line">    root.left = <span class="literal">None</span></span><br><span class="line">    root.right = left</span><br><span class="line">    </span><br><span class="line">    p = root</span><br><span class="line">    <span class="keyword">while</span> p.right:</span><br><span class="line">        p = p.right</span><br><span class="line">    p.right = right</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure></p>
+<h3 id="Iteration"><a href="#Iteration" class="headerlink" title="Iteration"></a>Iteration</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flatten</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Do not return anything, modify root in-place instead.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> root:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root.left:</span><br><span class="line">            root = root.right</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># find rightest element</span></span><br><span class="line">            p = root.left</span><br><span class="line">            <span class="keyword">while</span> p.right:</span><br><span class="line">                p = p.right</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># move right child to left.right</span></span><br><span class="line">            p.right = root.right</span><br><span class="line">            <span class="comment"># move left child to right</span></span><br><span class="line">            root.right = root.left</span><br><span class="line">            root.left = <span class="literal">None</span></span><br><span class="line">            root = root.right</span><br></pre></td></tr></table></figure>
+<h2 id="654-Maximum-Binary-Tree"><a href="#654-Maximum-Binary-Tree" class="headerlink" title="654. Maximum Binary Tree"></a>654. Maximum Binary Tree</h2><p>Classic recursion<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">constructMaximumBinaryTree</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; TreeNode:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> nums:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    val = <span class="built_in">max</span>(nums)</span><br><span class="line">    i = nums.index(val)</span><br><span class="line">    root = TreeNode(val)</span><br><span class="line">    root.left = self.constructMaximumBinaryTree(nums[:i])</span><br><span class="line">    root.right = self.constructMaximumBinaryTree(nums[i + <span class="number">1</span>: ])</span><br><span class="line">    <span class="keyword">return</span> root  </span><br></pre></td></tr></table></figure></p>
+<h2 id="106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal"><a href="#106-Construct-Binary-Tree-from-Inorder-and-Postorder-Traversal" class="headerlink" title="106. Construct Binary Tree from Inorder and Postorder Traversal"></a>106. Construct Binary Tree from Inorder and Postorder Traversal</h2><p>Pretty straightforward solution, but not the best!<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildTree</span>(<span class="params">self, inorder: <span class="type">List</span>[<span class="built_in">int</span>], postorder: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; TreeNode:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> inorder <span class="keyword">or</span> <span class="keyword">not</span> postorder:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    val = postorder[-<span class="number">1</span>]</span><br><span class="line">    root = TreeNode(val)</span><br><span class="line">    </span><br><span class="line">    i = inorder.index(val)</span><br><span class="line">    in_left = inorder[:i]</span><br><span class="line">    in_right = inorder[i + <span class="number">1</span>:]</span><br><span class="line">    </span><br><span class="line">    post_left = postorder[:<span class="built_in">len</span>(in_left)]</span><br><span class="line">    post_right = postorder[<span class="built_in">len</span>(in_left): -<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    root.left = self.buildTree(in_left, post_left)</span><br><span class="line">    root.right = self.buildTree(in_right, post_right)</span><br><span class="line">    <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure><br>Finding index is O(n). Slicing array is O(k), k = slicing size. And extra space. Overall time and extra space is O(n^2)<br>So, to avoid finding index and slicing, use hash map<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildTree</span>(<span class="params">self, inorder: <span class="type">List</span>[<span class="built_in">int</span>], postorder: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; TreeNode:</span></span><br><span class="line">        </span><br><span class="line">    dic = &#123;v: i <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">enumerate</span>(inorder)&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">lo, hi</span>):</span></span><br><span class="line">        <span class="keyword">if</span> lo &gt; hi:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        node = TreeNode(postorder.pop())</span><br><span class="line">        i = dic[node.val]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># poping from post order, so should construct right child first</span></span><br><span class="line">        node.right = build(i + <span class="number">1</span>, hi)</span><br><span class="line">        node.left = build(lo, i - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> build(<span class="number">0</span>, <span class="built_in">len</span>(inorder) - <span class="number">1</span>)</span><br></pre></td></tr></table></figure><br>And LC105 can be imporved in similar way.</p>
 
       
     
@@ -456,11 +456,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -472,15 +472,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -516,11 +520,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -540,19 +544,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -601,10 +605,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -658,6 +658,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -745,13 +752,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -810,6 +810,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -908,13 +915,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1045,76 +1045,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1161,6 +1097,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1193,6 +1167,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1337,7 +1342,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1349,12 +1361,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1479,30 +1491,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1535,6 +1523,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1728,18 +1740,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

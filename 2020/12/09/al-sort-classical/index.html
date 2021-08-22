@@ -314,10 +314,10 @@
 </tbody>
 </table>
 </div>
-<a id="more"></a>
-<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls) - <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(ls) - <span class="number">1</span>  - i):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt; ls[j + <span class="number">1</span>]:</span><br><span class="line">                ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
-<h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(ls)):</span><br><span class="line">        mini = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, len(ls)):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &lt; ls[mini]:</span><br><span class="line">                mini = j</span><br><span class="line">            ls[mini], ls[i] = ls[i], ls[mini]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
-<h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(ls)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt;= ls[j - <span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ls[j], ls[j - <span class="number">1</span>] = ls[j - <span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls) - <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls) - <span class="number">1</span>  - i):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt; ls[j + <span class="number">1</span>]:</span><br><span class="line">                ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
+<h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls)):</span><br><span class="line">        mini = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(ls)):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &lt; ls[mini]:</span><br><span class="line">                mini = j</span><br><span class="line">            ls[mini], ls[i] = ls[i], ls[mini]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
+<h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ls)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt;= ls[j - <span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ls[j], ls[j - <span class="number">1</span>] = ls[j - <span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure>
 <h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>An <code>divide and conquer</code> approch.</p>
 <ol>
 <li>If the list is of length 0 or 1, then it is already sorted. Otherwise:</li>
@@ -325,15 +325,15 @@
 <li>Sort each sublist recursively by re-applying merge sort.</li>
 <li>Merge the two sublists back into one sorted list.</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">arr1, arr2</span>):</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> arr1 <span class="keyword">and</span> arr2:</span><br><span class="line">        <span class="keyword">if</span> arr1[<span class="number">0</span>] &lt;= arr2[<span class="number">0</span>]:</span><br><span class="line">            res.append(arr1.pop(<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append(arr2.pop(<span class="number">0</span>))</span><br><span class="line">        res += arr1 <span class="keyword">if</span> arr1 <span class="keyword">else</span> arr2</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="keyword">if</span> len(arr) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    left = arr[:len(arr) // <span class="number">2</span>]</span><br><span class="line">    right = arr[len(arr) // <span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br></pre></td></tr></table></figure>
-<h2 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h2><p>An divide and conquer strategy. Select a <code>pivot</code>. elements less than pivot, move to the left side, else move to the right side.<br><em>set the first element as pivot</em><br>Sort in place:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    pivot = arr[right]</span><br><span class="line">    i = left - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(left, right):</span><br><span class="line">        <span class="keyword">if</span> arr[j] &lt;= pivot:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">    arr[i + <span class="number">1</span>], arr[right] = arr[right], arr[i+<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    <span class="keyword">if</span> left &lt; right:</span><br><span class="line">        q = partition(arr, left, right)</span><br><span class="line">        quickSort(arr, left, q - <span class="number">1</span>)</span><br><span class="line">        quickSort(arr, q + <span class="number">1</span>, right)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">arr1, arr2</span>):</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> arr1 <span class="keyword">and</span> arr2:</span><br><span class="line">        <span class="keyword">if</span> arr1[<span class="number">0</span>] &lt;= arr2[<span class="number">0</span>]:</span><br><span class="line">            res.append(arr1.pop(<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append(arr2.pop(<span class="number">0</span>))</span><br><span class="line">        res += arr1 <span class="keyword">if</span> arr1 <span class="keyword">else</span> arr2</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(arr) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    left = arr[:<span class="built_in">len</span>(arr) // <span class="number">2</span>]</span><br><span class="line">    right = arr[<span class="built_in">len</span>(arr) // <span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h2><p>An divide and conquer strategy. Select a <code>pivot</code>. elements less than pivot, move to the left side, else move to the right side.<br><em>set the first element as pivot</em><br>Sort in place:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    pivot = arr[right]</span><br><span class="line">    i = left - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(left, right):</span><br><span class="line">        <span class="keyword">if</span> arr[j] &lt;= pivot:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">    arr[i + <span class="number">1</span>], arr[right] = arr[right], arr[i+<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    <span class="keyword">if</span> left &lt; right:</span><br><span class="line">        q = partition(arr, left, right)</span><br><span class="line">        quickSort(arr, left, q - <span class="number">1</span>)</span><br><span class="line">        quickSort(arr, q + <span class="number">1</span>, right)</span><br></pre></td></tr></table></figure></p>
 <h2 id="Heap-Sort"><a href="#Heap-Sort" class="headerlink" title="Heap Sort"></a>Heap Sort</h2><p><a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/3.9/Lib/heapq.py">Heapq Module</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Heapsort">About Heap Sort</a></p>
 <ol>
 <li>Build a max heap</li>
 <li>replace the root (current largest number) with the last item and reduce the heap size by 1. At this time, the largerst number is sorted and excluded from the heap. </li>
 <li>repeat step 2</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">arr, n, i</span>):</span></span><br><span class="line">    largest = i  <span class="comment"># Initialize largest as root</span></span><br><span class="line">    l = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    r = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># check if any child is greater than root</span></span><br><span class="line">    <span class="keyword">if</span> l &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[l]:</span><br><span class="line">        largest = l</span><br><span class="line">    <span class="keyword">if</span> r &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[r]:</span><br><span class="line">        largest = r</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># if child greater than node, bubble it up.</span></span><br><span class="line">    <span class="keyword">if</span> largest != i:</span><br><span class="line">        arr[i], arr[largest] = arr[largest], arr[i]  <span class="comment"># swap</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment"># Heapify the root.</span></span><br><span class="line">        heapify(arr, n, largest)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    n = len(arr)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Build a maxheap.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(n // <span class="number">2</span>)):</span><br><span class="line">        heapify(arr, n, i)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># get sorted items one by one</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(<span class="number">1</span>, n)):</span><br><span class="line">        arr[i], arr[<span class="number">0</span>] = arr[<span class="number">0</span>], arr[i]  <span class="comment"># swap</span></span><br><span class="line">        heapify(arr, i, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">arr, n, i</span>):</span></span><br><span class="line">    largest = i  <span class="comment"># Initialize largest as root</span></span><br><span class="line">    l = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    r = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># check if any child is greater than root</span></span><br><span class="line">    <span class="keyword">if</span> l &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[l]:</span><br><span class="line">        largest = l</span><br><span class="line">    <span class="keyword">if</span> r &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[r]:</span><br><span class="line">        largest = r</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># if child greater than node, bubble it up.</span></span><br><span class="line">    <span class="keyword">if</span> largest != i:</span><br><span class="line">        arr[i], arr[largest] = arr[largest], arr[i]  <span class="comment"># swap</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment"># Heapify the root.</span></span><br><span class="line">        heapify(arr, n, largest)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(arr)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Build a maxheap.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(n // <span class="number">2</span>)):</span><br><span class="line">        heapify(arr, n, i)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># get sorted items one by one</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(<span class="number">1</span>, n)):</span><br><span class="line">        arr[i], arr[<span class="number">0</span>] = arr[<span class="number">0</span>], arr[i]  <span class="comment"># swap</span></span><br><span class="line">        heapify(arr, i, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="Counting-Sort"><a href="#Counting-Sort" class="headerlink" title="Counting Sort"></a>Counting Sort</h2>
       
     
@@ -507,11 +507,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -523,15 +523,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -567,11 +571,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -591,19 +595,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -652,10 +656,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -709,6 +709,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -796,13 +803,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -861,6 +861,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -959,13 +966,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1096,76 +1096,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1212,6 +1148,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1244,6 +1218,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1388,7 +1393,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1400,12 +1412,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1530,30 +1542,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1586,6 +1574,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1779,18 +1791,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

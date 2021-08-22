@@ -266,7 +266,7 @@
 <li>Deterministic Finite Automaton (DFA)</li>
 <li>Nondeterministic Finite Automaton (NFA)</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="Deterministic-Finite-Automaton-DFA"><a href="#Deterministic-Finite-Automaton-DFA" class="headerlink" title="Deterministic Finite Automaton (DFA)"></a>Deterministic Finite Automaton (DFA)</h2><p>Deterministic Finite Automaton (DFA) is a theoretical model of Computation</p>
 <p>a DFA is a 5-tuple M = (Q,Σ,δ,q,F)</p>
 <ul>
@@ -317,13 +317,13 @@
 <li>a*cc accepts cc,acc,aacc,aaacc,aaaaaacc, etc</li>
 <li>(0|1)<em> 101 (1|0)</em> accepts any binary string containing 101</li>
 </ul>
-<h2 id="Exercises"><a href="#Exercises" class="headerlink" title="Exercises"></a>Exercises</h2><h3 id="Accepts-any-binary-string-containing-exactly-three-1"><a href="#Accepts-any-binary-string-containing-exactly-three-1" class="headerlink" title="Accepts any binary string containing exactly three 1"></a>Accepts any binary string containing exactly three 1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># This DFA Accepts the Language</span><br><span class="line"># L&#x3D;&#123; Accepts any binary string containing exactly three 1s &#125;</span><br><span class="line"># Define DFA Properties</span><br><span class="line">symbols&#x3D;(0,1)</span><br><span class="line">states&#x3D;(q1,q2,q3,q4,q5)</span><br><span class="line">start&#x3D;q1</span><br><span class="line">accept&#x3D;(q4)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q1 and 0 then q1</span><br><span class="line">if q1 and 1 then q2</span><br><span class="line">if q2 and 0 then q2</span><br><span class="line">if q2 and 1 then q3</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q4</span><br><span class="line">if q4 and 0 then q4</span><br><span class="line">if q4 and 1 then q5</span><br><span class="line">if q5 and 0 then q5</span><br><span class="line">if q5 and 1 then q5</span><br></pre></td></tr></table></figure>
+<h2 id="Exercises"><a href="#Exercises" class="headerlink" title="Exercises"></a>Exercises</h2><h3 id="Accepts-any-binary-string-containing-exactly-three-1"><a href="#Accepts-any-binary-string-containing-exactly-three-1" class="headerlink" title="Accepts any binary string containing exactly three 1"></a>Accepts any binary string containing exactly three 1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># This DFA Accepts the Language</span><br><span class="line"># L=&#123; Accepts any binary string containing exactly three 1s &#125;</span><br><span class="line"># Define DFA Properties</span><br><span class="line">symbols=(0,1)</span><br><span class="line">states=(q1,q2,q3,q4,q5)</span><br><span class="line">start=q1</span><br><span class="line">accept=(q4)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q1 and 0 then q1</span><br><span class="line">if q1 and 1 then q2</span><br><span class="line">if q2 and 0 then q2</span><br><span class="line">if q2 and 1 then q3</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q4</span><br><span class="line">if q4 and 0 then q4</span><br><span class="line">if q4 and 1 then q5</span><br><span class="line">if q5 and 0 then q5</span><br><span class="line">if q5 and 1 then q5</span><br></pre></td></tr></table></figure>
 <p><img src="/images/Q1.png" alt="q1"></p>
-<h3 id="Accepts-any-binary-string-whose-length-is-a-multiple-of-3-0-3-6-9-…"><a href="#Accepts-any-binary-string-whose-length-is-a-multiple-of-3-0-3-6-9-…" class="headerlink" title="Accepts any binary string whose length is a multiple of 3. (0,3,6,9,…)"></a>Accepts any binary string whose length is a multiple of 3. (0,3,6,9,…)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># L&#x3D;&#123; Accepts any binary string containing exactly three 1s &#125;</span><br><span class="line"># Define DFA Properties</span><br><span class="line">symbols&#x3D;(0,1)</span><br><span class="line">states&#x3D;(q1,q2,q3,q4,q5)</span><br><span class="line">start&#x3D;q1</span><br><span class="line">accept&#x3D;(q4)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q1 and 0 then q1</span><br><span class="line">if q1 and 1 then q2</span><br><span class="line">if q2 and 0 then q2</span><br><span class="line">if q2 and 1 then q3</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q4</span><br><span class="line">if q4 and 0 then q4</span><br><span class="line">if q4 and 1 then q5</span><br><span class="line">if q5 and 0 then q5</span><br><span class="line">if q5 and 1 then q5</span><br></pre></td></tr></table></figure>
+<h3 id="Accepts-any-binary-string-whose-length-is-a-multiple-of-3-0-3-6-9-…"><a href="#Accepts-any-binary-string-whose-length-is-a-multiple-of-3-0-3-6-9-…" class="headerlink" title="Accepts any binary string whose length is a multiple of 3. (0,3,6,9,…)"></a>Accepts any binary string whose length is a multiple of 3. (0,3,6,9,…)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># L=&#123; Accepts any binary string containing exactly three 1s &#125;</span><br><span class="line"># Define DFA Properties</span><br><span class="line">symbols=(0,1)</span><br><span class="line">states=(q1,q2,q3,q4,q5)</span><br><span class="line">start=q1</span><br><span class="line">accept=(q4)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q1 and 0 then q1</span><br><span class="line">if q1 and 1 then q2</span><br><span class="line">if q2 and 0 then q2</span><br><span class="line">if q2 and 1 then q3</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q4</span><br><span class="line">if q4 and 0 then q4</span><br><span class="line">if q4 and 1 then q5</span><br><span class="line">if q5 and 0 then q5</span><br><span class="line">if q5 and 1 then q5</span><br></pre></td></tr></table></figure>
 <p><img src="/images/Q2.png" alt="q1"></p>
-<h3 id="Accepts-any-binary-string-that-does-not-contain-the-substring-110"><a href="#Accepts-any-binary-string-that-does-not-contain-the-substring-110" class="headerlink" title="Accepts any binary string that does not contain the substring 110"></a>Accepts any binary string that does not contain the substring 110</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># L&#x3D;&#123;Accepts any binary string that does not contain the substring 110.&#125;</span><br><span class="line">symbols&#x3D;(0,1)</span><br><span class="line">states&#x3D;(q0,q1,q2,q3)</span><br><span class="line">start&#x3D;q0</span><br><span class="line">accept&#x3D;(q0,q1,q2)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q0 and 0 then q0</span><br><span class="line">if q0 and 1 then q1</span><br><span class="line">if q1 and 0 then q0</span><br><span class="line">if q1 and 1 then q2</span><br><span class="line">if q2 and 0 then q3</span><br><span class="line">if q2 and 1 then q2</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q3</span><br></pre></td></tr></table></figure>
+<h3 id="Accepts-any-binary-string-that-does-not-contain-the-substring-110"><a href="#Accepts-any-binary-string-that-does-not-contain-the-substring-110" class="headerlink" title="Accepts any binary string that does not contain the substring 110"></a>Accepts any binary string that does not contain the substring 110</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># L=&#123;Accepts any binary string that does not contain the substring 110.&#125;</span><br><span class="line">symbols=(0,1)</span><br><span class="line">states=(q0,q1,q2,q3)</span><br><span class="line">start=q0</span><br><span class="line">accept=(q0,q1,q2)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q0 and 0 then q0</span><br><span class="line">if q0 and 1 then q1</span><br><span class="line">if q1 and 0 then q0</span><br><span class="line">if q1 and 1 then q2</span><br><span class="line">if q2 and 0 then q3</span><br><span class="line">if q2 and 1 then q2</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q3</span><br></pre></td></tr></table></figure>
 <p><img src="/images/Q3.png" alt="q1"></p>
-<h3 id="Accepts-any-binary-string-that-begins-with-a-1-and-ends-with-a-0"><a href="#Accepts-any-binary-string-that-begins-with-a-1-and-ends-with-a-0" class="headerlink" title="Accepts any binary string that begins with a 1 and ends with a 0"></a>Accepts any binary string that begins with a 1 and ends with a 0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># This DFA Accepts the Language</span><br><span class="line"># L&#x3D;&#123;Accepts any binary string that begins with a 1 and ends with a 0.&#125;</span><br><span class="line">symbols&#x3D;(0,1)</span><br><span class="line">states&#x3D;(q0,q1,q2,q3,q4)</span><br><span class="line">start&#x3D;q0</span><br><span class="line">accept&#x3D;(q3)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q0 and 0 then q1</span><br><span class="line">if q0 and 1 then q2</span><br><span class="line">if q1 and 0 then q1</span><br><span class="line">if q1 and 1 then q1</span><br><span class="line">if q2 and 0 then q3</span><br><span class="line">if q2 and 1 then q2</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q4</span><br><span class="line">if q4 and 0 then q3</span><br><span class="line">if q4 and 1 then q4</span><br></pre></td></tr></table></figure>
+<h3 id="Accepts-any-binary-string-that-begins-with-a-1-and-ends-with-a-0"><a href="#Accepts-any-binary-string-that-begins-with-a-1-and-ends-with-a-0" class="headerlink" title="Accepts any binary string that begins with a 1 and ends with a 0"></a>Accepts any binary string that begins with a 1 and ends with a 0</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># This DFA Accepts the Language</span><br><span class="line"># L=&#123;Accepts any binary string that begins with a 1 and ends with a 0.&#125;</span><br><span class="line">symbols=(0,1)</span><br><span class="line">states=(q0,q1,q2,q3,q4)</span><br><span class="line">start=q0</span><br><span class="line">accept=(q3)</span><br><span class="line"># Define Transition Table</span><br><span class="line">if q0 and 0 then q1</span><br><span class="line">if q0 and 1 then q2</span><br><span class="line">if q1 and 0 then q1</span><br><span class="line">if q1 and 1 then q1</span><br><span class="line">if q2 and 0 then q3</span><br><span class="line">if q2 and 1 then q2</span><br><span class="line">if q3 and 0 then q3</span><br><span class="line">if q3 and 1 then q4</span><br><span class="line">if q4 and 0 then q3</span><br><span class="line">if q4 and 1 then q4</span><br></pre></td></tr></table></figure>
 <p><img src="/images/Q4.png" alt="q1"></p>
 
       
@@ -498,11 +498,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -514,15 +514,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -558,11 +562,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -582,19 +586,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -643,10 +647,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -700,6 +700,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -787,13 +794,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -852,6 +852,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -950,13 +957,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1087,76 +1087,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1203,6 +1139,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1235,6 +1209,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1379,7 +1384,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1391,12 +1403,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1521,30 +1533,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1577,6 +1565,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1770,18 +1782,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

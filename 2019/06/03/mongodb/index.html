@@ -262,7 +262,7 @@
     <div class="post-content syuanpi fadeInRightShort back-3">
       
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MongoDB is from “Humongous”</p>
-<p>A document-based NoSQL database by MongoDB, Inc.<br><a id="more"></a></p>
+<p>A document-based NoSQL database by MongoDB, Inc.<br><span id="more"></span></p>
 <ul>
 <li>Data is stored in documents in JSON.</li>
 <li>Documents of a similar type are stored in collections.</li>
@@ -356,56 +356,56 @@
 </ol>
 <h2 id="Practice"><a href="#Practice" class="headerlink" title="Practice"></a>Practice</h2><h3 id="Basic-Manipulation"><a href="#Basic-Manipulation" class="headerlink" title="Basic Manipulation"></a>Basic Manipulation</h3><ol>
 <li><p>Create a collection called “customers”, input data</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.customers.insert(&#123;id: &quot;1&quot;, name : &quot;Bill&quot;, productId: &quot;1&quot;, customerId: &quot;1&quot;, amount: 20.00, state: &quot;PA&quot;&#125;)</span><br><span class="line">db.customers.insert(&#123;id: &quot;2&quot;, name : &quot;Hillary&quot;, productId: &quot;2&quot;, customerId: &quot;2&quot;, amount: 30.00, state: &quot;DC&quot;&#125;)</span><br><span class="line">db.customers.insert(&#123;id: &quot;3&quot;, name : &quot;brian&quot;, productId: &quot;1&quot;, customerId: &quot;3&quot;, amount: 25.00, state: &quot;DC&quot;&#125;)</span><br><span class="line">db.customers.insert(&#123;id: &quot;4&quot;, name : &quot;Donald&quot;, productId: &quot;2&quot;, customerId: &quot;4&quot;, amount: 50.00, state: &quot;PA&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.customers.insert(&#123;id: &quot;1&quot;, name : &quot;Bill&quot;, productId: &quot;1&quot;, customerId: &quot;1&quot;, amount: <span class="number">20.00</span>, state: &quot;PA&quot;&#125;)</span><br><span class="line">db.customers.insert(&#123;id: &quot;2&quot;, name : &quot;Hillary&quot;, productId: &quot;2&quot;, customerId: &quot;2&quot;, amount: <span class="number">30.00</span>, state: &quot;DC&quot;&#125;)</span><br><span class="line">db.customers.insert(&#123;id: &quot;3&quot;, name : &quot;brian&quot;, productId: &quot;1&quot;, customerId: &quot;3&quot;, amount: <span class="number">25.00</span>, state: &quot;DC&quot;&#125;)</span><br><span class="line">db.customers.insert(&#123;id: &quot;4&quot;, name : &quot;Donald&quot;, productId: &quot;2&quot;, customerId: &quot;4&quot;, amount: <span class="number">50.00</span>, state: &quot;PA&quot;&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Find the name and amount of all the customers whose state is PA</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find(&#123; state: &quot;PA&quot; &#125;, &#123; name: 1, _id: 0 &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find(&#123; state: &quot;PA&quot; &#125;, &#123; name: <span class="number">1</span>, _id: <span class="number">0</span> &#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Find the name and state of customers whose name begin with “B” or “b”</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find(&#123; name: /^(B|b)/ &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find(&#123; name: <span class="operator">/</span><span class="operator">^</span>(B<span class="operator">|</span>b)<span class="operator">/</span> &#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Find the name of customers whose sale amount is greater or equal to 30 but lower than 40</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find( &#123; amount: &#123; $gte: 30, $lt: 40 &#125; &#125; )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find( &#123; amount: &#123; $gte: <span class="number">30</span>, $lt: <span class="number">40</span> &#125; &#125; )</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>For each state, find the number of customers and their total amount</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.customers.aggregate( [ </span><br><span class="line">	&#123; $group: &#123; </span><br><span class="line">		_id: &quot;$state&quot;,</span><br><span class="line">		total_amount: &#123; $sum: &quot;$amount&quot; &#125;,</span><br><span class="line">		num_of_customers: &#123; $sum: 1 &#125; </span><br><span class="line">		&#125; </span><br><span class="line">	&#125; </span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.customers.aggregate( [ </span><br><span class="line">	&#123; $<span class="keyword">group</span>: &#123; </span><br><span class="line">		_id: &quot;$state&quot;,</span><br><span class="line">		total_amount: &#123; $sum: &quot;$amount&quot; &#125;,</span><br><span class="line">		num_of_customers: &#123; $sum: <span class="number">1</span> &#125; </span><br><span class="line">		&#125; </span><br><span class="line">	&#125; </span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>To all the documents, increase the salesAmount by 10</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.updateMany( &#123;&#125;, &#123; $inc: &#123; &quot;amount&quot;: 10 &#125; &#125; )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.updateMany( &#123;&#125;, &#123; $inc: &#123; &quot;amount&quot;: <span class="number">10</span> &#125; &#125; )</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>To all the documents, add the new field called “totalSaleAmount” whose value is defined by saleAmount*1.06 (i.e, add 6% tax)</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.aggregate( [ &#123;$addFields: &#123;totalSaleAmount: &#123;$multiply: [&quot;$amount&quot;, 1.06] &#125; &#125; &#125; ] )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.customers.aggregate( [ &#123;$addFields: &#123;totalSaleAmount: &#123;$multiply: [&quot;$amount&quot;, <span class="number">1.06</span>] &#125; &#125; &#125; ] )</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
 <li><p>To all the documents whose state is PA, add the new field called “pastPurchase” as an array of products. Document 1 will have [“chair”, “desk”], while Document 4 will have [“chair”, “tablet”, “usb”]</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.customers.update(</span><br><span class="line">      &#123; id : &quot;1&quot; &#125;,</span><br><span class="line">      &#123; $set: &#123; &quot;pastPurchase&quot; : [&quot;chair&quot;, &quot;desk&quot;] &#125; &#125;</span><br><span class="line">)</span><br><span class="line">db.customers.update(</span><br><span class="line">      &#123; id : &quot;4&quot; &#125;,</span><br><span class="line">      &#123; $set: &#123; &quot;pastPurchase&quot; : [&quot;chair&quot;, &quot;tablet&quot;, &quot;usb&quot;] &#125; &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.customers.update(</span><br><span class="line">      &#123; id : &quot;1&quot; &#125;,</span><br><span class="line">      &#123; $<span class="keyword">set</span>: &#123; &quot;pastPurchase&quot; : [&quot;chair&quot;, &quot;desk&quot;] &#125; &#125;</span><br><span class="line">)</span><br><span class="line">db.customers.update(</span><br><span class="line">      &#123; id : &quot;4&quot; &#125;,</span><br><span class="line">      &#123; $<span class="keyword">set</span>: &#123; &quot;pastPurchase&quot; : [&quot;chair&quot;, &quot;tablet&quot;, &quot;usb&quot;] &#125; &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="MapReduce-Implementation"><a href="#MapReduce-Implementation" class="headerlink" title="MapReduce Implementation"></a>MapReduce Implementation</h3><p>We need to find some aggregated data from a Grocery Store (Giant, ACME etc.,) by their shoppingCarts. The document structure is:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;_id&quot; : NumberLong(1),</span><br><span class="line">	&quot;name&quot;:&quot;Amelia Watson&quot;,</span><br><span class="line">	&quot;shoppingCart&quot; : &quot;Eggs, Milk, Chicken, Bacon&quot;,</span><br><span class="line">	&quot;discount&quot;: 1.25</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;_id&quot; : NumberLong(<span class="number">1</span>),</span><br><span class="line">	&quot;name&quot;:&quot;Amelia Watson&quot;,</span><br><span class="line">	&quot;shoppingCart&quot; : &quot;Eggs, Milk, Chicken, Bacon&quot;,</span><br><span class="line">	&quot;discount&quot;: <span class="number">1.25</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>Input data</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.insert(&#123;name: &quot;Bob&quot;, shoppingCart: &quot;Milk, Corn, Chocolates&quot;, discount: 0.75&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Alice&quot;, shoppingCart: &quot;Milk, Turkey, Apple&quot;, discount: 0&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Trudy&quot;, shoppingCart: &quot;Cheese, Corn, Tomatoes, Ginger, Juice, Pork&quot;, discount: 1.50&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Jacob”, shoppingCart: &quot;Ice Cream, Onions, Tomatoes, Vinegar, Chicken, Fish&quot;, discount: 2.60&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Paul&quot;, shoppingCart: &quot;Cheese, Chocolates, Fish, Bread&quot;&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Jack&quot;, shoppingCart: &quot;Milk, Corn, Fish&quot;, discount: 0.25&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Mary&quot;, shoppingCart: &quot;Milk, Turkey, Apple&quot;, discount: 0&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Kate&quot;, shoppingCart: &quot;Cheese, Apple, Corn, Juice, Pork&quot;, discount: 3.50&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Chris&quot;, shoppingCart: &quot;Ice Cream&quot;&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.insert(&#123;name: &quot;Bob&quot;, shoppingCart: &quot;Milk, Corn, Chocolates&quot;, discount: <span class="number">0.75</span>&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Alice&quot;, shoppingCart: &quot;Milk, Turkey, Apple&quot;, discount: <span class="number">0</span>&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Trudy&quot;, shoppingCart: &quot;Cheese, Corn, Tomatoes, Ginger, Juice, Pork&quot;, discount: <span class="number">1.50</span>&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Jacob”, shoppingCart: &quot;Ice Cream, Onions, Tomatoes, Vinegar, Chicken, Fish&quot;, discount: 2.60&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Paul&quot;, shoppingCart: &quot;Cheese, Chocolates, Fish, Bread&quot;&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Jack&quot;, shoppingCart: &quot;Milk, Corn, Fish&quot;, discount: 0.25&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Mary&quot;, shoppingCart: &quot;Milk, Turkey, Apple&quot;, discount: 0&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Kate&quot;, shoppingCart: &quot;Cheese, Apple, Corn, Juice, Pork&quot;, discount: 3.50&#125;);</span><br><span class="line">db.grocery.insert(&#123;name: &quot;Chris&quot;, shoppingCart: &quot;Ice Cream&quot;&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Add the fact that you purchased the following items {Apple, Ice Cream, Chocolates} with the discount of $1.25. That is, use your first name as the name of the new document</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.insert(&#123;name: &quot;Celine&quot;, shoppingCart: &quot;Milk, Corn, Chocolates&quot;, discount: 1.25&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.insert(&#123;name: &quot;Celine&quot;, shoppingCart: &quot;Milk, Corn, Chocolates&quot;, discount: <span class="number">1.25</span>&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Use Map/Reduce function to count all the people who got any discount at all. Show the complete code and output</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.find().pretty()</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Use Map/Reduce function to count all the people who got any discount at all. Show the complete code and output</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.mapReduce(</span><br><span class="line">	function() &#123;</span><br><span class="line">		if(this.discount != undefined &amp;&amp; this.discount &gt; 0)&#123;</span><br><span class="line">			emit(&quot;count&quot;, 1);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, // mapper</span><br><span class="line">	function(key,<span class="keyword">values</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Array.sum(<span class="keyword">values</span>);</span><br><span class="line">	&#125;, // reducer</span><br><span class="line">	&#123; out: &quot;discounts&quot; &#125; // output</span><br><span class="line">).find();</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.mapReduce(</span><br><span class="line">	<span class="keyword">function</span>() &#123;</span><br><span class="line">		if(this.discount <span class="operator">!=</span> undefined <span class="operator">&amp;&amp;</span> this.discount <span class="operator">&gt;</span> <span class="number">0</span>)&#123;</span><br><span class="line">			emit(&quot;count&quot;, <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, <span class="operator">/</span><span class="operator">/</span> mapper</span><br><span class="line">	<span class="keyword">function</span>(key,<span class="keyword">values</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Array.<span class="built_in">sum</span>(<span class="keyword">values</span>);</span><br><span class="line">	&#125;, <span class="operator">/</span><span class="operator">/</span> reducer</span><br><span class="line">	&#123; <span class="keyword">out</span>: &quot;discounts&quot; &#125; <span class="operator">/</span><span class="operator">/</span> output</span><br><span class="line">).find();</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
 <li><p>Use Map/Reduce function to count the total value of discounts of all the customers. Show the complete code and output</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.mapReduce(</span><br><span class="line">	function() &#123;</span><br><span class="line">		if(this.discount != undefined &amp;&amp; this.discount &gt; 0)&#123;</span><br><span class="line">			emit(&quot;sum&quot;,this.discount);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, // mapper</span><br><span class="line">	function(key,<span class="keyword">values</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Array.sum(<span class="keyword">values</span>);</span><br><span class="line">	&#125;, // reducer</span><br><span class="line">	&#123; out: &quot;discounts&quot; &#125; // output</span><br><span class="line">).find();</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.mapReduce(</span><br><span class="line">	<span class="keyword">function</span>() &#123;</span><br><span class="line">		if(this.discount <span class="operator">!=</span> undefined <span class="operator">&amp;&amp;</span> this.discount <span class="operator">&gt;</span> <span class="number">0</span>)&#123;</span><br><span class="line">			emit(&quot;sum&quot;,this.discount);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, <span class="operator">/</span><span class="operator">/</span> mapper</span><br><span class="line">	<span class="keyword">function</span>(key,<span class="keyword">values</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Array.<span class="built_in">sum</span>(<span class="keyword">values</span>);</span><br><span class="line">	&#125;, <span class="operator">/</span><span class="operator">/</span> reducer</span><br><span class="line">	&#123; <span class="keyword">out</span>: &quot;discounts&quot; &#125; <span class="operator">/</span><span class="operator">/</span> output</span><br><span class="line">).find();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Use Map/Reduce function to find the number of times an item appears in the cart.</p>
 <p>For example, if Chicken was inserted in 5 documents (5 different Carts), the key value pair generated after map reduce should look like: {Chicken: 5}</p>
 <p>Display the top 5 items most sold:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.mapReduce(</span><br><span class="line">	function() &#123;</span><br><span class="line">		if(this.shoppingCart != undefined) &#123; </span><br><span class="line">			this.shoppingCart.split(&#x27;,&#x27;).forEach(</span><br><span class="line">				function (v) &#123;</span><br><span class="line">					emit(v.trim(), 1);</span><br><span class="line">				&#125;</span><br><span class="line">			);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, </span><br><span class="line">	function(key,<span class="keyword">values</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Array.sum(<span class="keyword">values</span>);</span><br><span class="line">	&#125;, </span><br><span class="line">	&#123; out: &quot;top5Sellers&quot; &#125;</span><br><span class="line">).find().sort(&#123;value: -1&#125;).limit(5);</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">db.grocery.mapReduce(</span><br><span class="line">	<span class="keyword">function</span>() &#123;</span><br><span class="line">		if(this.shoppingCart <span class="operator">!=</span> undefined) &#123; </span><br><span class="line">			this.shoppingCart.split(<span class="string">&#x27;,&#x27;</span>).forEach(</span><br><span class="line">				<span class="keyword">function</span> (v) &#123;</span><br><span class="line">					emit(v.<span class="built_in">trim</span>(), <span class="number">1</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, </span><br><span class="line">	<span class="keyword">function</span>(key,<span class="keyword">values</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> Array.<span class="built_in">sum</span>(<span class="keyword">values</span>);</span><br><span class="line">	&#125;, </span><br><span class="line">	&#123; <span class="keyword">out</span>: &quot;top5Sellers&quot; &#125;</span><br><span class="line">).find().sort(&#123;<span class="keyword">value</span>: <span class="number">-1</span>&#125;).limit(<span class="number">5</span>);</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -576,11 +576,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -592,15 +592,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -636,11 +640,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -660,19 +664,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -721,10 +725,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -778,6 +778,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -865,13 +872,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -930,6 +930,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1028,13 +1035,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1165,76 +1165,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1281,6 +1217,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1313,6 +1287,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1457,7 +1462,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1469,12 +1481,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1599,30 +1611,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1655,6 +1643,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1848,18 +1860,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       

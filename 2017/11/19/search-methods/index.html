@@ -267,12 +267,12 @@
 <li>Bisection Search</li>
 <li>Newton-Raphson (for root finding)</li>
 </ol>
-<a id="more"></a>
+<span id="more"></span>
 <p><em>Sample Code</em></p>
-<h2 id="Exhaustive-Enumeration"><a href="#Exhaustive-Enumeration" class="headerlink" title="Exhaustive Enumeration"></a>Exhaustive Enumeration</h2><h3 id="Cube-Root"><a href="#Cube-Root" class="headerlink" title="Cube Root"></a>Cube Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cube = <span class="number">-64</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">guess = <span class="number">0.0</span></span><br><span class="line">increment = <span class="number">0.0001</span></span><br><span class="line">num_guesses = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> abs(guess**<span class="number">3</span> - cube) &gt;= epsilon <span class="keyword">and</span> abs(guess) &lt;= abs(cube):</span><br><span class="line">    <span class="keyword">if</span> cube &lt; <span class="number">0</span>:</span><br><span class="line">        guess -= increment</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        guess += increment</span><br><span class="line">    num_guesses += <span class="number">1</span></span><br><span class="line">print(<span class="string">&#x27;num_guesses = &#x27;</span>, num_guesses)</span><br><span class="line"><span class="keyword">if</span> abs(guess**<span class="number">3</span> - cube) &gt;= epsilon:</span><br><span class="line">    print(<span class="string">&#x27;Failed on cube root of&#x27;</span>, cube)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&#x27;Cube root of &#x27;</span> + str(cube) + <span class="string">&#x27; is &#x27;</span> + str(guess))</span><br></pre></td></tr></table></figure>
-<h2 id="Bisction-search"><a href="#Bisction-search" class="headerlink" title="Bisction search"></a>Bisction search</h2><h3 id="Square-Root"><a href="#Square-Root" class="headerlink" title="Square Root"></a>Square Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">25</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">numGuesses = <span class="number">0</span></span><br><span class="line">low = <span class="number">1.0</span></span><br><span class="line">high = x</span><br><span class="line">ans = (low + high) / <span class="number">2.0</span></span><br><span class="line"><span class="keyword">while</span> abs(ans**<span class="number">2</span> - x) &gt;= epsilon:</span><br><span class="line">    print(<span class="string">&#x27;low = &#x27;</span> + str(low) + <span class="string">&#x27; high = &#x27;</span> + str(high) + <span class="string">&#x27; ans = &#x27;</span> + str(ans))</span><br><span class="line">    numGuesses += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> ans**<span class="number">2</span> &lt; x:</span><br><span class="line">        low = ans</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        high = ans</span><br><span class="line">    ans = (low + high) / <span class="number">2.0</span></span><br><span class="line">print(<span class="string">&#x27;numGuesses: &#x27;</span> + str(numGuesses))</span><br><span class="line">print(str(ans) + <span class="string">&#x27; is close to square root of &#x27;</span> + str(x))</span><br></pre></td></tr></table></figure>
-<h3 id="Cube-Root-1"><a href="#Cube-Root-1" class="headerlink" title="Cube Root"></a>Cube Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cube = <span class="number">-27</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">numGuesses = <span class="number">0</span></span><br><span class="line"><span class="keyword">if</span> cube &gt;= <span class="number">0</span>:</span><br><span class="line">    low = <span class="number">0</span></span><br><span class="line">    high = cube</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    low = cube</span><br><span class="line">    high = <span class="number">0</span></span><br><span class="line">guess = (low + high) / <span class="number">2.0</span></span><br><span class="line"><span class="keyword">while</span> abs(guess**<span class="number">3</span> - cube) &gt;= epsilon:</span><br><span class="line">    print(<span class="string">&#x27;low = &#x27;</span> + str(low) + <span class="string">&#x27; high = &#x27;</span> + str(high) + <span class="string">&#x27; guess = &#x27;</span> + str(guess))</span><br><span class="line">    <span class="keyword">if</span> guess**<span class="number">3</span> &lt; cube:</span><br><span class="line">        low = guess</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        high = guess</span><br><span class="line">    guess = (low + high) / <span class="number">2.0</span></span><br><span class="line">    numGuesses += <span class="number">1</span></span><br><span class="line">print(<span class="string">&#x27;numGuesses: &#x27;</span> + str(numGuesses))</span><br><span class="line">print(str(guess) + <span class="string">&#x27; is close to square root of &#x27;</span> + str(cube))</span><br></pre></td></tr></table></figure>
-<h2 id="Newton-Raphson"><a href="#Newton-Raphson" class="headerlink" title="Newton-Raphson"></a>Newton-Raphson</h2><h3 id="Square-Root-1"><a href="#Square-Root-1" class="headerlink" title="Square Root"></a>Square Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Find the square root of 24</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">y = <span class="number">24.0</span></span><br><span class="line">guess = y/<span class="number">2.0</span></span><br><span class="line">numGuesses = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> abs(guess**<span class="number">2</span> - y) &gt;= epsilon:</span><br><span class="line">	numGuesses += <span class="number">1</span></span><br><span class="line">	guess = guess - ( (guess**<span class="number">2</span> - y) / (<span class="number">2</span> * guess) )</span><br><span class="line">print(<span class="string">&#x27;numGuesses = &#x27;</span> + str(numGuesses))</span><br><span class="line">print(<span class="string">&#x27;Square root of &#x27;</span> + str(y) + <span class="string">&#x27; is about &#x27;</span> + str(guess))</span><br></pre></td></tr></table></figure>
+<h2 id="Exhaustive-Enumeration"><a href="#Exhaustive-Enumeration" class="headerlink" title="Exhaustive Enumeration"></a>Exhaustive Enumeration</h2><h3 id="Cube-Root"><a href="#Cube-Root" class="headerlink" title="Cube Root"></a>Cube Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cube = -<span class="number">64</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">guess = <span class="number">0.0</span></span><br><span class="line">increment = <span class="number">0.0001</span></span><br><span class="line">num_guesses = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">abs</span>(guess**<span class="number">3</span> - cube) &gt;= epsilon <span class="keyword">and</span> <span class="built_in">abs</span>(guess) &lt;= <span class="built_in">abs</span>(cube):</span><br><span class="line">    <span class="keyword">if</span> cube &lt; <span class="number">0</span>:</span><br><span class="line">        guess -= increment</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        guess += increment</span><br><span class="line">    num_guesses += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;num_guesses = &#x27;</span>, num_guesses)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">abs</span>(guess**<span class="number">3</span> - cube) &gt;= epsilon:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Failed on cube root of&#x27;</span>, cube)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Cube root of &#x27;</span> + <span class="built_in">str</span>(cube) + <span class="string">&#x27; is &#x27;</span> + <span class="built_in">str</span>(guess))</span><br></pre></td></tr></table></figure>
+<h2 id="Bisction-search"><a href="#Bisction-search" class="headerlink" title="Bisction search"></a>Bisction search</h2><h3 id="Square-Root"><a href="#Square-Root" class="headerlink" title="Square Root"></a>Square Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">25</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">numGuesses = <span class="number">0</span></span><br><span class="line">low = <span class="number">1.0</span></span><br><span class="line">high = x</span><br><span class="line">ans = (low + high) / <span class="number">2.0</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">abs</span>(ans**<span class="number">2</span> - x) &gt;= epsilon:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;low = &#x27;</span> + <span class="built_in">str</span>(low) + <span class="string">&#x27; high = &#x27;</span> + <span class="built_in">str</span>(high) + <span class="string">&#x27; ans = &#x27;</span> + <span class="built_in">str</span>(ans))</span><br><span class="line">    numGuesses += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> ans**<span class="number">2</span> &lt; x:</span><br><span class="line">        low = ans</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        high = ans</span><br><span class="line">    ans = (low + high) / <span class="number">2.0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;numGuesses: &#x27;</span> + <span class="built_in">str</span>(numGuesses))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(ans) + <span class="string">&#x27; is close to square root of &#x27;</span> + <span class="built_in">str</span>(x))</span><br></pre></td></tr></table></figure>
+<h3 id="Cube-Root-1"><a href="#Cube-Root-1" class="headerlink" title="Cube Root"></a>Cube Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cube = -<span class="number">27</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">numGuesses = <span class="number">0</span></span><br><span class="line"><span class="keyword">if</span> cube &gt;= <span class="number">0</span>:</span><br><span class="line">    low = <span class="number">0</span></span><br><span class="line">    high = cube</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    low = cube</span><br><span class="line">    high = <span class="number">0</span></span><br><span class="line">guess = (low + high) / <span class="number">2.0</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">abs</span>(guess**<span class="number">3</span> - cube) &gt;= epsilon:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;low = &#x27;</span> + <span class="built_in">str</span>(low) + <span class="string">&#x27; high = &#x27;</span> + <span class="built_in">str</span>(high) + <span class="string">&#x27; guess = &#x27;</span> + <span class="built_in">str</span>(guess))</span><br><span class="line">    <span class="keyword">if</span> guess**<span class="number">3</span> &lt; cube:</span><br><span class="line">        low = guess</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        high = guess</span><br><span class="line">    guess = (low + high) / <span class="number">2.0</span></span><br><span class="line">    numGuesses += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;numGuesses: &#x27;</span> + <span class="built_in">str</span>(numGuesses))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(guess) + <span class="string">&#x27; is close to square root of &#x27;</span> + <span class="built_in">str</span>(cube))</span><br></pre></td></tr></table></figure>
+<h2 id="Newton-Raphson"><a href="#Newton-Raphson" class="headerlink" title="Newton-Raphson"></a>Newton-Raphson</h2><h3 id="Square-Root-1"><a href="#Square-Root-1" class="headerlink" title="Square Root"></a>Square Root</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Find the square root of 24</span></span><br><span class="line">epsilon = <span class="number">0.01</span></span><br><span class="line">y = <span class="number">24.0</span></span><br><span class="line">guess = y/<span class="number">2.0</span></span><br><span class="line">numGuesses = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">abs</span>(guess**<span class="number">2</span> - y) &gt;= epsilon:</span><br><span class="line">	numGuesses += <span class="number">1</span></span><br><span class="line">	guess = guess - ( (guess**<span class="number">2</span> - y) / (<span class="number">2</span> * guess) )</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;numGuesses = &#x27;</span> + <span class="built_in">str</span>(numGuesses))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Square root of &#x27;</span> + <span class="built_in">str</span>(y) + <span class="string">&#x27; is about &#x27;</span> + <span class="built_in">str</span>(guess))</span><br></pre></td></tr></table></figure>
       
     
     </div>
@@ -439,11 +439,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>DFS</button>
+      <button>Trie</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Greedy</button>
+      <button>Data Structure</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -455,15 +455,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Data Structure</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>Design</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Dynamic Programming</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Greedy</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>KMP</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -499,11 +503,11 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Hash Table</button>
+      <button>DFS</button>
     </div>
   
     <div class="tagcloud-tag">
-      <button>Trie</button>
+      <button>Hash Table</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -523,19 +527,19 @@
     </div>
   
     <div class="tagcloud-tag">
-      <button>Bash</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>Shell</button>
-    </div>
-  
-    <div class="tagcloud-tag">
       <button>日常</button>
     </div>
   
     <div class="tagcloud-tag">
       <button>Daily</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Bash</button>
+    </div>
+  
+    <div class="tagcloud-tag">
+      <button>Shell</button>
     </div>
   
     <div class="tagcloud-tag">
@@ -584,10 +588,6 @@
   
     <div class="tagcloud-tag">
       <button>Relational Database</button>
-    </div>
-  
-    <div class="tagcloud-tag">
-      <button>KMP</button>
     </div>
   
   </div>
@@ -641,6 +641,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -728,13 +735,6 @@
           </a>
         </div>
       
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
-          </a>
-        </div>
-      
     </div>
   
     <div class="tagcloud-postlist ">
@@ -793,6 +793,13 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -891,13 +898,6 @@
           <a href="/2017/11/19/search-methods/">
             <time class="tagcloud-posttime">2017 / 11 / 19</time>
             <span>Three Searching Methods</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1028,76 +1028,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>DFS</h2>
+      <h2>Trie</h2>
       
         <div class="tagcloud-post">
-          <a href="/2020/12/02/al-tree-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 02</time>
-            <span>Algorithm - Tree (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/06/al-tree-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 06</time>
-            <span>Algorithm - Tree (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Greedy</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/14/al-dp-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 14</time>
-            <span>Algorithm - Dynamic Programming (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/01/06/al-dp-2/">
-            <time class="tagcloud-posttime">2021 / 01 / 06</time>
-            <span>Algorithm - Dynamic Programming (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Backtracking</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/27/al-backtracking-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 27</time>
-            <span>Algorithm - Backtracking (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/28/al-backtracking-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 28</time>
-            <span>Algorithm - Backtracking (2)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Binary Search</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/29/al-binary-search-1/">
-            <time class="tagcloud-posttime">2020 / 12 / 29</time>
-            <span>Algorithm - Binary Search (1)</span>
-          </a>
-        </div>
-      
-        <div class="tagcloud-post">
-          <a href="/2020/12/30/al-binary-search-2/">
-            <time class="tagcloud-posttime">2020 / 12 / 30</time>
-            <span>Algorithm - Binary Search (2)</span>
+          <a href="/2021/01/30/al-trie-0/">
+            <time class="tagcloud-posttime">2021 / 01 / 30</time>
+            <span>Data Structure - Trie - Overview</span>
           </a>
         </div>
       
@@ -1144,6 +1080,44 @@
     </div>
   
     <div class="tagcloud-postlist ">
+      <h2>Backtracking</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/27/al-backtracking-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 27</time>
+            <span>Algorithm - Backtracking (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/28/al-backtracking-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 28</time>
+            <span>Algorithm - Backtracking (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Binary Search</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/29/al-binary-search-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 29</time>
+            <span>Algorithm - Binary Search (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/30/al-binary-search-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 30</time>
+            <span>Algorithm - Binary Search (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
       <h2>Design</h2>
       
         <div class="tagcloud-post">
@@ -1176,6 +1150,37 @@
           <a href="/2021/01/10/al-dp-3/">
             <time class="tagcloud-posttime">2021 / 01 / 10</time>
             <span>Algorithm - Dynamic Programming (3) - Buy & Sell Stock!</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Greedy</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/14/al-dp-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 14</time>
+            <span>Algorithm - Dynamic Programming (1)</span>
+          </a>
+        </div>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/01/06/al-dp-2/">
+            <time class="tagcloud-posttime">2021 / 01 / 06</time>
+            <span>Algorithm - Dynamic Programming (2)</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>KMP</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2021/02/21/al-kmp-0/">
+            <time class="tagcloud-posttime">2021 / 02 / 21</time>
+            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
@@ -1320,7 +1325,14 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Hash Table</h2>
+      <h2>DFS</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2020/12/02/al-tree-1/">
+            <time class="tagcloud-posttime">2020 / 12 / 02</time>
+            <span>Algorithm - Tree (1)</span>
+          </a>
+        </div>
       
         <div class="tagcloud-post">
           <a href="/2020/12/06/al-tree-2/">
@@ -1332,12 +1344,12 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Trie</h2>
+      <h2>Hash Table</h2>
       
         <div class="tagcloud-post">
-          <a href="/2021/01/30/al-trie-0/">
-            <time class="tagcloud-posttime">2021 / 01 / 30</time>
-            <span>Data Structure - Trie - Overview</span>
+          <a href="/2020/12/06/al-tree-2/">
+            <time class="tagcloud-posttime">2020 / 12 / 06</time>
+            <span>Algorithm - Tree (2)</span>
           </a>
         </div>
       
@@ -1462,30 +1474,6 @@
     </div>
   
     <div class="tagcloud-postlist ">
-      <h2>Bash</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>Shell</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2019/07/23/bash-notes/">
-            <time class="tagcloud-posttime">2019 / 07 / 23</time>
-            <span>Bash Notes</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
       <h2>日常</h2>
       
         <div class="tagcloud-post">
@@ -1518,6 +1506,30 @@
           <a href="/2021/08/22/update0822/">
             <time class="tagcloud-posttime">2021 / 08 / 22</time>
             <span>最近</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Bash</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
+          </a>
+        </div>
+      
+    </div>
+  
+    <div class="tagcloud-postlist ">
+      <h2>Shell</h2>
+      
+        <div class="tagcloud-post">
+          <a href="/2019/07/23/bash-notes/">
+            <time class="tagcloud-posttime">2019 / 07 / 23</time>
+            <span>Bash Notes</span>
           </a>
         </div>
       
@@ -1711,18 +1723,6 @@
           <a href="/2017/11/11/normalform/">
             <time class="tagcloud-posttime">2017 / 11 / 11</time>
             <span>当我重学Database -- 范式(Normal Form)</span>
-          </a>
-        </div>
-      
-    </div>
-  
-    <div class="tagcloud-postlist ">
-      <h2>KMP</h2>
-      
-        <div class="tagcloud-post">
-          <a href="/2021/02/21/al-kmp-0/">
-            <time class="tagcloud-posttime">2021 / 02 / 21</time>
-            <span>Algorithm - KMP - Overview</span>
           </a>
         </div>
       
