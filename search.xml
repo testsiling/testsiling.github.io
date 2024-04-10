@@ -4,25 +4,6 @@
   
     
     <entry>
-      <title>关于软件工程，设计，及Trade Off</title>
-      <link href="2022/03/24/software-engineering-1/"/>
-      <url>2022/03/24/software-engineering-1/</url>
-      
-        <content type="html"><![CDATA[<p>前言：文中提到的所有数据/日期/时间线均为虚构。</p><p>最近在做一个项目。鉴于我毕业之后在comcast写了一年多奇奇怪怪的计算模型，我感觉这是我步入职场后第一次真正的设计和领导一个项目（虽然目前，及可预见的未来也只有我一个人做）。一些关于开发的碎碎念吧。</p><span id="more"></span><h2 id="软件工程的教科书与现实"><a href="#软件工程的教科书与现实" class="headerlink" title="软件工程的教科书与现实"></a>软件工程的教科书与现实</h2><p>我们是有产品经理(Product Manager)的。但现实中的产品经理跟我书上学的完全不一样！</p><p>首先产品经理负责提出需求。当年学项目管理/需求管理的时候，第一步需要提出SMART(Specific, Measurable, Achievable, Relevant, Time bound) goal.</p><p>现实是，根本没有SMART goal!</p><p>跟PM沟通，给的需求非常抽象，没有范围，一切都可以由工程师自行裁定。</p><p>没有说这样的自由度不好的意思，就是弹性很大。PM都“既要又要”。你问他们要A还是B，他告诉你不冲突的话都要都要。所有目标/性能，问就是要最大最好的。就像手机流量明明只能用1T，非要买10T包。当然最后还是由工程师自由裁量。</p><p>不知道这种自由度是不是与我做的是infra项目有关。engineer driven。</p><h2 id="全都是trade-off！"><a href="#全都是trade-off！" class="headerlink" title="全都是trade off！"></a>全都是trade off！</h2><p>搞清楚需求以后<del>（发现无论我做啥他们都能接受）</del> ，开始设计。</p><p>基本上两个大方向：</p><h3 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h3><ul><li>优点：用户使用简单，优雅，拓展性好（有后续项目需要在此项目基础上进行）</li><li>缺点：复杂，容错率低，耗时长（需要3-4个季度才能交付）</li></ul><h3 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h3><ul><li>优点：简单，容错率高，实现快（只需要1个季度即可交付）</li><li>缺点：后续项目，及下游用户需要付出更多努力去适配，使用相对复杂。</li></ul><p>我现在也很迷惑：没有硬deadline和硬需求，PM聊过两个都可以接受，全都是自由裁量。</p><p>我自己喜欢方案1，因为从程序的角度来说优雅，下游及后续使用丝滑流畅。但是容错率低，如果发生错误的话会损失巨大。实现起来很复杂，intellectual control有难度。担心是否over engineering了？</p><p>我也喜欢方案2，短平快。因为代码简单，容错率高，也容易维护，容易实现intellectual control。</p><p>没有折中方案，两种方案的实现上除了框架，几乎没有可以复用的地方。</p><p>接下来估计跟各方聊天，写文档，然后敲定最终方案，另一个作为备用（不过如果你确定了设计之后，再发现问题启用备用的话，情况已经相当糟糕了）。</p><h3 id="如何考量一个功能是否作为独立的服务-micro-service"><a href="#如何考量一个功能是否作为独立的服务-micro-service" class="headerlink" title="如何考量一个功能是否作为独立的服务(micro service)"></a>如何考量一个功能是否作为独立的服务(micro service)</h3><p>你现在需要实现一个功能，如何考虑这个功能应该作为一个大服务中的功能，还是分出来作为单独的服务？基本的思路是：</p><ol><li>是不是一个工具类的功能，被多个服务使用? 是 -&gt; 独立服务；否 -&gt; 2</li><li>Is it worth to scaling the new function along with a larger service? （这句中文真的很讲）是 -&gt; 大服务中的小功能；否 -&gt; 独立服务</li></ol><p>我一开始被问到这个问题的时候，就想这个功能的复杂度/代码量啥的，然后被(友善地)教育了：不论代码量多少，都能作为独立服务。关键是要看【要不要一起scale】。例如大服务本来处理10TB数据，后来数据量暴增变成1000T了，要scale up。你这个小功能需要一起scale up吗？</p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>就最近上班还学到蛮多的。自己管自己跟自己干活还蛮开心 :)</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> Software Engineering </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>最近</title>
       <link href="2021/08/22/update0822/"/>
       <url>2021/08/22/update0822/</url>

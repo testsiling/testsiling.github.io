@@ -6,7 +6,7 @@
   <link href="http://testsiling.github.io/atom.xml" rel="self"/>
   
   <link href="http://testsiling.github.io/"/>
-  <updated>2022-03-25T02:20:00.000Z</updated>
+  <updated>2021-08-22T10:12:57.000Z</updated>
   <id>http://testsiling.github.io/</id>
   
   <author>
@@ -15,26 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>关于软件工程，设计，及Trade Off</title>
-    <link href="http://testsiling.github.io/2022/03/24/software-engineering-1/"/>
-    <id>http://testsiling.github.io/2022/03/24/software-engineering-1/</id>
-    <published>2022-03-25T02:20:00.000Z</published>
-    <updated>2022-03-25T02:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前言：文中提到的所有数据/日期/时间线均为虚构。</p><p>最近在做一个项目。鉴于我毕业之后在comcast写了一年多奇奇怪怪的计算模型，我感觉这是我步入职场后第一次真正的设计和领导一个项目（虽然目前，及可预见的未来也只有我一个人做）。一些关于开发的碎碎念吧。</p><span id="more"></span><h2 id="软件工程的教科书与现实"><a href="#软件工程的教科书与现实" class="headerlink" title="软件工程的教科书与现实"></a>软件工程的教科书与现实</h2><p>我们是有产品经理(Product Manager)的。但现实中的产品经理跟我书上学的完全不一样！</p><p>首先产品经理负责提出需求。当年学项目管理/需求管理的时候，第一步需要提出SMART(Specific, Measurable, Achievable, Relevant, Time bound) goal.</p><p>现实是，根本没有SMART goal!</p><p>跟PM沟通，给的需求非常抽象，没有范围，一切都可以由工程师自行裁定。</p><p>没有说这样的自由度不好的意思，就是弹性很大。PM都“既要又要”。你问他们要A还是B，他告诉你不冲突的话都要都要。所有目标/性能，问就是要最大最好的。就像手机流量明明只能用1T，非要买10T包。当然最后还是由工程师自由裁量。</p><p>不知道这种自由度是不是与我做的是infra项目有关。engineer driven。</p><h2 id="全都是trade-off！"><a href="#全都是trade-off！" class="headerlink" title="全都是trade off！"></a>全都是trade off！</h2><p>搞清楚需求以后<del>（发现无论我做啥他们都能接受）</del> ，开始设计。</p><p>基本上两个大方向：</p><h3 id="方案1"><a href="#方案1" class="headerlink" title="方案1"></a>方案1</h3><ul><li>优点：用户使用简单，优雅，拓展性好（有后续项目需要在此项目基础上进行）</li><li>缺点：复杂，容错率低，耗时长（需要3-4个季度才能交付）</li></ul><h3 id="方案2"><a href="#方案2" class="headerlink" title="方案2"></a>方案2</h3><ul><li>优点：简单，容错率高，实现快（只需要1个季度即可交付）</li><li>缺点：后续项目，及下游用户需要付出更多努力去适配，使用相对复杂。</li></ul><p>我现在也很迷惑：没有硬deadline和硬需求，PM聊过两个都可以接受，全都是自由裁量。</p><p>我自己喜欢方案1，因为从程序的角度来说优雅，下游及后续使用丝滑流畅。但是容错率低，如果发生错误的话会损失巨大。实现起来很复杂，intellectual control有难度。担心是否over engineering了？</p><p>我也喜欢方案2，短平快。因为代码简单，容错率高，也容易维护，容易实现intellectual control。</p><p>没有折中方案，两种方案的实现上除了框架，几乎没有可以复用的地方。</p><p>接下来估计跟各方聊天，写文档，然后敲定最终方案，另一个作为备用（不过如果你确定了设计之后，再发现问题启用备用的话，情况已经相当糟糕了）。</p><h3 id="如何考量一个功能是否作为独立的服务-micro-service"><a href="#如何考量一个功能是否作为独立的服务-micro-service" class="headerlink" title="如何考量一个功能是否作为独立的服务(micro service)"></a>如何考量一个功能是否作为独立的服务(micro service)</h3><p>你现在需要实现一个功能，如何考虑这个功能应该作为一个大服务中的功能，还是分出来作为单独的服务？基本的思路是：</p><ol><li>是不是一个工具类的功能，被多个服务使用? 是 -&gt; 独立服务；否 -&gt; 2</li><li>Is it worth to scaling the new function along with a larger service? （这句中文真的很讲）是 -&gt; 大服务中的小功能；否 -&gt; 独立服务</li></ol><p>我一开始被问到这个问题的时候，就想这个功能的复杂度/代码量啥的，然后被(友善地)教育了：不论代码量多少，都能作为独立服务。关键是要看【要不要一起scale】。例如大服务本来处理10TB数据，后来数据量暴增变成1000T了，要scale up。你这个小功能需要一起scale up吗？</p><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>就最近上班还学到蛮多的。自己管自己跟自己干活还蛮开心 :)</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;前言：文中提到的所有数据/日期/时间线均为虚构。&lt;/p&gt;
-&lt;p&gt;最近在做一个项目。鉴于我毕业之后在comcast写了一年多奇奇怪怪的计算模型，我感觉这是我步入职场后第一次真正的设计和领导一个项目（虽然目前，及可预见的未来也只有我一个人做）。一些关于开发的碎碎念吧。&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Software Engineering" scheme="http://testsiling.github.io/tags/Software-Engineering/"/>
-    
-  </entry>
   
   <entry>
     <title>最近</title>
@@ -604,6 +584,83 @@
     <category term="Sorting" scheme="http://testsiling.github.io/tags/Sorting/"/>
     
     <category term="Searching" scheme="http://testsiling.github.io/tags/Searching/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Classical Sorting Algorithms</title>
+    <link href="http://testsiling.github.io/2020/12/09/al-sort-classical/"/>
+    <id>http://testsiling.github.io/2020/12/09/al-sort-classical/</id>
+    <published>2020-12-10T04:02:28.000Z</published>
+    <updated>2020-12-10T04:02:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<div class="table-container"><table><thead><tr><th>Name</th><th>Time Complexity</th><th>Sapce Complexity</th></tr></thead><tbody><tr><td>Bubble Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Selection Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Insertion Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Merge Sort</td><td>O(n log(n))</td><td>O(n)</td></tr><tr><td>Quick Sort</td><td>O(n^2)</td><td>O(log(n))</td></tr><tr><td>Heap Sort</td><td>O(n log(n))</td><td>O(1)</td></tr><tr><td>Counting Sort</td><td>O(n+k)</td><td>O(k)</td></tr><tr><td>Radix Sort</td><td>O(nk)</td><td>O(n+k)</td></tr></tbody></table></div><span id="more"></span><h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls) - <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls) - <span class="number">1</span>  - i):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt; ls[j + <span class="number">1</span>]:</span><br><span class="line">                ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls)):</span><br><span class="line">        mini = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(ls)):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &lt; ls[mini]:</span><br><span class="line">                mini = j</span><br><span class="line">            ls[mini], ls[i] = ls[i], ls[mini]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ls)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt;= ls[j - <span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ls[j], ls[j - <span class="number">1</span>] = ls[j - <span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>An <code>divide and conquer</code> approch.</p><ol><li>If the list is of length 0 or 1, then it is already sorted. Otherwise:</li><li>Divide the unsorted list into two sublists of about half the size.</li><li>Sort each sublist recursively by re-applying merge sort.</li><li>Merge the two sublists back into one sorted list.</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">arr1, arr2</span>):</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> arr1 <span class="keyword">and</span> arr2:</span><br><span class="line">        <span class="keyword">if</span> arr1[<span class="number">0</span>] &lt;= arr2[<span class="number">0</span>]:</span><br><span class="line">            res.append(arr1.pop(<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append(arr2.pop(<span class="number">0</span>))</span><br><span class="line">        res += arr1 <span class="keyword">if</span> arr1 <span class="keyword">else</span> arr2</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(arr) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    left = arr[:<span class="built_in">len</span>(arr) // <span class="number">2</span>]</span><br><span class="line">    right = arr[<span class="built_in">len</span>(arr) // <span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br></pre></td></tr></table></figure><h2 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h2><p>An divide and conquer strategy. Select a <code>pivot</code>. elements less than pivot, move to the left side, else move to the right side.<br><em>set the first element as pivot</em><br>Sort in place:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    pivot = arr[right]</span><br><span class="line">    i = left - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(left, right):</span><br><span class="line">        <span class="keyword">if</span> arr[j] &lt;= pivot:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">    arr[i + <span class="number">1</span>], arr[right] = arr[right], arr[i+<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    <span class="keyword">if</span> left &lt; right:</span><br><span class="line">        q = partition(arr, left, right)</span><br><span class="line">        quickSort(arr, left, q - <span class="number">1</span>)</span><br><span class="line">        quickSort(arr, q + <span class="number">1</span>, right)</span><br></pre></td></tr></table></figure></p><h2 id="Heap-Sort"><a href="#Heap-Sort" class="headerlink" title="Heap Sort"></a>Heap Sort</h2><p><a href="https://github.com/python/cpython/blob/3.9/Lib/heapq.py">Heapq Module</a><br><a href="https://en.wikipedia.org/wiki/Heapsort">About Heap Sort</a></p><ol><li>Build a max heap</li><li>replace the root (current largest number) with the last item and reduce the heap size by 1. At this time, the largerst number is sorted and excluded from the heap. </li><li>repeat step 2</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">arr, n, i</span>):</span></span><br><span class="line">    largest = i  <span class="comment"># Initialize largest as root</span></span><br><span class="line">    l = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    r = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># check if any child is greater than root</span></span><br><span class="line">    <span class="keyword">if</span> l &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[l]:</span><br><span class="line">        largest = l</span><br><span class="line">    <span class="keyword">if</span> r &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[r]:</span><br><span class="line">        largest = r</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># if child greater than node, bubble it up.</span></span><br><span class="line">    <span class="keyword">if</span> largest != i:</span><br><span class="line">        arr[i], arr[largest] = arr[largest], arr[i]  <span class="comment"># swap</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment"># Heapify the root.</span></span><br><span class="line">        heapify(arr, n, largest)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(arr)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Build a maxheap.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(n // <span class="number">2</span>)):</span><br><span class="line">        heapify(arr, n, i)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># get sorted items one by one</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(<span class="number">1</span>, n)):</span><br><span class="line">        arr[i], arr[<span class="number">0</span>] = arr[<span class="number">0</span>], arr[i]  <span class="comment"># swap</span></span><br><span class="line">        heapify(arr, i, <span class="number">0</span>)</span><br></pre></td></tr></table></figure><h2 id="Counting-Sort"><a href="#Counting-Sort" class="headerlink" title="Counting Sort"></a>Counting Sort</h2>]]></content>
+    
+    
+    <summary type="html">&lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Time Complexity&lt;/th&gt;
+&lt;th&gt;Sapce Complexity&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Bubble Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Selection Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Insertion Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Merge Sort&lt;/td&gt;
+&lt;td&gt;O(n log(n))&lt;/td&gt;
+&lt;td&gt;O(n)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Quick Sort&lt;/td&gt;
+&lt;td&gt;O(n^2)&lt;/td&gt;
+&lt;td&gt;O(log(n))&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Heap Sort&lt;/td&gt;
+&lt;td&gt;O(n log(n))&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Counting Sort&lt;/td&gt;
+&lt;td&gt;O(n+k)&lt;/td&gt;
+&lt;td&gt;O(k)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Radix Sort&lt;/td&gt;
+&lt;td&gt;O(nk)&lt;/td&gt;
+&lt;td&gt;O(n+k)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;</summary>
+    
+    
+    
+    
+    <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
+    
+    <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
+    
+    <category term="Sorting" scheme="http://testsiling.github.io/tags/Sorting/"/>
+    
+    <category term="Heap" scheme="http://testsiling.github.io/tags/Heap/"/>
     
   </entry>
   
