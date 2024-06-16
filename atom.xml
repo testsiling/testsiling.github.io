@@ -6,7 +6,7 @@
   <link href="http://testsiling.github.io/atom.xml" rel="self"/>
   
   <link href="http://testsiling.github.io/"/>
-  <updated>2021-08-22T10:12:57.000Z</updated>
+  <updated>2024-06-16T01:22:03.000Z</updated>
   <id>http://testsiling.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>My Journey with WePay - Chapter One</title>
+    <link href="http://testsiling.github.io/2024/06/15/wepay-journey-1/"/>
+    <id>http://testsiling.github.io/2024/06/15/wepay-journey-1/</id>
+    <published>2024-06-16T01:22:03.000Z</published>
+    <updated>2024-06-16T01:22:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>我最开始听说wepay的时候，并不知道wepay也是JP的。我在论坛看到一些wepay员工的好评就申请了，面试也相当顺利，最后才发现原来wepay几年前被jp买了。lawrence和他的三个发小兼室友也是JP员工。后来我公寓lease结束后也跟他们住了半年，直到我们搬到湾区。那段时间大家一起住在一个townhouse里，全都是JP员工，简直跟宿舍一样，真是快乐极了。缘真是妙不可言。</p><p>When I first heard about WePay, to be honest, I didn’t know it was part of JP. I saw some positive reviews from WePay employees online and decided to apply. The interview process went quite smoothly, and it was only at the end of the process that I found out WePay had been acquired by JP a few years ago. Lawrence and his roommates were also working for JP at that time. There was a period when I lived with them until Lawrence and I moved to the Bay Area. We all stayed in a townhouse, and all of us were JP employees — the house of JP. It felt just like living in a dorm during that time. Fate works in mysterious ways.</p><span id="more"></span><p>2022年初，公司宣布回公司办公。由于我从入职就是在费城远程工作，老板说可以将我转成fully remote，当时愚蠢的我拒绝了，觉得在这边已经待太久，想要一些新鲜感。后来发现其实我完全可以转成fully remote之后，自己去找新鲜感。总之，2022年7月我和我对象搬到了湾区。</p><p>In early 2022, JP announced a return to the office (RTO). Since I had been working remotely from Philly from day one, my boss offered to convert my position to fully remote. I declined because, at that time, I felt like I had been living in this area forever and needed something fresh, some new excitement. It was a foolish choice; I could have accepted the fully remote offer and then moved wherever I wanted, even to the Bay Area, so that I wouldn’t need to go into the office. Anyway, I relocated to the Bay Area with my partner in July 2022.</p><h2 id="数据迁移-Data-Migration-2021Q3-2022Q1"><a href="#数据迁移-Data-Migration-2021Q3-2022Q1" class="headerlink" title="数据迁移 Data Migration(2021Q3 - 2022Q1)"></a>数据迁移 Data Migration(2021Q3 - 2022Q1)</h2><p>加入weepy之后参与的第一个项目是将组里的主数据库从Google Datastore 迁移到MySQL。Migrate的原因主要是：</p><ol><li>以后可能要走multi cloud，不想要绑定在Datastore(Google)</li><li>Google自己不再支持Datastore了</li><li>安全问题</li><li>write contention</li></ol><p>The first project I worked on in wepay was data migration, migrating our main database from Google Datastore to MySQL. The reasoning behind it were: </p><ol><li>As we might move to multi-cloud in the future, we don’t want to be bound by a specific tech provider(Google)</li><li>Google itself is deprecating Datastore</li><li>Security concerns</li><li>Write contention issues</li></ol><p>这是我第一次参加真正的一个有主题的的开发，兴奋极了，那段时间感觉每天都能学到新的东西。当时带这个项目的同事设计文档写得非常好，跟她工作非常舒适。2022年1月，项目已经进入收尾阶段，她离开了Wepay。收尾工作交给了另一个同事，而我接了别的工作。这种数据迁移类项目的难点如何确保数据准确，且过程不影响现有系统。原来是一个双读取的设计，写全部进新的数据库，读新旧数据库再按版本返回。但在执行的时候这个策略遇到了很多问题，导致在最后阶段重做了rollout plan，重新实现了一个双写设计。</p><p>It was my first time being part of a real project, with an actual roadmap, business needs, proper design, and reviews. I was thrilled. During that time, I felt like I was learning something new every day. The project lead had a strong technical background and provided comprehensive documentation; everything was well designed and explained. It was always a pleasure to work with her. In January 2022, as the migration was coming to an end, she left the firm. The remaining tasks were handed over to another colleague, and I moved on to a new project. The main challenge of this kind of data migration project is ensuring data integrity with zero downtime for the existing system. The initial design was basically a dual-read strategy: always write to the new database, read from both the new and old records, and then apply version control. However, this didn’t work out in our case. We ended up redesigning the rollout plan to implement a dual-write strategy instead.</p><h2 id="“RUN-THE-BUSINESS”-2022Q2-2023Q1"><a href="#“RUN-THE-BUSINESS”-2022Q2-2023Q1" class="headerlink" title="“RUN THE BUSINESS” (2022Q2 - 2023Q1)"></a>“RUN THE BUSINESS” (2022Q2 - 2023Q1)</h2><p>我加入wepay的时候虽然已经被JP收购了，但依然保持初创风格，独立运作，用自己的infra，有自己的客户。后来JP推进融合，发生了很多drama，高管换了一波，老员工一直在离职。我刚加入时我们组有20人，一直走一直招，到最后，直到我被重组到JP之前，组里好像只剩几个是原来的老员工，其他全都是和我同期加入填坑的“新人”。</p><p>At the time I joined WePay, although it has been acquired by JP for few years, the full integration never truely happen. It operated in a startup style, had its own infrastructure, served its own clients. Later, as JP pushed for integration, a lot of drama happened: new senior leadership, original employees kept leaving, culture shift etc. When I first joined, our team had 20+ people. Till I leave the team, it seemed like only a few original employees remained, with the rest being “newcomers” who joined around the same time as me.</p><p>我们组负责接收客户，处理/存储/验证KYC，各种服务有十几个，责任范围非常宽。而由于这些人员变动和业务复杂性，导致新人非常难在“保护期”内了解到每个服务。结果就是oncall在这个组里是噩梦。幸运的是有一个能力超强，人又无敌好的tech lead。遇到问题他不但告诉你“怎么做”，还引导你思考“为什么”。我从他身上学到很多，非常佩服。他现在依然是我的tech lead。</p><p>Our team owned about a dozen different microservices, managed client onboarding, merchant profile storage, and KYC verification. Due to these “loss of context” reorganizations and the complexity of the system, it was extremely hard for us as new hires to be well-prepared during the ramp-up period. Everyone would agree that on-call was a nightmare in this team. Luckily, we had a SUPERB tech lead! He has extensive domain knowledge and is absolutely passionate about technology. His mentorship impressed me the most; he would not only tell you how to solve a problem but also guide you to think about the reasoning behind every solution. He is a respectful person, and we are still working together today.</p><p>那段时间除了oncall，有一些日常的临时需求，修bug，还做了很多infra上的改善，增强observability，加dashboard加alert加各种trace，每次发现问题处理问题就会写进文档，让其他组员能够参考，大家都在努力让彼此不要那么痛苦。这些全都是属于Run The Business(RTB)。</p><p>During that time, besides on-call duties, we needed to handle adhoc requests, and bug fixes. In addition, we kept improving the system and the process of team operation. We enhanced our infrastructure to provide better observability by adding dashboards, alerts, various traces. Each time we resolved an issue, we make sure it got documented so that the team could share collective knowledge. Everyone was trying to make each other’s life easier. All these effort are what we call “Run The Business” (RTB).</p><p>这一年里，大概有大半时间是RTB和oncall，其余时间里我做了我在wepay的第二个项目，一个从数据迁移的衍生项目。未完待续。</p><p>In that year, half of my time were spent on RTB and on-call duties. The rest was devoted to my second project, a spinoff from the data migration. To be continued.</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h2&gt;&lt;p&gt;我最开始听说wepay的时候，并不知道wepay也是JP的。我在论坛看到一些wepay员工的好评就申请了，面试也相当顺利，最后才发现原来wepay几年前被jp买了。lawrence和他的三个发小兼室友也是JP员工。后来我公寓lease结束后也跟他们住了半年，直到我们搬到湾区。那段时间大家一起住在一个townhouse里，全都是JP员工，简直跟宿舍一样，真是快乐极了。缘真是妙不可言。&lt;/p&gt;
+&lt;p&gt;When I first heard about WePay, to be honest, I didn’t know it was part of JP. I saw some positive reviews from WePay employees online and decided to apply. The interview process went quite smoothly, and it was only at the end of the process that I found out WePay had been acquired by JP a few years ago. Lawrence and his roommates were also working for JP at that time. There was a period when I lived with them until Lawrence and I moved to the Bay Area. We all stayed in a townhouse, and all of us were JP employees — the house of JP. It felt just like living in a dorm during that time. Fate works in mysterious ways.&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="career" scheme="http://testsiling.github.io/tags/career/"/>
+    
+    <category term="wepay" scheme="http://testsiling.github.io/tags/wepay/"/>
+    
+    <category term="jpmc" scheme="http://testsiling.github.io/tags/jpmc/"/>
+    
+    <category term="journal" scheme="http://testsiling.github.io/tags/journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>最近</title>
     <link href="http://testsiling.github.io/2021/08/22/update0822/"/>
     <id>http://testsiling.github.io/2021/08/22/update0822/</id>
-    <published>2021-08-22T10:12:57.000Z</published>
-    <updated>2021-08-22T10:12:57.000Z</updated>
+    <published>2021-08-22T13:12:57.000Z</published>
+    <updated>2021-08-22T13:12:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>好久没更新啦，大家还好吗？也不知道这个blog有没有人在看。我最后一次更新是02/21/21，之后我换了一个工作。新公司在湾区，不过目前是remote from Philly。计划明年Q1会搬到湾区，如果疫情好转的话。</p><p>我是4月离开老东家，然后跟Lawrence度了一个长假，5月中入职新公司。8月刚过了我的社畜两周年纪念日。</p><span id="more"></span><h2 id="关于新工作"><a href="#关于新工作" class="headerlink" title="关于新工作"></a>关于新工作</h2><p>新工作跟以前完全不一样！现在是backend engineer，写API，micro service。刚进去啥都不会，连java都不会，不过边看边写感觉还蛮容易pickup的。关键是新公司的codebase很清晰！ramp up的时候感觉简直像“乡下人进城”一样，全都“哇好厉害”， “哇原来是这样”！用的工具全都没见过，在老东家手动完成的东西，新公司都有健全的工具链，然后各种guideline也很清晰，文档我觉得很健全（反正老东家是完全没有）。同事们都很友善，问什么问题都会得到回应，就整个反馈都很正向，work life balance我觉得客观来讲是很好的，业务熟悉之后很快就完成。很舒适！</p><p>刚开始的时候好多东西不会，学了一些grpc，java，restful，还有一些乱七八糟的东西（有时间会总结出来）。最大的感受就是“有些东西就是你见过就会知道，没见过就是不知道”。很多东西不是多高深，就是没听说过。前三个月读很多文档，我们组管很多个service，每一个都有设计文档，一些自己以前“希望做到但不知道best practice”的东西，这里都有。就收获很多吧。读文档跟挖矿一样，学到很多。</p><p>最近在做一个数据库的项目，一开始是先看了项目的设计文档，然后就觉得哇好厉害啊，每一步给出很多potential solution，分析优缺，跟其他组讨论推进，最后得到这个文档的我，看着就知道我应该要做什么，很清晰。跟别的同事闲聊的时候我就赞这个项目很清晰，同事说lead这个项目的engineer其实跟我差不多经验，相信我很快也可以做到。然后就感叹觉得自己其实并没有从上一份工作中得到很多软件工程上的指引，毕竟是一个非科技公司的偏硬件的组。也感谢自己去新公司的决定。希望不久的将来能成长成独当一面的工程师吧。</p><h2 id="关于找工作"><a href="#关于找工作" class="headerlink" title="关于找工作"></a>关于找工作</h2><p>其实一开始是Sherry老师要跳槽，喊我一起刷题。于是我们俩从12月开始正式刷题，还开了一个刷题打卡群，每天至少刷一题。我们一般新题一天5题，复习的时候高频题一天5-10题也有。最后一共刷了240题(101 easy, 111 medium, 28 hard)。wepay是我收到的第一个offer，觉得聊得挺好，包裹也满意，就接了，后面其他的就推了不想面了。Sherry老师很快拿到了相当好的offer，比我先走一步去西雅图。刷题打卡还蛮有用的！</p><p>感觉是觉得招工市场真的很好，开始海投之后就拿到了一些不错的面试，都懒得找内推了，跟newgrad的时候简历石沉大海真的差别很大。</p><h2 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h2><p>在我找工的时候就跟Lawrence达成一致：我去哪他去哪。所以当我确定湾区之后，他也开始学习啦。虽然他也是软件工程师，但不知道刷题为何物。给了他Sherry老师留下的cracking the technical interview，对他来说比直接上leetcode硬刷有用。其实我觉得问题不大，毕竟有工作经验。又不是每个公司都考很难的algorithm。我会支持他的！</p><p>最近半年就很顺利，感情甜蜜，工作轻松。5月刚度假完，又定了11月跟朋友们再去一次夏威夷。</p><p>唯一问题可能是之前欠太多信用卡，今年又想max out 401k，现在基本就是月欠族，paycheck还没到手已经被信用卡债/房租预定了，算了一下2022年之前我的财务状况大概不会有任何改善。</p><p>“那没钱怎么去度假呢？” —- 刷信用卡呀。看出来了吧这就是我没钱剩的原因。</p><p>真的好穷。加州税太贵了。我现在交加州税+Philly城市税。没房贷没孩子未婚，税务就一言难尽吧。</p><h2 id="Bottom-Line"><a href="#Bottom-Line" class="headerlink" title="Bottom Line"></a>Bottom Line</h2><p>工作顺利，感情甜蜜。</p><p>希望明年升职加薪。</p><p>希望疫情尽快结束。希望中美关系缓和，签证/运输早日无障碍互通，好久没回国了。</p><p>祝各位万事顺遂！</p>]]></content>
     
@@ -32,9 +58,7 @@
     
     
     
-    <category term="日常" scheme="http://testsiling.github.io/tags/%E6%97%A5%E5%B8%B8/"/>
-    
-    <category term="Daily" scheme="http://testsiling.github.io/tags/Daily/"/>
+    <category term="journal" scheme="http://testsiling.github.io/tags/journal/"/>
     
   </entry>
   
@@ -584,83 +608,6 @@
     <category term="Sorting" scheme="http://testsiling.github.io/tags/Sorting/"/>
     
     <category term="Searching" scheme="http://testsiling.github.io/tags/Searching/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Classical Sorting Algorithms</title>
-    <link href="http://testsiling.github.io/2020/12/09/al-sort-classical/"/>
-    <id>http://testsiling.github.io/2020/12/09/al-sort-classical/</id>
-    <published>2020-12-10T04:02:28.000Z</published>
-    <updated>2020-12-10T04:02:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<div class="table-container"><table><thead><tr><th>Name</th><th>Time Complexity</th><th>Sapce Complexity</th></tr></thead><tbody><tr><td>Bubble Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Selection Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Insertion Sort</td><td>O(n^2)</td><td>O(1)</td></tr><tr><td>Merge Sort</td><td>O(n log(n))</td><td>O(n)</td></tr><tr><td>Quick Sort</td><td>O(n^2)</td><td>O(log(n))</td></tr><tr><td>Heap Sort</td><td>O(n log(n))</td><td>O(1)</td></tr><tr><td>Counting Sort</td><td>O(n+k)</td><td>O(k)</td></tr><tr><td>Radix Sort</td><td>O(nk)</td><td>O(n+k)</td></tr></tbody></table></div><span id="more"></span><h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls) - <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls) - <span class="number">1</span>  - i):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt; ls[j + <span class="number">1</span>]:</span><br><span class="line">                ls[j], ls[j+<span class="number">1</span>] = ls[j+<span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ls)):</span><br><span class="line">        mini = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(ls)):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &lt; ls[mini]:</span><br><span class="line">                mini = j</span><br><span class="line">            ls[mini], ls[i] = ls[i], ls[mini]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertSort</span>(<span class="params">ls</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ls)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ls[j] &gt;= ls[j - <span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ls[j], ls[j - <span class="number">1</span>] = ls[j - <span class="number">1</span>], ls[j]</span><br><span class="line">    <span class="keyword">return</span> ls</span><br></pre></td></tr></table></figure><h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>An <code>divide and conquer</code> approch.</p><ol><li>If the list is of length 0 or 1, then it is already sorted. Otherwise:</li><li>Divide the unsorted list into two sublists of about half the size.</li><li>Sort each sublist recursively by re-applying merge sort.</li><li>Merge the two sublists back into one sorted list.</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">arr1, arr2</span>):</span></span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">while</span> arr1 <span class="keyword">and</span> arr2:</span><br><span class="line">        <span class="keyword">if</span> arr1[<span class="number">0</span>] &lt;= arr2[<span class="number">0</span>]:</span><br><span class="line">            res.append(arr1.pop(<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res.append(arr2.pop(<span class="number">0</span>))</span><br><span class="line">        res += arr1 <span class="keyword">if</span> arr1 <span class="keyword">else</span> arr2</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(arr) &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    left = arr[:<span class="built_in">len</span>(arr) // <span class="number">2</span>]</span><br><span class="line">    right = arr[<span class="built_in">len</span>(arr) // <span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br></pre></td></tr></table></figure><h2 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h2><p>An divide and conquer strategy. Select a <code>pivot</code>. elements less than pivot, move to the left side, else move to the right side.<br><em>set the first element as pivot</em><br>Sort in place:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    pivot = arr[right]</span><br><span class="line">    i = left - <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(left, right):</span><br><span class="line">        <span class="keyword">if</span> arr[j] &lt;= pivot:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            arr[i], arr[j] = arr[j], arr[i]</span><br><span class="line">    arr[i + <span class="number">1</span>], arr[right] = arr[right], arr[i+<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span>(<span class="params">arr, left, right</span>):</span></span><br><span class="line">    <span class="keyword">if</span> left &lt; right:</span><br><span class="line">        q = partition(arr, left, right)</span><br><span class="line">        quickSort(arr, left, q - <span class="number">1</span>)</span><br><span class="line">        quickSort(arr, q + <span class="number">1</span>, right)</span><br></pre></td></tr></table></figure></p><h2 id="Heap-Sort"><a href="#Heap-Sort" class="headerlink" title="Heap Sort"></a>Heap Sort</h2><p><a href="https://github.com/python/cpython/blob/3.9/Lib/heapq.py">Heapq Module</a><br><a href="https://en.wikipedia.org/wiki/Heapsort">About Heap Sort</a></p><ol><li>Build a max heap</li><li>replace the root (current largest number) with the last item and reduce the heap size by 1. At this time, the largerst number is sorted and excluded from the heap. </li><li>repeat step 2</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">arr, n, i</span>):</span></span><br><span class="line">    largest = i  <span class="comment"># Initialize largest as root</span></span><br><span class="line">    l = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    r = <span class="number">2</span> * i + <span class="number">2</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment"># check if any child is greater than root</span></span><br><span class="line">    <span class="keyword">if</span> l &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[l]:</span><br><span class="line">        largest = l</span><br><span class="line">    <span class="keyword">if</span> r &lt; n <span class="keyword">and</span> arr[largest] &lt; arr[r]:</span><br><span class="line">        largest = r</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># if child greater than node, bubble it up.</span></span><br><span class="line">    <span class="keyword">if</span> largest != i:</span><br><span class="line">        arr[i], arr[largest] = arr[largest], arr[i]  <span class="comment"># swap</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment"># Heapify the root.</span></span><br><span class="line">        heapify(arr, n, largest)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(arr)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Build a maxheap.</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(n // <span class="number">2</span>)):</span><br><span class="line">        heapify(arr, n, i)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># get sorted items one by one</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(<span class="number">1</span>, n)):</span><br><span class="line">        arr[i], arr[<span class="number">0</span>] = arr[<span class="number">0</span>], arr[i]  <span class="comment"># swap</span></span><br><span class="line">        heapify(arr, i, <span class="number">0</span>)</span><br></pre></td></tr></table></figure><h2 id="Counting-Sort"><a href="#Counting-Sort" class="headerlink" title="Counting Sort"></a>Counting Sort</h2>]]></content>
-    
-    
-    <summary type="html">&lt;div class=&quot;table-container&quot;&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Name&lt;/th&gt;
-&lt;th&gt;Time Complexity&lt;/th&gt;
-&lt;th&gt;Sapce Complexity&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Bubble Sort&lt;/td&gt;
-&lt;td&gt;O(n^2)&lt;/td&gt;
-&lt;td&gt;O(1)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Selection Sort&lt;/td&gt;
-&lt;td&gt;O(n^2)&lt;/td&gt;
-&lt;td&gt;O(1)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Insertion Sort&lt;/td&gt;
-&lt;td&gt;O(n^2)&lt;/td&gt;
-&lt;td&gt;O(1)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Merge Sort&lt;/td&gt;
-&lt;td&gt;O(n log(n))&lt;/td&gt;
-&lt;td&gt;O(n)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Quick Sort&lt;/td&gt;
-&lt;td&gt;O(n^2)&lt;/td&gt;
-&lt;td&gt;O(log(n))&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Heap Sort&lt;/td&gt;
-&lt;td&gt;O(n log(n))&lt;/td&gt;
-&lt;td&gt;O(1)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Counting Sort&lt;/td&gt;
-&lt;td&gt;O(n+k)&lt;/td&gt;
-&lt;td&gt;O(k)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Radix Sort&lt;/td&gt;
-&lt;td&gt;O(nk)&lt;/td&gt;
-&lt;td&gt;O(n+k)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;/div&gt;</summary>
-    
-    
-    
-    
-    <category term="Algorithm" scheme="http://testsiling.github.io/tags/Algorithm/"/>
-    
-    <category term="Python" scheme="http://testsiling.github.io/tags/Python/"/>
-    
-    <category term="Sorting" scheme="http://testsiling.github.io/tags/Sorting/"/>
-    
-    <category term="Heap" scheme="http://testsiling.github.io/tags/Heap/"/>
     
   </entry>
   
